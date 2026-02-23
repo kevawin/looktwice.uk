@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Look Twice | Independent brand and customer experience strategy</title>
+  <meta name="description" content="Independent brand and customer experience strategy." />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0f0f0f;
+      --fg: #e8e0d0;
+      --accent: #c9b99a;
+      --muted: #6b6560;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: Georgia, 'Times New Roman', serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 4rem 6rem;
+    }
+
+    header {
+      margin-bottom: 4rem;
+    }
+
+    .wordmark {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: normal;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+    }
+
+    .tagline {
+      margin-top: 0.5rem;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 400;
+    }
+
+    main {
+      max-width: 38rem;
+    }
+
+    .headline {
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+      font-weight: normal;
+      line-height: 1.25;
+      margin-bottom: 2.5rem;
+      color: var(--fg);
+    }
+
+    .body-text {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+      line-height: 1.75;
+      color: var(--accent);
+    }
+
+    .body-text p + p {
+      margin-top: 1.25rem;
+    }
+
+    .body-text a {
+      color: var(--fg);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--muted);
+      transition: text-decoration-color 0.2s ease;
+    }
+
+    .body-text a:hover {
+      text-decoration-color: var(--fg);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 2rem;
+      left: 6rem;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 3rem 2rem;
+        align-items: flex-start;
+      }
+
+      footer {
+        left: 2rem;
+        bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wordmark">Look Twice</div>
+    <div class="tagline">Independent brand &amp; customer experience strategy</div>
+  </header>
+
+  <main>
+    <h1 class="headline">Not quite ready for your second look.</h1>
+
+    <div class="body-text">
+      <p>Curious? Find me on <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">LinkedIn</a> in the meantime.</p>
+      <p>Or if your brand makes a promise your experience isn&rsquo;t keeping, let&rsquo;s talk:&nbsp;<a href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></p>
+    </div>
+  </main>
+
+  <footer>&copy; Look Twice</footer>
+
+</body>
+</html>
