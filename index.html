@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Look Twice | Independent brand and customer experience strategy</title>
   <meta name="description" content="Independent brand and customer experience strategy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -13,10 +16,9 @@
     }
 
     :root {
-      --bg: #0f0f0f;
-      --fg: #e8e0d0;
-      --accent: #c9b99a;
-      --muted: #6b6560;
+      --navy: #e3e3f4;
+      --navy-mid: #e3e3f499;
+      --navy-soft: #e3e3f4cc;
     }
 
     html, body {
@@ -24,9 +26,17 @@
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--fg);
-      font-family: Georgia, 'Times New Roman', serif;
+      background: linear-gradient(135deg,
+        #ff9900 0%,
+        #ff4400 25%,
+        #ff1144 45%,
+        #ff0077 65%,
+        #cc00aa 82%,
+        #5500aa 100%
+      );
+      background-attachment: fixed;
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -40,20 +50,21 @@
     }
 
     .wordmark {
-      font-size: clamp(1.5rem, 4vw, 2.25rem);
-      font-weight: normal;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.9rem, 4vw, 2.25rem);
       letter-spacing: 0.04em;
-      color: var(--fg);
+      color: var(--navy);
     }
 
     .tagline {
       margin-top: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
       font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-      color: var(--accent);
+      color: var(--navy-soft);
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: 400;
     }
 
     main {
@@ -61,60 +72,69 @@
     }
 
     .headline {
-      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
-      font-weight: normal;
-      line-height: 1.25;
-      margin-bottom: 2.5rem;
-      color: var(--fg);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1rem, 2.2vw, 1.6rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--navy);
     }
 
     .body-text {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
       font-size: clamp(0.95rem, 1.5vw, 1.05rem);
       line-height: 1.75;
-      color: var(--accent);
+      color: var(--navy-soft);
     }
 
     .body-text p + p {
-      margin-top: 1.25rem;
+      margin-top: 1.5rem;
     }
 
     .body-text a {
-      color: var(--fg);
+      color: var(--navy);
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: var(--muted);
+      text-decoration-color: var(--navy-mid);
       transition: text-decoration-color 0.2s ease;
     }
 
     .body-text a:hover {
-      text-decoration-color: var(--fg);
+      text-decoration-color: var(--navy);
     }
 
     footer {
-      position: fixed;
-      bottom: 2rem;
-      left: 6rem;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin-top: 3rem;
+      font-family: 'DM Sans', sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.08em;
-      color: var(--muted);
+      color: var(--navy-mid);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.20);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header, main, footer {
+      position: relative;
+      z-index: 1;
     }
 
     @media (max-width: 640px) {
       body {
         padding: 3rem 2rem;
-        align-items: flex-start;
-      }
-
-      footer {
-        left: 2rem;
-        bottom: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
+
+  <div class="overlay"></div>
 
   <header>
     <div class="wordmark">Look Twice</div>
@@ -126,11 +146,11 @@
 
     <div class="body-text">
       <p>Curious? Find me on <a href="https://www.linkedin.com/in/krisevawin/" target="_blank" rel="noopener noreferrer">LinkedIn</a> in the meantime.</p>
-      <p>Or if your brand makes a promise your experience isn&rsquo;t keeping, let&rsquo;s talk:&nbsp;<a href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></p>
+      <p>Or if your brand makes a promise your experience isn&rsquo;t keeping, let&rsquo;s talk: <a href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></p>
     </div>
   </main>
 
-  <footer>&copy; Look Twice</footer>
+  <footer>&copy; 2026 Look Twice</footer>
 
 </body>
 </html>
