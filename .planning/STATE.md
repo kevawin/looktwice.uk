@@ -3,19 +3,20 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-04-29T23:09:00.264Z"
+stopped_at: Completed 01-02-shell-nav-PLAN.md
+last_updated: "2026-04-29T23:14:20.677Z"
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
-  percent: 33
+  completed_plans: 2
+  percent: 67
 ---
 
 # State: looktwice.uk
 
 **Last updated:** 2026-04-30
-**Session:** Phase 01 plan 01 complete
+**Session:** Phase 01 plan 02 complete
 
 ## Project Reference
 
@@ -26,13 +27,13 @@ progress:
 ## Current Position
 
 Phase: 01 (foundations-deploy-pipeline) — EXECUTING
-Plan: 2 of 3 (next: 01-02-shell-nav)
+Plan: 3 of 3 (next: 01-03-deploy-pipeline)
 
 - **Milestone:** v1
 - **Phase:** 1 — Foundations & Deploy Pipeline
-- **Plan:** 01-01 complete; 01-02-shell-nav next
+- **Plan:** 01-01 + 01-02 complete; 01-03-deploy-pipeline next
 - **Status:** Executing Phase 01
-- **Progress:** [███░░░░░░░] 33% (1/3 plans complete in Phase 01)
+- **Progress:** [███████░░░] 67% (2/3 plans complete in Phase 01)
 
 ## Configuration
 
@@ -53,6 +54,7 @@ Plan: 2 of 3 (next: 01-02-shell-nav)
 | Page weight (excl. images) | < 500KB | not measured |
 | WCAG AA | pass on all surfaces | not verified |
 | Phase 01 P01 | 6min | 3 tasks | 10 files |
+| Phase 01 P02 | 2min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -69,6 +71,9 @@ Plan: 2 of 3 (next: 01-02-shell-nav)
 - Cross-cutting concerns (A11Y/PERF/SEO/RESP) concentrated in Phase 5 rather than spread per section
 - [Phase 01]: Plan 01-01: Latin subset of Epilogue (~14KB/weight) chosen over full charset
 - [Phase 01]: Plan 01-01: Brand gradient declared in tokens, painted only on Phase 4 sticky tab
+- [Phase 01]: Plan 01-02: Holding-page index.html overwritten in single Write on new-site only (D-01 honoured)
+- [Phase 01]: Plan 01-02: Two-range hamburger media query (max-width:1024px shows / min-width:1025px hides) avoids the 1024px overlap edge case
+- [Phase 01]: Plan 01-02: D-11 doc-fix landed — REQUIREMENTS.md FOUND-05 + ROADMAP.md SC#2 say 'six' (not 'eight')
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -90,11 +95,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-04-29T23:09:00.262Z
+**Last session:** 2026-04-29T23:14:00.950Z
 
-**Next session entry point:** `/gsd:execute-phase 1` (resumes plan 01-02-shell-nav)
+**Next session entry point:** `/gsd:execute-phase 1` (resumes plan 01-03-deploy-pipeline)
 
-**Stopped at:** Completed 01-01-tokens-base-fonts-PLAN.md
+**Stopped at:** Completed 01-02-shell-nav-PLAN.md
 
 **Files of record:**
 

@@ -13,15 +13,15 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 - [x] **FOUND-02**: CSS custom properties file (`css/tokens.css`) implements every token from seeds/DESIGN-TOKENS.md (OKLCH colours, Epilogue scale, spacing, radius, shadows, transitions)
 - [x] **FOUND-03**: Base CSS reset, semantic typography defaults, body line-length cap (`--measure: 65ch`)
 - [x] **FOUND-04**: Epilogue (400, 700) loads via Google Fonts with preconnect + font-display: swap
-- [ ] **FOUND-05**: Single `index.html` carries `<main>`, six `<section>` blocks with id anchors, `<nav>`, `<footer>` — semantic HTML hierarchy with one H1 (hero)
+- [x] **FOUND-05**: Single `index.html` carries `<main>`, six `<section>` blocks with id anchors, `<nav>`, `<footer>` — semantic HTML hierarchy with one H1 (hero)
 
 ### Navigation
 
-- [ ] **NAV-01**: Sticky top nav, transparent over hero, transitions to Linen fill on first scroll (200ms)
-- [ ] **NAV-02**: Wordmark left ("Look Twice", Epilogue Bold), nav links right (WORK / APPROACH / CONTACT), all anchor to on-page sections
-- [ ] **NAV-03**: Hover/active state — Hot Pink underline (2px, 3px offset), no background fill change
-- [ ] **NAV-04**: Mobile nav — hamburger triggers full-width Midnight overlay sliding down (280ms ease-out-quart) with stacked Linen-text links
-- [ ] **NAV-05**: Hamburger button has aria-expanded / aria-controls; close button top-right of overlay
+- [x] **NAV-01**: Sticky top nav, transparent over hero, transitions to Linen fill on first scroll (200ms)
+- [x] **NAV-02**: Wordmark left ("Look Twice", Epilogue Bold), nav links right (WORK / APPROACH / CONTACT), all anchor to on-page sections
+- [x] **NAV-03**: Hover/active state — Hot Pink underline (2px, 3px offset), no background fill change
+- [x] **NAV-04**: Mobile nav — hamburger triggers full-width Midnight overlay sliding down (280ms ease-out-quart) with stacked Linen-text links
+- [x] **NAV-05**: Hamburger button has aria-expanded / aria-controls; close button top-right of overlay
 
 ### Hero (#hero)
 
@@ -183,12 +183,12 @@ Each requirement maps to exactly one phase.
 | FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Complete |
-| FOUND-05 | Phase 1 | Pending |
-| NAV-01 | Phase 1 | Pending |
-| NAV-02 | Phase 1 | Pending |
-| NAV-03 | Phase 1 | Pending |
-| NAV-04 | Phase 1 | Pending |
-| NAV-05 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Complete |
+| NAV-01 | Phase 1 | Complete |
+| NAV-02 | Phase 1 | Complete |
+| NAV-03 | Phase 1 | Complete |
+| NAV-04 | Phase 1 | Complete |
+| NAV-05 | Phase 1 | Complete |
 | HERO-01 | Phase 2 | Pending |
 | HERO-02 | Phase 2 | Pending |
 | HERO-03 | Phase 2 | Pending |

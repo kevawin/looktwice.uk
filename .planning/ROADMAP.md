@@ -33,7 +33,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   6. `tokens.css` exposes every OKLCH colour, the type scale, spacing, radii, shadows, and transitions specified in DESIGN-TOKENS.md
 **Plans**: 3 plans
   - [x] 01-01-tokens-base-fonts-PLAN.md — File scaffold, tokens.css with full DESIGN-TOKENS.md set, base.css with Andy Bell reset + Epilogue self-host @font-face + scroll-behavior + body defaults, three CSS stubs
-  - [ ] 01-02-shell-nav-PLAN.md — Overwrite index.html with semantic shell (six sections), wire nav + overlay CSS + JS (sticky transparent → Linen, Hot Pink underline, hamburger overlay with aria + Escape), apply doc-fix correcting eight→six in REQUIREMENTS.md and ROADMAP.md
+  - [x] 01-02-shell-nav-PLAN.md — Overwrite index.html with semantic shell (six sections), wire nav + overlay CSS + JS (sticky transparent → Linen, Hot Pink underline, hamburger overlay with aria + Escape), apply doc-fix correcting eight→six in REQUIREMENTS.md and ROADMAP.md
   - [ ] 01-03-deploy-pipeline-PLAN.md — _headers (cache + basic security), push to new-site, verify Cloudflare Pages preview deploy, capture branch-alias URL in STATE.md, confirm main untouched
 **UI hint**: yes
 
