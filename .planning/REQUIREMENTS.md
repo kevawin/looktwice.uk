@@ -9,10 +9,10 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 
 ### Foundations
 
-- [ ] **FOUND-01**: Project structure follows seeds/ARCHITECTURE.md (flat tree: index.html, css/, js/, images/)
-- [ ] **FOUND-02**: CSS custom properties file (`css/tokens.css`) implements every token from seeds/DESIGN-TOKENS.md (OKLCH colours, Epilogue scale, spacing, radius, shadows, transitions)
-- [ ] **FOUND-03**: Base CSS reset, semantic typography defaults, body line-length cap (`--measure: 65ch`)
-- [ ] **FOUND-04**: Epilogue (400, 700) loads via Google Fonts with preconnect + font-display: swap
+- [x] **FOUND-01**: Project structure follows seeds/ARCHITECTURE.md (flat tree: index.html, css/, js/, images/)
+- [x] **FOUND-02**: CSS custom properties file (`css/tokens.css`) implements every token from seeds/DESIGN-TOKENS.md (OKLCH colours, Epilogue scale, spacing, radius, shadows, transitions)
+- [x] **FOUND-03**: Base CSS reset, semantic typography defaults, body line-length cap (`--measure: 65ch`)
+- [x] **FOUND-04**: Epilogue (400, 700) loads via Google Fonts with preconnect + font-display: swap
 - [ ] **FOUND-05**: Single `index.html` carries `<main>`, eight `<section>` blocks with id anchors, `<nav>`, `<footer>` — semantic HTML hierarchy with one H1 (hero)
 
 ### Navigation
@@ -179,10 +179,10 @@ Each requirement maps to exactly one phase.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
+| FOUND-04 | Phase 1 | Complete |
 | FOUND-05 | Phase 1 | Pending |
 | NAV-01 | Phase 1 | Pending |
 | NAV-02 | Phase 1 | Pending |
