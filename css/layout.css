@@ -1,1 +1,49 @@
 /* Look Twice — layout. Page shell, sections, nav layout, footer layout. Phase 1 plan 02 populates the nav and shell layout; Phase 2+ populate sections. */
+
+/* Page shell: main flow, sections (zero-padding stubs in Phase 1), nav layout, footer min-height */
+
+main {
+  display: block;
+}
+
+/* Empty section shells — collapse to zero height in Phase 1. Phases 2–4 paint backgrounds and padding. */
+main > section {
+  /* No padding, no min-height. Bare anchor only per CONTEXT.md D-13. */
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-sm) calc(var(--space-lg) * 0.75); /* 16px 48px per UI-SPEC */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile breakpoint — hide desktop links, show hamburger. UI-SPEC: max-width 1024px. */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: inline-flex; }
+}
+
+@media (min-width: 1025px) {
+  .nav-hamburger { display: none; }
+}
+
+.footer {
+  padding: var(--space-lg) calc(var(--space-lg) * 0.75);
+  min-height: 64px;
+}
