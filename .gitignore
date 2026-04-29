@@ -35,6 +35,7 @@ coverage/
 
 # Misc
 Thumbs.db
+inspo/
 *.log
 .agents/
 .claude/
