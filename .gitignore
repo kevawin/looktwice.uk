@@ -36,3 +36,6 @@ coverage/
 # Misc
 Thumbs.db
 *.log
+.agents/
+.claude/
+skills-lock.json
