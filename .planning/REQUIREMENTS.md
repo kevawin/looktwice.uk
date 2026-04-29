@@ -13,7 +13,7 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 - [x] **FOUND-02**: CSS custom properties file (`css/tokens.css`) implements every token from seeds/DESIGN-TOKENS.md (OKLCH colours, Epilogue scale, spacing, radius, shadows, transitions)
 - [x] **FOUND-03**: Base CSS reset, semantic typography defaults, body line-length cap (`--measure: 65ch`)
 - [x] **FOUND-04**: Epilogue (400, 700) loads via Google Fonts with preconnect + font-display: swap
-- [ ] **FOUND-05**: Single `index.html` carries `<main>`, eight `<section>` blocks with id anchors, `<nav>`, `<footer>` — semantic HTML hierarchy with one H1 (hero)
+- [ ] **FOUND-05**: Single `index.html` carries `<main>`, six `<section>` blocks with id anchors, `<nav>`, `<footer>` — semantic HTML hierarchy with one H1 (hero)
 
 ### Navigation
 

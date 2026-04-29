@@ -26,7 +26,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04, FOUND-05, NAV-01, NAV-02, NAV-03, NAV-04, NAV-05, DEPLOY-01, DEPLOY-02
 **Success Criteria** (what must be TRUE):
   1. The `new-site` branch deploys to a Cloudflare Pages preview URL on every push, and the preview loads `index.html`
-  2. The preview shows a semantic page shell (`<main>` + eight empty `<section>` anchors + `<nav>` + `<footer>`) with one H1 reserved for the hero
+  2. The preview shows a semantic page shell (`<main>` + six empty `<section>` anchors + `<nav>` + `<footer>`) with one H1 reserved for the hero
   3. Epilogue 400/700 loads via Google Fonts with `font-display: swap` and no FOUC of a fallback weight
   4. The sticky top nav is transparent at the top of the page, fills with Linen on first scroll within 200ms, and shows a Hot Pink underline on link hover
   5. The mobile hamburger opens a Midnight overlay with stacked Linen links and correct `aria-expanded` / `aria-controls` state

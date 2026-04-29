@@ -1,156 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Look Twice | Independent brand and customer experience strategy</title>
-  <meta name="description" content="Independent brand and customer experience strategy." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Look Twice</title>
 
-    :root {
-      --navy: #e3e3f4;
-      --navy-mid: #e3e3f499;
-      --navy-soft: #e3e3f4cc;
-    }
+  <!-- Phase 1: minimal meta. Phase 5 (SEO) adds description, og:, canonical, JSON-LD. -->
 
-    html, body {
-      height: 100%;
-    }
+  <!-- Preload critical font weight (400 — used by nav links and body). -->
+  <!-- crossorigin is mandatory for fonts even when same-origin (browser refetches without it). -->
+  <link rel="preload" href="/fonts/epilogue-400.woff2" as="font" type="font/woff2" crossorigin>
 
-    body {
-      background: linear-gradient(135deg,
-        #ff9900 0%,
-        #ff4400 25%,
-        #ff1144 45%,
-        #ff0077 65%,
-        #cc00aa 82%,
-        #5500aa 100%
-      );
-      background-attachment: fixed;
-      color: var(--navy);
-      font-family: 'DM Sans', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 4rem 6rem;
-    }
-
-    header {
-      margin-bottom: 4rem;
-    }
-
-    .wordmark {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.9rem, 4vw, 2.25rem);
-      letter-spacing: 0.04em;
-      color: var(--navy);
-    }
-
-    .tagline {
-      margin-top: 0.5rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-      color: var(--navy-soft);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    main {
-      max-width: 38rem;
-    }
-
-    .headline {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.35rem, 2.2vw, 1.6rem);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      color: var(--navy);
-    }
-
-    .body-text {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
-      line-height: 1.75;
-      color: var(--navy-soft);
-    }
-
-    .body-text p + p {
-      margin-top: 0.4rem;
-    }
-
-    .body-text a {
-      color: var(--navy);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--navy-mid);
-      transition: text-decoration-color 0.2s ease;
-    }
-
-    .body-text a:hover {
-      text-decoration-color: var(--navy);
-    }
-
-    footer {
-      margin-top: 3rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--navy-mid);
-    }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.20);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    header, main, footer {
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 3rem 2rem;
-      }
-    }
-  </style>
+  <!-- Stylesheets in cascade order: tokens → base → layout → components → animations. Do not @import; @import is render-blocking sequential. -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
 </head>
 <body>
 
-  <div class="overlay"></div>
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="nav-wordmark" href="/">Look Twice</a>
+    <button class="nav-hamburger"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-overlay"
+            aria-label="Open menu">
+      <span class="nav-hamburger-line" aria-hidden="true"></span>
+      <span class="nav-hamburger-line" aria-hidden="true"></span>
+      <span class="nav-hamburger-line" aria-hidden="true"></span>
+    </button>
+    <ul class="nav-links" role="list">
+      <li><a class="nav-link" href="#work">WORK</a></li>
+      <li><a class="nav-link" href="#approach">APPROACH</a></li>
+      <li><a class="nav-link" href="#contact">CONTACT</a></li>
+    </ul>
+  </nav>
 
-  <header>
-    <div class="wordmark">Look Twice</div>
-    <div class="tagline">Independent brand &amp; customer experience strategy</div>
-  </header>
+  <div id="nav-overlay" class="nav-overlay" aria-hidden="true">
+    <button class="nav-overlay-close"
+            type="button"
+            aria-label="Close menu">&times;</button>
+    <nav aria-label="Mobile navigation">
+      <a class="nav-overlay-link" href="#work">WORK</a>
+      <a class="nav-overlay-link" href="#approach">APPROACH</a>
+      <a class="nav-overlay-link" href="#contact">CONTACT</a>
+    </nav>
+  </div>
 
   <main>
-    <h1 class="headline">Not quite ready for your second look yet.</h1>
-
-    <div class="body-text">
-      <p>Curious? Find me on <a href="https://www.linkedin.com/in/krisevawin/" target="_blank" rel="noopener noreferrer">LinkedIn</a> in the meantime.</p>
-      <p>Or if your brand makes a promise your experience isn&rsquo;t keeping, <span style="white-space: nowrap;">let&rsquo;s talk: <a href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></span></p>
-    </div>
+    <section id="hero"></section>
+    <section id="situation"></section>
+    <section id="approach"></section>
+    <section id="work"></section>
+    <section id="services"></section>
+    <section id="contact"></section>
   </main>
 
-  <footer>&copy; 2026 Look Twice</footer>
+  <footer class="footer footer--placeholder">
+    <!-- Phase 4 populates this -->
+  </footer>
 
+  <script src="/js/main.js" defer></script>
 </body>
 </html>
