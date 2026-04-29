@@ -1,0 +1,143 @@
+/* Look Twice — base CSS. Reset + font face + scroll behaviour + body defaults. Cascade-order: loaded after tokens.css, before layout.css. */
+
+/* ============================================================
+   1. Andy Bell — modern minimal CSS reset
+   https://piccalil.li/blog/a-more-modern-css-reset/
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* ============================================================
+   2. Self-hosted Epilogue 400 + 700 font faces.
+   Absolute /fonts/ paths so Cloudflare Pages serves correctly
+   from previews and deeplinks.
+   ============================================================ */
+@font-face {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/epilogue-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Epilogue';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/epilogue-700.woff2') format('woff2');
+}
+
+/* ============================================================
+   3. Smooth scroll with reduced-motion guard
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================================
+   4. Body defaults — token-driven, no hard-coded values
+   ============================================================ */
+body {
+  background: var(--color-linen);
+  color: var(--color-midnight);
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+}
+
+/* ============================================================
+   5. Measure cap on running text + global focus ring
+   ============================================================ */
+p,
+.measure {
+  max-width: var(--measure);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-hot-pink);
+  outline-offset: 3px;
+}
