@@ -175,17 +175,93 @@ Deferred to a future milestone. Documented now so they're not forgotten.
 
 ## Traceability
 
-Will be populated by the roadmapper. Each requirement maps to exactly one phase.
+Each requirement maps to exactly one phase.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by gsd-roadmapper) | | |
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| NAV-01 | Phase 1 | Pending |
+| NAV-02 | Phase 1 | Pending |
+| NAV-03 | Phase 1 | Pending |
+| NAV-04 | Phase 1 | Pending |
+| NAV-05 | Phase 1 | Pending |
+| HERO-01 | Phase 2 | Pending |
+| HERO-02 | Phase 2 | Pending |
+| HERO-03 | Phase 2 | Pending |
+| HERO-04 | Phase 2 | Pending |
+| HERO-05 | Phase 2 | Pending |
+| HERO-06 | Phase 2 | Pending |
+| SITU-01 | Phase 2 | Pending |
+| SITU-02 | Phase 2 | Pending |
+| SITU-03 | Phase 2 | Pending |
+| SITU-04 | Phase 2 | Pending |
+| SITU-05 | Phase 2 | Pending |
+| INTR-01 | Phase 3 | Pending |
+| INTR-02 | Phase 3 | Pending |
+| INTR-03 | Phase 3 | Pending |
+| INTR-04 | Phase 3 | Pending |
+| WORK-01 | Phase 3 | Pending |
+| WORK-02 | Phase 3 | Pending |
+| WORK-03 | Phase 3 | Pending |
+| WORK-04 | Phase 3 | Pending |
+| SERV-01 | Phase 3 | Pending |
+| SERV-02 | Phase 3 | Pending |
+| SERV-03 | Phase 3 | Pending |
+| SERV-04 | Phase 3 | Pending |
+| SERV-05 | Phase 3 | Pending |
+| CONT-01 | Phase 4 | Pending |
+| CONT-02 | Phase 4 | Pending |
+| CONT-03 | Phase 4 | Pending |
+| CONT-04 | Phase 4 | Pending |
+| CONT-05 | Phase 4 | Pending |
+| CONT-06 | Phase 4 | Pending |
+| FOOT-01 | Phase 4 | Pending |
+| FOOT-02 | Phase 4 | Pending |
+| FOOT-03 | Phase 4 | Pending |
+| FOOT-04 | Phase 4 | Pending |
+| TAB-01 | Phase 4 | Pending |
+| TAB-02 | Phase 4 | Pending |
+| TAB-03 | Phase 4 | Pending |
+| TAB-04 | Phase 4 | Pending |
+| TAB-05 | Phase 4 | Pending |
+| TAB-06 | Phase 4 | Pending |
+| TAB-07 | Phase 4 | Pending |
+| JS-01 | Phase 4 | Pending |
+| JS-02 | Phase 4 | Pending |
+| JS-03 | Phase 4 | Pending |
+| JS-04 | Phase 4 | Pending |
+| JS-05 | Phase 4 | Pending |
+| JS-06 | Phase 4 | Pending |
+| RESP-01 | Phase 5 | Pending |
+| RESP-02 | Phase 5 | Pending |
+| RESP-03 | Phase 5 | Pending |
+| RESP-04 | Phase 5 | Pending |
+| A11Y-01 | Phase 5 | Pending |
+| A11Y-02 | Phase 5 | Pending |
+| A11Y-03 | Phase 5 | Pending |
+| A11Y-04 | Phase 5 | Pending |
+| A11Y-05 | Phase 5 | Pending |
+| A11Y-06 | Phase 5 | Pending |
+| PERF-01 | Phase 5 | Pending |
+| PERF-02 | Phase 5 | Pending |
+| PERF-03 | Phase 5 | Pending |
+| PERF-04 | Phase 5 | Pending |
+| SEO-01 | Phase 5 | Pending |
+| SEO-02 | Phase 5 | Pending |
+| SEO-03 | Phase 5 | Pending |
+| DEPLOY-01 | Phase 1 | Pending |
+| DEPLOY-02 | Phase 1 | Pending |
+| DEPLOY-03 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 65 total
-- Mapped to phases: pending roadmap
-- Unmapped: pending roadmap ⚠️
+- v1 requirements: 77 total
+- Mapped to phases: 77
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-29*
-*Last updated: 2026-04-29 after initial definition*
+*Last updated: 2026-04-29 after roadmap traceability mapping*
