@@ -334,6 +334,7 @@
 
 .chip {
   display: inline-block;
+  align-self: flex-start;
   background: var(--color-midnight);
   color: var(--color-linen);
   font-family: var(--font-primary);
