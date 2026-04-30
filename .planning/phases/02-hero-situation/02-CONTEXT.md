@@ -30,7 +30,7 @@ Out of scope: positioning interrupt + work + services (Phase 3), contact + foote
 ### Hero photography
 - **D-07:** Main cutout (large rounded-rect, ~40–50% section width on desktop) renders **a temp Kris headshot** at `images/kris-portrait.webp`. User (Kris/Jamie) sources and converts the JPG to WebP before plan-phase or before Wave 2 commit. Conversion path: Squoosh (https://squoosh.app, drag-drop, quality 75–80) or macOS `sips -s format webp <src>.jpg --out images/kris-portrait.webp`. Fully desaturated via `filter: grayscale(100%)` per HOMEPAGE-SPEC.
 - **D-08:** Supporting cutout (smaller circle / rounded-rect, asymmetric to the main) renders **a stock greyscale image** (workshop / hands working / architectural detail per HOMEPAGE-SPEC §Section 2) at `images/hero-supporting.webp`. User selects manually (PROJECT.md bans automated picks). Same desaturate filter — note the source image can be colour, the CSS handles greyscale.
-- **D-09:** Image format is WebP at fixed paths — single source per slot, no `srcset` for Phase 2. Responsive sizing handled via CSS `object-fit` + `max-width`. Phase 5 may add `srcset` if Lighthouse calls for it.
+- **D-09:** Image format is WebP at fixed paths — single source per slot, no `srcset` for Phase 2. Responsive sizing handled via CSS `object-fit` + `max-width`. Phase 5 may add `srcset` if Lighthouse calls for it. Hero main cutout ships with `fetchpriority="high"` and `loading="eager"` in Phase 2 (the LCP-candidate above-the-fold image — defensible perf win even though broader LCP optimisation is deferred to Phase 5).
 - **D-10:** **Fallback if either image is missing at execute time:** hero falls back to a Midnight token-block placeholder rendered at the exact size and position the real image will occupy. The plan does not block on the file's presence. Replacing the placeholder with the real image is a single-file commit on `new-site` later, no markup or CSS change required.
 - **D-11:** Both cutouts are positioned on the Hot Pink surface only — text never overlaps photography. Asymmetric, not symmetrical.
 
@@ -147,7 +147,7 @@ None — `gsd-tools todo match-phase 2` returned no matches.
 ## Deferred Ideas
 
 - Responsive `srcset` for hero images — Phase 5 if Lighthouse demands it.
-- Image LCP optimisation (`fetchpriority="high"`, preload tag for the main cutout) — Phase 5 (PERF-01).
+- Image LCP optimisation broader sweep (preload tag for main cutout, additional perf hints) — Phase 5 (PERF-01). Note: hero main cutout `fetchpriority="high"` lands in Phase 2 per D-09 (above-the-fold LCP candidate, defensible standalone win).
 - Final Kris portrait + final supporting cutout — Kris commissions/selects late in the cycle. Phase 2 ships with temp/stock; the swap is a single-file commit on `new-site` once finals are ready, no markup change.
 - Refining situation block 01–05 copy in Kris's voice — happens on the live preview after Phase 2 ships, not as a phase of its own.
 - `[DECIDE]` markers elsewhere in CONTENT-DRAFT (positioning interrupt option A/B in §Section 3, work section public client names in §Section 4) — Phase 3 decisions.
