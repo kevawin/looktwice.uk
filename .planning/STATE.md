@@ -3,37 +3,37 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-situation-PLAN.md
-last_updated: "2026-04-30T07:46:22.777Z"
+stopped_at: Completed 02-03-reveal-observer-PLAN.md
+last_updated: "2026-04-30T07:50:46.145Z"
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
-  percent: 83
+  completed_plans: 6
+  percent: 100
 ---
 
 # State: looktwice.uk
 
 **Last updated:** 2026-04-30
-**Session:** Phase 02 plan 02 (situation) complete — markup + CSS landed, .chip class shipped
+**Session:** Phase 02 complete — hero + situation + generic .reveal IntersectionObserver shipped; site-wide observer is the foundation for Phase 3 + 4 scroll animations
 
 ## Project Reference
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 02 — hero-situation
+**Current focus:** Phase 02 complete — Phase 03 (approach + work + services) next
 
 ## Current Position
 
-Phase: 02 (hero-situation) — EXECUTING
-Plan: 3 of 3 (next: 02-03 reveal observer)
+Phase: 02 (hero-situation) — COMPLETE
+Plan: 3 of 3 complete (next: Phase 03 approach + work + services)
 
 - **Milestone:** v1
-- **Phase:** 2
-- **Plan:** 02-02-situation complete; 02-03-reveal-observer next
-- **Status:** Executing Phase 02
-- **Progress:** [████████░░] 83%
+- **Phase:** 2 complete
+- **Plan:** 02-03-reveal-observer complete; Phase 03 next
+- **Status:** Phase 02 complete; ready for Phase 03 entry
+- **Progress:** [██████████] 100%
 - **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias — stable across pushes)
 
 ## Configuration
@@ -58,6 +58,7 @@ Plan: 3 of 3 (next: 02-03 reveal observer)
 | Phase 01 P02 | 2min | 3 tasks | 7 files |
 | Phase 02-hero-situation P01 | 6min | 3 tasks | 3 files |
 | Phase 02-hero-situation P02 | 2min | 3 tasks | 3 files |
+| Phase 02-hero-situation P03 | 1m 20s | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -90,6 +91,10 @@ Plan: 3 of 3 (next: 02-03 reveal observer)
 - [Phase 02]: Plan 02-02: Staggered desktop layout via grid-row: 2 on block 04 (skipping row 1 of column 2) — pure CSS Grid expression of D-12, no padding hacks or absolute positioning
 - [Phase 02]: Plan 02-02: Three-breakpoint cascade for situation grid (mobile baseline → 641px tablet alternation → 1025px desktop stagger) gives an intentional shape at every viewport
 - [Phase 02]: Plan 02-02: Visible 01..05 number spans marked aria-hidden — <ol> already conveys order semantically, prevents SR double-announcement
+- [Phase 02-hero-situation]: Plan 02-03: generic IntersectionObserver lands in js/main.js — one IIFE-scoped observer rules all .reveal elements site-wide; Phase 3 + 4 add .reveal + data-reveal-index in HTML, no JS changes
+- [Phase 02-hero-situation]: Plan 02-03: stagger formula is parametric — delay = data-reveal-index × (data-reveal-step || 80) ms; Phase 3 services will ship data-reveal-step=100 per HOMEPAGE-SPEC, no JS change required
+- [Phase 02-hero-situation]: Plan 02-03: one-shot reveal contract via observer.unobserve() after first intersect — re-trigger on scroll-back is a deliberate non-feature (D-15); becomes the project standard for every later phase
+- [Phase 02-hero-situation]: Plan 02-03: prefers-reduced-motion handled entirely by existing CSS guard in animations.css — observer still fires, class still toggles, but transform is stripped to opacity-only fade; zero JS branching for reduced motion
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -103,9 +108,10 @@ Plan: 3 of 3 (next: 02-03 reveal observer)
 ### Todos
 
 - Source `images/hero-supporting.webp` (Kris/Jamie pick — supports the asymmetric working-session beat). Single-file commit lands it; Midnight fallback drops out automatically.
-- Inspect Phase 02 hero + situation on Cloudflare Pages preview at https://new-site.looktwice-uk.pages.dev (desktop, 1024px, 640px, 375px) when `c5e8938` deploys.
+- Inspect Phase 02 hero + situation + reveal cascade on Cloudflare Pages preview at https://new-site.looktwice-uk.pages.dev (desktop, 1024px, 640px, 375px) when `887057d` deploys.
+- Verify reduced-motion behaviour: DevTools → Rendering → Emulate CSS prefers-reduced-motion: reduce → refresh → scroll into situation. Reveal should still happen but opacity-only (no vertical movement).
 - Refine provisional supporting cutout `alt` text in `index.html` once final image is chosen.
-- Execute plan 02-03 (reveal observer) next — wires `.reveal` + `data-reveal-index` on situation chip, headline, and the five blocks.
+- Phase 02 complete — entry point for Phase 03 is `/gsd:execute-phase 3` (approach + work + services).
 
 ### Blockers
 
@@ -113,11 +119,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-04-30T07:45:57.477Z
+**Last session:** 2026-04-30T07:50:46.142Z
 
-**Next session entry point:** `/gsd:execute-phase 2` (continue Phase 2 with plan 02-03 reveal observer)
+**Next session entry point:** `/gsd:execute-phase 3` (begin Phase 3 — approach + work + services)
 
-**Stopped at:** Completed 02-02-situation-PLAN.md
+**Stopped at:** Completed 02-03-reveal-observer-PLAN.md
 
 **Files of record:**
 

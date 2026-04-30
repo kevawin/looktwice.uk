@@ -38,7 +38,7 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 - [x] **SITU-02**: Five situation blocks (01–05) — Hot Pink number label, Bold title (--text-title), 1–2 body sentences (lh 1.7, max 65ch); no icons, no card boxes, no borders, no shadows
 - [x] **SITU-03**: Desktop layout — 2-column stagger (col 1: 01,02,03 / col 2: 04,05 offset down ~1 item height), --space-lg gap
 - [x] **SITU-04**: Mobile layout — single column, --space-md between items
-- [ ] **SITU-05**: Scroll reveal — chip + headline first, then items 01–05 stagger 80ms each (opacity 0→1, translateY 16px→0, 400ms ease-out-quart, IntersectionObserver threshold 0.2)
+- [x] **SITU-05**: Scroll reveal — chip + headline first, then items 01–05 stagger 80ms each (opacity 0→1, translateY 16px→0, 400ms ease-out-quart, IntersectionObserver threshold 0.2)
 
 ### Positioning Interrupt (#approach)
 
@@ -199,7 +199,7 @@ Each requirement maps to exactly one phase.
 | SITU-02 | Phase 2 | Complete |
 | SITU-03 | Phase 2 | Complete |
 | SITU-04 | Phase 2 | Complete |
-| SITU-05 | Phase 2 | Pending |
+| SITU-05 | Phase 2 | Complete |
 | INTR-01 | Phase 3 | Pending |
 | INTR-02 | Phase 3 | Pending |
 | INTR-03 | Phase 3 | Pending |
