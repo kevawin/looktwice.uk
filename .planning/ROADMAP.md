@@ -49,7 +49,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   5. Situation blocks reveal on scroll with 80ms stagger between items via IntersectionObserver, and reduced-motion users get opacity-only fade
 **Plans**: 3 plans
   - [x] 02-01-hero-PLAN.md — Hero markup + Hot Pink CSS + two-column layout (HERO-01..06)
-  - [ ] 02-02-situation-PLAN.md — Situation markup + Linen CSS + .chip component + staggered grid (SITU-01..04)
+  - [x] 02-02-situation-PLAN.md — Situation markup + Linen CSS + .chip component + staggered grid (SITU-01..04)
   - [ ] 02-03-reveal-observer-PLAN.md — Generic .reveal IntersectionObserver wired to situation chip/headline/blocks (SITU-05)
 **UI hint**: yes
 

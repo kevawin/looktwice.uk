@@ -3,20 +3,20 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-hero-PLAN.md
-last_updated: "2026-04-30T07:41:04.021Z"
+stopped_at: Completed 02-02-situation-PLAN.md
+last_updated: "2026-04-30T07:46:22.777Z"
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 6
-  completed_plans: 4
-  percent: 67
+  completed_plans: 5
+  percent: 83
 ---
 
 # State: looktwice.uk
 
 **Last updated:** 2026-04-30
-**Session:** Phase 02 plan 01 (hero) complete — markup + CSS landed
+**Session:** Phase 02 plan 02 (situation) complete — markup + CSS landed, .chip class shipped
 
 ## Project Reference
 
@@ -27,13 +27,13 @@ progress:
 ## Current Position
 
 Phase: 02 (hero-situation) — EXECUTING
-Plan: 2 of 3 (next: 02-02 situation section)
+Plan: 3 of 3 (next: 02-03 reveal observer)
 
 - **Milestone:** v1
 - **Phase:** 2
-- **Plan:** 02-01-hero complete; 02-02-situation next
+- **Plan:** 02-02-situation complete; 02-03-reveal-observer next
 - **Status:** Executing Phase 02
-- **Progress:** [███████░░░] 67%
+- **Progress:** [████████░░] 83%
 - **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias — stable across pushes)
 
 ## Configuration
@@ -57,6 +57,7 @@ Plan: 2 of 3 (next: 02-02 situation section)
 | Phase 01 P01 | 6min | 3 tasks | 10 files |
 | Phase 01 P02 | 2min | 3 tasks | 7 files |
 | Phase 02-hero-situation P01 | 6min | 3 tasks | 3 files |
+| Phase 02-hero-situation P02 | 2min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,11 @@ Plan: 2 of 3 (next: 02-02 situation section)
 - [Phase 02]: Plan 02-01: `.btn` / `.btn--primary` / `.btn--ghost-on-dark` component classes ship with focus-ring override on the ghost variant only (Hot Pink global outline disappears on Hot Pink surface; White outline override scoped to the modifier where it fails)
 - [Phase 02]: Plan 02-01: Subhead at 85% white via `opacity: 0.85` on `--color-true-white` (no new colour token introduced)
 - [Phase 02]: Plan 02-01: Inline `onerror` handler on supporting cutout `<img>` toggles `.hero__cutout--missing` so Midnight fallback survives even if Cloudflare Pages 404s the file (defence-in-depth on top of CSS layering)
+- [Phase 02]: Plan 02-02: Linen situation section shipped — .situation surface, THE SITUATION chip, 'Sound familiar?' H2, five blocks 01-05 in <ol role='list'> with Hot Pink number / bold title / body capped at --measure
+- [Phase 02]: Plan 02-02: .chip is a generic reusable component class (not .situation__chip) — Phase 3 reuses verbatim on WORK / HOW I WORK chips, no rename or override
+- [Phase 02]: Plan 02-02: Staggered desktop layout via grid-row: 2 on block 04 (skipping row 1 of column 2) — pure CSS Grid expression of D-12, no padding hacks or absolute positioning
+- [Phase 02]: Plan 02-02: Three-breakpoint cascade for situation grid (mobile baseline → 641px tablet alternation → 1025px desktop stagger) gives an intentional shape at every viewport
+- [Phase 02]: Plan 02-02: Visible 01..05 number spans marked aria-hidden — <ol> already conveys order semantically, prevents SR double-announcement
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -97,9 +103,9 @@ Plan: 2 of 3 (next: 02-02 situation section)
 ### Todos
 
 - Source `images/hero-supporting.webp` (Kris/Jamie pick — supports the asymmetric working-session beat). Single-file commit lands it; Midnight fallback drops out automatically.
-- Inspect Phase 02 hero on Cloudflare Pages preview at https://new-site.looktwice-uk.pages.dev (desktop, 768px, 375px) when `70e322d` deploys.
+- Inspect Phase 02 hero + situation on Cloudflare Pages preview at https://new-site.looktwice-uk.pages.dev (desktop, 1024px, 640px, 375px) when `c5e8938` deploys.
 - Refine provisional supporting cutout `alt` text in `index.html` once final image is chosen.
-- Execute plan 02-02 (situation section) next.
+- Execute plan 02-03 (reveal observer) next — wires `.reveal` + `data-reveal-index` on situation chip, headline, and the five blocks.
 
 ### Blockers
 
@@ -107,11 +113,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-04-30T07:39:23Z
+**Last session:** 2026-04-30T07:45:57.477Z
 
-**Next session entry point:** `/gsd:execute-phase 2` (continue Phase 2 with plan 02-02 situation section)
+**Next session entry point:** `/gsd:execute-phase 2` (continue Phase 2 with plan 02-03 reveal observer)
 
-**Stopped at:** Completed 02-01-hero-PLAN.md (3 commits: 01c24d5, 3bda8b2, 70e322d)
+**Stopped at:** Completed 02-02-situation-PLAN.md
 
 **Files of record:**
 
