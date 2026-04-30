@@ -130,3 +130,198 @@
 .footer--placeholder {
   background: var(--color-midnight);
 }
+
+/* ============================================================
+   Phase 2 — Hero (#hero) component
+   HERO-01 through HERO-06. Hot Pink full-bleed surface.
+   ============================================================ */
+
+.hero {
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  /* Internal padding: clear sticky nav at top, breathe at bottom. Token-driven. */
+  padding-block: var(--space-lg);
+  padding-inline: calc(var(--space-lg) * 0.75); /* matches nav gutter (48px) per Phase 1 layout */
+  position: relative;
+  overflow: hidden; /* prevents asymmetric cutout offset bleeding past surface */
+}
+
+.hero__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--color-true-white);
+  margin: 0;
+}
+
+.hero__subhead {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  opacity: 0.85;
+  max-width: var(--measure);
+  margin-block-start: var(--space-sm);
+  margin-block-end: 0;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Cutout column — asymmetric composition.
+   Main cutout dominates; supporting cutout offsets bottom-left to break the rectangle. */
+.hero__cutouts {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* keeps the composition stable while content scales */
+  max-width: 520px;
+  justify-self: end;
+}
+
+.hero__cutout {
+  position: absolute;
+  display: block;
+  filter: grayscale(100%);
+}
+
+.hero__cutout img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero__cutout--main {
+  top: 0;
+  right: 0;
+  width: 78%;
+  height: 86%;
+  border-radius: var(--radius-cutout);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero__cutout--support {
+  bottom: 0;
+  left: 0;
+  width: 42%;
+  height: 42%;
+  border-radius: 50%; /* circle per HOMEPAGE-SPEC §Section 2 — supporting cutout is a circle for asymmetric tension against the main rounded-rect */
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Midnight token-block fallback (D-10).
+   Sits behind the <picture>; if the image is present, it covers the fallback.
+   If the image fails to load (or .hero__cutout--missing is added by the inline onerror handler in index.html), the fallback shows through. */
+.hero__cutout-fallback {
+  position: absolute;
+  inset: 0;
+  background: var(--color-midnight);
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.hero__cutout-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero__cutout--missing .hero__cutout-image {
+  display: none;
+}
+
+/* ============================================================
+   Buttons — base + hero variants (HERO-04).
+   Padding 14px 32px is locked by DESIGN-TOKENS Buttons spec.
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: var(--radius-sm);
+  border: 0;
+  cursor: pointer;
+  transition: var(--transition-button);
+}
+
+.btn--primary {
+  background: var(--color-midnight);
+  color: var(--color-linen);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
+}
+
+.btn--ghost-on-dark {
+  background: transparent;
+  color: var(--color-true-white);
+  border: 1.5px solid var(--color-true-white);
+}
+
+.btn--ghost-on-dark:hover {
+  background: var(--color-true-white);
+  color: var(--color-midnight);
+}
+
+/* Focus-ring exception (UI-SPEC Hover & focus): Hot Pink outline disappears on Hot Pink surface.
+   Override only on .btn--ghost-on-dark to keep contrast against hero. */
+.btn--ghost-on-dark:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Hero responsive — single-column stack at narrow viewports.
+   Breakpoint 768px keeps the 2-col hero readable on tablets while
+   stacking it on phones (matches HERO-05).
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .hero {
+    /* Allow content to grow taller than 90vh on small screens if cutout + buttons need it. */
+    min-height: 90vh;
+    padding-block: var(--space-md);
+  }
+
+  .hero__cutouts {
+    width: 85%; /* HERO-05: scaled cutout ~85% section width */
+    margin-block-start: var(--space-md);
+    aspect-ratio: 4 / 5; /* taller composition on mobile */
+    max-width: none;
+    justify-self: center;
+  }
+
+  .hero__ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
+  }
+}
