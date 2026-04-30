@@ -1,10 +1,16 @@
 /* Look Twice — components. Nav, buttons, chips, footer, sticky tab, cutout mask. Phase 1 plan 02 populates the nav components; Phase 2+ append sections. */
 
-/* Sticky nav (NAV-01, NAV-02, NAV-03) */
+/* Sticky nav (NAV-01, NAV-02, NAV-03).
+   position: fixed (not sticky) so the hero starts at y=0 and white nav
+   text overlays the Hot Pink hero instead of sitting on Linen body bg
+   above it. The .scrolled state below paints a Linen surface once the
+   user begins scrolling, so legibility holds across every section. */
 
 .nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   background: transparent;
   color: var(--color-true-white);
@@ -271,10 +277,19 @@
   color: var(--color-linen);
 }
 
-.btn--primary:hover,
-.btn--primary:focus-visible {
+.btn--primary:hover {
   background: var(--color-hot-pink);
   color: var(--color-true-white);
+}
+
+/* Focus-ring exception (UI-SPEC Hover & focus): the global Hot Pink ring
+   disappears on the Hot Pink hero, and the previous shared hover+focus rule
+   flipped the button into the hero on keyboard focus. Override to a Midnight
+   outline so the primary button keeps a visible ring on every surface
+   (Hot Pink hero, Linen sections, future Midnight footer). */
+.btn--primary:focus-visible {
+  outline: 2px solid var(--color-midnight);
+  outline-offset: 3px;
 }
 
 .btn--ghost-on-dark {
