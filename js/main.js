@@ -50,3 +50,51 @@ if (hamburger && overlay && closeBtn) {
     }
   });
 }
+
+// ============================================================
+// Generic .reveal IntersectionObserver (Phase 2 — D-14, D-15).
+// One observer rules all .reveal elements site-wide. Phase 3 and
+// Phase 4 add .reveal + data-reveal-index to their elements; no
+// new JS needed.
+// Stagger formula: delay = index × step, where step defaults to
+// 80ms but can be overridden per element via data-reveal-step
+// (e.g. Phase 3 services use data-reveal-step="100").
+// One-shot: observer.unobserve(el) after first reveal (D-15).
+// ============================================================
+
+(function initReveal() {
+  const revealEls = document.querySelectorAll('.reveal');
+  if (revealEls.length === 0) return;
+
+  // Set per-element transition-delay from data-reveal-index × data-reveal-step.
+  // Done here once at boot — cheaper than reading the dataset on every intersect.
+  revealEls.forEach((el) => {
+    const i = parseInt(el.dataset.revealIndex || '0', 10);
+    const step = parseInt(el.dataset.revealStep || '80', 10);
+    el.style.transitionDelay = `${i * step}ms`;
+  });
+
+  // Graceful fallback for browsers without IntersectionObserver (very rare in 2026,
+  // but covers older WebViews). Reveal everything immediately so content is never hidden.
+  if (!('IntersectionObserver' in window)) {
+    revealEls.forEach((el) => el.classList.add('visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target); // one-shot per D-15
+        }
+      });
+    },
+    {
+      threshold: 0.2,        // D-13: fires when 20% of the element is in view
+      rootMargin: '0px 0px -10% 0px', // small bottom inset so reveal fires comfortably inside the viewport
+    }
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+})();
