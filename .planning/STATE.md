@@ -2,13 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Phase 1 plans 01–03 executed; preview live; awaiting verifier
+status: planning
 stopped_at: Completed 01-03-deploy-pipeline-PLAN.md
-last_updated: "2026-04-30T00:00:00.000Z"
-preview_url: https://new-site.looktwice-uk.pages.dev
+last_updated: "2026-04-30T06:15:31.795Z"
 progress:
   total_phases: 5
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
   completed_plans: 3
   percent: 100
@@ -31,9 +30,9 @@ Phase: 01 (foundations-deploy-pipeline) — PLANS COMPLETE, awaiting verifier
 Plan: 3 of 3 complete
 
 - **Milestone:** v1
-- **Phase:** 1 — Foundations & Deploy Pipeline
-- **Plan:** 01-01 + 01-02 + 01-03 complete; awaiting verifier sign-off
-- **Status:** Phase 1 plans 01–03 executed; preview live; awaiting verifier
+- **Phase:** 2
+- **Plan:** Not started
+- **Status:** Ready to plan
 - **Progress:** [██████████] 100% (3/3 plans complete in Phase 01)
 - **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias — stable across pushes)
 
