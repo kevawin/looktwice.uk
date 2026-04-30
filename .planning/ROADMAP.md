@@ -47,7 +47,10 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   3. The situation section shows the "THE SITUATION" Midnight chip, section headline, and five numbered blocks (01–05) in client language with no icons, no card boxes, no borders, no shadows
   4. On desktop situations stagger across two columns (01/02/03 left, 04/05 offset right); on mobile they collapse to a single column with --space-md between items
   5. Situation blocks reveal on scroll with 80ms stagger between items via IntersectionObserver, and reduced-motion users get opacity-only fade
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 02-01-hero-PLAN.md — Hero markup + Hot Pink CSS + two-column layout (HERO-01..06)
+  - [ ] 02-02-situation-PLAN.md — Situation markup + Linen CSS + .chip component + staggered grid (SITU-01..04)
+  - [ ] 02-03-reveal-observer-PLAN.md — Generic .reveal IntersectionObserver wired to situation chip/headline/blocks (SITU-05)
 **UI hint**: yes
 
 ### Phase 3: Mid-page Story
@@ -97,7 +100,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundations & Deploy Pipeline | 0/3 | Not started | - |
-| 2. Hero & Situation | 0/0 | Not started | - |
+| 2. Hero & Situation | 0/3 | Not started | - |
 | 3. Mid-page Story | 0/0 | Not started | - |
 | 4. Conversion & Persistent Surfaces | 0/0 | Not started | - |
 | 5. Hardening & Launch | 0/0 | Not started | - |
