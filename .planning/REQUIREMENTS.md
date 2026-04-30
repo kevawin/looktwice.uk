@@ -25,12 +25,12 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 
 ### Hero (#hero)
 
-- [ ] **HERO-01**: Hot Pink full-bleed surface, min-height 90vh, two-column layout on desktop (text left ~55%, cutout composition right)
-- [ ] **HERO-02**: Display headline (Epilogue 700, --text-display, White) and one-line subhead (--text-body, White at 85%) per CONTENT-DRAFT.md
-- [ ] **HERO-03**: Cutout composition — large rounded-rect (radius 16px) Kris portrait + smaller supporting circle/rect, asymmetric, both `filter: grayscale(100%)`, never overlapping text
-- [ ] **HERO-04**: Two CTAs — Primary "BOOK A SESSION" (Midnight fill → Hot Pink hover) anchors to #contact, Ghost "SEE THE WORK" (1.5px White border → White fill hover) anchors to #work
-- [ ] **HERO-05**: Mobile layout — headline above, scaled cutout (~85% width) below, buttons stacked
-- [ ] **HERO-06**: Hero visible immediately on load — no scroll reveal
+- [x] **HERO-01**: Hot Pink full-bleed surface, min-height 90vh, two-column layout on desktop (text left ~55%, cutout composition right)
+- [x] **HERO-02**: Display headline (Epilogue 700, --text-display, White) and one-line subhead (--text-body, White at 85%) per CONTENT-DRAFT.md
+- [x] **HERO-03**: Cutout composition — large rounded-rect (radius 16px) Kris portrait + smaller supporting circle/rect, asymmetric, both `filter: grayscale(100%)`, never overlapping text
+- [x] **HERO-04**: Two CTAs — Primary "BOOK A SESSION" (Midnight fill → Hot Pink hover) anchors to #contact, Ghost "SEE THE WORK" (1.5px White border → White fill hover) anchors to #work
+- [x] **HERO-05**: Mobile layout — headline above, scaled cutout (~85% width) below, buttons stacked
+- [x] **HERO-06**: Hero visible immediately on load — no scroll reveal
 
 ### Situation (#situation)
 
@@ -189,12 +189,12 @@ Each requirement maps to exactly one phase.
 | NAV-03 | Phase 1 | Complete |
 | NAV-04 | Phase 1 | Complete |
 | NAV-05 | Phase 1 | Complete |
-| HERO-01 | Phase 2 | Pending |
-| HERO-02 | Phase 2 | Pending |
-| HERO-03 | Phase 2 | Pending |
-| HERO-04 | Phase 2 | Pending |
-| HERO-05 | Phase 2 | Pending |
-| HERO-06 | Phase 2 | Pending |
+| HERO-01 | Phase 2 | Complete |
+| HERO-02 | Phase 2 | Complete |
+| HERO-03 | Phase 2 | Complete |
+| HERO-04 | Phase 2 | Complete |
+| HERO-05 | Phase 2 | Complete |
+| HERO-06 | Phase 2 | Complete |
 | SITU-01 | Phase 2 | Pending |
 | SITU-02 | Phase 2 | Pending |
 | SITU-03 | Phase 2 | Pending |
