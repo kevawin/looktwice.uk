@@ -38,5 +38,6 @@ Thumbs.db
 inspo/
 *.log
 .agents/
-.claude/
+.claude/*
+!.claude/launch.json
 skills-lock.json
