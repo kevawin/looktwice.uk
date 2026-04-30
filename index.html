@@ -7,7 +7,7 @@
 
   <!-- Phase 1: minimal meta. Phase 5 (SEO) adds description, og:, canonical, JSON-LD. -->
 
-  <!-- Preload critical font weight (400 — used by nav links and body). -->
+  <!-- Preload critical font weight (400, used by nav links and body). -->
   <!-- crossorigin is mandatory for fonts even when same-origin (browser refetches without it). -->
   <link rel="preload" href="/fonts/epilogue-400.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -50,7 +50,51 @@
   </div>
 
   <main>
-    <section id="hero"></section>
+    <section id="hero" class="hero">
+      <div class="hero__inner">
+        <div class="hero__text">
+          <h1 class="hero__headline">
+            Your brand makes a promise.<br>
+            But is your experience breaking it?
+          </h1>
+          <p class="hero__subhead">
+            I find where brand promise and experience are out of step. Then close the gap.
+          </p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="#contact">BOOK A SESSION</a>
+            <a class="btn btn--ghost-on-dark" href="#work">SEE THE WORK</a>
+          </div>
+        </div>
+
+        <div class="hero__cutouts" aria-hidden="false">
+          <picture class="hero__cutout hero__cutout--main">
+            <img src="/images/kris-portrait.webp"
+                 alt="Kristina Evawin, brand and CX strategist"
+                 width="800"
+                 height="1000"
+                 loading="eager"
+                 decoding="async"
+                 fetchpriority="high">
+          </picture>
+          <!-- Supporting cutout: image not yet committed.
+               Per D-10 the markup ships the picture/img with the agreed path,
+               and a Midnight token-block fallback (.hero__cutout-fallback) renders behind it.
+               When images/hero-supporting.webp lands later, the fallback drops out via CSS attribute selector, no markup change. -->
+          <div class="hero__cutout hero__cutout--support">
+            <div class="hero__cutout-fallback" aria-hidden="true"></div>
+            <picture class="hero__cutout-image">
+              <img src="/images/hero-supporting.webp"
+                   alt="A working session: hands annotating printed brand research on a desk"
+                   width="500"
+                   height="500"
+                   loading="eager"
+                   decoding="async"
+                   onerror="this.parentElement.parentElement.classList.add('hero__cutout--missing'); this.remove();">
+            </picture>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="situation"></section>
     <section id="approach"></section>
     <section id="work"></section>
