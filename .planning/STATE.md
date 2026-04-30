@@ -2,21 +2,22 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 01-02-shell-nav-PLAN.md
-last_updated: "2026-04-29T23:14:20.677Z"
+status: Phase 1 plans 01–03 executed; preview live; awaiting verifier
+stopped_at: Completed 01-03-deploy-pipeline-PLAN.md
+last_updated: "2026-04-30T00:00:00.000Z"
+preview_url: https://new-site.looktwice-uk.pages.dev
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 3
-  completed_plans: 2
-  percent: 67
+  completed_plans: 3
+  percent: 100
 ---
 
 # State: looktwice.uk
 
 **Last updated:** 2026-04-30
-**Session:** Phase 01 plan 02 complete
+**Session:** Phase 01 plan 03 complete — preview live
 
 ## Project Reference
 
@@ -26,14 +27,15 @@ progress:
 
 ## Current Position
 
-Phase: 01 (foundations-deploy-pipeline) — EXECUTING
-Plan: 3 of 3 (next: 01-03-deploy-pipeline)
+Phase: 01 (foundations-deploy-pipeline) — PLANS COMPLETE, awaiting verifier
+Plan: 3 of 3 complete
 
 - **Milestone:** v1
 - **Phase:** 1 — Foundations & Deploy Pipeline
-- **Plan:** 01-01 + 01-02 complete; 01-03-deploy-pipeline next
-- **Status:** Executing Phase 01
-- **Progress:** [███████░░░] 67% (2/3 plans complete in Phase 01)
+- **Plan:** 01-01 + 01-02 + 01-03 complete; awaiting verifier sign-off
+- **Status:** Phase 1 plans 01–03 executed; preview live; awaiting verifier
+- **Progress:** [██████████] 100% (3/3 plans complete in Phase 01)
+- **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias — stable across pushes)
 
 ## Configuration
 
@@ -74,6 +76,9 @@ Plan: 3 of 3 (next: 01-03-deploy-pipeline)
 - [Phase 01]: Plan 01-02: Holding-page index.html overwritten in single Write on new-site only (D-01 honoured)
 - [Phase 01]: Plan 01-02: Two-range hamburger media query (max-width:1024px shows / min-width:1025px hides) avoids the 1024px overlap edge case
 - [Phase 01]: Plan 01-02: D-11 doc-fix landed — REQUIREMENTS.md FOUND-05 + ROADMAP.md SC#2 say 'six' (not 'eight')
+- [Phase 01]: Plan 01-03: `_headers` written at repo root with `/fonts/*` immutable cache, `/css/*` + `/js/*` 24h cache, and three security headers on `/*` (X-Content-Type-Options, Referrer-Policy, X-Frame-Options); HSTS/CSP/COOP/COEP deferred to Phase 5
+- [Phase 01]: Plan 01-03: Phase 1 shell pushed to `origin/new-site`; Cloudflare Pages auto-deployed; branch-alias preview URL captured at https://new-site.looktwice-uk.pages.dev — single source of truth for every later phase
+- [Phase 01]: Plan 01-03: `main` confirmed unchanged on origin — production holding page at looktwice.uk untouched (D-01 honoured)
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -95,11 +100,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-04-29T23:14:00.950Z
+**Last session:** 2026-04-30T00:00:00.000Z
 
-**Next session entry point:** `/gsd:execute-phase 1` (resumes plan 01-03-deploy-pipeline)
+**Next session entry point:** `/gsd:verify-phase 1` (Phase 1 plans complete; verifier signs off then transition to Phase 2)
 
-**Stopped at:** Completed 01-02-shell-nav-PLAN.md
+**Stopped at:** Completed 01-03-deploy-pipeline-PLAN.md
 
 **Files of record:**
 

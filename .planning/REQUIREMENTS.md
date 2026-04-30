@@ -128,8 +128,8 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 
 ### Deployment
 
-- [ ] **DEPLOY-01**: Cloudflare Pages project configured to build/serve from `new-site` branch
-- [ ] **DEPLOY-02**: Preview URL accessible for accessibility/performance verification before cutover
+- [x] **DEPLOY-01**: Cloudflare Pages project configured to build/serve from `new-site` branch
+- [x] **DEPLOY-02**: Preview URL accessible for accessibility/performance verification before cutover
 - [ ] **DEPLOY-03**: Cutover plan documented — switch Pages production source from `main` to `new-site` (or merge `new-site` → `main`) when Kris approves; `main` untouched until then
 
 ## v2 Requirements
@@ -253,8 +253,8 @@ Each requirement maps to exactly one phase.
 | SEO-01 | Phase 5 | Pending |
 | SEO-02 | Phase 5 | Pending |
 | SEO-03 | Phase 5 | Pending |
-| DEPLOY-01 | Phase 1 | Pending |
-| DEPLOY-02 | Phase 1 | Pending |
+| DEPLOY-01 | Phase 1 | Complete |
+| DEPLOY-02 | Phase 1 | Complete |
 | DEPLOY-03 | Phase 5 | Pending |
 
 **Coverage:**
