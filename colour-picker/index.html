@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colour Picker</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem;
+      gap: 2rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: -1.25rem;
+    }
+
+    /* ── Swatches ── */
+    .swatches {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .swatch {
+      width: 200px;
+      height: 220px;
+      border-radius: 20px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.06s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swatch:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+    .swatch:active { transform: scale(0.97); }
+
+    .swatch.spinning {
+      transition: background 0.06s ease;
+    }
+
+    .swatch.landing {
+      transition: background 0.25s ease, transform 0.25s ease;
+      transform: scale(1.04);
+    }
+
+    .colour-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      user-select: none;
+      transition: color 0.06s ease;
+    }
+
+    .swatch.landing .colour-name {
+      transition: color 0.25s ease;
+    }
+
+    .colour-hex {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      opacity: 0.65;
+      font-family: monospace;
+      user-select: none;
+    }
+
+    .copied-toast {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(2px);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+      border-radius: inherit;
+    }
+
+    .swatch.show-copied .copied-toast { opacity: 1; }
+
+    /* ── Pick button ── */
+    button.pick {
+      padding: 0.85rem 3rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, opacity 0.15s;
+      letter-spacing: 0.02em;
+    }
+
+    button.pick:hover:not(:disabled) { background: #333; }
+    button.pick:active:not(:disabled) { transform: scale(0.97); }
+    button.pick:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Palette editor ── */
+    details {
+      width: 100%;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 1rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+      color: #111;
+    }
+
+    summary::after {
+      content: '›';
+      margin-left: auto;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      color: #aaa;
+    }
+
+    details[open] summary::after { transform: rotate(90deg); }
+
+    .palette-body {
+      padding: 0 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .palette-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .palette-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.5rem 0.3rem 0.4rem;
+      border-radius: 8px;
+      background: #f5f5f5;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #222;
+      position: relative;
+    }
+
+    .chip-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    .chip-remove {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ddd;
+      border: none;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #666;
+      padding: 0;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    .chip-remove:hover { background: #fca5a5; color: #dc2626; }
+
+    .add-row {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .add-row input[type="color"] {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 8px;
+      padding: 2px;
+      cursor: pointer;
+      background: none;
+      flex-shrink: 0;
+    }
+
+    .add-row input[type="text"] {
+      padding: 0.5rem 0.7rem;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #111;
+      outline: none;
+      transition: border-color 0.15s;
+      min-width: 0;
+    }
+
+    .add-row input[type="text"]:focus { border-color: #111; }
+    .add-row .name-input { flex: 1; }
+    .add-row .hex-input  { width: 90px; font-family: monospace; }
+
+    .add-row button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .add-row button:hover { background: #333; }
+
+    .error-msg {
+      font-size: 0.75rem;
+      color: #dc2626;
+      min-height: 1rem;
+    }
+
+    .reset-link {
+      font-size: 0.75rem;
+      color: #aaa;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .reset-link:hover { color: #666; }
+  </style>
+</head>
+<body>
+
+  <h1>Dani &amp; Kris' photo adventure</h1>
+  <h2>random colour picker</h2>
+
+  <div class="swatches">
+    <div class="swatch" id="swatch-a">
+      <span class="colour-name" id="name-a"></span>
+      <span class="colour-hex" id="hex-a"></span>
+      <span class="copied-toast">Copied</span>
+    </div>
+    <div class="swatch" id="swatch-b">
+      <span class="colour-name" id="name-b"></span>
+      <span class="colour-hex" id="hex-b"></span>
+      <span class="copied-toast">Copied</span>
+    </div>
+  </div>
+
+  <button class="pick" id="pick-btn">Pick colours</button>
+
+  <details>
+    <summary>Customise palette</summary>
+    <div class="palette-body">
+      <div class="palette-grid" id="palette-grid"></div>
+      <div class="add-row">
+        <input type="color" id="color-input" value="#3b82f6">
+        <input type="text" class="name-input" id="name-input" placeholder="Name" maxlength="20">
+        <input type="text" class="hex-input" id="hex-input" placeholder="#3b82f6" maxlength="7">
+        <button id="add-btn">Add</button>
+      </div>
+      <div class="error-msg" id="error-msg"></div>
+      <button class="reset-link" id="reset-btn">Reset to defaults</button>
+    </div>
+  </details>
+
+  <script>
+    const DEFAULT_PALETTE = [
+      { name: 'Red',    hex: '#e53935' },
+      { name: 'Orange', hex: '#e67e22' },
+      { name: 'Yellow', hex: '#f1c40f' },
+      { name: 'Green',  hex: '#27ae60' },
+      { name: 'Blue',   hex: '#2980b9' },
+      { name: 'Purple', hex: '#8e44ad' },
+      { name: 'Pink',   hex: '#e91e8c' },
+      { name: 'Brown',  hex: '#795548' },
+      { name: 'Grey',   hex: '#607d8b' },
+      { name: 'Black',  hex: '#212121' },
+      { name: 'White',  hex: '#fafafa' },
+    ];
+
+    const STORAGE_KEY = 'colour-picker-palette-v3';
+
+    function loadPalette() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return JSON.parse(saved);
+      } catch {}
+      return DEFAULT_PALETTE.map(c => ({ ...c }));
+    }
+
+    function savePalette() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(palette));
+    }
+
+    let palette = loadPalette();
+    let animating = false;
+
+    function relativeLuminance(hex) {
+      const r = parseInt(hex.slice(1,3),16)/255;
+      const g = parseInt(hex.slice(3,5),16)/255;
+      const b = parseInt(hex.slice(5,7),16)/255;
+      const lin = c => c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4);
+      return 0.2126*lin(r) + 0.7152*lin(g) + 0.0722*lin(b);
+    }
+
+    function textColour(hex) {
+      return relativeLuminance(hex) > 0.35 ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.9)';
+    }
+
+    function setSwatch(swatchEl, nameEl, hexEl, colour) {
+      swatchEl.style.background = colour.hex;
+      nameEl.textContent = colour.name;
+      hexEl.textContent = colour.hex;
+      const tc = textColour(colour.hex);
+      nameEl.style.color = tc;
+      hexEl.style.color = tc;
+    }
+
+    // Slot machine animation: rapid cycling that slows to a stop
+    function animateSwatch(swatchEl, nameEl, hexEl, finalColour, startDelay, onDone) {
+      const TOTAL_FRAMES = 22;
+      let frame = 0;
+
+      function step() {
+        if (frame === TOTAL_FRAMES) {
+          swatchEl.classList.remove('spinning');
+          swatchEl.classList.add('landing');
+          setSwatch(swatchEl, nameEl, hexEl, finalColour);
+          setTimeout(() => {
+            swatchEl.classList.remove('landing');
+            if (onDone) onDone();
+          }, 300);
+          return;
+        }
+
+        const rand = palette[Math.floor(Math.random() * palette.length)];
+        setSwatch(swatchEl, nameEl, hexEl, rand);
+
+        frame++;
+        // exponential slowdown: 40ms → ~380ms
+        const progress = frame / TOTAL_FRAMES;
+        const delay = 40 + Math.pow(progress, 2.2) * 340;
+        setTimeout(step, delay);
+      }
+
+      swatchEl.classList.add('spinning');
+      setTimeout(step, startDelay);
+    }
+
+    function pickTwo() {
+      if (palette.length < 2 || animating) return;
+      animating = true;
+      document.getElementById('pick-btn').disabled = true;
+
+      const idx = Math.floor(Math.random() * palette.length);
+      let idx2;
+      do { idx2 = Math.floor(Math.random() * palette.length); } while (idx2 === idx);
+
+      const sa = document.getElementById('swatch-a');
+      const na = document.getElementById('name-a');
+      const ha = document.getElementById('hex-a');
+      const sb = document.getElementById('swatch-b');
+      const nb = document.getElementById('name-b');
+      const hb = document.getElementById('hex-b');
+
+      let doneCount = 0;
+      function onSwatchDone() {
+        doneCount++;
+        if (doneCount === 2) {
+          animating = false;
+          document.getElementById('pick-btn').disabled = false;
+        }
+      }
+
+      animateSwatch(sa, na, ha, palette[idx],  0,   onSwatchDone);
+      animateSwatch(sb, nb, hb, palette[idx2], 160, onSwatchDone);
+    }
+
+    document.getElementById('pick-btn').addEventListener('click', pickTwo);
+
+    // Click swatch to copy hex
+    ['a','b'].forEach(id => {
+      const swatch = document.getElementById('swatch-' + id);
+      swatch.addEventListener('click', () => {
+        if (animating) return;
+        const hex = document.getElementById('hex-' + id).textContent;
+        if (!hex) return;
+        navigator.clipboard.writeText(hex).catch(() => {});
+        swatch.classList.add('show-copied');
+        setTimeout(() => swatch.classList.remove('show-copied'), 900);
+      });
+    });
+
+    // ── Palette editor ──
+
+    function renderPaletteGrid() {
+      const grid = document.getElementById('palette-grid');
+      grid.innerHTML = '';
+      palette.forEach((colour, i) => {
+        const chip = document.createElement('div');
+        chip.className = 'palette-chip';
+
+        const dot = document.createElement('div');
+        dot.className = 'chip-dot';
+        dot.style.background = colour.hex;
+
+        const label = document.createElement('span');
+        label.textContent = colour.name;
+
+        const rm = document.createElement('button');
+        rm.className = 'chip-remove';
+        rm.textContent = '×';
+        rm.title = 'Remove';
+        rm.addEventListener('click', () => {
+          palette.splice(i, 1);
+          savePalette();
+          renderPaletteGrid();
+        });
+
+        chip.append(dot, label, rm);
+        grid.appendChild(chip);
+      });
+    }
+
+    function isValidHex(h) {
+      return /^#[0-9a-fA-F]{6}$/.test(h);
+    }
+
+    const colorInput = document.getElementById('color-input');
+    const hexInput   = document.getElementById('hex-input');
+    const nameInput  = document.getElementById('name-input');
+    const errorMsg   = document.getElementById('error-msg');
+
+    colorInput.addEventListener('input', () => {
+      hexInput.value = colorInput.value;
+      errorMsg.textContent = '';
+    });
+
+    hexInput.addEventListener('input', () => {
+      let val = hexInput.value.trim();
+      if (!val.startsWith('#')) val = '#' + val;
+      if (isValidHex(val)) {
+        colorInput.value = val;
+        errorMsg.textContent = '';
+      }
+    });
+
+    document.getElementById('add-btn').addEventListener('click', () => {
+      let hex = hexInput.value.trim();
+      if (!hex.startsWith('#')) hex = '#' + hex;
+      const name = nameInput.value.trim();
+
+      if (!isValidHex(hex)) {
+        errorMsg.textContent = 'Enter a valid hex colour, e.g. #ff6600';
+        return;
+      }
+      if (!name) {
+        errorMsg.textContent = 'Give this colour a name.';
+        return;
+      }
+      if (palette.some(c => c.hex.toLowerCase() === hex.toLowerCase())) {
+        errorMsg.textContent = 'That colour is already in the palette.';
+        return;
+      }
+
+      errorMsg.textContent = '';
+      palette.push({ name, hex });
+      savePalette();
+      renderPaletteGrid();
+      hexInput.value = '';
+      nameInput.value = '';
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      palette = DEFAULT_PALETTE.map(c => ({ ...c }));
+      savePalette();
+      renderPaletteGrid();
+    });
+
+    renderPaletteGrid();
+
+    // Initial pick on load
+    const idx = Math.floor(Math.random() * palette.length);
+    let idx2;
+    do { idx2 = Math.floor(Math.random() * palette.length); } while (idx2 === idx);
+    setSwatch(
+      document.getElementById('swatch-a'),
+      document.getElementById('name-a'),
+      document.getElementById('hex-a'),
+      palette[idx]
+    );
+    setSwatch(
+      document.getElementById('swatch-b'),
+      document.getElementById('name-b'),
+      document.getElementById('hex-b'),
+      palette[idx2]
+    );
+  </script>
+</body>
+</html>
