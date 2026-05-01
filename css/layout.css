@@ -105,3 +105,16 @@ main > section {
   }
 }
 
+/* ============================================================
+   Phase 3 — Inner wrappers for interrupt / work / services.
+   Cap content at 1280px (matches hero/situation), centre, single column.
+   ============================================================ */
+
+.interrupt__inner,
+.work__inner,
+.services__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+

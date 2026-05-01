@@ -14,7 +14,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 - [ ] **Phase 1: Foundations & Deploy Pipeline** - File structure, design tokens, base CSS, fonts, semantic shell, nav, Cloudflare Pages preview live
 - [ ] **Phase 2: Hero & Situation** - Above-the-fold identity (Hot Pink hero + cutout) and self-identification (Linen situation, five blocks)
-- [ ] **Phase 3: Mid-page Story** - Positioning interrupt (Signal Orange), work placeholder, services (three problem-first areas)
+- [x] **Phase 3: Mid-page Story** - Positioning interrupt (Signal Orange), work placeholder, services (three problem-first areas)
 - [ ] **Phase 4: Conversion & Persistent Surfaces** - Deep Teal contact, Midnight footer, floating sticky tab, all JS behaviours wired
 - [ ] **Phase 5: Hardening & Launch** - Accessibility, performance, SEO, responsive verification, cutover plan
 
@@ -63,7 +63,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   3. The services section renders three items separated by 1px Midnight-12% horizontal rules, each with Hot Pink number, Bold service name, and two body sentences — no card grid
   4. A ghost "TALK THROUGH WHAT YOU NEED →" button sits below service 03 and anchors to #contact
   5. Interrupt fades in on scroll; work section reveals on the shared stagger pattern; services reveal headline-first then items 01–03 with 100ms stagger
-**Plans**: TBD
+**Plans**: shipped without per-plan PLAN.md files — see `.planning/phases/03-mid-page-story/03-SUMMARY.md` (cloud-session simplification per HANDOFF.md)
 **UI hint**: yes
 
 ### Phase 4: Conversion & Persistent Surfaces

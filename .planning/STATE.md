@@ -3,38 +3,39 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-03-reveal-observer-PLAN.md
-last_updated: "2026-04-30T07:50:46.145Z"
+stopped_at: Completed Phase 03 (interrupt + work + services)
+last_updated: "2026-05-01T23:35:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
   completed_plans: 6
-  percent: 100
+  percent: 60
 ---
 
 # State: looktwice.uk
 
-**Last updated:** 2026-04-30
-**Session:** Phase 02 complete — hero + situation + generic .reveal IntersectionObserver shipped; site-wide observer is the foundation for Phase 3 + 4 scroll animations
+**Last updated:** 2026-05-01
+**Session:** Phase 03 complete — Signal Orange positioning interrupt, Linen work placeholder, three problem-first services shipped on `claude/new-site-QGsb8`
 
 ## Project Reference
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 02 complete — Phase 03 (approach + work + services) next
+**Current focus:** Phase 03 complete — Phase 04 (contact + footer + sticky tab + JS wiring) next
 
 ## Current Position
 
-Phase: 02 (hero-situation) — COMPLETE
-Plan: 3 of 3 complete (next: Phase 03 approach + work + services)
+Phase: 03 (mid-page-story) — COMPLETE
+Plan: Phase 03 shipped without per-plan PLAN.md files (cloud-session simplification per HANDOFF.md). Phase 04 next.
 
 - **Milestone:** v1
-- **Phase:** 2 complete
-- **Plan:** 02-03-reveal-observer complete; Phase 03 next
-- **Status:** Phase 02 complete; ready for Phase 03 entry
-- **Progress:** [██████████] 100%
-- **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias — stable across pushes)
+- **Phase:** 3 complete
+- **Plan:** Phase 03 SUMMARY landed; Phase 04 next
+- **Status:** Phase 03 complete; ready for Phase 04 entry
+- **Progress:** [██████░░░░] 60% (3 of 5 phases)
+- **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
+- **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
 ## Configuration
 
@@ -95,6 +96,12 @@ Plan: 3 of 3 complete (next: Phase 03 approach + work + services)
 - [Phase 02-hero-situation]: Plan 02-03: stagger formula is parametric — delay = data-reveal-index × (data-reveal-step || 80) ms; Phase 3 services will ship data-reveal-step=100 per HOMEPAGE-SPEC, no JS change required
 - [Phase 02-hero-situation]: Plan 02-03: one-shot reveal contract via observer.unobserve() after first intersect — re-trigger on scroll-back is a deliberate non-feature (D-15); becomes the project standard for every later phase
 - [Phase 02-hero-situation]: Plan 02-03: prefers-reduced-motion handled entirely by existing CSS guard in animations.css — observer still fires, class still toggles, but transform is stripped to opacity-only fade; zero JS branching for reduced motion
+- [Phase 03]: Cloud-session simplification — Phase 03 ships without per-plan PLAN.md files (HANDOFF.md authorises plain-English execution); single 03-SUMMARY.md captures decisions + carryover
+- [Phase 03]: Em-dashes substituted with commas in all CONTENT-DRAFT copy lifted into the page (project ban — CLAUDE.md / HANDOFF Hard rules)
+- [Phase 03]: New `.btn--ghost-on-light` variant added alongside `.btn--ghost-on-dark` — Midnight border + text on Linen, Midnight fill + Linen text on hover; reused by work and services CTAs
+- [Phase 03]: Hot Pink number style scoped per-section (`.services__number`, mirroring Phase 2's `.situation__number`) rather than aliased — keeps each section's component layer self-contained
+- [Phase 03]: Services rule stack closes top + bottom (border-top on each item + border-bottom on `:last-child`) so the rules visually wrap the list rather than orphaning the closing CTA
+- [Phase 03]: Services CTA reveal index = 4 with `data-reveal-step="100"` — arrives 400ms after item 01 begins, lands as a punctuation beat after the three-item stagger
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -112,6 +119,8 @@ Plan: 3 of 3 complete (next: Phase 03 approach + work + services)
 - Verify reduced-motion behaviour: DevTools → Rendering → Emulate CSS prefers-reduced-motion: reduce → refresh → scroll into situation. Reveal should still happen but opacity-only (no vertical movement).
 - Refine provisional supporting cutout `alt` text in `index.html` once final image is chosen.
 - Phase 02 complete — entry point for Phase 03 is `/gsd:execute-phase 3` (approach + work + services).
+- Phase 03 complete — entry point for Phase 04 is `/gsd:execute-phase 4` (contact + footer + sticky tab + JS wiring).
+- Inspect Phase 03 (interrupt / work / services) on Cloudflare Pages preview at https://claude-new-site-qgsb8.looktwice-uk.pages.dev.
 
 ### Blockers
 
@@ -121,9 +130,9 @@ None.
 
 **Last session:** 2026-04-30T07:50:46.142Z
 
-**Next session entry point:** `/gsd:execute-phase 3` (begin Phase 3 — approach + work + services)
+**Next session entry point:** `/gsd:execute-phase 4` (begin Phase 4 — contact + footer + sticky tab + JS wiring)
 
-**Stopped at:** Completed 02-03-reveal-observer-PLAN.md
+**Stopped at:** Completed Phase 03 mid-page-story (interrupt + work + services)
 
 **Files of record:**
 

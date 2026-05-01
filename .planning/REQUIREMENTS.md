@@ -42,25 +42,25 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 
 ### Positioning Interrupt (#approach)
 
-- [ ] **INTR-01**: Signal Orange full-bleed surface, --space-xl vertical padding
-- [ ] **INTR-02**: Single text block per CONTENT-DRAFT.md — Headline scale, Epilogue 700, White, lh 1.1, max-width 800px, left-aligned, ≤50 words
-- [ ] **INTR-03**: No chip, no subheading, no CTA — standalone statement only
-- [ ] **INTR-04**: Scroll reveal — fade in + translateY 16px→0, 400ms ease-out-quart
+- [x] **INTR-01**: Signal Orange full-bleed surface, --space-xl vertical padding
+- [x] **INTR-02**: Single text block per CONTENT-DRAFT.md — Headline scale, Epilogue 700, White, lh 1.1, max-width 800px, left-aligned, ≤50 words
+- [x] **INTR-03**: No chip, no subheading, no CTA — standalone statement only
+- [x] **INTR-04**: Scroll reveal — fade in + translateY 16px→0, 400ms ease-out-quart
 
 ### Case Studies Placeholder (#work)
 
-- [ ] **WORK-01**: Linen surface, --space-section padding, Midnight chip "WORK", section headline per CONTENT-DRAFT.md
-- [ ] **WORK-02**: Brief 2–3 sentence holding statement (--text-body, max 65ch) per CONTENT-DRAFT.md
-- [ ] **WORK-03**: Ghost button "GET IN TOUCH" anchors to #contact
-- [ ] **WORK-04**: Section reveals on scroll using same stagger pattern
+- [x] **WORK-01**: Linen surface, --space-section padding, Midnight chip "WORK", section headline per CONTENT-DRAFT.md
+- [x] **WORK-02**: Brief 2–3 sentence holding statement (--text-body, max 65ch) per CONTENT-DRAFT.md
+- [x] **WORK-03**: Ghost button "GET IN TOUCH" anchors to #contact
+- [x] **WORK-04**: Section reveals on scroll using same stagger pattern
 
 ### Services (#services)
 
-- [ ] **SERV-01**: Linen surface, --space-section padding, Midnight chip "HOW I WORK", section headline per CONTENT-DRAFT.md
-- [ ] **SERV-02**: Three service items separated by 1px Midnight-12% full-width horizontal rules — each: Hot Pink number, Bold service name, two body sentences
-- [ ] **SERV-03**: Single column, full content width, body max 65ch
-- [ ] **SERV-04**: Ghost button "TALK THROUGH WHAT YOU NEED →" below item 03, anchors to #contact
-- [ ] **SERV-05**: Scroll reveal — headline first, items 01–03 stagger 100ms each
+- [x] **SERV-01**: Linen surface, --space-section padding, Midnight chip "HOW I WORK", section headline per CONTENT-DRAFT.md
+- [x] **SERV-02**: Three service items separated by 1px Midnight-12% full-width horizontal rules — each: Hot Pink number, Bold service name, two body sentences
+- [x] **SERV-03**: Single column, full content width, body max 65ch
+- [x] **SERV-04**: Ghost button "TALK THROUGH WHAT YOU NEED →" below item 03, anchors to #contact
+- [x] **SERV-05**: Scroll reveal — headline first, items 01–03 stagger 100ms each
 
 ### Contact / CTA (#contact)
 

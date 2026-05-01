@@ -438,3 +438,174 @@
     padding-block: var(--space-xl);
   }
 }
+
+/* ============================================================
+   Phase 3 — Ghost button on light surfaces (.btn--ghost-on-light)
+   Used by #work and #services CTAs. Midnight border + text on Linen,
+   inverts to Midnight fill / Linen text on hover.
+   ============================================================ */
+
+.btn--ghost-on-light {
+  background: transparent;
+  color: var(--color-midnight);
+  border: 1.5px solid var(--color-midnight);
+}
+
+.btn--ghost-on-light:hover {
+  background: var(--color-midnight);
+  color: var(--color-linen);
+}
+
+/* ============================================================
+   Phase 3 — Positioning Interrupt (#approach) component
+   INTR-01..04. Signal Orange full-bleed. No chip, no subhead, no CTA.
+   ============================================================ */
+
+.interrupt {
+  background: var(--color-signal-orange);
+  color: var(--color-true-white);
+  padding-block: var(--space-xl);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.interrupt__statement {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-true-white);
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ============================================================
+   Phase 3 — Work placeholder (#work) component
+   WORK-01..04. Linen surface, chip, headline, holding statement, ghost CTA.
+   ============================================================ */
+
+.work {
+  background: var(--color-linen);
+  color: var(--color-midnight);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.work__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-md);
+}
+
+.work__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.work__body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  max-width: var(--measure);
+  margin: 0 0 var(--space-md) 0;
+}
+
+@media (max-width: 640px) {
+  .work {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Phase 3 — Services (#services) component
+   SERV-01..05. Linen surface. Three items separated by 1px Midnight-12% rules.
+   No card grid. Single column, full content width, body capped at --measure.
+   ============================================================ */
+
+.services {
+  background: var(--color-linen);
+  color: var(--color-midnight);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.services__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-lg);
+}
+
+.services__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.services__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-md) 0;
+}
+
+.services__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-block: var(--space-md);
+  border-top: 1px solid oklch(24% 0.04 275 / 0.12);
+}
+
+/* Final item closes the rule stack with a bottom border (visual symmetry below 03 before the CTA). */
+.services__item:last-child {
+  border-bottom: 1px solid oklch(24% 0.04 275 / 0.12);
+}
+
+.services__number {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-hot-pink);
+  display: inline-block;
+}
+
+.services__title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.services__body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  max-width: var(--measure);
+  margin-block-start: var(--space-xs);
+  margin-block-end: 0;
+}
+
+@media (max-width: 640px) {
+  .services {
+    padding-block: var(--space-xl);
+  }
+}
