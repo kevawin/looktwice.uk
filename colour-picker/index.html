@@ -9,20 +9,21 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f5f5f5;
+      background: #f0f0f0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
       gap: 2rem;
     }
 
     h1 {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      color: #111;
-      letter-spacing: -0.02em;
+      color: #555;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     /* ── Swatches ── */
@@ -34,81 +35,105 @@
     }
 
     .swatch {
-      width: 180px;
-      height: 180px;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      width: 200px;
+      height: 220px;
+      border-radius: 20px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.15);
       display: flex;
-      align-items: flex-end;
-      padding: 0.75rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.06s ease;
       position: relative;
+      overflow: hidden;
     }
 
-    .swatch:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.16); }
-    .swatch:active { transform: translateY(0); }
+    .swatch:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+    .swatch:active { transform: scale(0.97); }
 
-    .swatch-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.5rem;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.25);
-      backdrop-filter: blur(4px);
+    .swatch.spinning {
+      transition: background 0.06s ease;
+    }
+
+    .swatch.landing {
+      transition: background 0.25s ease, transform 0.25s ease;
+      transform: scale(1.04);
+    }
+
+    .colour-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      user-select: none;
+      transition: color 0.06s ease;
+    }
+
+    .swatch.landing .colour-name {
+      transition: color 0.25s ease;
+    }
+
+    .colour-hex {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      opacity: 0.65;
+      font-family: monospace;
       user-select: none;
     }
 
     .copied-toast {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.7);
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(2px);
       color: #fff;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      pointer-events: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       opacity: 0;
-      transition: opacity 0.2s;
+      pointer-events: none;
+      transition: opacity 0.15s;
+      border-radius: inherit;
     }
 
     .swatch.show-copied .copied-toast { opacity: 1; }
 
     /* ── Pick button ── */
     button.pick {
-      padding: 0.75rem 2.5rem;
+      padding: 0.85rem 3rem;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       border: none;
       border-radius: 999px;
       background: #111;
       color: #fff;
       cursor: pointer;
-      transition: background 0.15s ease, transform 0.1s ease;
-      letter-spacing: -0.01em;
+      transition: background 0.15s, transform 0.1s, opacity 0.15s;
+      letter-spacing: 0.02em;
     }
 
-    button.pick:hover { background: #333; }
-    button.pick:active { transform: scale(0.97); }
+    button.pick:hover:not(:disabled) { background: #333; }
+    button.pick:active:not(:disabled) { transform: scale(0.97); }
+    button.pick:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* ── Palette editor ── */
     details {
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
       background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
       overflow: hidden;
     }
 
     summary {
       padding: 1rem 1.25rem;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       font-weight: 600;
       cursor: pointer;
       list-style: none;
@@ -124,7 +149,7 @@
       margin-left: auto;
       font-size: 1.1rem;
       transition: transform 0.2s;
-      color: #888;
+      color: #aaa;
     }
 
     details[open] summary::after { transform: rotate(90deg); }
@@ -139,52 +164,60 @@
     .palette-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .palette-chip {
-      width: 40px;
-      height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.5rem 0.3rem 0.4rem;
       border-radius: 8px;
+      background: #f5f5f5;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #222;
       position: relative;
-      cursor: pointer;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
-      transition: transform 0.1s;
-      flex-shrink: 0;
     }
 
-    .palette-chip:hover { transform: scale(1.1); }
-
-    .palette-chip .remove {
-      position: absolute;
-      top: -6px;
-      right: -6px;
+    .chip-dot {
       width: 18px;
       height: 18px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+
+    .chip-remove {
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
-      background: #fff;
-      border: 1.5px solid #ddd;
-      font-size: 0.65rem;
+      background: #ddd;
+      border: none;
+      font-size: 0.7rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: #555;
+      color: #666;
+      padding: 0;
       line-height: 1;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      transition: background 0.1s, color 0.1s;
     }
 
-    .palette-chip .remove:hover { background: #fee2e2; border-color: #fca5a5; color: #dc2626; }
+    .chip-remove:hover { background: #fca5a5; color: #dc2626; }
 
     .add-row {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.6rem;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .add-row input[type="color"] {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border: none;
       border-radius: 8px;
       padding: 2px;
@@ -194,21 +227,22 @@
     }
 
     .add-row input[type="text"] {
-      flex: 1;
-      padding: 0.55rem 0.75rem;
+      padding: 0.5rem 0.7rem;
       border: 1.5px solid #e5e5e5;
       border-radius: 8px;
       font-size: 0.875rem;
-      font-family: monospace;
       color: #111;
       outline: none;
       transition: border-color 0.15s;
+      min-width: 0;
     }
 
     .add-row input[type="text"]:focus { border-color: #111; }
+    .add-row .name-input { flex: 1; }
+    .add-row .hex-input  { width: 90px; font-family: monospace; }
 
     .add-row button {
-      padding: 0.55rem 1rem;
+      padding: 0.5rem 1rem;
       border: none;
       border-radius: 8px;
       background: #111;
@@ -216,8 +250,8 @@
       font-size: 0.875rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s;
       white-space: nowrap;
+      transition: background 0.15s;
     }
 
     .add-row button:hover { background: #333; }
@@ -230,16 +264,17 @@
 
     .reset-link {
       font-size: 0.75rem;
-      color: #888;
+      color: #aaa;
       cursor: pointer;
       text-decoration: underline;
       text-underline-offset: 2px;
       background: none;
       border: none;
       padding: 0;
+      text-align: left;
     }
 
-    .reset-link:hover { color: #555; }
+    .reset-link:hover { color: #666; }
   </style>
 </head>
 <body>
@@ -248,12 +283,14 @@
 
   <div class="swatches">
     <div class="swatch" id="swatch-a">
-      <span class="swatch-label" id="label-a"></span>
-      <span class="copied-toast">Copied!</span>
+      <span class="colour-name" id="name-a"></span>
+      <span class="colour-hex" id="hex-a"></span>
+      <span class="copied-toast">Copied</span>
     </div>
     <div class="swatch" id="swatch-b">
-      <span class="swatch-label" id="label-b"></span>
-      <span class="copied-toast">Copied!</span>
+      <span class="colour-name" id="name-b"></span>
+      <span class="colour-hex" id="hex-b"></span>
+      <span class="copied-toast">Copied</span>
     </div>
   </div>
 
@@ -265,7 +302,8 @@
       <div class="palette-grid" id="palette-grid"></div>
       <div class="add-row">
         <input type="color" id="color-input" value="#3b82f6">
-        <input type="text" id="hex-input" placeholder="#3b82f6" maxlength="7">
+        <input type="text" class="name-input" id="name-input" placeholder="Name" maxlength="20">
+        <input type="text" class="hex-input" id="hex-input" placeholder="#3b82f6" maxlength="7">
         <button id="add-btn">Add</button>
       </div>
       <div class="error-msg" id="error-msg"></div>
@@ -275,31 +313,39 @@
 
   <script>
     const DEFAULT_PALETTE = [
-      '#e63946','#f4a261','#e9c46a','#2a9d8f','#264653',
-      '#457b9d','#1d3557','#a8dadc','#f1faee','#6d6875',
-      '#b5838d','#e5989b','#ffb4a2','#ffcdb2','#3d405b',
-      '#81b29a','#f2cc8f','#118ab2','#06d6a0','#073b4c',
+      { name: 'Red',     hex: '#c0392b' },
+      { name: 'Orange',  hex: '#e67e22' },
+      { name: 'Yellow',  hex: '#f1c40f' },
+      { name: 'Green',   hex: '#27ae60' },
+      { name: 'Blue',    hex: '#2980b9' },
+      { name: 'Purple',  hex: '#8e44ad' },
+      { name: 'Pink',    hex: '#e91e8c' },
+      { name: 'Brown',   hex: '#795548' },
+      { name: 'Teal',    hex: '#16a085' },
+      { name: 'Navy',    hex: '#1a237e' },
+      { name: 'Gold',    hex: '#f39c12' },
+      { name: 'Coral',   hex: '#e74c3c' },
+      { name: 'Olive',   hex: '#827717' },
+      { name: 'Grey',    hex: '#607d8b' },
+      { name: 'Maroon',  hex: '#880e4f' },
     ];
 
-    const STORAGE_KEY = 'colour-picker-palette';
+    const STORAGE_KEY = 'colour-picker-palette-v2';
 
     function loadPalette() {
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) return JSON.parse(saved);
       } catch {}
-      return [...DEFAULT_PALETTE];
+      return DEFAULT_PALETTE.map(c => ({ ...c }));
     }
 
-    function savePalette(p) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+    function savePalette() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(palette));
     }
 
     let palette = loadPalette();
-
-    function isValidHex(h) {
-      return /^#[0-9a-fA-F]{6}$/.test(h);
-    }
+    let animating = false;
 
     function relativeLuminance(hex) {
       const r = parseInt(hex.slice(1,3),16)/255;
@@ -310,47 +356,92 @@
     }
 
     function textColour(hex) {
-      return relativeLuminance(hex) > 0.35 ? '#111' : '#fff';
+      return relativeLuminance(hex) > 0.35 ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.9)';
+    }
+
+    function setSwatch(swatchEl, nameEl, hexEl, colour) {
+      swatchEl.style.background = colour.hex;
+      nameEl.textContent = colour.name;
+      hexEl.textContent = colour.hex;
+      const tc = textColour(colour.hex);
+      nameEl.style.color = tc;
+      hexEl.style.color = tc;
+    }
+
+    // Slot machine animation: rapid cycling that slows to a stop
+    function animateSwatch(swatchEl, nameEl, hexEl, finalColour, startDelay, onDone) {
+      const TOTAL_FRAMES = 22;
+      let frame = 0;
+
+      function step() {
+        if (frame === TOTAL_FRAMES) {
+          swatchEl.classList.remove('spinning');
+          swatchEl.classList.add('landing');
+          setSwatch(swatchEl, nameEl, hexEl, finalColour);
+          setTimeout(() => {
+            swatchEl.classList.remove('landing');
+            if (onDone) onDone();
+          }, 300);
+          return;
+        }
+
+        const rand = palette[Math.floor(Math.random() * palette.length)];
+        setSwatch(swatchEl, nameEl, hexEl, rand);
+
+        frame++;
+        // exponential slowdown: 40ms → ~380ms
+        const progress = frame / TOTAL_FRAMES;
+        const delay = 40 + Math.pow(progress, 2.2) * 340;
+        setTimeout(step, delay);
+      }
+
+      swatchEl.classList.add('spinning');
+      setTimeout(step, startDelay);
     }
 
     function pickTwo() {
-      if (palette.length < 2) return;
+      if (palette.length < 2 || animating) return;
+      animating = true;
+      document.getElementById('pick-btn').disabled = true;
+
       const idx = Math.floor(Math.random() * palette.length);
       let idx2;
       do { idx2 = Math.floor(Math.random() * palette.length); } while (idx2 === idx);
 
-      const a = palette[idx], b = palette[idx2];
-
       const sa = document.getElementById('swatch-a');
+      const na = document.getElementById('name-a');
+      const ha = document.getElementById('hex-a');
       const sb = document.getElementById('swatch-b');
-      sa.style.background = a;
-      sb.style.background = b;
+      const nb = document.getElementById('name-b');
+      const hb = document.getElementById('hex-b');
 
-      const la = document.getElementById('label-a');
-      const lb = document.getElementById('label-b');
-      la.textContent = a;
-      lb.textContent = b;
-      la.style.color = textColour(a);
-      lb.style.color = textColour(b);
+      let doneCount = 0;
+      function onSwatchDone() {
+        doneCount++;
+        if (doneCount === 2) {
+          animating = false;
+          document.getElementById('pick-btn').disabled = false;
+        }
+      }
+
+      animateSwatch(sa, na, ha, palette[idx],  0,   onSwatchDone);
+      animateSwatch(sb, nb, hb, palette[idx2], 160, onSwatchDone);
     }
-
-    function copyHex(hex, swatchEl) {
-      navigator.clipboard.writeText(hex).catch(() => {});
-      swatchEl.classList.add('show-copied');
-      setTimeout(() => swatchEl.classList.remove('show-copied'), 1000);
-    }
-
-    document.getElementById('swatch-a').addEventListener('click', () => {
-      const hex = document.getElementById('label-a').textContent;
-      if (hex) copyHex(hex, document.getElementById('swatch-a'));
-    });
-
-    document.getElementById('swatch-b').addEventListener('click', () => {
-      const hex = document.getElementById('label-b').textContent;
-      if (hex) copyHex(hex, document.getElementById('swatch-b'));
-    });
 
     document.getElementById('pick-btn').addEventListener('click', pickTwo);
+
+    // Click swatch to copy hex
+    ['a','b'].forEach(id => {
+      const swatch = document.getElementById('swatch-' + id);
+      swatch.addEventListener('click', () => {
+        if (animating) return;
+        const hex = document.getElementById('hex-' + id).textContent;
+        if (!hex) return;
+        navigator.clipboard.writeText(hex).catch(() => {});
+        swatch.classList.add('show-copied');
+        setTimeout(() => swatch.classList.remove('show-copied'), 900);
+      });
+    });
 
     // ── Palette editor ──
 
@@ -360,27 +451,36 @@
       palette.forEach((colour, i) => {
         const chip = document.createElement('div');
         chip.className = 'palette-chip';
-        chip.style.background = colour;
-        chip.title = colour;
 
-        const rm = document.createElement('span');
-        rm.className = 'remove';
+        const dot = document.createElement('div');
+        dot.className = 'chip-dot';
+        dot.style.background = colour.hex;
+
+        const label = document.createElement('span');
+        label.textContent = colour.name;
+
+        const rm = document.createElement('button');
+        rm.className = 'chip-remove';
         rm.textContent = '×';
         rm.title = 'Remove';
-        rm.addEventListener('click', (e) => {
-          e.stopPropagation();
+        rm.addEventListener('click', () => {
           palette.splice(i, 1);
-          savePalette(palette);
+          savePalette();
           renderPaletteGrid();
         });
 
-        chip.appendChild(rm);
+        chip.append(dot, label, rm);
         grid.appendChild(chip);
       });
     }
 
+    function isValidHex(h) {
+      return /^#[0-9a-fA-F]{6}$/.test(h);
+    }
+
     const colorInput = document.getElementById('color-input');
     const hexInput   = document.getElementById('hex-input');
+    const nameInput  = document.getElementById('name-input');
     const errorMsg   = document.getElementById('error-msg');
 
     colorInput.addEventListener('input', () => {
@@ -398,31 +498,55 @@
     });
 
     document.getElementById('add-btn').addEventListener('click', () => {
-      let val = hexInput.value.trim();
-      if (!val.startsWith('#')) val = '#' + val;
-      if (!isValidHex(val)) {
+      let hex = hexInput.value.trim();
+      if (!hex.startsWith('#')) hex = '#' + hex;
+      const name = nameInput.value.trim();
+
+      if (!isValidHex(hex)) {
         errorMsg.textContent = 'Enter a valid hex colour, e.g. #ff6600';
         return;
       }
-      if (palette.includes(val.toLowerCase()) || palette.includes(val.toUpperCase()) || palette.includes(val)) {
-        errorMsg.textContent = 'That colour is already in your palette.';
+      if (!name) {
+        errorMsg.textContent = 'Give this colour a name.';
         return;
       }
+      if (palette.some(c => c.hex.toLowerCase() === hex.toLowerCase())) {
+        errorMsg.textContent = 'That colour is already in the palette.';
+        return;
+      }
+
       errorMsg.textContent = '';
-      palette.push(val);
-      savePalette(palette);
+      palette.push({ name, hex });
+      savePalette();
       renderPaletteGrid();
       hexInput.value = '';
+      nameInput.value = '';
     });
 
     document.getElementById('reset-btn').addEventListener('click', () => {
-      palette = [...DEFAULT_PALETTE];
-      savePalette(palette);
+      palette = DEFAULT_PALETTE.map(c => ({ ...c }));
+      savePalette();
       renderPaletteGrid();
     });
 
     renderPaletteGrid();
-    pickTwo();
+
+    // Initial pick on load
+    const idx = Math.floor(Math.random() * palette.length);
+    let idx2;
+    do { idx2 = Math.floor(Math.random() * palette.length); } while (idx2 === idx);
+    setSwatch(
+      document.getElementById('swatch-a'),
+      document.getElementById('name-a'),
+      document.getElementById('hex-a'),
+      palette[idx]
+    );
+    setSwatch(
+      document.getElementById('swatch-b'),
+      document.getElementById('name-b'),
+      document.getElementById('hex-b'),
+      palette[idx2]
+    );
   </script>
 </body>
 </html>
