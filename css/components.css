@@ -132,10 +132,9 @@
   padding: var(--space-xs) 0;
 }
 
-/* Footer placeholder (D-14) — Midnight surface, no copy in Phase 1 */
-.footer--placeholder {
-  background: var(--color-midnight);
-}
+/* Phase 4 fills the .footer rule below with brand + meta layout.
+   Phase 1 originally shipped a .footer--placeholder Midnight surface; that class
+   has been removed from index.html now that the footer carries content. */
 
 /* ============================================================
    Phase 2 — Hero (#hero) component
@@ -607,5 +606,284 @@
 @media (max-width: 640px) {
   .services {
     padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Phase 4 — Chip ghost-on-dark variant (CONT-01).
+   Used on the Deep Teal contact surface — White border + text + transparent fill.
+   ============================================================ */
+
+.chip--ghost-on-dark {
+  background: transparent;
+  color: var(--color-true-white);
+  border: 1.5px solid var(--color-true-white);
+  padding: 3.5px 12.5px; /* compensate for 1.5px border so visual height matches Midnight pill */
+}
+
+/* ============================================================
+   Phase 4 — Contact (#contact) component (CONT-01..06)
+   Deep Teal full-bleed. Left-aligned. Max content 680px.
+   ============================================================ */
+
+.contact {
+  background: var(--color-deep-teal);
+  color: var(--color-true-white);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.contact__inner {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.contact__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-true-white);
+  margin: 0;
+}
+
+.contact__body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  opacity: 0.85;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.contact__prompts {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-label);
+  color: var(--color-true-white);
+  opacity: 0.6;
+  text-transform: uppercase;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/* CTA button — White fill on Deep Teal, flips to Midnight fill / Linen text on hover (CONT-03) */
+.btn--contact {
+  background: var(--color-true-white);
+  color: var(--color-deep-teal);
+}
+
+.btn--contact:hover {
+  background: var(--color-midnight);
+  color: var(--color-linen);
+}
+
+.btn--contact:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .contact {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Phase 4 — Footer (FOOT-01..04)
+   Midnight surface, --space-lg padding, two-column desktop, stacked mobile.
+   ============================================================ */
+
+.footer {
+  background: var(--color-midnight);
+  color: var(--color-linen);
+  /* Override .footer--placeholder padding inherited from layout.css */
+  padding: var(--space-lg) calc(var(--space-lg) * 0.75);
+}
+
+.footer__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer__wordmark {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 1.7rem);
+  letter-spacing: 0.04em;
+  color: var(--color-linen);
+}
+
+.footer__tagline {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-linen);
+  opacity: 0.6;
+}
+
+.footer__meta {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: flex-end;
+}
+
+.footer__link,
+.footer__copy {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-linen);
+  text-decoration: none;
+  transition: color 180ms ease-out;
+}
+
+.footer__link:hover {
+  color: var(--color-link-sage);
+}
+
+@media (max-width: 640px) {
+  .footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer__meta {
+    align-items: flex-start;
+  }
+}
+
+/* ============================================================
+   Phase 4 — Sticky tab (TAB-01..07)
+   Brand gradient — the only place gradient appears on the site.
+   Hidden by default; .sticky-tab--visible class added by JS once
+   scrollY > hero height. Pill + 4px variants both render at build.
+   ============================================================ */
+
+.sticky-tab {
+  position: fixed;
+  z-index: 150;
+  background: var(--gradient-brand);
+  color: var(--color-true-white);
+  padding: 14px 28px;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: var(--shadow-float);
+  transform: translateX(120%);
+  transition: var(--transition-tab);
+}
+
+.sticky-tab--visible {
+  transform: translateX(0);
+}
+
+.sticky-tab:hover {
+  transform: translateX(0) scale(1.03);
+  transition: transform 180ms ease-out;
+}
+
+.sticky-tab:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 3px;
+}
+
+/* Pill variant — bottom-right, full radius */
+.sticky-tab--pill {
+  bottom: 24px;
+  right: 24px;
+  border-radius: var(--radius-pill);
+}
+
+/* 4px variant — sits above the pill on desktop so both render side by side
+   for Kris to pick. After pick, drop the unused variant. */
+.sticky-tab--square {
+  bottom: 88px;
+  right: 24px;
+  border-radius: var(--radius-sm);
+}
+
+/* Mobile (TAB-07) — full-width bottom strip, slides up from bottom.
+   Only the pill variant renders on mobile to avoid stacked strips covering content;
+   the square variant is hidden until Kris picks at desktop. */
+@media (max-width: 640px) {
+  .sticky-tab {
+    transform: translateY(100%);
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sticky-tab--visible {
+    transform: translateY(0);
+  }
+
+  .sticky-tab--pill {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 52px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+  }
+
+  .sticky-tab--square {
+    display: none;
+  }
+}
+
+/* Reduced motion — remove transform-based entrance, keep tab visible immediately.
+   No vestibular slide; the tab still appears via opacity once scroll threshold met. */
+@media (prefers-reduced-motion: reduce) {
+  .sticky-tab {
+    transform: none;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+
+  .sticky-tab--visible {
+    transform: none;
+    opacity: 1;
+  }
+
+  .sticky-tab:hover {
+    transform: none;
   }
 }

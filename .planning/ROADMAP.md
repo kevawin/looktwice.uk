@@ -15,7 +15,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [ ] **Phase 1: Foundations & Deploy Pipeline** - File structure, design tokens, base CSS, fonts, semantic shell, nav, Cloudflare Pages preview live
 - [ ] **Phase 2: Hero & Situation** - Above-the-fold identity (Hot Pink hero + cutout) and self-identification (Linen situation, five blocks)
 - [x] **Phase 3: Mid-page Story** - Positioning interrupt (Signal Orange), work placeholder, services (three problem-first areas)
-- [ ] **Phase 4: Conversion & Persistent Surfaces** - Deep Teal contact, Midnight footer, floating sticky tab, all JS behaviours wired
+- [x] **Phase 4: Conversion & Persistent Surfaces** - Deep Teal contact, Midnight footer, floating sticky tab, all JS behaviours wired
 - [ ] **Phase 5: Hardening & Launch** - Accessibility, performance, SEO, responsive verification, cutover plan
 
 ## Phase Details
@@ -78,7 +78,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   5. Both pill and 4px sticky-tab variants render at build (toggle / both visible) so Kris can pick one before launch
   6. All JS is vanilla (no libraries), uses `{ passive: true }` scroll listeners, and `scroll-behavior: smooth` is suppressed under `prefers-reduced-motion: reduce`
   7. Anchor links from nav, hero buttons, work button, and services button smooth-scroll to the correct sections on click
-**Plans**: TBD
+**Plans**: shipped without per-plan PLAN.md files — see `.planning/phases/04-conversion-persistent/04-SUMMARY.md` (cloud-session simplification per HANDOFF.md)
 **UI hint**: yes
 
 ### Phase 5: Hardening & Launch

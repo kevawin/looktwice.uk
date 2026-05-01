@@ -64,38 +64,38 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 
 ### Contact / CTA (#contact)
 
-- [ ] **CONT-01**: Deep Teal full-bleed surface, --space-section padding, ghost-on-dark chip "FREE SESSION"
-- [ ] **CONT-02**: Section headline (Epilogue 700, White) and 2-sentence body (White at 85%) per CONTENT-DRAFT.md
-- [ ] **CONT-03**: CTA button — White fill, Deep Teal text, label "hello@looktwice.uk", `href="mailto:hello@looktwice.uk"`; hover: Midnight fill, Linen text
-- [ ] **CONT-04**: Static prompts beneath the button (Label typography, White at 60%) per CONTENT-DRAFT.md — no form
-- [ ] **CONT-05**: Left-aligned, max content width 680px
-- [ ] **CONT-06**: Scroll reveal stagger — chip → headline → body → button
+- [x] **CONT-01**: Deep Teal full-bleed surface, --space-section padding, ghost-on-dark chip "FREE SESSION"
+- [x] **CONT-02**: Section headline (Epilogue 700, White) and 2-sentence body (White at 85%) per CONTENT-DRAFT.md
+- [x] **CONT-03**: CTA button — White fill, Deep Teal text, label "hello@looktwice.uk", `href="mailto:hello@looktwice.uk"`; hover: Midnight fill, Linen text
+- [x] **CONT-04**: Static prompts beneath the button (Label typography, White at 60%) per CONTENT-DRAFT.md — no form
+- [x] **CONT-05**: Left-aligned, max content width 680px
+- [x] **CONT-06**: Scroll reveal stagger — chip → headline → body → button
 
 ### Footer
 
-- [ ] **FOOT-01**: Midnight surface, --space-lg vertical padding, two-column desktop layout
-- [ ] **FOOT-02**: Left — "Look Twice" wordmark (Epilogue Bold) + tagline "Independent brand & CX strategy" (Label, Linen at 60%)
-- [ ] **FOOT-03**: Right — LinkedIn link, mailto link, "© 2026 Look Twice" — Label typography, Linen text, Link Sage hover
-- [ ] **FOOT-04**: Mobile layout — stacked, left-aligned
+- [x] **FOOT-01**: Midnight surface, --space-lg vertical padding, two-column desktop layout
+- [x] **FOOT-02**: Left — "Look Twice" wordmark (Epilogue Bold) + tagline "Independent brand & CX strategy" (Label, Linen at 60%)
+- [x] **FOOT-03**: Right — LinkedIn link, mailto link, "© 2026 Look Twice" — Label typography, Linen text, Link Sage hover
+- [x] **FOOT-04**: Mobile layout — stacked, left-aligned
 
 ### Sticky Tab
 
-- [ ] **TAB-01**: Fixed bottom-right (24px/24px), z-index above sections, hidden on load
-- [ ] **TAB-02**: Appears after >100vh scroll — slide in from right (translateX 120% → 0, 300ms ease-out-quart)
-- [ ] **TAB-03**: Brand gradient background (the only place gradient appears), White text "LET'S TALK →" in Label typography, --shadow-float
-- [ ] **TAB-04**: Pill (--radius-pill) and 4px (--radius-sm) variants both rendered at build — Kris picks one before launch
-- [ ] **TAB-05**: Hover: scale(1.03), 180ms ease-out — no colour change
-- [ ] **TAB-06**: Anchors to #contact; aria-label="Contact Kris"
-- [ ] **TAB-07**: Mobile — full-width bottom strip (height 52px), slides up from bottom (translateY 100% → 0)
+- [x] **TAB-01**: Fixed bottom-right (24px/24px), z-index above sections, hidden on load
+- [x] **TAB-02**: Appears after >100vh scroll — slide in from right (translateX 120% → 0, 300ms ease-out-quart)
+- [x] **TAB-03**: Brand gradient background (the only place gradient appears), White text "LET'S TALK →" in Label typography, --shadow-float
+- [x] **TAB-04**: Pill (--radius-pill) and 4px (--radius-sm) variants both rendered at build — Kris picks one before launch
+- [x] **TAB-05**: Hover: scale(1.03), 180ms ease-out — no colour change
+- [x] **TAB-06**: Anchors to #contact; aria-label="Contact Kris"
+- [x] **TAB-07**: Mobile — full-width bottom strip (height 52px), slides up from bottom (translateY 100% → 0)
 
 ### Behaviour & JS
 
-- [ ] **JS-01**: Vanilla JS only — no libraries, no dependencies, no npm
-- [ ] **JS-02**: Nav scroll-state toggle (window.scrollY > 0 adds `.scrolled`)
-- [ ] **JS-03**: Sticky tab entrance toggle (window.scrollY > hero height adds `.visible`)
-- [ ] **JS-04**: IntersectionObserver scroll-reveal with stagger via inline transition-delay; observer unobserves after first reveal
-- [ ] **JS-05**: Smooth anchor scroll via `scroll-behavior: smooth` (CSS), suppressed under prefers-reduced-motion
-- [ ] **JS-06**: All scroll listeners use `{ passive: true }`
+- [x] **JS-01**: Vanilla JS only — no libraries, no dependencies, no npm
+- [x] **JS-02**: Nav scroll-state toggle (window.scrollY > 0 adds `.scrolled`)
+- [x] **JS-03**: Sticky tab entrance toggle (window.scrollY > hero height adds `.visible`)
+- [x] **JS-04**: IntersectionObserver scroll-reveal with stagger via inline transition-delay; observer unobserves after first reveal
+- [x] **JS-05**: Smooth anchor scroll via `scroll-behavior: smooth` (CSS), suppressed under prefers-reduced-motion
+- [x] **JS-06**: All scroll listeners use `{ passive: true }`
 
 ### Responsive
 

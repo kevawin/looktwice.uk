@@ -3,37 +3,37 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed Phase 03 (interrupt + work + services)
-last_updated: "2026-05-01T23:35:00.000Z"
+stopped_at: Completed Phase 04 (contact + footer + sticky tab + JS wiring)
+last_updated: "2026-05-01T23:50:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 6
   completed_plans: 6
-  percent: 60
+  percent: 80
 ---
 
 # State: looktwice.uk
 
 **Last updated:** 2026-05-01
-**Session:** Phase 03 complete — Signal Orange positioning interrupt, Linen work placeholder, three problem-first services shipped on `claude/new-site-QGsb8`
+**Session:** Phase 04 complete — Deep Teal contact, Midnight footer, brand-gradient sticky tab (pill + 4px), all JS behaviours wired on `claude/new-site-QGsb8`
 
 ## Project Reference
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 03 complete — Phase 04 (contact + footer + sticky tab + JS wiring) next
+**Current focus:** Phase 04 complete — Phase 05 (hardening + launch: A11Y, PERF, SEO, RESP, cutover) next
 
 ## Current Position
 
-Phase: 03 (mid-page-story) — COMPLETE
-Plan: Phase 03 shipped without per-plan PLAN.md files (cloud-session simplification per HANDOFF.md). Phase 04 next.
+Phase: 04 (conversion-persistent) — COMPLETE
+Plan: Phase 04 shipped without per-plan PLAN.md files (cloud-session simplification per HANDOFF.md). Phase 05 next.
 
 - **Milestone:** v1
-- **Phase:** 3 complete
-- **Plan:** Phase 03 SUMMARY landed; Phase 04 next
-- **Status:** Phase 03 complete; ready for Phase 04 entry
-- **Progress:** [██████░░░░] 60% (3 of 5 phases)
+- **Phase:** 4 complete
+- **Plan:** Phase 04 SUMMARY landed; Phase 05 next
+- **Status:** Phase 04 complete; ready for Phase 05 entry
+- **Progress:** [████████░░] 80% (4 of 5 phases)
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
@@ -102,6 +102,13 @@ Plan: Phase 03 shipped without per-plan PLAN.md files (cloud-session simplificat
 - [Phase 03]: Hot Pink number style scoped per-section (`.services__number`, mirroring Phase 2's `.situation__number`) rather than aliased — keeps each section's component layer self-contained
 - [Phase 03]: Services rule stack closes top + bottom (border-top on each item + border-bottom on `:last-child`) so the rules visually wrap the list rather than orphaning the closing CTA
 - [Phase 03]: Services CTA reveal index = 4 with `data-reveal-step="100"` — arrives 400ms after item 01 begins, lands as a punctuation beat after the three-item stagger
+- [Phase 04]: Both sticky-tab variants render simultaneously (stacked: pill at 24px from bottom, 4px square at 88px from bottom) so Kris sees both shapes during the design pick; square is `aria-hidden` + `tabindex="-1"` so SR / keyboard users only hit one CTA
+- [Phase 04]: Mobile sticky tab shows pill only; the 4px variant hides at <640px to avoid stacked 52px strips covering content
+- [Phase 04]: New `.chip--ghost-on-dark` modifier with padding compensated for the 1.5px border (3.5px 12.5px) so visual height matches the Midnight pill — used on the Deep Teal contact surface
+- [Phase 04]: Sticky-tab threshold = `hero.offsetHeight` (recomputed on resize) rather than the spec's fixed 100vh, so the threshold tracks actual hero height when content + cutout grow it past 90vh
+- [Phase 04]: Sticky-tab z-index = 150 sits between nav (100) and overlay (200) — overlay opens above the tab so the mobile menu doesn't fight the strip for the bottom edge
+- [Phase 04]: `.btn--contact` is its own variant (White fill / Deep Teal text → Midnight fill / Linen text on hover) with focus-ring override, not a re-skin of the existing ghost variants
+- [Phase 04]: Reduced-motion sticky-tab fallback uses opacity (not transform) so the tab still appears once scroll threshold is met without any vestibular slide
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -120,7 +127,9 @@ Plan: Phase 03 shipped without per-plan PLAN.md files (cloud-session simplificat
 - Refine provisional supporting cutout `alt` text in `index.html` once final image is chosen.
 - Phase 02 complete — entry point for Phase 03 is `/gsd:execute-phase 3` (approach + work + services).
 - Phase 03 complete — entry point for Phase 04 is `/gsd:execute-phase 4` (contact + footer + sticky tab + JS wiring).
-- Inspect Phase 03 (interrupt / work / services) on Cloudflare Pages preview at https://claude-new-site-qgsb8.looktwice-uk.pages.dev.
+- Phase 04 complete — entry point for Phase 05 is `/gsd:execute-phase 5` (hardening + launch: A11Y, PERF, SEO, RESP, cutover).
+- Inspect Phase 03 + 04 (interrupt / work / services / contact / footer / sticky tab) on Cloudflare Pages preview at https://claude-new-site-qgsb8.looktwice-uk.pages.dev.
+- Pick sticky-tab variant (pill vs 4px) before launch; drop the unused variant + the dual-rendering note in `index.html`.
 
 ### Blockers
 
@@ -130,9 +139,9 @@ None.
 
 **Last session:** 2026-04-30T07:50:46.142Z
 
-**Next session entry point:** `/gsd:execute-phase 4` (begin Phase 4 — contact + footer + sticky tab + JS wiring)
+**Next session entry point:** `/gsd:execute-phase 5` (begin Phase 5 — hardening + launch)
 
-**Stopped at:** Completed Phase 03 mid-page-story (interrupt + work + services)
+**Stopped at:** Completed Phase 04 conversion-persistent (contact + footer + sticky tab + JS)
 
 **Files of record:**
 

@@ -184,12 +184,45 @@
         <a class="btn btn--ghost-on-light reveal" data-reveal-index="4" data-reveal-step="100" href="#contact">TALK THROUGH WHAT YOU NEED →</a>
       </div>
     </section>
-    <section id="contact"></section>
+    <section id="contact" class="contact">
+      <div class="contact__inner">
+        <span class="chip chip--ghost-on-dark reveal" data-reveal-index="0">FREE SESSION</span>
+        <h2 class="contact__headline reveal" data-reveal-index="1">Name the problem. That's the whole point.</h2>
+        <p class="contact__body reveal" data-reveal-index="2">
+          A free 30 to 45 minute session to identify what the problem really is, not the symptom, the actual problem. No commitment, no pitch. Just a useful conversation.
+        </p>
+        <a class="btn btn--contact reveal" data-reveal-index="3" href="mailto:hello@looktwice.uk">hello@looktwice.uk</a>
+        <p class="contact__prompts reveal" data-reveal-index="4">
+          When you get in touch, tell me: what the business does, what the problem feels like right now, and what you've already tried.
+        </p>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer footer--placeholder">
-    <!-- Phase 4 populates this -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__wordmark">Look Twice</span>
+        <span class="footer__tagline">Independent brand &amp; CX strategy</span>
+      </div>
+      <ul class="footer__meta" role="list">
+        <li><a class="footer__link" href="https://www.linkedin.com/in/krisevawin/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a class="footer__link" href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></li>
+        <li><span class="footer__copy">&copy; 2026 Look Twice</span></li>
+      </ul>
+    </div>
   </footer>
+
+  <!-- TAB-04: pill + 4px variants both rendered at build so Kris can pick one before launch.
+       Both share scroll-entrance behaviour (.sticky-tab--visible added by JS once scrollY > hero height).
+       Pill is the keyboard/SR-accessible tab; square is the visual sibling for the design pick (aria-hidden, tabindex -1) so SR users hear one CTA, not two.
+       After Kris picks, drop the unused variant + this dual rendering. -->
+  <a class="sticky-tab sticky-tab--pill" href="#contact" aria-label="Contact Kris">
+    <span class="sticky-tab__label">LET'S TALK &rarr;</span>
+  </a>
+  <a class="sticky-tab sticky-tab--square" href="#contact" aria-hidden="true" tabindex="-1">
+    <span class="sticky-tab__label">LET'S TALK &rarr;</span>
+  </a>
 
   <script src="/js/main.js" defer></script>
 </body>

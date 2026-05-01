@@ -98,3 +98,36 @@ if (hamburger && overlay && closeBtn) {
 
   revealEls.forEach((el) => observer.observe(el));
 })();
+
+// ============================================================
+// Sticky tab entrance toggle (Phase 4 — TAB-01, TAB-02, JS-03).
+// Hidden on load. Slides in once scrollY > hero height.
+// One scroll listener handles both pill + 4px variants.
+// { passive: true } per JS-06.
+// ============================================================
+
+(function initStickyTab() {
+  const tabs = document.querySelectorAll('.sticky-tab');
+  if (tabs.length === 0) return;
+
+  const hero = document.querySelector('.hero');
+  // Fallback: if hero is missing, threshold = 100vh per HOMEPAGE-SPEC §Sticky Tab
+  // ("Hidden on page load. Appears after user scrolls 100vh").
+  const getThreshold = () => (hero ? hero.offsetHeight : window.innerHeight);
+
+  let threshold = getThreshold();
+
+  // Recompute threshold on resize — hero height changes on viewport rotation / resize.
+  // No debounce: this runs once per resize event, which is rare and cheap.
+  window.addEventListener('resize', () => {
+    threshold = getThreshold();
+  }, { passive: true });
+
+  const onScroll = () => {
+    const past = window.scrollY > threshold;
+    tabs.forEach((tab) => tab.classList.toggle('sticky-tab--visible', past));
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on boot in case page loads with scrollY > threshold (refresh mid-page)
+})();
