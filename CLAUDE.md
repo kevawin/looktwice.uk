@@ -10,7 +10,6 @@ The website for Look Twice — Kristina (Kris) Evawin's independent brand and CX
 ### Constraints
 
 - **Tech stack**: Plain HTML + CSS + minimal vanilla JS — no frameworks, no preprocessors, no bundlers, no npm deps for V1.
-- **Hosting**: Cloudflare Pages, static deploy from `new-site` branch. Already-registered domain `looktwice.uk` on Cloudflare DNS.
 - **Typography**: Epilogue only, weights 400 and 700. No 500. No second family. Google Fonts (or self-hosted woff2) with font-display: swap.
 - **Accessibility**: WCAG AA minimum on every surface. prefers-reduced-motion respected. One H1 per page (hero).
 - **Performance**: LCP < 2.5s, CLS < 0.1, FID < 100ms, page weight < 500KB excluding images. Images in WebP with srcset; lazy-load below the fold.
