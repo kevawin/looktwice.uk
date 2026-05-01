@@ -51,6 +51,33 @@ Use these entry points:
 Do not make direct repo edits outside a GSD workflow unless the user explicitly asks to bypass it.
 <!-- GSD:workflow-end -->
 
+## Phone preview handoff (Cloudflare)
+
+When Kris needs to test a change on her phone and live local preview isn't available (cloud sessions, iPhone reviews), do this — every time, in this order:
+
+1. **After pushing a PR, wait for the Cloudflare bot comment.** Don't guess URLs and don't send dashboard links. Poll `mcp__github__pull_request_read` (`get_comments`) until the `cloudflare-workers-and-pages[bot]` comment shows **"Deploy successful"** and contains a **Branch Preview URL**. Always send the **Branch Preview** URL (auto-updates on later pushes), not the per-deploy hash URL (goes stale).
+
+2. **Send Kris a single message in this shape:**
+
+   > Tap this on your phone: `<branch-preview-url>`
+   >
+   > What to look at:
+   > - [one bullet per visible change in plain English]
+   >
+   > Reply with what you see, or screenshot anything that looks off.
+
+   Treat Kris as non-technical for previews. Never ask her to use DevTools, the console, keyboard focus testing, or to interpret HTML/CSS. Describe visual outcomes, not implementation. Keyboard-only checks (focus rings, tab order) are Claude's responsibility, not Kris's.
+
+3. **If the Cloudflare comment never lands** (a known flake in Cloudflare's GitHub comment integration — has happened before), tell her:
+
+   > The Cloudflare → GitHub preview comment is failing again. Two options:
+   > - Quickest: ask Jamie.
+   > - Or grab it yourself in Cloudflare → Workers and Pages → looktwice.uk → click into the latest Preview deployment → tap the small arrow-box icon next to the URL.
+
+4. **If it keeps failing across PRs**, tell her:
+
+   > Get Jamie to reset the integration: Cloudflare → Workers and Pages → looktwice.uk → Settings → Build configuration → pencil (edit) → disable build comments → Save → re-enable build comments → Save. Then tell me and I'll close and reopen the PR to trigger a fresh deploy.
+
 
 
 <!-- GSD:profile-start -->
