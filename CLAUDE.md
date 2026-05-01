@@ -78,6 +78,8 @@ When Kris needs to test a change on her phone and live local preview isn't avail
 
    > Get Jamie to reset the integration: Cloudflare → Workers and Pages → looktwice.uk → Settings → Build configuration → pencil (edit) → disable build comments → Save → re-enable build comments → Save. Then tell me and I'll close and reopen the PR to trigger a fresh deploy.
 
+5. **Keep branch names short so the preview URL is guessable as a fallback.** Cloudflare Pages branch alias rule: sanitise the branch name (lowercase, non-alphanumerics → `-`); if sanitised length ≤ 28 chars, the alias is `https://<sanitised>.looktwice-uk.pages.dev` exactly — no hash suffix, fully predictable. Over 28 chars and Cloudflare truncates to 28 and appends a deterministic 4-char hash (e.g. `-mo37`) that we can't pre-compute. **Cap sanitised branch names at ≤ 24 chars** (4-char safety margin). For `claude/`-prefixed branches that means ≤ 17 chars after `claude-`; if the harness appends a 5-char session ID, the descriptive slug must be ≤ 11 chars. Examples: `claude/fix-nav-zRVdj` ✓ (20 chars, predictable URL), `claude/fix-focus-nav-illegibility-v2` ✗ (36 chars, gets truncated + hashed).
+
 
 
 <!-- GSD:profile-start -->
