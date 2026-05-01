@@ -79,10 +79,8 @@ main > section {
 
 /* ============================================================
    Phase 2 — Situation layout (SITU-03, SITU-04).
-   Desktop (>=1025px): two-column grid, column 2 offset down ~1 item.
-   Tablet  (641–1024px): two-column grid, no offset (cleaner at narrower widths).
-   Mobile  (<=640px): single column, --space-md gap.
-   Implementation: CSS Grid using grid-row-start to place items 04/05 in column 2 with a leading empty cell that creates the visual offset.
+   >=641px: two-column grid, items flow left-to-right.
+   <=640px: single column, --space-md gap.
    ============================================================ */
 
 .situation__inner {
@@ -105,24 +103,5 @@ main > section {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-lg);
   }
-
-  /* Tablet baseline: alternate items into columns naturally — items 01,03,05 left; 02,04 right.
-     Desktop will override with explicit row placement. */
-  .situation__block:nth-child(1) { grid-column: 1; grid-row: 1; }
-  .situation__block:nth-child(2) { grid-column: 2; grid-row: 1; }
-  .situation__block:nth-child(3) { grid-column: 1; grid-row: 2; }
-  .situation__block:nth-child(4) { grid-column: 2; grid-row: 2; }
-  .situation__block:nth-child(5) { grid-column: 1; grid-row: 3; }
 }
 
-@media (min-width: 1025px) {
-  /* Desktop staggered layout per SITU-03 / D-12.
-     Column 1 holds items 01, 02, 03 stacked.
-     Column 2 holds items 04, 05 — offset down by approximately one item height (grid-row-start: 2).
-     This creates the asymmetric visual rhythm without absolute positioning. */
-  .situation__block:nth-child(1) { grid-column: 1; grid-row: 1; }
-  .situation__block:nth-child(2) { grid-column: 1; grid-row: 2; }
-  .situation__block:nth-child(3) { grid-column: 1; grid-row: 3; }
-  .situation__block:nth-child(4) { grid-column: 2; grid-row: 2; }
-  .situation__block:nth-child(5) { grid-column: 2; grid-row: 3; }
-}
