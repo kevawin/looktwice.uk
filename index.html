@@ -9,7 +9,6 @@
   <link rel="canonical" href="https://looktwice.uk/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://looktwice.uk/">
   <meta property="og:title" content="Look Twice | Independent Brand & CX Strategy">
@@ -19,24 +18,19 @@
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_GB">
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Look Twice | Independent Brand & CX Strategy">
   <meta name="twitter:description" content="Closing the gap between brand promise and lived customer experience.">
   <meta name="twitter:image" content="https://looktwice.uk/images/og-share-1200x630.jpg">
 
-  <!-- Preload critical font weight (400, used by nav links and body). -->
-  <!-- crossorigin is mandatory for fonts even when same-origin (browser refetches without it). -->
   <link rel="preload" href="/fonts/epilogue-400.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Stylesheets in cascade order: tokens → base → layout → components → animations. Do not @import; @import is render-blocking sequential. -->
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/animations.css">
 
-  <!-- JSON-LD ProfessionalService with founder Person (SEO-02). -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -46,7 +40,7 @@
     "description": "Independent brand and customer experience strategy for SMEs and scale-ups.",
     "url": "https://looktwice.uk",
     "image": "https://looktwice.uk/images/kris-portrait.webp",
-    "logo": "https://looktwice.uk/favicon.svg",
+    "logo": "https://looktwice.uk/images/logo-looktwice.svg",
     "email": "hello@looktwice.uk",
     "founder": {
       "@type": "Person",
@@ -69,8 +63,24 @@
 </head>
 <body>
 
+  <!-- Logo symbol — single source, used in nav + footer via <use>. currentColor follows surface. -->
+  <svg style="display: none" aria-hidden="true">
+    <symbol id="logo" viewBox="0 0 691 321">
+      <path d="M437 60.9414L479.924 0H522.39L475.357 63.6543L525 148H481.028L451.933 93.3779L437 113.74V321H397V0H437V60.9414Z"/>
+      <path d="M517.434 174C529.352 174 539.516 175.959 547.926 179.876C556.401 183.793 563.189 188.931 568.287 195.289C573.452 201.647 577.027 208.454 579.014 215.711C580.338 220.656 581 225.441 581 230.064H540.774C540.774 228.009 540.642 226.211 540.377 224.67C539.781 220.496 538.49 216.867 536.504 213.784C534.518 210.702 531.902 208.326 528.657 206.656C525.479 204.922 521.738 204.055 517.434 204.055C512.269 204.055 507.6 205.532 503.429 208.486C499.257 211.44 495.914 216.096 493.397 222.454C490.948 228.812 489.723 237.128 489.723 247.403C489.723 257.614 490.947 265.931 493.397 272.354C495.914 278.775 499.257 283.495 503.429 286.514C507.6 289.532 512.269 291.041 517.434 291.041C521.142 291.041 524.419 290.399 527.267 289.114C530.18 287.766 532.63 285.903 534.616 283.527C536.603 281.151 538.126 278.39 539.186 275.243C540.245 272.032 540.774 268.564 540.774 264.84H581C581 271.326 579.708 277.877 577.126 284.491C574.61 291.041 570.737 297.078 565.506 302.601C560.341 308.124 553.752 312.588 545.74 315.991C537.795 319.331 528.359 321 517.434 321C503.065 321 490.749 317.886 480.485 311.656C470.288 305.363 462.475 296.692 457.045 285.646C451.682 274.601 449 261.853 449 247.403C449 232.954 451.682 220.238 457.045 209.257C462.475 198.211 470.288 189.573 480.485 183.344C490.749 177.114 503.065 174 517.434 174Z"/>
+      <path d="M182.853 203.85H148.426V320.763H108.327V203.85H74V174H182.853V203.85Z"/>
+      <path d="M246.847 290.437L263.953 174H313.007L330.02 290.366L340.568 174H381.861L361.563 320.763H300.172L288.522 217.626L276.789 320.763H215.298L195 174H236.293L246.847 290.437Z"/>
+      <path d="M690.222 203.85H635.397V232.207H679.177V262.058H635.397V290.912H690.222V320.763H595V174H690.222V203.85Z"/>
+      <path d="M40.4004 115.791H93V148H0V0H40.4004V115.791Z"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M165.009 0C174.648 2.00602e-05 183.756 1.58378 192.332 4.75195C200.908 7.85544 208.453 12.5109 214.968 18.7178C221.549 24.9248 226.702 32.6195 230.425 41.8008C234.148 50.982 236.009 61.6504 236.009 73.8057C236.009 85.8965 234.114 96.5656 230.324 105.812C226.535 115.057 221.317 122.816 214.669 129.088C208.087 135.36 200.508 140.08 191.933 143.248C183.423 146.416 174.449 148 165.009 148C155.502 148 146.461 146.416 137.885 143.248C129.376 140.08 121.83 135.36 115.249 129.088C108.668 122.816 103.482 115.057 99.6924 105.812C95.9031 96.5656 94.0088 85.8965 94.0088 73.8057C94.0088 61.6503 95.87 50.982 99.5928 41.8008C103.382 32.6195 108.535 24.9248 115.05 18.7178C121.631 12.5109 129.176 7.85542 137.686 4.75195C146.261 1.58378 155.369 0 165.009 0ZM165.009 30.2598C160.156 30.2598 155.402 31.5525 150.749 34.1387C146.162 36.6603 142.372 41.0895 139.381 47.4258C136.389 53.6974 134.894 62.4909 134.894 73.8057C134.894 85.1206 136.389 93.9788 139.381 100.38C142.372 106.716 146.162 111.21 150.749 113.861C155.402 116.448 160.156 117.74 165.009 117.74C169.928 117.74 174.682 116.448 179.269 113.861C183.922 111.21 187.712 106.684 190.637 100.283C193.628 93.8822 195.124 85.056 195.124 73.8057C195.124 62.4909 193.628 53.6974 190.637 47.4258C187.645 41.0894 183.856 36.6603 179.269 34.1387C174.682 31.5524 169.928 30.2598 165.009 30.2598Z"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M317.009 0C326.648 2.00602e-05 335.756 1.58378 344.332 4.75195C352.908 7.85544 360.453 12.5109 366.968 18.7178C373.549 24.9248 378.702 32.6195 382.425 41.8008C386.148 50.982 388.009 61.6504 388.009 73.8057C388.009 85.8965 386.114 96.5656 382.324 105.812C378.535 115.057 373.317 122.816 366.669 129.088C360.087 135.36 352.508 140.08 343.933 143.248C335.423 146.416 326.449 148 317.009 148C307.502 148 298.461 146.416 289.885 143.248C281.376 140.08 273.83 135.36 267.249 129.088C260.668 122.816 255.482 115.057 251.692 105.812C247.903 96.5656 246.009 85.8965 246.009 73.8057C246.009 61.6503 247.87 50.982 251.593 41.8008C255.382 32.6195 260.535 24.9248 267.05 18.7178C273.631 12.5109 281.176 7.85542 289.686 4.75195C298.261 1.58378 307.369 0 317.009 0ZM317.009 30.2598C312.156 30.2598 307.402 31.5525 302.749 34.1387C298.162 36.6603 294.372 41.0895 291.381 47.4258C288.389 53.6974 286.894 62.4909 286.894 73.8057C286.894 85.1206 288.389 93.9788 291.381 100.38C294.372 106.716 298.162 111.21 302.749 113.861C307.402 116.448 312.156 117.74 317.009 117.74C321.928 117.74 326.682 116.448 331.269 113.861C335.922 111.21 339.712 106.684 342.637 100.283C345.628 93.8822 347.124 85.056 347.124 73.8057C347.124 62.4909 345.628 53.6974 342.637 47.4258C339.645 41.0894 335.856 36.6603 331.269 34.1387C326.682 31.5524 321.928 30.2598 317.009 30.2598Z"/>
+    </symbol>
+  </svg>
+
   <nav class="nav" aria-label="Primary navigation">
-    <a class="nav-wordmark" href="/">Look Twice</a>
+    <a class="nav-wordmark" href="/" aria-label="Look Twice, home">
+      <svg class="nav-logo" viewBox="0 0 691 321" role="img" aria-label="Look Twice"><use href="#logo"/></svg>
+    </a>
     <button class="nav-hamburger"
             type="button"
             aria-expanded="false"
@@ -103,20 +113,22 @@
       <div class="hero__inner">
         <div class="hero__text">
           <h1 class="hero__headline">
-            Your brand makes a promise.<br>
-            But is your experience breaking it?
+            Your brand makes a promise. But is your experience breaking it?
           </h1>
           <p class="hero__subhead">
             I find where brand promise and experience are out of step. Then close the gap.
           </p>
+          <p class="hero__pitch">
+            If you think your business might be at the mercy of the dreaded <em>experience gap</em>, or you're battling a problem you can't fully see yet, I can help. I offer a free 30-minute session to identify the underlying problem you're up against. No commitment. No pitch. Just a useful conversation.
+          </p>
           <div class="hero__ctas">
-            <a class="btn btn--primary" href="#contact">BOOK A SESSION</a>
-            <a class="btn btn--ghost-on-dark" href="#work">SEE THE WORK</a>
+            <a class="btn btn--on-pink" href="#contact">Let's talk</a>
+            <a class="hero__readon" href="#situation">Or read on &darr;</a>
           </div>
         </div>
 
-        <div class="hero__cutouts" aria-hidden="false">
-          <picture class="hero__cutout hero__cutout--main">
+        <div class="hero__cutouts">
+          <picture class="hero__cutout">
             <img src="/images/kris-portrait.webp"
                  alt="Kristina Evawin, brand and CX strategist"
                  width="800"
@@ -125,129 +137,155 @@
                  decoding="async"
                  fetchpriority="high">
           </picture>
-          <!-- Supporting cutout: image not yet committed.
-               Per D-10 the markup ships the picture/img with the agreed path,
-               and a Midnight token-block fallback (.hero__cutout-fallback) renders behind it.
-               When images/hero-supporting.webp lands later, the fallback drops out via CSS attribute selector, no markup change.
-               Phase 5: inline onerror handler refactored to a JS listener in main.js (strict CSP compatibility). -->
-          <div class="hero__cutout hero__cutout--support" data-fallback="hero-supporting">
-            <div class="hero__cutout-fallback" aria-hidden="true"></div>
-            <picture class="hero__cutout-image">
-              <img src="/images/hero-supporting.webp"
-                   alt="A working session: hands annotating printed brand research on a desk"
-                   width="500"
-                   height="500"
-                   loading="eager"
-                   decoding="async">
-            </picture>
-          </div>
         </div>
       </div>
     </section>
+
     <section id="situation" class="situation">
       <div class="situation__inner">
         <header class="situation__header">
-          <span class="chip reveal" data-reveal-index="0">THE SITUATION</span>
-          <h2 class="situation__headline reveal" data-reveal-index="0">Sound familiar?</h2>
+          <h2 class="situation__headline">Sound familiar?</h2>
         </header>
 
         <ol class="situation__grid" role="list">
-          <li class="situation__block reveal" data-reveal-index="1">
+          <li class="situation__block">
             <span class="situation__number" aria-hidden="true">01</span>
-            <h3 class="situation__title">The brand caught up with the growth</h3>
-            <p class="situation__body">The business has grown faster than the brand. Something feels off, the website, the pitch, the way the team talks about what you do, but nobody can name it precisely. You're thinking about a rebrand, or entering a new market, and you need the foundations to be solid before you do.</p>
+            <h3 class="situation__title">The brand hasn't caught up with the growth</h3>
+            <p class="situation__body">The business has grown faster than the brand. Something feels off, the website, the pitch, the way the team talks about what you do, but nobody can name it precisely.</p>
           </li>
 
-          <li class="situation__block reveal" data-reveal-index="2">
+          <li class="situation__block">
             <span class="situation__number" aria-hidden="true">02</span>
             <h3 class="situation__title">The strategy exists on paper</h3>
-            <p class="situation__body">You inherited a brand strategy you didn't build and don't believe in. It lives in a deck someone made two years ago. It's not driving decisions, it's not changing behaviour, and nobody references it unless they have to.</p>
+            <p class="situation__body">You inherited a brand strategy you didn't build and don't believe in. It lives in a deck. It's not driving decisions, and nobody references it unless they have to.</p>
           </li>
 
-          <li class="situation__block reveal" data-reveal-index="3">
+          <li class="situation__block">
             <span class="situation__number" aria-hidden="true">03</span>
             <h3 class="situation__title">The experience is good. The story isn't.</h3>
-            <p class="situation__body">You've built something that works. The operations are solid, the product is strong. But the marketing isn't sticking, the premium pricing isn't landing, and the brand doesn't reflect what you actually deliver. The gap is between what's true and what people think.</p>
+            <p class="situation__body">Operations are solid, the product is strong. But the marketing isn't sticking, the premium pricing isn't landing, and the brand doesn't reflect what you actually deliver.</p>
           </li>
 
-          <li class="situation__block reveal" data-reveal-index="4">
+          <li class="situation__block">
             <span class="situation__number" aria-hidden="true">04</span>
             <h3 class="situation__title">The rebrand landed. Nothing changed.</h3>
-            <p class="situation__body">Six months ago, you launched a new brand. It looks better. But the experience hasn't caught up, the way things feel to customers, the way the team talks about the business, the day-to-day reality. The new brand is on the assets. It's not in the organisation.</p>
+            <p class="situation__body">Six months ago, you launched a new brand. It looks better. But the experience hasn't caught up, the way things feel to customers, the way the team talks about the business.</p>
           </li>
 
-          <li class="situation__block reveal" data-reveal-index="5">
+          <li class="situation__block">
             <span class="situation__number" aria-hidden="true">05</span>
-            <h3 class="situation__title">You need senior firepower without a full hire.</h3>
-            <p class="situation__body">You're running a project that spans brand, CX, and comms, and you need someone who can work at strategy level without becoming a permanent fixture. A senior thinking partner for the duration, not an account manager with a team behind them.</p>
+            <h3 class="situation__title">You need senior firepower without a full hire</h3>
+            <p class="situation__body">A project that spans brand, CX, and comms, and you need someone who can work at strategy level. A senior thinking partner for the duration, not an account manager with a team behind them.</p>
           </li>
         </ol>
       </div>
     </section>
+
     <section id="approach" class="interrupt">
       <div class="interrupt__inner">
-        <p class="interrupt__lead reveal" data-reveal-index="0">
-          If you asked me for 3 words to capture how I work, I'd say:
-          <span class="interrupt__three-words">Dig. Reveal. Sharpen.</span>
+        <p class="interrupt__lead">
+          If you asked me for three words to capture how I work, I'd say:
         </p>
-        <p class="interrupt__statement reveal" data-reveal-index="1">
+        <h2 class="interrupt__headline">Dig. Reveal. Sharpen.</h2>
+        <p class="interrupt__statement">
           Most briefs describe a symptom, not the problem. I dig until I find it. Then I show what was already there but missed, the thing that's been normalised, taken for granted, or seen too narrowly.
         </p>
       </div>
     </section>
+
     <section id="work" class="work">
       <div class="work__inner">
         <header class="work__header">
-          <span class="chip reveal" data-reveal-index="0">WORK</span>
-          <h2 class="work__headline reveal" data-reveal-index="0">The proof is in the diagnosis.</h2>
+          <h2 class="work__headline">Twelve years finding the gap.</h2>
         </header>
-        <p class="work__body reveal" data-reveal-index="1">
-          Get in touch if you'd like to see an example of my past work. I've spent 12+ years on brand, CX, and research strategy.
+        <p class="work__body">
+          I've spent over twelve years building strategy across brand, CX, and comms. Agency-side at TBWA\MCR, Havas Lynx, and Mediacom, then independently. My experience spans:
         </p>
-        <a class="btn btn--ghost-on-light reveal" data-reveal-index="2" href="#contact">GET IN TOUCH</a>
+        <ul class="work__sectors" role="list">
+          <li class="work__sector">Retail</li>
+          <li class="work__sector">FMCG</li>
+          <li class="work__sector">Healthcare</li>
+          <li class="work__sector">Leisure</li>
+          <li class="work__sector">Finance</li>
+          <li class="work__sector">Hospitality</li>
+        </ul>
+        <p class="work__body">
+          I'm as comfortable building a brand platform as I am mapping a patient journey or writing a comms strategy. Because I've worked across disciplines, I tend to spot the connections, and the contradictions, that specialists miss.
+        </p>
+        <p class="work__segue">
+          Want to see an example of my work and how I think?
+        </p>
+        <a class="btn btn--accent-indigo work__cta" href="#contact">Get in touch</a>
       </div>
     </section>
+
     <section id="services" class="services">
       <div class="services__inner">
         <header class="services__header">
-          <span class="chip reveal" data-reveal-index="0">HOW I WORK</span>
-          <h2 class="services__headline reveal" data-reveal-index="0">Three problems. One frame.</h2>
+          <h2 class="services__headline">Three problems. One frame.</h2>
         </header>
 
         <ol class="services__list" role="list">
-          <li class="services__item reveal" data-reveal-index="1" data-reveal-step="100">
-            <span class="services__number" aria-hidden="true">01</span>
+          <li class="services__item">
+            <svg class="services__icon" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+              <rect x="6" y="6" width="28" height="28"/>
+              <circle cx="38" cy="38" r="12"/>
+            </svg>
             <h3 class="services__title">Brand strategy</h3>
             <p class="services__body">When the brand isn't doing what it should, or doesn't reflect the business you've become. I work on positioning, narrative, and the strategic foundations that make everything else coherent.</p>
           </li>
 
-          <li class="services__item reveal" data-reveal-index="2" data-reveal-step="100">
-            <span class="services__number" aria-hidden="true">02</span>
+          <li class="services__item">
+            <svg class="services__icon" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+              <rect x="4" y="6" width="32" height="18" rx="2"/>
+              <rect x="20" y="32" width="32" height="18" rx="2"/>
+              <line x1="36" y1="24" x2="20" y2="32"/>
+            </svg>
             <h3 class="services__title">Experience and CX strategy</h3>
             <p class="services__body">When the promise and the reality don't match. I map the gap between what a brand commits to and what customers actually experience, then build the strategy to close it.</p>
           </li>
 
-          <li class="services__item reveal" data-reveal-index="3" data-reveal-step="100">
-            <span class="services__number" aria-hidden="true">03</span>
+          <li class="services__item">
+            <svg class="services__icon" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+              <circle cx="22" cy="22" r="14"/>
+              <line x1="32" y1="32" x2="46" y2="46"/>
+            </svg>
             <h3 class="services__title">Research and insight</h3>
             <p class="services__body">When you need to understand what's actually going on before deciding what to do about it. Customer research, stakeholder interviews, category analysis, the kind of investigation that changes the brief.</p>
           </li>
         </ol>
 
-        <a class="btn btn--ghost-on-light reveal" data-reveal-index="4" data-reveal-step="100" href="#contact">TALK THROUGH WHAT YOU NEED →</a>
+        <p class="services__segue">
+          If something here is your problem, the first 30 minutes are on me.
+        </p>
+        <a class="btn btn--accent-pink" href="#contact">Let's talk</a>
       </div>
     </section>
+
     <section id="contact" class="contact">
       <div class="contact__inner">
-        <span class="chip chip--ghost-on-dark reveal" data-reveal-index="0">FREE SESSION</span>
-        <h2 class="contact__headline reveal" data-reveal-index="1">Name the problem. That's the whole point.</h2>
-        <p class="contact__body reveal" data-reveal-index="2">
-          A free 30 to 45 minute session to identify what the problem really is, not the symptom, the actual problem. No commitment, no pitch. Just a useful conversation.
-        </p>
-        <a class="btn btn--contact reveal" data-reveal-index="3" href="mailto:hello@looktwice.uk">hello@looktwice.uk</a>
-        <p class="contact__prompts reveal" data-reveal-index="4">
-          When you get in touch, tell me: what the business does, what the problem feels like right now, and what you've already tried.
-        </p>
+        <div class="contact__intro">
+          <h2 class="contact__headline">What happens at our free session?</h2>
+          <p class="contact__body">
+            A useful 30-minute conversation, not a sales call. We'll talk through what's going on in your business, the symptom, the situation, what you've already tried, and I'll help you separate the surface issue from the real underlying problem.
+          </p>
+          <p class="contact__body">
+            No commitment. No pitch. If we're a fit, we'll figure out next steps. If not, you'll leave with a clearer view of what to work on.
+          </p>
+          <div class="contact__cta-group">
+            <a class="btn btn--on-teal" href="mailto:hello@looktwice.uk">Let's talk</a>
+            <a class="contact__email" href="mailto:hello@looktwice.uk">hello@looktwice.uk</a>
+          </div>
+        </div>
+
+        <div class="contact__list-wrap">
+          <h3 class="contact__list-title">Tell me, when you get in touch:</h3>
+          <ul class="contact__list" role="list">
+            <li>What the business does</li>
+            <li>What the problem feels like right now</li>
+            <li>What you've already tried</li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>
@@ -255,20 +293,23 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <span class="footer__wordmark">Look Twice</span>
+        <a class="footer__logo-link" href="/" aria-label="Look Twice, home">
+          <svg class="footer__logo" viewBox="0 0 691 321" role="img" aria-label="Look Twice"><use href="#logo"/></svg>
+        </a>
         <span class="footer__tagline">Independent brand &amp; CX strategy</span>
+        <span class="footer__location">UK-wide, based in Manchester</span>
       </div>
       <ul class="footer__meta" role="list">
         <li><a class="footer__link" href="https://www.linkedin.com/in/krisevawin/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         <li><a class="footer__link" href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></li>
+        <li><a class="footer__link" href="#privacy">Privacy policy</a></li>
         <li><span class="footer__copy">&copy; 2026 Look Twice</span></li>
       </ul>
     </div>
   </footer>
 
-  <!-- Persistent CTA — slides in once scrollY > hero height. Pill shape locked Phase 5 (Q6 OPEN-DECISIONS). -->
-  <a class="sticky-tab sticky-tab--pill" href="#contact" aria-label="Contact Kris">
-    <span class="sticky-tab__label">LET'S TALK &rarr;</span>
+  <a class="sticky-tab" href="#contact" aria-label="Contact Kris">
+    <span class="sticky-tab__label">Let's talk &rarr;</span>
   </a>
 
   <script src="/js/main.js" defer></script>

@@ -1,37 +1,20 @@
-/* Look Twice — animations. Nav transition, overlay slide, scroll reveal. Phase 1 plan 02 populates the nav transition and overlay; Phase 2 adds reveal. */
+/* Look Twice — animations. Phase 6: site-wide reveal-on-scroll dropped (D-6.5).
+   Only nav colour fade, mobile overlay slide, and sticky-tab transition remain. */
 
-/* Nav transition (NAV-01) — 200ms ease-out on background-color and color */
+/* Nav transition — 200ms ease-out on background-color and color */
 .nav {
   transition: var(--transition-nav);
 }
 
-/* Overlay slide (NAV-04) — 280ms ease-out-quart on transform */
+/* Mobile overlay slide — 280ms ease-out-quart on transform */
 .nav-overlay {
   transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reduced-motion guard: remove transform-based transition on overlay; keep nav colour fade (colour transitions are vestibular-safe). Smooth-scroll guard already lives in base.css. */
+/* Reduced-motion guard: drop transform-based transition on overlay; keep nav colour fade.
+   Smooth-scroll guard already lives in base.css. */
 @media (prefers-reduced-motion: reduce) {
   .nav-overlay {
     transition: none;
-  }
-}
-
-/* Scroll reveal stub (Phase 2 lands the IntersectionObserver). Authored here so Phase 2 only adds JS, not CSS. */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: var(--transition-reveal);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    transform: none;
-    transition: opacity 400ms ease-out;
   }
 }

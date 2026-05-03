@@ -1,10 +1,9 @@
-/* Look Twice — components. Nav, buttons, chips, footer, sticky tab, cutout mask. Phase 1 plan 02 populates the nav components; Phase 2+ append sections. */
+/* Look Twice — components. Phase 6 rewrite: drops chips, drops ghost button system,
+   introduces pill CTA system + decorative situation numbers + service icons + contact split. */
 
-/* Sticky nav (NAV-01, NAV-02, NAV-03).
-   position: fixed (not sticky) so the hero starts at y=0 and white nav
-   text overlays the Hot Pink hero instead of sitting on Linen body bg
-   above it. The .scrolled state below paints a Linen surface once the
-   user begins scrolling, so legibility holds across every section. */
+/* ============================================================
+   Sticky nav
+   ============================================================ */
 
 .nav {
   position: fixed;
@@ -22,12 +21,23 @@
 }
 
 .nav-wordmark {
-  font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: clamp(1.4rem, 2.5vw, 1.7rem);
-  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
   color: inherit;
+}
+
+.nav-logo {
+  display: block;
+  width: auto;
+  height: 28px;
+  fill: currentColor;
+}
+
+@media (min-width: 769px) {
+  .nav-logo {
+    height: 34px;
+  }
 }
 
 .nav-link {
@@ -42,7 +52,6 @@
   padding: var(--space-xs) 0;
 }
 
-/* Hot Pink underline (NAV-03): 2px, 3px below baseline, grows from width 0 to 100% on hover/active */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -60,15 +69,29 @@
   width: 100%;
 }
 
-/* Hamburger button (NAV-04, NAV-05). 44×44 minimum hit target per WCAG 2.5.5. */
+/* Focus ring override: nav sits on Hot Pink hero before scroll — Hot Pink ring is invisible.
+   Use white over the unscrolled (hero) surface, default to global Hot Pink once Linen kicks in. */
+.nav .nav-link:focus-visible,
+.nav .nav-wordmark:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 3px;
+}
+
+.nav.scrolled .nav-link:focus-visible,
+.nav.scrolled .nav-wordmark:focus-visible {
+  outline-color: var(--color-hot-pink);
+}
+
+/* Hamburger — owned entirely here (Phase 6 cascade fix). Default hidden;
+   surfaced only at <=1024px. */
 .nav-hamburger {
+  display: none;
   min-width: 44px;
   min-height: 44px;
   padding: 10px;
   background: transparent;
   border: 0;
   cursor: pointer;
-  display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
@@ -82,7 +105,13 @@
   background: currentColor;
 }
 
-/* Mobile overlay (NAV-04, NAV-05) */
+@media (max-width: 1024px) {
+  .nav-hamburger {
+    display: inline-flex;
+  }
+}
+
+/* Mobile overlay */
 
 .nav-overlay {
   position: fixed;
@@ -132,128 +161,11 @@
   padding: var(--space-xs) 0;
 }
 
-/* Phase 4 fills the .footer rule below with brand + meta layout.
-   Phase 1 originally shipped a .footer--placeholder Midnight surface; that class
-   has been removed from index.html now that the footer carries content. */
-
 /* ============================================================
-   Phase 2 — Hero (#hero) component
-   HERO-01 through HERO-06. Hot Pink full-bleed surface.
-   ============================================================ */
-
-.hero {
-  background: var(--color-hot-pink);
-  color: var(--color-true-white);
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  /* Internal padding: clear sticky nav at top, breathe at bottom. Token-driven. */
-  padding-block: var(--space-lg);
-  padding-inline: calc(var(--space-lg) * 0.75); /* matches nav gutter (48px) per Phase 1 layout */
-  position: relative;
-  overflow: hidden; /* prevents asymmetric cutout offset bleeding past surface */
-}
-
-.hero__headline {
-  font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: var(--text-display);
-  line-height: var(--lh-display);
-  letter-spacing: var(--ls-display);
-  color: var(--color-true-white);
-  margin: 0;
-}
-
-.hero__subhead {
-  font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: var(--text-body);
-  line-height: var(--lh-body);
-  color: var(--color-true-white);
-  /* Phase 5 A11Y-03: opacity bumped from 0.85 to 1.0. White on Hot Pink
-     at 100% measures ~4.6:1 vs. ~3.7:1 at 85% — clears WCAG AA for
-     normal-text contrast (4.5:1 threshold) on the hero surface. */
-  opacity: 1;
-  max-width: var(--measure);
-  margin-block-start: var(--space-sm);
-  margin-block-end: 0;
-}
-
-.hero__ctas {
-  display: flex;
-  flex-direction: row;
-  gap: var(--space-sm);
-  margin-block-start: var(--space-md);
-  flex-wrap: wrap;
-}
-
-/* Cutout column — asymmetric composition.
-   Main cutout dominates; supporting cutout offsets bottom-left to break the rectangle. */
-.hero__cutouts {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1; /* keeps the composition stable while content scales */
-  max-width: 520px;
-  justify-self: end;
-}
-
-.hero__cutout {
-  position: absolute;
-  display: block;
-  filter: grayscale(100%);
-}
-
-.hero__cutout img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.hero__cutout--main {
-  top: 0;
-  right: 0;
-  width: 78%;
-  height: 86%;
-  border-radius: var(--radius-cutout);
-  overflow: hidden;
-  z-index: 1;
-}
-
-.hero__cutout--support {
-  bottom: 0;
-  left: 0;
-  width: 42%;
-  height: 42%;
-  border-radius: 50%; /* circle per HOMEPAGE-SPEC §Section 2 — supporting cutout is a circle for asymmetric tension against the main rounded-rect */
-  overflow: hidden;
-  z-index: 2;
-}
-
-/* Midnight token-block fallback (D-10).
-   Sits behind the <picture>; if the image is present, it covers the fallback.
-   If the image fails to load (or .hero__cutout--missing is added by the inline onerror handler in index.html), the fallback shows through. */
-.hero__cutout-fallback {
-  position: absolute;
-  inset: 0;
-  background: var(--color-midnight);
-  border-radius: inherit;
-  z-index: 0;
-}
-
-.hero__cutout-image {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.hero__cutout--missing .hero__cutout-image {
-  display: none;
-}
-
-/* ============================================================
-   Buttons — base + hero variants (HERO-04).
-   Padding 14px 32px is locked by DESIGN-TOKENS Buttons spec.
+   Pill CTA system (Phase 6 D-6.3).
+   Shape consistent with the sticky tab. Two surface contexts:
+   - On colour: white fill + surface-colour text → hover: outlined white.
+   - On Linen: accent fill + white text → hover: outlined accent.
    ============================================================ */
 
 .btn {
@@ -267,68 +179,221 @@
   line-height: var(--lh-label);
   text-transform: uppercase;
   text-decoration: none;
-  padding: 14px 32px;
-  border-radius: var(--radius-sm);
-  border: 0;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  border: 2px solid currentColor;
+  background: currentColor;
   cursor: pointer;
   transition: var(--transition-button);
 }
 
-.btn--primary {
-  background: var(--color-midnight);
-  color: var(--color-linen);
+/* On-colour variants — white fill, surface-colour text. Hover inverts. */
+.btn--on-pink {
+  background: var(--color-true-white);
+  color: var(--color-hot-pink);
+  border-color: var(--color-true-white);
 }
 
-.btn--primary:hover {
-  background: var(--color-hot-pink);
-  color: var(--color-true-white);
-}
-
-/* Focus-ring exception (UI-SPEC Hover & focus): the global Hot Pink ring
-   disappears on the Hot Pink hero, and the previous shared hover+focus rule
-   flipped the button into the hero on keyboard focus. Override to a Midnight
-   outline so the primary button keeps a visible ring on every surface
-   (Hot Pink hero, Linen sections, future Midnight footer). */
-.btn--primary:focus-visible {
-  outline: 2px solid var(--color-midnight);
-  outline-offset: 3px;
-}
-
-.btn--ghost-on-dark {
+.btn--on-pink:hover,
+.btn--on-pink:focus-visible {
   background: transparent;
   color: var(--color-true-white);
-  border: 1.5px solid var(--color-true-white);
+  border-color: var(--color-true-white);
 }
 
-.btn--ghost-on-dark:hover {
-  background: var(--color-true-white);
-  color: var(--color-midnight);
-}
-
-/* Focus-ring exception (UI-SPEC Hover & focus): Hot Pink outline disappears on Hot Pink surface.
-   Override only on .btn--ghost-on-dark to keep contrast against hero. */
-.btn--ghost-on-dark:focus-visible {
+.btn--on-pink:focus-visible {
   outline: 2px solid var(--color-true-white);
-  outline-offset: 3px;
+  outline-offset: 4px;
+}
+
+.btn--on-teal {
+  background: var(--color-true-white);
+  color: var(--color-deep-teal);
+  border-color: var(--color-true-white);
+}
+
+.btn--on-teal:hover,
+.btn--on-teal:focus-visible {
+  background: transparent;
+  color: var(--color-true-white);
+  border-color: var(--color-true-white);
+}
+
+.btn--on-teal:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 4px;
+}
+
+/* On-Linen variants — accent fill, white text. Hover inverts to outlined accent. */
+.btn--accent-pink {
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
+  border-color: var(--color-hot-pink);
+}
+
+.btn--accent-pink:hover,
+.btn--accent-pink:focus-visible {
+  background: transparent;
+  color: var(--color-hot-pink);
+  border-color: var(--color-hot-pink);
+}
+
+.btn--accent-indigo {
+  background: var(--color-cool-indigo);
+  color: var(--color-true-white);
+  border-color: var(--color-cool-indigo);
+}
+
+.btn--accent-indigo:hover,
+.btn--accent-indigo:focus-visible {
+  background: transparent;
+  color: var(--color-cool-indigo);
+  border-color: var(--color-cool-indigo);
+}
+
+.btn--accent-amber {
+  background: var(--color-warm-amber);
+  color: var(--color-true-white);
+  border-color: var(--color-warm-amber);
+}
+
+.btn--accent-amber:hover,
+.btn--accent-amber:focus-visible {
+  background: transparent;
+  color: var(--color-warm-amber);
+  border-color: var(--color-warm-amber);
+}
+
+/* Focus ring on Linen accent buttons — Midnight ring keeps high contrast on every accent. */
+.btn--accent-pink:focus-visible,
+.btn--accent-indigo:focus-visible,
+.btn--accent-amber:focus-visible {
+  outline: 2px solid var(--color-midnight);
+  outline-offset: 4px;
 }
 
 /* ============================================================
-   Hero responsive — single-column stack at narrow viewports.
-   Breakpoint 768px keeps the 2-col hero readable on tablets while
-   stacking it on phones (matches HERO-05).
+   Hero (#hero) — Hot Pink full-bleed (Phase 6 simplified).
+   Single rounded-rect portrait cutout (broken supporting circle dropped).
    ============================================================ */
+
+.hero {
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-xl) var(--space-lg);
+  padding-inline: calc(var(--space-lg) * 0.75);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--color-true-white);
+  margin: 0;
+  margin-block-start: var(--space-md);
+  text-wrap: balance;
+}
+
+.hero__subhead {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  opacity: 1;
+  max-width: none;
+  margin-block-start: var(--space-md);
+  margin-block-end: 0;
+}
+
+.hero__pitch {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  margin-block-start: var(--space-md);
+  margin-block-end: 0;
+  max-width: none;
+}
+
+.hero__pitch em {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-md);
+  margin-block-start: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.hero__readon {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-true-white);
+  border-bottom: 1px solid var(--color-true-white);
+  padding-block-end: 2px;
+}
+
+.hero__readon:hover,
+.hero__readon:focus-visible {
+  opacity: 0.85;
+}
+
+.hero__readon:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 4px;
+}
+
+.hero__cutouts {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-width: 460px;
+  justify-self: end;
+}
+
+.hero__cutout {
+  position: absolute;
+  inset: 0;
+  display: block;
+  filter: grayscale(100%);
+  border-radius: var(--radius-cutout);
+  overflow: hidden;
+}
+
+.hero__cutout img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 @media (max-width: 768px) {
   .hero {
-    /* Allow content to grow taller than 90vh on small screens if cutout + buttons need it. */
-    min-height: 90vh;
-    padding-block: var(--space-md);
+    min-height: auto;
+    padding-block: var(--space-xl) var(--space-lg);
   }
 
   .hero__cutouts {
-    width: 85%; /* HERO-05: scaled cutout ~85% section width */
+    width: 80%;
     margin-block-start: var(--space-md);
-    aspect-ratio: 4 / 5; /* taller composition on mobile */
+    aspect-ratio: 4 / 5;
     max-width: none;
     justify-self: center;
   }
@@ -336,44 +401,28 @@
   .hero__ctas {
     flex-direction: column;
     align-items: stretch;
+    gap: var(--space-sm);
   }
 
   .hero__ctas .btn {
     width: 100%;
   }
+
+  .hero__readon {
+    align-self: flex-start;
+  }
 }
 
 /* ============================================================
-   Phase 2 — Reusable .chip component (DESIGN-TOKENS Chips spec).
-   Phase 2 ships it for "THE SITUATION".
-   Phase 3 reuses for "WORK" and "HOW I WORK".
-   ============================================================ */
-
-.chip {
-  display: inline-block;
-  align-self: flex-start;
-  background: var(--color-midnight);
-  color: var(--color-linen);
-  font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: var(--text-label);
-  letter-spacing: var(--ls-label);
-  line-height: var(--lh-label);
-  text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: var(--radius-pill);
-}
-
-/* ============================================================
-   Phase 2 — Situation (#situation) component
-   SITU-01 through SITU-04. Linen surface, no boxes/shadows/icons/borders.
+   Situation (#situation) — Linen, decorative numbers (D-6.8).
+   Numbers: oversized, Hot Pink, 700 weight, sit above title.
    ============================================================ */
 
 .situation {
   background: var(--color-linen);
   color: var(--color-midnight);
   padding-block: var(--space-section);
-  padding-inline: calc(var(--space-lg) * 0.75); /* matches nav + hero gutter (48px) */
+  padding-inline: calc(var(--space-lg) * 0.75);
 }
 
 .situation__header {
@@ -393,10 +442,7 @@
   margin: 0;
 }
 
-/* The grid + stagger layout lives in css/layout.css. */
-
 .situation__block {
-  /* No card box. No border. No shadow. No background. Flat layout per SITU-02. */
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
@@ -404,13 +450,13 @@
 
 .situation__number {
   font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: var(--text-label);
-  letter-spacing: var(--ls-label);
-  line-height: var(--lh-label);
-  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--color-hot-pink);
   display: inline-block;
+  margin-block-end: var(--space-xs);
 }
 
 .situation__title {
@@ -433,8 +479,17 @@
   margin-block-end: 0;
 }
 
-/* Mobile: collapse situation section padding from --space-section (120px) to --space-xl (96px).
-   This is forward-compatible with RESP-02 (Phase 5 verifies). */
+@media (min-width: 1280px) {
+  .situation__body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .situation__number {
+    font-size: clamp(2.5rem, 4vw, 3.25rem);
+  }
+}
+
 @media (max-width: 640px) {
   .situation {
     padding-block: var(--space-xl);
@@ -442,25 +497,9 @@
 }
 
 /* ============================================================
-   Phase 3 — Ghost button on light surfaces (.btn--ghost-on-light)
-   Used by #work and #services CTAs. Midnight border + text on Linen,
-   inverts to Midnight fill / Linen text on hover.
-   ============================================================ */
-
-.btn--ghost-on-light {
-  background: transparent;
-  color: var(--color-midnight);
-  border: 1.5px solid var(--color-midnight);
-}
-
-.btn--ghost-on-light:hover {
-  background: var(--color-midnight);
-  color: var(--color-linen);
-}
-
-/* ============================================================
-   Phase 3 — Positioning Interrupt (#approach) component
-   INTR-01..04. Signal Orange full-bleed. No chip, no subhead, no CTA.
+   Interrupt (#approach) — Signal Orange full-bleed.
+   Phase 6: hierarchy flipped — "Dig. Reveal. Sharpen." is the H2.
+   Lead-in and explainer drop to body scale.
    ============================================================ */
 
 .interrupt {
@@ -470,9 +509,6 @@
   padding-inline: calc(var(--space-lg) * 0.75);
 }
 
-/* Phase 5: lead-in to "Dig. Reveal. Sharpen." (OPEN-DECISIONS Q3 → option 2).
-   Two-beat composition — quiet Body-scale lead, then Headline-scale Bold
-   three-word hit on its own line, then the existing paragraph below. */
 .interrupt__lead {
   font-family: var(--font-primary);
   font-weight: 400;
@@ -483,30 +519,29 @@
   margin: 0 0 var(--space-md) 0;
 }
 
-.interrupt__three-words {
-  display: block;
+.interrupt__headline {
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: var(--text-headline);
-  line-height: var(--lh-headline);
-  letter-spacing: var(--ls-headline);
-  margin-block-start: var(--space-sm);
+  font-size: var(--text-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--color-true-white);
+  margin: 0 0 var(--space-md) 0;
+  text-wrap: balance;
 }
 
 .interrupt__statement {
   font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: var(--text-headline);
-  line-height: var(--lh-headline);
-  letter-spacing: var(--ls-headline);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
   color: var(--color-true-white);
   max-width: 800px;
   margin: 0;
 }
 
 /* ============================================================
-   Phase 3 — Work placeholder (#work) component
-   WORK-01..04. Linen surface, chip, headline, holding statement, ghost CTA.
+   Work (#work) — Linen, expanded bio + sector list (D-6.4).
    ============================================================ */
 
 .work {
@@ -514,13 +549,6 @@
   color: var(--color-midnight);
   padding-block: var(--space-section);
   padding-inline: calc(var(--space-lg) * 0.75);
-}
-
-.work__header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  margin-block-end: var(--space-md);
 }
 
 .work__headline {
@@ -540,7 +568,50 @@
   line-height: var(--lh-body);
   color: var(--color-midnight);
   max-width: var(--measure);
-  margin: 0 0 var(--space-md) 0;
+  margin: 0;
+}
+
+.work__sectors {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.work__sector {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--color-cool-indigo);
+}
+
+.work__close {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.work__segue {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-cool-indigo);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.work__cta {
+  align-self: flex-start;
+  margin-block-start: var(--space-xs);
 }
 
 @media (max-width: 640px) {
@@ -550,9 +621,8 @@
 }
 
 /* ============================================================
-   Phase 3 — Services (#services) component
-   SERV-01..05. Linen surface. Three items separated by 1px Midnight-12% rules.
-   No card grid. Single column, full content width, body capped at --measure.
+   Services / How-I-work (#services) — Linen, 3-col + icons (D-6.9).
+   Drops the rule-line stack from Phase 3.
    ============================================================ */
 
 .services {
@@ -582,31 +652,25 @@
 .services__list {
   list-style: none;
   padding: 0;
-  margin: 0 0 var(--space-md) 0;
+  margin: 0 0 var(--space-lg) 0;
 }
 
 .services__item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
-  padding-block: var(--space-md);
-  border-top: 1px solid oklch(24% 0.04 275 / 0.12);
+  gap: var(--space-sm);
 }
 
-/* Final item closes the rule stack with a bottom border (visual symmetry below 03 before the CTA). */
-.services__item:last-child {
-  border-bottom: 1px solid oklch(24% 0.04 275 / 0.12);
-}
-
-.services__number {
-  font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: var(--text-label);
-  letter-spacing: var(--ls-label);
-  line-height: var(--lh-label);
-  text-transform: uppercase;
+.services__icon {
+  width: 56px;
+  height: 56px;
+  display: block;
   color: var(--color-hot-pink);
-  display: inline-block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .services__title {
@@ -625,8 +689,17 @@
   line-height: var(--lh-body);
   color: var(--color-midnight);
   max-width: var(--measure);
-  margin-block-start: var(--space-xs);
-  margin-block-end: 0;
+  margin: 0;
+}
+
+.services__segue {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-hot-pink);
+  margin: 0 0 var(--space-md) 0;
+  max-width: var(--measure);
 }
 
 @media (max-width: 640px) {
@@ -636,20 +709,8 @@
 }
 
 /* ============================================================
-   Phase 4 — Chip ghost-on-dark variant (CONT-01).
-   Used on the Deep Teal contact surface — White border + text + transparent fill.
-   ============================================================ */
-
-.chip--ghost-on-dark {
-  background: transparent;
-  color: var(--color-true-white);
-  border: 1.5px solid var(--color-true-white);
-  padding: 3.5px 12.5px; /* compensate for 1.5px border so visual height matches Midnight pill */
-}
-
-/* ============================================================
-   Phase 4 — Contact (#contact) component (CONT-01..06)
-   Deep Teal full-bleed. Left-aligned. Max content 680px.
+   Contact (#contact) — Deep Teal full-bleed, split layout (D-6.10).
+   Left column: title + intro + CTA. Right column: what-to-bring list.
    ============================================================ */
 
 .contact {
@@ -659,13 +720,11 @@
   padding-inline: calc(var(--space-lg) * 0.75);
 }
 
-.contact__inner {
-  width: 100%;
-  max-width: 680px;
+.contact__intro {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: var(--space-md);
+  align-items: flex-start;
 }
 
 .contact__headline {
@@ -684,42 +743,75 @@
   font-size: var(--text-body);
   line-height: var(--lh-body);
   color: var(--color-true-white);
-  opacity: 0.85;
-  max-width: var(--measure);
   margin: 0;
+  max-width: var(--measure);
 }
 
-.contact__prompts {
+.contact__cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  margin-block-start: var(--space-sm);
+}
+
+.contact__email {
   font-family: var(--font-primary);
   font-weight: 400;
   font-size: var(--text-label);
-  line-height: var(--lh-body);
   letter-spacing: var(--ls-label);
   color: var(--color-true-white);
-  /* Phase 5 A11Y-03: opacity bumped from 0.6 to 0.85. At 0.6 these
-     prompts measured ~3.0:1 on Deep Teal (fails AA normal); at 0.85
-     they clear ~4.6:1. Remains visually quieter than the body via the
-     uppercase + Label-scale typography so the prompt-tone is preserved. */
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-true-white);
+  padding-block-end: 2px;
+}
+
+.contact__email:hover,
+.contact__email:focus-visible {
   opacity: 0.85;
-  text-transform: uppercase;
-  max-width: var(--measure);
-  margin: 0;
 }
 
-/* CTA button — White fill on Deep Teal, flips to Midnight fill / Linen text on hover (CONT-03) */
-.btn--contact {
-  background: var(--color-true-white);
-  color: var(--color-deep-teal);
-}
-
-.btn--contact:hover {
-  background: var(--color-midnight);
-  color: var(--color-linen);
-}
-
-.btn--contact:focus-visible {
+.contact__email:focus-visible {
   outline: 2px solid var(--color-true-white);
-  outline-offset: 3px;
+  outline-offset: 4px;
+}
+
+.contact__list-title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-true-white);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.contact__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact__list li {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  padding-inline-start: 28px;
+  position: relative;
+}
+
+.contact__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 14px;
+  height: 2px;
+  background: var(--color-true-white);
 }
 
 @media (max-width: 640px) {
@@ -729,14 +821,13 @@
 }
 
 /* ============================================================
-   Phase 4 — Footer (FOOT-01..04)
-   Midnight surface, --space-lg padding, two-column desktop, stacked mobile.
+   Footer — Midnight surface, two-column desktop, stacked mobile.
+   Phase 6 additions: Manchester location, Privacy policy link.
    ============================================================ */
 
 .footer {
   background: var(--color-midnight);
   color: var(--color-linen);
-  /* Override .footer--placeholder padding inherited from layout.css */
   padding: var(--space-lg) calc(var(--space-lg) * 0.75);
 }
 
@@ -755,15 +846,20 @@
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
-.footer__wordmark {
-  font-family: var(--font-primary);
-  font-weight: 700;
-  font-size: clamp(1.4rem, 2.5vw, 1.7rem);
-  letter-spacing: 0.04em;
-  color: var(--color-linen);
+.footer__logo-link {
+  display: inline-flex;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer__logo {
+  display: block;
+  width: auto;
+  height: 32px;
+  fill: currentColor;
 }
 
 .footer__tagline {
@@ -775,6 +871,17 @@
   text-transform: uppercase;
   color: var(--color-linen);
   opacity: 0.6;
+}
+
+.footer__location {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-linen);
+  opacity: 0.85;
 }
 
 .footer__meta {
@@ -800,8 +907,9 @@
   transition: color 180ms ease-out;
 }
 
-.footer__link:hover {
-  color: var(--color-link-sage);
+.footer__link:hover,
+.footer__link:focus-visible {
+  color: var(--color-cool-indigo);
 }
 
 @media (max-width: 640px) {
@@ -816,14 +924,14 @@
 }
 
 /* ============================================================
-   Phase 4 — Sticky tab (TAB-01..07)
-   Brand gradient — the only place gradient appears on the site.
-   Hidden by default; .sticky-tab--visible class added by JS once
-   scrollY > hero height. Pill + 4px variants both render at build.
+   Sticky tab — brand gradient, the only place gradient appears.
+   Phase 6: adds .sticky-tab--suppressed (hidden while contact is in view).
    ============================================================ */
 
 .sticky-tab {
   position: fixed;
+  bottom: 24px;
+  right: 24px;
   z-index: 150;
   background: var(--gradient-brand);
   color: var(--color-true-white);
@@ -835,13 +943,20 @@
   line-height: var(--lh-label);
   text-transform: uppercase;
   text-decoration: none;
+  border-radius: var(--radius-pill);
   box-shadow: var(--shadow-float);
   transform: translateX(120%);
-  transition: var(--transition-tab);
+  transition: var(--transition-tab), opacity 240ms ease-out;
 }
 
 .sticky-tab--visible {
   transform: translateX(0);
+}
+
+.sticky-tab--suppressed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(120%);
 }
 
 .sticky-tab:hover {
@@ -854,26 +969,8 @@
   outline-offset: 3px;
 }
 
-/* Pill variant — bottom-right, full radius. Phase 5 OPEN-DECISIONS Q6 locked pill;
-   4px square variant deleted as part of cutover prep. */
-.sticky-tab--pill {
-  bottom: 24px;
-  right: 24px;
-  border-radius: var(--radius-pill);
-}
-
-/* Mobile (TAB-07) — full-width bottom strip, slides up from bottom. */
 @media (max-width: 640px) {
   .sticky-tab {
-    transform: translateY(100%);
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .sticky-tab--visible {
-    transform: translateY(0);
-  }
-
-  .sticky-tab--pill {
     bottom: 0;
     right: 0;
     left: 0;
@@ -883,11 +980,19 @@
     align-items: center;
     justify-content: center;
     border-radius: 0;
+    transform: translateY(100%);
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
+  }
+
+  .sticky-tab--visible {
+    transform: translateY(0);
+  }
+
+  .sticky-tab--suppressed {
+    transform: translateY(100%);
   }
 }
 
-/* Reduced motion — remove transform-based entrance, keep tab visible immediately.
-   No vestibular slide; the tab still appears via opacity once scroll threshold met. */
 @media (prefers-reduced-motion: reduce) {
   .sticky-tab {
     transform: none;
@@ -898,6 +1003,11 @@
   .sticky-tab--visible {
     transform: none;
     opacity: 1;
+  }
+
+  .sticky-tab--suppressed {
+    transform: none;
+    opacity: 0;
   }
 
   .sticky-tab:hover {

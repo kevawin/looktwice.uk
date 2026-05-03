@@ -17,6 +17,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 3: Mid-page Story** - Positioning interrupt (Signal Orange), work placeholder, services (three problem-first areas)
 - [x] **Phase 4: Conversion & Persistent Surfaces** - Deep Teal contact, Midnight footer, floating sticky tab, all JS behaviours wired
 - [x] **Phase 5: Hardening & Launch** - Accessibility, performance, SEO, responsive verification, cutover plan (code complete; Kris-side Lighthouse + UAT + cutover trigger pending)
+- [ ] **Phase 6: Post-UAT Polish** - Brand colour truth, nav cascade fix, logo + hero composition, drop chips/animations, situation 5-col + decorative numbers, work bio expansion, how-I-work icons, contact split, footer additions
 
 ## Phase Details
 
