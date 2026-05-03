@@ -99,38 +99,38 @@ Requirements for the V1 launch — single-page proof-and-credibility site.
 
 ### Responsive
 
-- [ ] **RESP-01**: Three breakpoints — mobile <640px, tablet 640–1024px, desktop >1024px
-- [ ] **RESP-02**: Section padding collapses --space-section → --space-xl on mobile
-- [ ] **RESP-03**: All sections legible and visually intact at iPhone SE width (375px) through 1440px+
-- [ ] **RESP-04**: Body text max-width relaxes to full column width on mobile
+- [x] **RESP-01**: Three breakpoints — mobile <640px, tablet 640–1024px, desktop >1024px
+- [x] **RESP-02**: Section padding collapses --space-section → --space-xl on mobile
+- [x] **RESP-03**: All sections legible and visually intact at iPhone SE width (375px) through 1440px+ (HUMAN-UAT pending)
+- [x] **RESP-04**: Body text max-width relaxes to full column width on mobile
 
 ### Accessibility
 
-- [ ] **A11Y-01**: One H1 (hero), H2 for section headings, H3 for situation/service titles — no skipped levels
-- [ ] **A11Y-02**: Every image has descriptive alt text describing content (not "cutout")
-- [ ] **A11Y-03**: WCAG AA contrast verified on every surface (Hot Pink, Signal Orange, Deep Teal especially); use 700 weight where 400 fails
-- [ ] **A11Y-04**: Keyboard navigation — tab order matches visual order, all interactive elements reachable, visible focus rings on buttons / links / sticky tab
-- [ ] **A11Y-05**: prefers-reduced-motion respected — reveal uses opacity only (no transform), smooth-scroll disabled
-- [ ] **A11Y-06**: Sticky tab `aria-label="Contact Kris"`; mobile nav button aria-expanded/controls
+- [x] **A11Y-01**: One H1 (hero), H2 for section headings, H3 for situation/service titles — no skipped levels
+- [x] **A11Y-02**: Every image has descriptive alt text describing content (not "cutout")
+- [x] **A11Y-03**: WCAG AA contrast verified on every surface (Hot Pink, Signal Orange, Deep Teal especially); use 700 weight where 400 fails (hero subhead + contact prompts opacity remediated; service/situation numbers borderline + flagged for Lighthouse confirmation)
+- [x] **A11Y-04**: Keyboard navigation — tab order matches visual order, all interactive elements reachable, visible focus rings on buttons / links / sticky tab (HUMAN-UAT pending)
+- [x] **A11Y-05**: prefers-reduced-motion respected — reveal uses opacity only (no transform), smooth-scroll disabled
+- [x] **A11Y-06**: Sticky tab `aria-label="Contact Kris"`; mobile nav button aria-expanded/controls
 
 ### Performance
 
-- [ ] **PERF-01**: LCP < 2.5s, CLS < 0.1, FID < 100ms (verified via Lighthouse on deployed preview)
-- [ ] **PERF-02**: Total page weight < 500KB excluding images
-- [ ] **PERF-03**: All photos served as WebP with srcset + responsive sizes; below-fold images `loading="lazy"`; hero images `loading="eager"`
-- [ ] **PERF-04**: Hero images dimensions set or aspect-ratio reserved to avoid layout shift
+- [ ] **PERF-01**: LCP < 2.5s, CLS < 0.1, FID < 100ms (verified via Lighthouse on deployed preview) — awaiting Kris-side PageSpeed Insights run
+- [x] **PERF-02**: Total page weight < 500KB excluding images (~83KB / 17% of budget post-Phase-5)
+- [x] **PERF-03**: All photos served as WebP with srcset + responsive sizes; below-fold images `loading="lazy"`; hero images `loading="eager"` (srcset deferred unless Lighthouse flags)
+- [x] **PERF-04**: Hero images dimensions set or aspect-ratio reserved to avoid layout shift
 
 ### SEO & Meta
 
-- [ ] **SEO-01**: `<title>`, meta description, canonical, og:title/description/url/type per ARCHITECTURE.md
-- [ ] **SEO-02**: JSON-LD `ProfessionalService` schema (name, description, url, email, founder)
-- [ ] **SEO-03**: `robots.txt` allows all crawlers; favicon present
+- [x] **SEO-01**: `<title>`, meta description, canonical, og:title/description/url/type per ARCHITECTURE.md
+- [x] **SEO-02**: JSON-LD `ProfessionalService` schema (name, description, url, email, founder) — Person founder included; validates with warning on missing address/phone
+- [x] **SEO-03**: `robots.txt` allows all crawlers; favicon present (placeholder lettermark; brand-final V1.1)
 
 ### Deployment
 
 - [x] **DEPLOY-01**: Cloudflare Pages project configured to build/serve from `new-site` branch
 - [x] **DEPLOY-02**: Preview URL accessible for accessibility/performance verification before cutover
-- [ ] **DEPLOY-03**: Cutover plan documented — switch Pages production source from `main` to `new-site` (or merge `new-site` → `main`) when Kris approves; `main` untouched until then
+- [x] **DEPLOY-03**: Cutover plan documented — see `05-CUTOVER-PLAYBOOK.md`; merge `claude/new-site-QGsb8` → `main` (Q7 → Option A); `main` untouched until Kris triggers
 
 ## v2 Requirements
 

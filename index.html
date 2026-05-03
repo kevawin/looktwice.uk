@@ -3,9 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Look Twice</title>
+  <title>Look Twice | Independent Brand & CX Strategy</title>
 
-  <!-- Phase 1: minimal meta. Phase 5 (SEO) adds description, og:, canonical, JSON-LD. -->
+  <meta name="description" content="Closing the gap between brand promise and lived customer experience. Independent brand and CX strategy for SMEs and scale-ups.">
+  <link rel="canonical" href="https://looktwice.uk/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://looktwice.uk/">
+  <meta property="og:title" content="Look Twice | Independent Brand & CX Strategy">
+  <meta property="og:description" content="Closing the gap between brand promise and lived customer experience.">
+  <meta property="og:image" content="https://looktwice.uk/images/og-share-1200x630.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Look Twice | Independent Brand & CX Strategy">
+  <meta name="twitter:description" content="Closing the gap between brand promise and lived customer experience.">
+  <meta name="twitter:image" content="https://looktwice.uk/images/og-share-1200x630.jpg">
 
   <!-- Preload critical font weight (400, used by nav links and body). -->
   <!-- crossorigin is mandatory for fonts even when same-origin (browser refetches without it). -->
@@ -17,6 +35,37 @@
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/animations.css">
+
+  <!-- JSON-LD ProfessionalService with founder Person (SEO-02). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Look Twice",
+    "alternateName": "Look Twice Consultancy",
+    "description": "Independent brand and customer experience strategy for SMEs and scale-ups.",
+    "url": "https://looktwice.uk",
+    "image": "https://looktwice.uk/images/kris-portrait.webp",
+    "logo": "https://looktwice.uk/favicon.svg",
+    "email": "hello@looktwice.uk",
+    "founder": {
+      "@type": "Person",
+      "name": "Kristina Evawin",
+      "jobTitle": "Brand and CX Strategist",
+      "sameAs": "https://www.linkedin.com/in/krisevawin/"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "United Kingdom"
+    },
+    "knowsAbout": [
+      "Brand strategy",
+      "Customer experience strategy",
+      "Research and insight"
+    ],
+    "priceRange": "$$$"
+  }
+  </script>
 </head>
 <body>
 
@@ -79,8 +128,9 @@
           <!-- Supporting cutout: image not yet committed.
                Per D-10 the markup ships the picture/img with the agreed path,
                and a Midnight token-block fallback (.hero__cutout-fallback) renders behind it.
-               When images/hero-supporting.webp lands later, the fallback drops out via CSS attribute selector, no markup change. -->
-          <div class="hero__cutout hero__cutout--support">
+               When images/hero-supporting.webp lands later, the fallback drops out via CSS attribute selector, no markup change.
+               Phase 5: inline onerror handler refactored to a JS listener in main.js (strict CSP compatibility). -->
+          <div class="hero__cutout hero__cutout--support" data-fallback="hero-supporting">
             <div class="hero__cutout-fallback" aria-hidden="true"></div>
             <picture class="hero__cutout-image">
               <img src="/images/hero-supporting.webp"
@@ -88,8 +138,7 @@
                    width="500"
                    height="500"
                    loading="eager"
-                   decoding="async"
-                   onerror="this.parentElement.parentElement.classList.add('hero__cutout--missing'); this.remove();">
+                   decoding="async">
             </picture>
           </div>
         </div>
@@ -137,7 +186,11 @@
     </section>
     <section id="approach" class="interrupt">
       <div class="interrupt__inner">
-        <p class="interrupt__statement reveal" data-reveal-index="0">
+        <p class="interrupt__lead reveal" data-reveal-index="0">
+          If you asked me for 3 words to capture how I work, I'd say:
+          <span class="interrupt__three-words">Dig. Reveal. Sharpen.</span>
+        </p>
+        <p class="interrupt__statement reveal" data-reveal-index="1">
           Most briefs describe a symptom, not the problem. I dig until I find it. Then I show what was already there but missed, the thing that's been normalised, taken for granted, or seen too narrowly.
         </p>
       </div>
@@ -149,7 +202,7 @@
           <h2 class="work__headline reveal" data-reveal-index="0">The proof is in the diagnosis.</h2>
         </header>
         <p class="work__body reveal" data-reveal-index="1">
-          Case studies are being written for this site. In the meantime, get in touch and I'll share relevant examples from my portfolio, spanning retail, FMCG, healthcare, finance, hospitality, and entertainment.
+          Get in touch if you'd like to see an example of my past work. I've spent 12+ years on brand, CX, and research strategy.
         </p>
         <a class="btn btn--ghost-on-light reveal" data-reveal-index="2" href="#contact">GET IN TOUCH</a>
       </div>
@@ -213,14 +266,8 @@
     </div>
   </footer>
 
-  <!-- TAB-04: pill + 4px variants both rendered at build so Kris can pick one before launch.
-       Both share scroll-entrance behaviour (.sticky-tab--visible added by JS once scrollY > hero height).
-       Pill is the keyboard/SR-accessible tab; square is the visual sibling for the design pick (aria-hidden, tabindex -1) so SR users hear one CTA, not two.
-       After Kris picks, drop the unused variant + this dual rendering. -->
+  <!-- Persistent CTA — slides in once scrollY > hero height. Pill shape locked Phase 5 (Q6 OPEN-DECISIONS). -->
   <a class="sticky-tab sticky-tab--pill" href="#contact" aria-label="Contact Kris">
-    <span class="sticky-tab__label">LET'S TALK &rarr;</span>
-  </a>
-  <a class="sticky-tab sticky-tab--square" href="#contact" aria-hidden="true" tabindex="-1">
     <span class="sticky-tab__label">LET'S TALK &rarr;</span>
   </a>
 

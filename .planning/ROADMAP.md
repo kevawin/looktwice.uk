@@ -16,7 +16,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [ ] **Phase 2: Hero & Situation** - Above-the-fold identity (Hot Pink hero + cutout) and self-identification (Linen situation, five blocks)
 - [x] **Phase 3: Mid-page Story** - Positioning interrupt (Signal Orange), work placeholder, services (three problem-first areas)
 - [x] **Phase 4: Conversion & Persistent Surfaces** - Deep Teal contact, Midnight footer, floating sticky tab, all JS behaviours wired
-- [ ] **Phase 5: Hardening & Launch** - Accessibility, performance, SEO, responsive verification, cutover plan
+- [x] **Phase 5: Hardening & Launch** - Accessibility, performance, SEO, responsive verification, cutover plan (code complete; Kris-side Lighthouse + UAT + cutover trigger pending)
 
 ## Phase Details
 
@@ -92,7 +92,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   4. Every section reads cleanly and stays visually intact at iPhone SE width (375px), tablet (768px), and desktop (1440px+); section padding collapses from --space-section to --space-xl on mobile
   5. View source shows correct `<title>`, meta description, canonical, and og: tags; `ProfessionalService` JSON-LD validates; `robots.txt` allows all crawlers and a favicon is present
   6. A documented cutover plan exists for switching Cloudflare Pages production source from `main` to `new-site` (or merging) once Kris approves, with `main` untouched until then
-**Plans**: TBD
+**Plans**: shipped without per-plan PLAN.md files — see `.planning/phases/05-hardening-launch/` (CONTEXT, RESEARCH, DISCUSSION-LOG, OPEN-DECISIONS, SUMMARY, VERIFICATION, CUTOVER-PLAYBOOK)
 **UI hint**: yes
 
 ## Progress

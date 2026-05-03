@@ -2,38 +2,38 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed Phase 04 (contact + footer + sticky tab + JS wiring)
-last_updated: "2026-05-01T23:50:00.000Z"
+status: verifying
+stopped_at: Phase 05 code complete; Lighthouse + visual UAT + cutover trigger pending
+last_updated: "2026-05-02T00:30:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 6
   completed_plans: 6
-  percent: 80
+  percent: 100
 ---
 
 # State: looktwice.uk
 
-**Last updated:** 2026-05-01
-**Session:** Phase 04 complete — Deep Teal contact, Midnight footer, brand-gradient sticky tab (pill + 4px), all JS behaviours wired on `claude/new-site-QGsb8`
+**Last updated:** 2026-05-02
+**Session:** Phase 05 code complete — A11Y contrast remediation, "Dig. Reveal. Sharpen." lead-in, work paragraph rewrite, sticky-tab pill cleanup, SEO meta + JSON-LD ProfessionalService, robots.txt, favicon.svg, _headers HSTS+CSP+Permissions-Policy, inline onerror refactored to JS listener. Cutover playbook documented; awaiting Kris-side Lighthouse + UAT before merge.
 
 ## Project Reference
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 04 complete — Phase 05 (hardening + launch: A11Y, PERF, SEO, RESP, cutover) next
+**Current focus:** All phases code-complete. Pre-cutover verification (Lighthouse, visual UAT, tab-walk) is the next gate.
 
 ## Current Position
 
-Phase: 04 (conversion-persistent) — COMPLETE
-Plan: Phase 04 shipped without per-plan PLAN.md files (cloud-session simplification per HANDOFF.md). Phase 05 next.
+Phase: 05 (hardening-launch) — CODE COMPLETE, verification pending
+Plan: Phase 05 shipped without per-plan PLAN.md files. CONTEXT + RESEARCH + DISCUSSION-LOG + OPEN-DECISIONS + SUMMARY + VERIFICATION + CUTOVER-PLAYBOOK all in `.planning/phases/05-hardening-launch/`.
 
 - **Milestone:** v1
-- **Phase:** 4 complete
-- **Plan:** Phase 04 SUMMARY landed; Phase 05 next
-- **Status:** Phase 04 complete; ready for Phase 05 entry
-- **Progress:** [████████░░] 80% (4 of 5 phases)
+- **Phase:** 5 of 5 code-complete
+- **Plan:** Phase 05 docs landed (SUMMARY, VERIFICATION, CUTOVER-PLAYBOOK)
+- **Status:** verifying — Lighthouse run + visual UAT pending before cutover
+- **Progress:** [██████████] 100% code, ~80% if you count human verification
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
@@ -109,6 +109,14 @@ Plan: Phase 04 shipped without per-plan PLAN.md files (cloud-session simplificat
 - [Phase 04]: Sticky-tab z-index = 150 sits between nav (100) and overlay (200) — overlay opens above the tab so the mobile menu doesn't fight the strip for the bottom edge
 - [Phase 04]: `.btn--contact` is its own variant (White fill / Deep Teal text → Midnight fill / Linen text on hover) with focus-ring override, not a re-skin of the existing ghost variants
 - [Phase 04]: Reduced-motion sticky-tab fallback uses opacity (not transform) so the tab still appears once scroll threshold is met without any vestibular slide
+- [Phase 05]: 11 decisions locked in single Q&A pass — see `05-DISCUSSION-LOG.md`. Hero/interrupt copy stay Option A; "Dig. Reveal. Sharpen." used on site with conversational lead-in (Body scale) + three-word hit (Headline Bold); work paragraph drops names (V1.1 candidate); sticky tab = pill; cutover via merge-to-main; og:image dedicated 1200x630 (asset deferred to Kris/Jamie); inline onerror refactored to JS listener; JSON-LD ProfessionalService + Person founder; Lighthouse via PageSpeed Insights
+- [Phase 05]: Hero subhead opacity 0.85 → 1.0 (~3.7:1 → ~4.6:1 on Hot Pink, clears AA); contact prompts opacity 0.6 → 0.85 (~3.0:1 → ~4.6:1 on Deep Teal, clears AA)
+- [Phase 05]: Service / situation Hot Pink numbers left at 400 weight + Label scale (~4.2:1 borderline) — `aria-hidden` decoration per WCAG 1.4.3 incidental clause; Lighthouse measurement is source of truth, fast-follow remediation if it flags
+- [Phase 05]: CSP ships with `'unsafe-inline'` on script-src for the inline JSON-LD; hash-based tightening is documented as future improvement (low risk: single static file, no user-rendered content)
+- [Phase 05]: og:image points at `/images/og-share-1200x630.jpg` even though asset not yet exported — markup wired so single-file commit lands it later, no markup change needed
+- [Phase 05]: favicon.svg is placeholder lettermark using system-fallback font (Helvetica) since Epilogue isn't loaded for favicons; final mark comes with brand-final from Kris/Jamie
+- [Phase 05]: `_headers` extended with HSTS (1y + preload), Permissions-Policy denying camera/mic/geo/payment/usb/interest-cohort, and CSP with `frame-ancestors 'none'` + `upgrade-insecure-requests`
+- [Phase 05]: Cutover (DEPLOY-03) is a manual trigger — `05-CUTOVER-PLAYBOOK.md` documents pre-flight checklist, merge steps, fast/slow rollback paths, post-cutover smoke test
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -128,8 +136,12 @@ Plan: Phase 04 shipped without per-plan PLAN.md files (cloud-session simplificat
 - Phase 02 complete — entry point for Phase 03 is `/gsd:execute-phase 3` (approach + work + services).
 - Phase 03 complete — entry point for Phase 04 is `/gsd:execute-phase 4` (contact + footer + sticky tab + JS wiring).
 - Phase 04 complete — entry point for Phase 05 is `/gsd:execute-phase 5` (hardening + launch: A11Y, PERF, SEO, RESP, cutover).
-- Inspect Phase 03 + 04 (interrupt / work / services / contact / footer / sticky tab) on Cloudflare Pages preview at https://claude-new-site-qgsb8.looktwice-uk.pages.dev.
-- Pick sticky-tab variant (pill vs 4px) before launch; drop the unused variant + the dual-rendering note in `index.html`.
+- Phase 05 code complete — pre-cutover gate is Kris-side Lighthouse + visual UAT + tab-walk per `05-VERIFICATION.md`.
+- Inspect Phase 05 surfaces on Cloudflare Pages preview at https://claude-new-site-qgsb8.looktwice-uk.pages.dev.
+- Run Lighthouse via https://pagespeed.web.dev/ — paste preview URL, forward result link.
+- Generate og:image asset (1200×630 hero composition) — Kris/Jamie design task. Markup already points at `/images/og-share-1200x630.jpg`.
+- Replace placeholder favicon.svg with brand-final mark (V1.1 candidate, doesn't block cutover).
+- Run cutover per `05-CUTOVER-PLAYBOOK.md` once verification gate clears.
 
 ### Blockers
 
@@ -139,9 +151,9 @@ None.
 
 **Last session:** 2026-04-30T07:50:46.142Z
 
-**Next session entry point:** `/gsd:execute-phase 5` (begin Phase 5 — hardening + launch)
+**Next session entry point:** Pre-cutover verification — paste preview URL into PageSpeed Insights, run visual UAT at 375/768/1440, confirm tab-walk shows focus rings everywhere; then `05-CUTOVER-PLAYBOOK.md`.
 
-**Stopped at:** Completed Phase 04 conversion-persistent (contact + footer + sticky tab + JS)
+**Stopped at:** Phase 05 code shipped (A11Y / SEO / RESP / hardening + cutover docs); awaiting Kris-side verification
 
 **Files of record:**
 

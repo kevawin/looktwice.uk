@@ -131,3 +131,32 @@ if (hamburger && overlay && closeBtn) {
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // run once on boot in case page loads with scrollY > threshold (refresh mid-page)
 })();
+
+// ============================================================
+// Hero supporting cutout fallback (Phase 5 — refactor of Phase 2 inline onerror).
+// If /images/hero-supporting.webp 404s, toggle .hero__cutout--missing on the
+// parent so the Midnight token-block fallback shows through. Identical
+// behaviour to the previous inline onerror; moved to JS so a strict CSP
+// without 'unsafe-inline' on script-src does not block it.
+// ============================================================
+
+(function initSupportingCutoutFallback() {
+  const wrapper = document.querySelector('[data-fallback="hero-supporting"]');
+  if (!wrapper) return;
+  const img = wrapper.querySelector('img');
+  if (!img) return;
+
+  const markMissing = () => {
+    wrapper.classList.add('hero__cutout--missing');
+    img.remove();
+  };
+
+  // If the image already failed before this listener attached (cached error),
+  // the .complete + naturalWidth=0 pattern catches it on boot.
+  if (img.complete && img.naturalWidth === 0) {
+    markMissing();
+    return;
+  }
+
+  img.addEventListener('error', markMissing, { once: true });
+})();

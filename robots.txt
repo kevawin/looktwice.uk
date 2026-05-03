@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Single-page site — no sitemap.xml. Canonical is https://looktwice.uk/

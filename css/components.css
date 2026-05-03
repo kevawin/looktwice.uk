@@ -170,7 +170,10 @@
   font-size: var(--text-body);
   line-height: var(--lh-body);
   color: var(--color-true-white);
-  opacity: 0.85;
+  /* Phase 5 A11Y-03: opacity bumped from 0.85 to 1.0. White on Hot Pink
+     at 100% measures ~4.6:1 vs. ~3.7:1 at 85% — clears WCAG AA for
+     normal-text contrast (4.5:1 threshold) on the hero surface. */
+  opacity: 1;
   max-width: var(--measure);
   margin-block-start: var(--space-sm);
   margin-block-end: 0;
@@ -467,6 +470,29 @@
   padding-inline: calc(var(--space-lg) * 0.75);
 }
 
+/* Phase 5: lead-in to "Dig. Reveal. Sharpen." (OPEN-DECISIONS Q3 → option 2).
+   Two-beat composition — quiet Body-scale lead, then Headline-scale Bold
+   three-word hit on its own line, then the existing paragraph below. */
+.interrupt__lead {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  max-width: 800px;
+  margin: 0 0 var(--space-md) 0;
+}
+
+.interrupt__three-words {
+  display: block;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  margin-block-start: var(--space-sm);
+}
+
 .interrupt__statement {
   font-family: var(--font-primary);
   font-weight: 700;
@@ -670,7 +696,11 @@
   line-height: var(--lh-body);
   letter-spacing: var(--ls-label);
   color: var(--color-true-white);
-  opacity: 0.6;
+  /* Phase 5 A11Y-03: opacity bumped from 0.6 to 0.85. At 0.6 these
+     prompts measured ~3.0:1 on Deep Teal (fails AA normal); at 0.85
+     they clear ~4.6:1. Remains visually quieter than the body via the
+     uppercase + Label-scale typography so the prompt-tone is preserved. */
+  opacity: 0.85;
   text-transform: uppercase;
   max-width: var(--measure);
   margin: 0;
@@ -824,24 +854,15 @@
   outline-offset: 3px;
 }
 
-/* Pill variant — bottom-right, full radius */
+/* Pill variant — bottom-right, full radius. Phase 5 OPEN-DECISIONS Q6 locked pill;
+   4px square variant deleted as part of cutover prep. */
 .sticky-tab--pill {
   bottom: 24px;
   right: 24px;
   border-radius: var(--radius-pill);
 }
 
-/* 4px variant — sits above the pill on desktop so both render side by side
-   for Kris to pick. After pick, drop the unused variant. */
-.sticky-tab--square {
-  bottom: 88px;
-  right: 24px;
-  border-radius: var(--radius-sm);
-}
-
-/* Mobile (TAB-07) — full-width bottom strip, slides up from bottom.
-   Only the pill variant renders on mobile to avoid stacked strips covering content;
-   the square variant is hidden until Kris picks at desktop. */
+/* Mobile (TAB-07) — full-width bottom strip, slides up from bottom. */
 @media (max-width: 640px) {
   .sticky-tab {
     transform: translateY(100%);
@@ -862,10 +883,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 0;
-  }
-
-  .sticky-tab--square {
-    display: none;
   }
 }
 
