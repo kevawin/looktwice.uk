@@ -2,13 +2,14 @@
 
 **For:** Kris
 **Compiled:** 2026-05-02
-**Why this exists:** Six things still need a Kris call before V1 can launch. They are not blockers for the technical Phase 5 work (a11y / perf / SEO / resp), but they DO block cutover. Surfacing them in one place so they can be answered in a single pass.
-
-For each: the **question**, the **options** (with the file/line each lands at if picked), Claude's **recommendation**, and a **leave it for now** option where applicable.
+**Resolved:** 2026-05-02 — all six decisions landed in a single Q&A pass. See `05-DISCUSSION-LOG.md` for the full session.
+**Status:** RESOLVED. Each section below carries its locked answer in **bold** at the top.
 
 ---
 
 ## 1. Hero headline
+
+**RESOLVED — Option A.** Already shipping. No code change.
 
 **Where it lands:** `index.html` lines 56–59 (`.hero__headline`)
 
@@ -34,6 +35,8 @@ For each: the **question**, the **options** (with the file/line each lands at if
 
 ## 2. Positioning interrupt copy
 
+**RESOLVED — Option A (diagnostic framing).** Already shipping. No code change.
+
 **Where it lands:** `index.html` lines 145–147 (`.interrupt__statement`)
 **Surface:** Signal Orange. White text. 40–50 words max.
 
@@ -51,6 +54,19 @@ For each: the **question**, the **options** (with the file/line each lands at if
 
 ## 3. "Dig. Reveal. Sharpen."
 
+**RESOLVED — use on site, with conversational lead-in.** Final copy:
+
+> If you asked me for 3 words to capture how I work, I'd say: Dig. Reveal. Sharpen.
+
+Lands inside `#approach` section, **above** the existing Option A interrupt paragraph. Typographic treatment (Option 2 of 3 surfaced):
+- Lead sentence at **Body scale**, regular weight
+- Line break before "Dig. Reveal. Sharpen."
+- Three words at **Headline scale**, **Bold**
+
+Section 4 becomes a two-beat moment: quiet intro → loud three-word hit → existing paragraph. Implementation in Phase 5 plan 05-01.
+
+---
+
 **Question:** Use this three-word diagnostic statement on the site, or keep it for decks only?
 
 If used, it lands above the interrupt paragraph at display scale (Epilogue Bold, ~3rem) — turns Section 4 (#approach) from a single paragraph into a two-line beat: the punchline + the explanation.
@@ -62,6 +78,14 @@ If used, it lands above the interrupt paragraph at display scale (Epilogue Bold,
 ---
 
 ## 4. Case study holding statement
+
+**RESOLVED — confident, name-free.** Final copy (gated on Q5 = defer):
+
+> Get in touch if you'd like to see an example of my past work. I've spent 12+ years on brand, CX, and research strategy.
+
+Single Edit on `.work__body` in Phase 5 plan 05-01. When client names clear post-launch, single Edit re-adds them.
+
+---
 
 **Where it lands:** `index.html` lines 156–158 (`.work__body`)
 
@@ -78,6 +102,12 @@ If used, it lands above the interrupt paragraph at display scale (Epilogue Bold,
 ---
 
 ## 5. Public client names
+
+**RESOLVED — defer to V1.1.** Kris checks NDA / engagement-letter clearance post-launch. None of Toolstation, Goodfella's, Merlin Entertainments, or Sanofi appear in V1 copy. Knock-on: JSON-LD `knowsAbout` stays at the three service categories; no `clientele` or named-organisation references.
+
+When clearances land, single Edit re-introduces them in the work paragraph + (optionally) a `clientele` array in the JSON-LD block.
+
+---
 
 **Question:** Which of these can be named publicly on the site?
 
@@ -97,6 +127,14 @@ If used, it lands above the interrupt paragraph at display scale (Epilogue Bold,
 
 ## 6. Sticky tab shape (pill or 4px)
 
+**RESOLVED — pill.** Drop the 4px square variant at Phase 5 cutover.
+
+Implementation (lands in plan 05-03 cutover): delete `.sticky-tab--square` rules from `css/components.css`, delete the second `<a class="sticky-tab sticky-tab--square">` anchor from `index.html`, drop the dual-rendering comment.
+
+Tonal reasoning preferred over system-consistency: pill reads friendlier / more conversational and fits the "let's talk" CTA better than the architectural square.
+
+---
+
 **Where it lands:** `index.html` lines 200–212 (two `.sticky-tab` anchors); `css/components.css` `.sticky-tab--pill` and `.sticky-tab--square` blocks.
 
 **Both are currently rendering on the deployed preview** so you can see them side-by-side once you scroll past the hero. Pill sits at the bottom-right corner; the 4px square sits above it.
@@ -113,8 +151,8 @@ After your pick, Phase 5 cutover plan deletes the unused variant from `index.htm
 
 ---
 
-## How to answer
+## Status
 
-Reply in any format that's easiest — list of letters, prose, edits-to-this-doc, voice note transcribed. Once all six land, Phase 5 plans can lock and execute the cutover-ready build.
+All six decisions resolved on 2026-05-02 in a single Q&A session — see `05-DISCUSSION-LOG.md`. Phase 5 plans (05-01 a11y/SEO/resp, 05-02 perf/hardening, 05-03 cutover) draft against these locked answers.
 
-If you want to defer any of these to V2 launch, say so — Claude will note them in a `deferred-items.md` and proceed with the current shipping defaults.
+The five additional technical questions (cutover plan, og:image, inline onerror, JSON-LD shape, Lighthouse mechanics) also resolved in the same session and are recorded in the discussion log.
