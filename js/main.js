@@ -9,6 +9,8 @@
    Nav scroll-state toggle
    ============================================================ */
 
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 const nav = document.querySelector('.nav');
 if (nav) {
   const toggleScrolled = () => nav.classList.toggle('scrolled', window.scrollY > 0);
