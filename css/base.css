@@ -1,5 +1,7 @@
 /* Look Twice — base CSS. Reset + font face + scroll behaviour + body defaults. Cascade-order: loaded after tokens.css, before layout.css. */
 
+.svg-sprite { display: none; }
+
 /* ============================================================
    1. Andy Bell — modern minimal CSS reset
    https://piccalil.li/blog/a-more-modern-css-reset/
