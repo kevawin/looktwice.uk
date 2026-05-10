@@ -127,7 +127,6 @@ if (hamburger && overlay && closeBtn) {
   sizer.textContent = 'partnerships';
   roller.appendChild(sizer);
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   let current = 0;
 
