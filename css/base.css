@@ -123,6 +123,7 @@ html {
    4. Body defaults — token-driven, no hard-coded values
    ============================================================ */
 body {
+  margin: 0;
   background: var(--color-linen);
   color: var(--color-midnight);
   font-family: var(--font-primary);
