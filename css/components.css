@@ -268,6 +268,223 @@
 }
 
 /* ============================================================
+   Process (#process) — Midnight, accordion stages.
+   ============================================================ */
+
+.process {
+  background: var(--color-midnight);
+  color: var(--color-linen);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.process__header {
+  margin-block-end: var(--space-lg);
+}
+
+.process__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-linen);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.process__intro {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  opacity: 0.7;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.process__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.process__item {
+  border-top: 1px solid rgba(249, 246, 241, 0.12);
+  padding-block: var(--space-md);
+}
+
+.process__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-sm);
+}
+
+.process__row-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.process__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--color-hot-pink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.process__step {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-hot-pink);
+  flex-shrink: 0;
+  min-width: 1.8ch;
+}
+
+.process__name {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-linen);
+  margin: 0;
+}
+
+.process__toggle {
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid rgba(249, 246, 241, 0.25);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  color: var(--color-linen);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 180ms ease-out, border-color 180ms ease-out;
+}
+
+.process__toggle:hover {
+  background: rgba(249, 246, 241, 0.08);
+  border-color: rgba(249, 246, 241, 0.45);
+}
+
+.process__toggle:focus-visible {
+  outline: 2px solid var(--color-hot-pink);
+  outline-offset: 3px;
+}
+
+.process__chevron {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 280ms ease;
+}
+
+.process__item--open .process__chevron {
+  transform: rotate(180deg);
+}
+
+.process__summary {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  opacity: 0.7;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/* Accordion panel — CSS grid row animation */
+.process__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+}
+
+.process__panel--open {
+  grid-template-rows: 1fr;
+}
+
+.process__panel-inner {
+  overflow: hidden;
+}
+
+.process__detail {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  max-width: var(--measure);
+  margin: 0;
+  padding-block-start: var(--space-md);
+  border-top: 1px solid rgba(249, 246, 241, 0.15);
+  margin-block-start: var(--space-md);
+}
+
+.process__bullets {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-sm) 0 var(--space-xs) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  max-width: var(--measure);
+}
+
+.process__bullets li {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  opacity: 0.85;
+  padding-inline-start: 20px;
+  position: relative;
+}
+
+.process__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 8px;
+  height: 2px;
+  background: var(--color-hot-pink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process__panel,
+  .process__chevron {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .process {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
    Situation (#situation) — Linen, decorative numbers (D-6.8).
    Numbers: oversized, Hot Pink, 700 weight, sit above title.
    ============================================================ */
@@ -943,6 +1160,7 @@
 
 @media (max-width: 640px) {
   .hero,
+  .process,
   .situation,
   .interrupt,
   .work,

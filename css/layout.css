@@ -124,6 +124,13 @@ main {
   }
 }
 
+/* Process layout — capped at 900px for readable accordion lines. */
+.process__inner {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
 /* ============================================================
    Inner wrappers for interrupt / work / services / contact.
    Cap content at 1280px, centre, single column unless overridden.

@@ -178,6 +178,24 @@
 })();
 
 /* ============================================================
+   Process accordion
+   ============================================================ */
+
+(function initProcessAccordion() {
+  document.querySelectorAll('.process__toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      const item = btn.closest('.process__item');
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      panel.classList.toggle('process__panel--open', !expanded);
+      item.classList.toggle('process__item--open', !expanded);
+    });
+  });
+})();
+
+/* ============================================================
    Word roller — hero H1 rotating word
    ============================================================ */
 
