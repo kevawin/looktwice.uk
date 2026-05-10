@@ -29,6 +29,7 @@
   overflow: hidden;
   height: 1.2em;
   vertical-align: bottom;
+  padding-right: 6px;
 }
 
 .word-roller__word {
