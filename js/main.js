@@ -121,11 +121,15 @@ if (hamburger && overlay && closeBtn) {
     return span;
   });
 
-  const sizer = document.createElement('span');
-  sizer.className = 'word-roller__sizer';
-  sizer.setAttribute('aria-hidden', 'true');
-  sizer.textContent = 'partnerships';
-  roller.appendChild(sizer);
+  // Measure actual rendered widths to find the widest word
+  const measurer = document.createElement('span');
+  measurer.setAttribute('aria-hidden', 'true');
+  measurer.style.cssText = 'position:absolute;top:0;left:0;visibility:hidden;font-style:italic;white-space:nowrap;pointer-events:none';
+  roller.appendChild(measurer);
+  let maxWidth = 0;
+  words.forEach(w => { measurer.textContent = w; if (measurer.offsetWidth > maxWidth) maxWidth = measurer.offsetWidth; });
+  roller.removeChild(measurer);
+  roller.style.minWidth = maxWidth + 'px';
 
 
   let current = 0;

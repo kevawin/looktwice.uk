@@ -40,4 +40,5 @@ inspo/
 .agents/
 .claude/*
 !.claude/launch.json
+!.claude/server.py
 skills-lock.json
