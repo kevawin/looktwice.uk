@@ -913,6 +913,16 @@
 }
 
 @media (max-width: 640px) {
+  .hero,
+  .situation,
+  .interrupt,
+  .work,
+  .services,
+  .contact,
+  .footer {
+    padding-inline: 16px;
+  }
+
   .footer__inner {
     flex-direction: column;
     align-items: flex-start;
