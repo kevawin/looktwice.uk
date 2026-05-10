@@ -18,3 +18,50 @@
     transition: none;
   }
 }
+
+/* ============================================================
+   Word roller — hero H1 rotating word
+   ============================================================ */
+
+.word-roller {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1em;
+  vertical-align: bottom;
+}
+
+.word-roller__word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 600ms cubic-bezier(.65, .05, .36, 1), opacity 400ms ease;
+  font-style: italic;
+  white-space: nowrap;
+  color: var(--color-warm-amber);
+}
+
+.word-roller__word--active {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.word-roller__word--exiting {
+  transform: translateY(-120%);
+  opacity: 0;
+}
+
+.word-roller__sizer {
+  display: inline-block;
+  visibility: hidden;
+  white-space: nowrap;
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word-roller__word {
+    transition: none;
+  }
+}

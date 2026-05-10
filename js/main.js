@@ -98,3 +98,49 @@ if (hamburger && overlay && closeBtn) {
     observer.observe(contact);
   }
 })();
+
+/* ============================================================
+   Word roller — hero H1 rotating word
+   ============================================================ */
+
+(function initWordRoller() {
+  const words = ['acquisition', 'display', 'social', 'events', 'new hires', 'CRM', 'PPC', 'partnerships'];
+  const intervalMs = 2200;
+  const cleanupMs = 700;
+
+  const roller = document.querySelector('.word-roller');
+  if (!roller) return;
+
+  roller.textContent = '';
+
+  const wordSpans = words.map((word, i) => {
+    const span = document.createElement('span');
+    span.className = 'word-roller__word' + (i === 0 ? ' word-roller__word--active' : '');
+    span.textContent = word;
+    roller.appendChild(span);
+    return span;
+  });
+
+  const sizer = document.createElement('span');
+  sizer.className = 'word-roller__sizer';
+  sizer.setAttribute('aria-hidden', 'true');
+  sizer.textContent = 'partnerships';
+  roller.appendChild(sizer);
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let current = 0;
+
+  setInterval(() => {
+    const prev = current;
+    current = (current + 1) % words.length;
+
+    wordSpans[prev].classList.remove('word-roller__word--active');
+    wordSpans[prev].classList.add('word-roller__word--exiting');
+    wordSpans[current].classList.add('word-roller__word--active');
+
+    setTimeout(() => {
+      wordSpans[prev].classList.remove('word-roller__word--exiting');
+    }, cleanupMs);
+  }, intervalMs);
+})();

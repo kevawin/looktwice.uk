@@ -143,6 +143,12 @@ Plan: Phase 05 shipped without per-plan PLAN.md files. CONTEXT + RESEARCH + DISC
 - Replace placeholder favicon.svg with brand-final mark (V1.1 candidate, doesn't block cutover).
 - Run cutover per `05-CUTOVER-PLAYBOOK.md` once verification gate clears.
 
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260510-ZMD | Rotating-word hero headline | 2026-05-10 | — | [260510-ZMD-rotating-word-hero-headline](./quick/260510-ZMD-rotating-word-hero-headline/) |
+
 ### Blockers
 
 None.
