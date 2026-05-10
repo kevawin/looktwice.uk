@@ -121,18 +121,20 @@ if (hamburger && overlay && closeBtn) {
     return span;
   });
 
-  // Measure actual rendered widths to find the widest word
-  const measurer = document.createElement('span');
-  measurer.setAttribute('aria-hidden', 'true');
-  measurer.style.cssText = 'position:absolute;top:0;left:0;visibility:hidden;font-style:italic;white-space:nowrap;pointer-events:none';
-  roller.appendChild(measurer);
-  let maxWidth = 0;
-  words.forEach(w => { measurer.textContent = w; if (measurer.offsetWidth > maxWidth) maxWidth = measurer.offsetWidth; });
-  roller.removeChild(measurer);
-  roller.style.minWidth = maxWidth + 'px';
-
-
   let current = 0;
+
+  function measure() {
+    const measurer = document.createElement('span');
+    measurer.setAttribute('aria-hidden', 'true');
+    measurer.style.cssText = 'position:absolute;top:0;left:0;visibility:hidden;font-style:italic;white-space:nowrap;pointer-events:none';
+    roller.appendChild(measurer);
+    let maxWidth = 0;
+    words.forEach(w => { measurer.textContent = w; const bw = measurer.getBoundingClientRect().width; if (bw > maxWidth) maxWidth = bw; });
+    roller.removeChild(measurer);
+    roller.style.minWidth = (Math.ceil(maxWidth) + 2) + 'px';
+  }
+
+  document.fonts.ready.then(measure);
 
   setInterval(() => {
     const prev = current;
