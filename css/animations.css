@@ -23,50 +23,20 @@
    Word roller — hero H1 rotating word
    ============================================================ */
 
+/* Typewriter: main.js types the word char-by-char, types 3 trailing dots,
+   holds, deletes, then moves to the next word.
+   display:block drops the word onto its own line, always, right after
+   "investment in". min-height reserves one line so the empty pause between
+   words keeps the space — content below never jumps. The word owns the full
+   width of its line, so nowrap stays on one line without the old min-width. */
 .word-roller {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  height: 1.2em;
-  vertical-align: bottom;
-  padding-right: 6px;
-}
-
-.word-roller__word {
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateY(120%);
-  opacity: 0;
-  transition: transform 600ms cubic-bezier(.65, .05, .36, 1), opacity 400ms ease;
+  display: block;
+  min-height: 1lh;
   font-style: italic;
-  white-space: nowrap;
   color: var(--color-warm-amber);
-}
-
-.word-roller__word--active {
-  transform: translateY(0%);
-  opacity: 1;
-}
-
-.word-roller__word--exiting {
-  transform: translateY(-120%);
-  opacity: 0;
-}
-
-.word-roller__sizer {
-  display: inline-block;
-  visibility: hidden;
   white-space: nowrap;
-  font-style: italic;
+  padding-right: 3px; /* guards italic last-glyph clipping on iOS */
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .word-roller__word {
-    transform: translateY(0%);
-    transition: opacity 400ms ease;
-  }
-  .word-roller__word--exiting {
-    transform: translateY(0%);
-  }
-}
+/* Reduced motion: main.js never starts the loop and rests on the first
+   word, so there is no animation to override here. */

@@ -105,47 +105,60 @@ if (hamburger && overlay && closeBtn) {
 
 (function initWordRoller() {
   const words = ['acquisition', 'display', 'social', 'events', 'new hires', 'CRM', 'PPC', 'partnerships'];
-  const intervalMs = 2200;
-  const cleanupMs = 700;
+
+  // Per-letter type speed, per-dot speed, hold after dots, per-char delete
+  // speed, blank gap before the next word. All in ms.
+  const TYPE_MS = 80;
+  const DOT_MS = 250;
+  const HOLD_MS = 1600;
+  const DEL_MS = 45;
+  const PAUSE_MS = 350;
+  const DOTS = 3;
 
   const roller = document.querySelector('.word-roller');
   if (!roller) return;
 
-  roller.textContent = '';
-
-  const wordSpans = words.map((word, i) => {
-    const span = document.createElement('span');
-    span.className = 'word-roller__word' + (i === 0 ? ' word-roller__word--active' : '');
-    span.textContent = word;
-    roller.appendChild(span);
-    return span;
-  });
-
-  let current = 0;
-
-  function measure() {
-    const measurer = document.createElement('span');
-    measurer.setAttribute('aria-hidden', 'true');
-    measurer.style.cssText = 'position:absolute;top:0;left:0;visibility:hidden;font-style:italic;white-space:nowrap;pointer-events:none';
-    roller.appendChild(measurer);
-    let maxWidth = 0;
-    words.forEach(w => { measurer.textContent = w; const bw = measurer.getBoundingClientRect().width; if (bw > maxWidth) maxWidth = bw; });
-    roller.removeChild(measurer);
-    roller.style.minWidth = (Math.ceil(maxWidth) + 2) + 'px';
+  // Reduced motion: rest on the first word, never start the loop.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    roller.textContent = words[0];
+    return;
   }
 
-  document.fonts.ready.then(measure);
+  let wordIdx = 0;
 
-  setInterval(() => {
-    const prev = current;
-    current = (current + 1) % words.length;
+  function typeWord() {
+    const word = words[wordIdx];
+    let i = 0;
+    roller.textContent = '';
+    (function typeChar() {
+      roller.textContent = word.slice(0, ++i);
+      setTimeout(i < word.length ? typeChar : () => typeDots(word, 0), TYPE_MS);
+    })();
+  }
 
-    wordSpans[prev].classList.remove('word-roller__word--active');
-    wordSpans[prev].classList.add('word-roller__word--exiting');
-    wordSpans[current].classList.add('word-roller__word--active');
+  function typeDots(word, d) {
+    if (d < DOTS) {
+      roller.textContent = word + '.'.repeat(d + 1);
+      setTimeout(() => typeDots(word, d + 1), DOT_MS);
+    } else {
+      setTimeout(deleteAll, HOLD_MS);
+    }
+  }
 
-    setTimeout(() => {
-      wordSpans[prev].classList.remove('word-roller__word--exiting');
-    }, cleanupMs);
-  }, intervalMs);
+  function deleteAll() {
+    let txt = roller.textContent;
+    (function delChar() {
+      txt = txt.slice(0, -1);
+      roller.textContent = txt;
+      if (txt.length) {
+        setTimeout(delChar, DEL_MS);
+      } else {
+        wordIdx = (wordIdx + 1) % words.length;
+        setTimeout(typeWord, PAUSE_MS);
+      }
+    })();
+  }
+
+  // Wait for the font so the first letters use correct metrics (no reflow jump).
+  document.fonts.ready.then(typeWord);
 })();
