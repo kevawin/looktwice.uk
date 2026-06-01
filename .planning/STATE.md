@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
+status: executing
 stopped_at: "Phase 10 (refresh P7 — Contact mechanic) context gathered: form chosen over mailto"
-last_updated: "2026-06-01T19:24:40.975Z"
+last_updated: "2026-06-01T20:04:38.651Z"
 progress:
   total_phases: 9
   completed_phases: 4
-  total_plans: 11
+  total_plans: 13
   completed_plans: 14
   percent: 44
 ---
@@ -34,7 +34,7 @@ Plan: not started
 - **Milestone:** v1 (in progress)
 - **Phase:** 09 of 9 — discuss stage
 - **Plan:** Not started
-- **Status:** Phase 08 complete + verified 7/7; Phase 09 registered, gathering bugs + menu deviation
+- **Status:** Ready to execute
 - **Progress:** [█████████░] 89%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
