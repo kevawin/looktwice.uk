@@ -795,18 +795,46 @@
 }
 
 /* ============================================================
-   Sticky tab — brand gradient, the only place gradient appears.
-   Phase 6: adds .sticky-tab--suppressed (hidden while contact is in view).
+   Floating action bar — brand gradient CTA pill (left) + circular burger / nav pills (right).
+   Phase 8: replaces the old sticky-tab. The CTA pill is the ONLY place --gradient-brand appears.
+   D-11: gradient one-surface rule. D-12/D-13: scroll-gate + contact-suppress via JS.
+   D-14: reduced-motion guard. D-16: per-surface AA focus rings.
    ============================================================ */
 
-.sticky-tab {
+/* Bar root — transparent row spanning the bottom edge.
+   Individual children re-enable pointer-events:auto. */
+.floating-bar {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: calc(var(--space-lg) * 0.75);
+  left: calc(var(--space-lg) * 0.75);
+  right: calc(var(--space-lg) * 0.75);
   z-index: 150;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  transform: translateY(calc(100% + calc(var(--space-lg) * 0.75)));
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
+}
+
+.floating-bar--visible {
+  transform: translateY(0);
+}
+
+.floating-bar--suppressed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(100% + calc(var(--space-lg) * 0.75)));
+}
+
+/* CTA pill — gradient surface, white text.
+   D-11: the ONLY element in the site with --gradient-brand. */
+.floating-bar__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: var(--gradient-brand);
   color: var(--color-true-white);
-  padding: 14px 28px;
   font-family: var(--font-primary);
   font-weight: 700;
   font-size: var(--text-label);
@@ -814,74 +842,171 @@
   line-height: var(--lh-label);
   text-transform: uppercase;
   text-decoration: none;
+  padding: 14px 28px;
+  min-height: 44px;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-float);
-  transform: translateX(120%);
-  transition: var(--transition-tab), opacity 240ms ease-out;
+  pointer-events: auto;
 }
 
-.sticky-tab--visible {
-  transform: translateX(0);
+.floating-bar__cta:hover {
+  filter: brightness(1.07);
 }
 
-.sticky-tab--suppressed {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(120%);
-}
-
-.sticky-tab:hover {
-  transform: translateX(0) scale(1.03);
-  transition: transform 180ms ease-out;
-}
-
-.sticky-tab:focus-visible {
+.floating-bar__cta:focus-visible {
   outline: 2px solid var(--color-true-white);
   outline-offset: 3px;
 }
 
-@media (max-width: 640px) {
-  .sticky-tab {
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 52px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0;
-    transform: translateY(100%);
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
+/* Nav cluster — contains burger (mobile) + pills */
+.floating-bar__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/* Pills list — mobile: stacked column above the burger, hidden until open.
+   Desktop (>640px): flex row, always visible, burger hidden. */
+.floating-bar__pills {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* mobile default: hidden (slides up when .floating-bar__pills--open added) */
+  transform: translateY(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
+}
+
+.floating-bar__pills--open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Individual nav pill — white bg, Hot Pink text */
+.floating-bar__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-true-white);
+  color: var(--color-hot-pink);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.floating-bar__pill:hover {
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
+}
+
+.floating-bar__pill:focus-visible {
+  outline: 2px solid var(--color-hot-pink);
+  outline-offset: 3px;
+}
+
+/* Circular burger — white bg, Hot Pink lines */
+.floating-bar__burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  background: var(--color-true-white);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: var(--shadow-float);
+  cursor: pointer;
+  pointer-events: auto;
+  padding: 0;
+}
+
+.floating-bar__burger:focus-visible {
+  outline: 2px solid var(--color-hot-pink);
+  outline-offset: 3px;
+}
+
+.floating-bar__burger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-hot-pink);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 200ms ease-out, opacity 150ms ease-out;
+}
+
+/* Burger → X when menu is open */
+.floating-bar__burger[aria-expanded="true"] .floating-bar__burger-line:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.floating-bar__burger[aria-expanded="true"] .floating-bar__burger-line:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* Desktop: no burger, pills always visible as a row */
+@media (min-width: 641px) {
+  .floating-bar__burger {
+    display: none;
   }
 
-  .sticky-tab--visible {
-    transform: translateY(0);
-  }
-
-  .sticky-tab--suppressed {
-    transform: translateY(100%);
+  .floating-bar__pills {
+    flex-direction: row;
+    gap: 8px;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    transition: none;
   }
 }
 
+/* Reduced-motion: strip transforms, use opacity only.
+   Burger snaps to X (rotate still applied as static end-state, transition:none). */
 @media (prefers-reduced-motion: reduce) {
-  .sticky-tab {
+  .floating-bar {
     transform: none;
     opacity: 0;
     transition: opacity 200ms ease-out;
   }
 
-  .sticky-tab--visible {
+  .floating-bar--visible {
     transform: none;
     opacity: 1;
   }
 
-  .sticky-tab--suppressed {
+  .floating-bar--suppressed {
     transform: none;
     opacity: 0;
   }
 
-  .sticky-tab:hover {
+  .floating-bar__pills {
     transform: none;
+    transition: opacity 200ms ease-out;
+  }
+
+  .floating-bar__pills--open {
+    transform: none;
+  }
+
+  .floating-bar__burger-line {
+    transition: none;
   }
 }

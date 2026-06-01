@@ -25,11 +25,11 @@
 
   <link rel="preload" href="/fonts/epilogue-400.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/css/tokens.css?v=5">
-  <link rel="stylesheet" href="/css/base.css?v=5">
-  <link rel="stylesheet" href="/css/layout.css?v=5">
-  <link rel="stylesheet" href="/css/components.css?v=5">
-  <link rel="stylesheet" href="/css/animations.css?v=5">
+  <link rel="stylesheet" href="/css/tokens.css?v=6">
+  <link rel="stylesheet" href="/css/base.css?v=6">
+  <link rel="stylesheet" href="/css/layout.css?v=6">
+  <link rel="stylesheet" href="/css/components.css?v=6">
+  <link rel="stylesheet" href="/css/animations.css?v=6">
 
   <script type="application/ld+json">
   {
@@ -289,10 +289,24 @@
     </div>
   </footer>
 
-  <a class="sticky-tab" href="#contact" aria-label="Contact Kris">
-    <span class="sticky-tab__label">Let's talk &rarr;</span>
-  </a>
+  <div class="floating-bar" aria-hidden="true">
+    <a class="floating-bar__cta" href="#contact">Free 30-min chat</a>
+    <div class="floating-bar__nav">
+      <button class="floating-bar__burger"
+              type="button"
+              aria-expanded="false"
+              aria-label="Open menu"
+              aria-controls="floating-bar-pills">
+        <span class="floating-bar__burger-line" aria-hidden="true"></span>
+        <span class="floating-bar__burger-line" aria-hidden="true"></span>
+      </button>
+      <ul class="floating-bar__pills" id="floating-bar-pills" role="list">
+        <li><a class="floating-bar__pill" href="#approach">Approach</a></li>
+        <li><a class="floating-bar__pill" href="#work">Work</a></li>
+      </ul>
+    </div>
+  </div>
 
-  <script src="/js/main.js?v=5" defer></script>
+  <script src="/js/main.js?v=6" defer></script>
 </body>
 </html>
