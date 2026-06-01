@@ -224,53 +224,6 @@
   outline-offset: 4px;
 }
 
-/* On-Linen variants — accent fill, white text. Hover inverts to outlined accent. */
-.btn--accent-pink {
-  background: var(--color-hot-pink);
-  color: var(--color-true-white);
-  border-color: var(--color-hot-pink);
-}
-
-.btn--accent-pink:hover,
-.btn--accent-pink:focus-visible {
-  background: transparent;
-  color: var(--color-hot-pink);
-  border-color: var(--color-hot-pink);
-}
-
-.btn--accent-indigo {
-  background: var(--color-cool-indigo);
-  color: var(--color-true-white);
-  border-color: var(--color-cool-indigo);
-}
-
-.btn--accent-indigo:hover,
-.btn--accent-indigo:focus-visible {
-  background: transparent;
-  color: var(--color-cool-indigo);
-  border-color: var(--color-cool-indigo);
-}
-
-.btn--accent-amber {
-  background: var(--color-warm-amber);
-  color: var(--color-true-white);
-  border-color: var(--color-warm-amber);
-}
-
-.btn--accent-amber:hover,
-.btn--accent-amber:focus-visible {
-  background: transparent;
-  color: var(--color-warm-amber);
-  border-color: var(--color-warm-amber);
-}
-
-/* Focus ring on Linen accent buttons — Midnight ring keeps high contrast on every accent. */
-.btn--accent-pink:focus-visible,
-.btn--accent-indigo:focus-visible,
-.btn--accent-amber:focus-visible {
-  outline: 2px solid var(--color-midnight);
-  outline-offset: 4px;
-}
 
 /* ============================================================
    Hero (#hero) — Hot Pink full-bleed (Phase 6 simplified).
@@ -620,10 +573,6 @@
   max-width: var(--measure);
 }
 
-.work__cta {
-  align-self: flex-start;
-  margin-block-start: var(--space-xs);
-}
 
 @media (max-width: 640px) {
   .work {
