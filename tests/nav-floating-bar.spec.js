@@ -354,11 +354,26 @@ test.describe('Focus management (mobile)', () => {
     await expect(page.locator('.floating-bar')).toHaveClass(/floating-bar--visible/);
   });
 
-  test('opening the menu focuses the first pill (Approach)', async ({ page }) => {
+  test('opening the menu does NOT move focus (disclosure pattern, no focus ring on open)', async ({ page }) => {
     if (isDesktop(page)) return;
-    await page.locator('.floating-bar__burger').click();
+    const burger = page.locator('.floating-bar__burger');
+    await burger.click();
     await expect(page.locator('.floating-bar__pills')).toHaveClass(/floating-bar__pills--open/);
-    // Active element should be the first pill link
+    // Focus must stay on the burger — nothing inside the menu is auto-focused.
+    const active = await page.evaluate(() => document.activeElement?.className || '');
+    expect(active).toContain('floating-bar__burger');
+    // No pill is the active element.
+    const activeHref = await page.evaluate(() => document.activeElement?.getAttribute('href'));
+    expect(activeHref).not.toBe('#approach');
+  });
+
+  test('keyboard: Tab from burger reaches the first pill after opening', async ({ page }) => {
+    if (isDesktop(page)) return;
+    const burger = page.locator('.floating-bar__burger');
+    await burger.focus();
+    await page.keyboard.press('Enter'); // open via keyboard
+    await expect(page.locator('.floating-bar__pills')).toHaveClass(/floating-bar__pills--open/);
+    await page.keyboard.press('Tab');
     const activeHref = await page.evaluate(() => document.activeElement?.getAttribute('href'));
     expect(activeHref).toBe('#approach');
   });

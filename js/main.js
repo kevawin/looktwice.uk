@@ -99,12 +99,14 @@
   // Guard: if burger or pills are absent (e.g. in a stripped test env) skip wiring.
   if (!burger || !pills) return;
 
+  // Disclosure pattern (not a modal menu): opening does NOT move focus into the
+  // pills. Focus stays on the burger, so no focus ring appears on tap/click and
+  // nothing is focused unless the user chooses to. Keyboard users Tab from the
+  // burger straight into the now-visible pills (next in DOM order); Escape closes.
   function openMenu() {
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Close menu');
     pills.classList.add('floating-bar__pills--open');
-    const firstPill = pills.querySelector('a');
-    if (firstPill) firstPill.focus();
   }
 
   // returnFocus (default true): when true, return focus to the burger after close.
