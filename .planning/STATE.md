@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 08 context gathered
-last_updated: "2026-06-01T07:53:48.103Z"
+last_updated: "2026-06-01T07:55:38.239Z"
 progress:
   total_phases: 7
   completed_phases: 3
@@ -22,19 +22,19 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 07 — design-system-foundations
+**Current focus:** Phase 08 — nav-floating-bar
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 07 (design-system-foundations) — COMPLETE
-Plan: 1 of 1 complete
+Phase: 08 (nav-floating-bar) — EXECUTING
+Plan: 1 of 3
 
 - **Milestone:** v1
 - **Phase:** 5 of 5 code-complete
 - **Plan:** Phase 07 Plan 01 complete (SUMMARY landed; checkpoint approved)
-- **Status:** Ready to execute
+- **Status:** Executing Phase 08
 - **Progress:** [██████████] 100%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
