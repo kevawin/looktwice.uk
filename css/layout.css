@@ -32,10 +32,6 @@ main {
   align-items: center;
 }
 
-@media (max-width: 1024px) {
-  .nav-links { display: none; }
-}
-
 .footer {
   padding: var(--space-lg) calc(var(--space-lg) * 0.75);
   min-height: 64px;
