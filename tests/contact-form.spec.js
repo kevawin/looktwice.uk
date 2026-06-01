@@ -174,4 +174,14 @@ test.describe('Contact form', () => {
     expect(count).toBe(0);
   });
 
+  // -------------------------------------------------------------------------
+  // D-02 source guard: Kris's inbox must not leak in page source (e.g. JSON-LD)
+  // -------------------------------------------------------------------------
+  test('D-02 source guard: no email address in page source', async ({ page }) => {
+    const res = await page.goto('/');
+    const html = await res.text();
+    expect(html).not.toMatch(/hello@looktwice\.uk/i);
+    expect(html).not.toMatch(/"email"\s*:/);
+  });
+
 });

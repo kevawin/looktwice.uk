@@ -236,8 +236,10 @@
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Honeypot guard — bots fill the hidden field; reject silently (D-06)
-    if (form.querySelector('[name="_gotcha"]').value) return;
+    // Honeypot guard — bots fill the hidden field; reject silently (D-06).
+    // Null-guard: privacy extensions can strip the hidden field; missing trap is not a bot.
+    const trap = form.querySelector('[name="_gotcha"]');
+    if (trap && trap.value) return;
 
     // Required-field validation — focus first invalid field, announce via aria-live (D-09)
     const invalid = form.querySelector(':invalid');
