@@ -1,18 +1,20 @@
 /* Look Twice — site JS.
    Behaviours:
-   - Sticky tab entrance toggle (slides in past hero, hides while contact in view)
+   - Floating action bar: slides in past the hero; suppressed while #contact is in view (D-12, D-13).
+   - Floating burger: mobile circular burger opens/closes nav pills; aria-expanded, Escape, focus return (D-15).
+   - Word roller: hero H1 rotating word (untouched).
    Phase 8: nav scroll-state toggle and mobile hamburger overlay removed (D-03, D-04). */
 
 /* ============================================================
-   Sticky tab — entrance + suppression while contact section is in view.
-   D-6.11: contact has its own CTA; the sticky tab would be redundant noise
-   while the visitor is reading or actioning that CTA. IntersectionObserver
-   on #contact toggles a .sticky-tab--suppressed class.
+   Floating bar — entrance + suppression while contact section is in view.
+   D-12: appears once scrollY > hero.offsetHeight (threshold recomputed on resize).
+   D-13: IntersectionObserver on #contact { threshold:0.15 } suppresses the bar
+         while the visitor is reading or actioning the contact CTA.
    ============================================================ */
 
-(function initStickyTab() {
-  const tabs = document.querySelectorAll('.sticky-tab');
-  if (tabs.length === 0) return;
+(function initFloatingBar() {
+  const bar = document.querySelector('.floating-bar');
+  if (!bar) return;
 
   const hero = document.querySelector('.hero');
   const getThreshold = () => (hero ? hero.offsetHeight : window.innerHeight);
@@ -24,7 +26,8 @@
 
   const onScroll = () => {
     const past = window.scrollY > threshold;
-    tabs.forEach((tab) => tab.classList.toggle('sticky-tab--visible', past));
+    bar.classList.toggle('floating-bar--visible', past);
+    bar.setAttribute('aria-hidden', past ? 'false' : 'true');
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -35,13 +38,58 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          tabs.forEach((tab) => tab.classList.toggle('sticky-tab--suppressed', entry.isIntersecting));
+          bar.classList.toggle('floating-bar--suppressed', entry.isIntersecting);
         });
       },
       { threshold: 0.15 }
     );
     observer.observe(contact);
   }
+})();
+
+/* ============================================================
+   Floating burger — mobile nav pill open/close.
+   D-15: aria-expanded toggle; open moves focus to first pill; Escape closes
+         and returns focus to the burger; pill click closes and returns focus.
+   Desktop: burger is display:none; pills are always visible via CSS regardless
+            of .floating-bar__pills--open — desktop nav is unaffected by this block.
+   ============================================================ */
+
+(function initFloatingBurger() {
+  const bar    = document.querySelector('.floating-bar');
+  const burger = document.querySelector('.floating-bar__burger');
+  const pills  = document.querySelector('.floating-bar__pills');
+  if (!bar || !burger || !pills) return;
+
+  function openMenu() {
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Close menu');
+    pills.classList.add('floating-bar__pills--open');
+    const firstPill = pills.querySelector('a');
+    if (firstPill) firstPill.focus();
+  }
+
+  function closeMenu() {
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Open menu');
+    pills.classList.remove('floating-bar__pills--open');
+    burger.focus();
+  }
+
+  burger.addEventListener('click', () => {
+    if (burger.getAttribute('aria-expanded') === 'true') closeMenu();
+    else openMenu();
+  });
+
+  pills.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+    }
+  });
 })();
 
 /* ============================================================
