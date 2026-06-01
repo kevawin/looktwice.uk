@@ -683,12 +683,14 @@
   gap: var(--space-md);
   width: 100%;
   max-width: var(--measure);
-  transition: opacity 280ms ease;
+  transition: opacity 320ms ease;
 }
 
-/* Fade the form out before it is removed on a successful submit. */
-.contact__form--leaving {
-  opacity: 0;
+/* On a successful submit the form stays in place but dims and locks — the
+   typed words remain visible ("received this"). */
+.contact__form--submitted {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* Off-screen spam trap. Kept out of view, tab order, and the a11y tree.
@@ -760,62 +762,95 @@
   min-height: 1.5em;
 }
 
-/* Icon stacked above text, matching the "Three problems" services items.
-   Icon hidden until a successful submit. */
-.contact__status-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-sm);
-}
-
-/* Decorative success icon — same size and stroke treatment as .services__icon. */
-.contact__status-icon {
-  display: none;
-  flex: none;
-  width: 56px;
-  height: 56px;
-  color: var(--color-true-white);
-  fill: none;
-  stroke: currentColor;
-  /* lucide art is a 24-unit viewBox; 0.86 here renders the same ~2px stroke
-     as .services__icon (stroke-width 2 on a 56-unit viewBox). */
-  stroke-width: 0.86;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Success state: matches the section segue — title size, bold — and fades in
-   as the form fades out. Validation and error messages keep the base body
-   style; only the success state enlarges and reveals the icon. */
-.contact__status-wrap--success {
-  opacity: 0;
+/* Success message sits below the button. Title size + bold (matching the
+   section segue), fades in. Validation and error messages keep the base body
+   style above — only the success modifier enlarges. */
+.contact__status {
   transition: opacity 320ms ease;
 }
 
-.contact__status-wrap--success .contact__status-icon {
-  display: block;
-}
-
-.contact__status-wrap--success .contact__status {
+.contact__status--success {
   font-weight: 700;
   font-size: var(--text-title);
   line-height: var(--lh-title);
+  margin-top: var(--space-sm);
+  /* Fade in: start transparent, then the keyframe brings it up. Using an
+     animation (not a class toggle) avoids a JS reflow step. */
+  animation: contact-status-in 320ms ease forwards;
 }
 
-.contact__status-wrap--success.contact__status-wrap--visible {
+@keyframes contact-status-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* --- Submit button: Send label → spinner → mail-check tick, in place --- */
+.contact__submit {
+  align-self: flex-start;
+  position: relative;          /* anchor the centred spinner + tick */
+}
+
+/* The label stays in normal flow so the button keeps its "Send" width; it just
+   fades out. The spinner and tick are centred over that same box. */
+.contact__submit-label {
+  transition: opacity 160ms ease;
+}
+
+.contact__submit-spinner,
+.contact__submit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  margin: -0.625em 0 0 -0.625em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  pointer-events: none;
+}
+
+.contact__submit--sending .contact__submit-label,
+.contact__submit--sent .contact__submit-label {
+  opacity: 0;
+}
+
+.contact__submit--sending .contact__submit-spinner {
+  opacity: 1;
+  animation: contact-spin 0.8s linear infinite;
+}
+
+.contact__submit--sent .contact__submit-icon {
   opacity: 1;
 }
 
-.contact__submit {
-  align-self: flex-start;
+/* Keep the disabled "sent" button looking intentional, not greyed-out. */
+.contact__submit:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+@keyframes contact-spin {
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .contact__form,
   .contact__status,
-  .contact__status-wrap--success {
+  .contact__status--success,
+  .contact__submit-label,
+  .contact__submit-spinner,
+  .contact__submit-icon {
     transition: none;
+    animation: none;
+  }
+  /* No spin — the spinner still shows briefly as a static ring before the tick. */
+  .contact__submit--sending .contact__submit-spinner {
+    opacity: 1;
   }
 }
 

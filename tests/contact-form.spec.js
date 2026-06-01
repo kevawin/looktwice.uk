@@ -79,14 +79,15 @@ test.describe('Contact form', () => {
     await fillValidFields(page);
     await page.click('button.contact__submit');
 
-    // Form becomes hidden
-    await expect(page.locator('#contact-form')).toHaveAttribute('hidden', /.*/);
+    // Form stays in place but locks (dimmed); the button morphs to the tick.
+    await expect(page.locator('#contact-form')).toHaveClass(/contact__form--submitted/);
+    await expect(page.locator('.contact__submit')).toHaveClass(/contact__submit--sent/);
+    await expect(page.locator('.contact__submit')).toBeDisabled();
+    await expect(page.locator('.contact__submit-icon')).toBeVisible();
 
-    // Status region has non-empty success text (wait for it)
+    // Success message shows below the button (non-empty, success styling).
     await expect(page.locator('#contact-status')).not.toBeEmpty();
-
-    // Success icon is revealed (hidden in every other state)
-    await expect(page.locator('.contact__status-icon')).toBeVisible();
+    await expect(page.locator('#contact-status')).toHaveClass(/contact__status--success/);
 
     // Page did not navigate away
     expect(page.url()).toMatch(/\/$/);
@@ -228,9 +229,9 @@ test.describe('Contact form', () => {
     await fillValidFields(page);
     await page.click('button.contact__submit');
 
-    // Success UI still shows...
-    await expect(page.locator('#contact-form')).toHaveAttribute('hidden', /.*/);
-    await expect(page.locator('.contact__status-icon')).toBeVisible();
+    // Success UI still shows (button morphs to the tick, message appears)...
+    await expect(page.locator('.contact__submit')).toHaveClass(/contact__submit--sent/);
+    await expect(page.locator('#contact-status')).toHaveClass(/contact__status--success/);
     // ...but no real submission left the page.
     expect(formspreeHit).toBe(0);
   });

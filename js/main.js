@@ -231,7 +231,13 @@
 (function initContactForm() {
   const form   = document.querySelector('#contact-form');
   const status = document.querySelector('#contact-status');
-  if (!form || !status) return;
+  const button = form && form.querySelector('.contact__submit');
+  if (!form || !status || !button) return;
+
+  // Minimum time the spinner shows on the simulated (local/preview) path so the
+  // send → tick morph reads instead of flashing. On the live domain the real
+  // fetch sets the pace.
+  const SIMULATED_DELAY_MS = 500;
 
   // Real submissions go to Formspree ONLY on the live domain (looktwice.uk and
   // subdomains). Everywhere else — localhost and the *.pages.dev Cloudflare
@@ -242,36 +248,37 @@
     return /(^|\.)looktwice\.uk$/i.test(window.location.hostname);
   }
 
-  // Swap the form for the success message: announce via the aria-live region
-  // (textContent only — T-10-01), reveal the icon, then fade the form out and
-  // the message in. Honours prefers-reduced-motion with an instant swap.
+  // Button has three visual states driven by classes: default (Send label),
+  // is-sending (spinner), is-sent (mail-check tick). 'sent' stays disabled.
+  function setButtonState(state) {
+    button.classList.toggle('contact__submit--sending', state === 'sending');
+    button.classList.toggle('contact__submit--sent',    state === 'sent');
+    // Disabled while sending or once sent; re-enabled on error so they can retry.
+    button.disabled = (state === 'sending' || state === 'sent');
+  }
+
+  function setFieldsDisabled(disabled) {
+    form.querySelectorAll('.contact__input').forEach(function (el) { el.disabled = disabled; });
+  }
+
+  // Success resolves in place: lock + dim the form (keeping the typed words),
+  // morph the button to the tick, and announce the message below it via the
+  // aria-live region (textContent only — T-10-01). No reset, no scroll.
   function showSuccess() {
-    form.reset();
+    setButtonState('sent');
+    setFieldsDisabled(true);
+    form.classList.add('contact__form--submitted');
+    status.classList.add('contact__status--success');
     status.textContent = 'Thanks, I\'ll be in touch within one working day.';
-    const wrap = status.closest('.contact__status-wrap');
-    if (wrap) wrap.classList.add('contact__status-wrap--success');
+  }
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      form.hidden = true;
-      if (wrap) wrap.classList.add('contact__status-wrap--visible');
-      return;
-    }
-
-    let done = false;
-    const finish = function () {
-      if (done) return;
-      done = true;
-      form.hidden = true;
-      if (wrap) wrap.classList.add('contact__status-wrap--visible');
-    };
-    form.addEventListener('transitionend', function onDone(ev) {
-      if (ev.propertyName !== 'opacity') return;
-      form.removeEventListener('transitionend', onDone);
-      finish();
-    });
-    // Fallback if transitionend never fires (no transition support, etc.)
-    setTimeout(finish, 400);
-    form.classList.add('contact__form--leaving');
+  // Error returns to a retryable state: spinner back to the Send label, button
+  // and fields re-enabled, generic no-email message (D-02 + T-10-03).
+  function showError(message) {
+    setButtonState('default');
+    setFieldsDisabled(false);
+    status.classList.remove('contact__status--success');
+    status.textContent = message;
   }
 
   form.addEventListener('submit', async function (e) {
@@ -287,13 +294,19 @@
     const invalid = form.querySelector(':invalid');
     if (invalid) {
       invalid.focus();
+      status.classList.remove('contact__status--success');
       status.textContent = 'Please fill in all required fields.';
       return;
     }
 
-    // Off the live domain: simulate success, never hit Formspree.
+    // Lock the button and start the spinner.
+    status.textContent = '';
+    status.classList.remove('contact__status--success');
+    setButtonState('sending');
+
+    // Off the live domain: simulate success after a short spinner, never hit Formspree.
     if (!submitsForReal()) {
-      showSuccess();
+      setTimeout(showSuccess, SIMULATED_DELAY_MS);
       return;
     }
 
@@ -309,12 +322,10 @@
       if (res.ok) {
         showSuccess();
       } else {
-        // Generic retry copy — no email address in any error state (D-02 + T-10-03)
-        status.textContent = 'Something went wrong sending your message. Please try again in a moment.';
+        showError('Something went wrong sending your message. Please try again in a moment.');
       }
     } catch (_err) {
-      // Network error — no email address in fallback copy (D-02 + T-10-03)
-      status.textContent = 'Could not send your message. Check your connection and try again.';
+      showError('Could not send your message. Check your connection and try again.');
     }
   });
 })();
