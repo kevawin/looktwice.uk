@@ -227,3 +227,47 @@
   // Wait for the font so the first letters use correct metrics (no reflow jump).
   document.fonts.ready.then(typeWord);
 })();
+
+(function initContactForm() {
+  const form   = document.querySelector('#contact-form');
+  const status = document.querySelector('#contact-status');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    // Honeypot guard — bots fill the hidden field; reject silently (D-06)
+    if (form.querySelector('[name="_gotcha"]').value) return;
+
+    // Required-field validation — focus first invalid field, announce via aria-live (D-09)
+    const invalid = form.querySelector(':invalid');
+    if (invalid) {
+      invalid.focus();
+      status.textContent = 'Please fill in all required fields.';
+      return;
+    }
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.reset();
+        form.hidden = true;
+        // Success announced via aria-live region (D-09); textContent only (T-10-01)
+        status.textContent = 'Thanks, I\'ll be in touch within one working day.';
+      } else {
+        // Generic retry copy — no email address in any error state (D-02 + T-10-03)
+        status.textContent = 'Something went wrong sending your message. Please try again in a moment.';
+      }
+    } catch (_err) {
+      // Network error — no email address in fallback copy (D-02 + T-10-03)
+      status.textContent = 'Could not send your message. Check your connection and try again.';
+    }
+  });
+})();
