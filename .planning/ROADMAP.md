@@ -160,7 +160,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **Plans**: 3 plans
 
   - [x] 08-01-PLAN.md — Header refactor: non-fixed scroll-away, remove hamburger/overlay/scroll-fade, drop Contact, reorder Approach→Work, align section gutter, keep mobile links (Wave 1)
-  - [ ] 08-02-PLAN.md — Floating action bar: gradient CTA pill + circular white/pink two-line burger, mobile slide-up Approach/Work stack, desktop pill row, scroll-gate + contact-suppress + reduced-motion + focus/keyboard, cache-bust bump (Wave 2)
+  - [x] 08-02-PLAN.md — Floating action bar: gradient CTA pill + circular white/pink two-line burger, mobile slide-up Approach/Work stack, desktop pill row, scroll-gate + contact-suppress + reduced-motion + focus/keyboard, cache-bust bump (Wave 2)
   - [ ] 08-03-PLAN.md — Heavy Playwright suite (D-18): dev-only harness + responsive/scroll-away/menu-order/bar-gate/slide-up/desktop-row/focus-trap/line-to-X tests at 375/768/1440 (Wave 3)
 
 ## Progress
@@ -174,7 +174,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 5. Hardening & Launch | 0/0 | Not started | - |
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
-| 8. Navigation & floating action bar (refresh P2) | 1/3 | In Progress|  |
+| 8. Navigation & floating action bar (refresh P2) | 2/3 | In Progress|  |
 
 ## Coverage Summary
 
