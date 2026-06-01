@@ -422,6 +422,147 @@ test.describe('Focus management (mobile)', () => {
 // 7. Burger line → X: transition present by default, absent under reducedMotion
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// 8. Hidden-bar accessibility (CR-01) — inert blocks focus when bar is not visible
+// ---------------------------------------------------------------------------
+
+test.describe('Hidden-bar accessibility (CR-01)', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    await scrollTo(page, 0);
+  });
+
+  test('bar root has inert attribute at scrollY 0 (hidden state)', async ({ page }) => {
+    const bar = page.locator('.floating-bar');
+    // inert is a boolean attribute — present means active; its value may be '' or 'true'
+    const hasInert = await page.evaluate(() => {
+      const el = document.querySelector('.floating-bar');
+      return el ? el.hasAttribute('inert') : false;
+    });
+    expect(hasInert).toBe(true);
+  });
+
+  test('bar root has aria-hidden="true" at scrollY 0', async ({ page }) => {
+    await expect(page.locator('.floating-bar')).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  test('CTA anchor inside hidden bar is not focusable (inert blocks focus)', async ({ page }) => {
+    // The bar is inert at scrollY 0. Attempting focus on the CTA should be refused.
+    const activeHref = await page.evaluate(() => {
+      const cta = document.querySelector('.floating-bar__cta');
+      if (!cta) return null;
+      cta.focus();
+      const active = document.activeElement;
+      return active ? active.getAttribute('href') : null;
+    });
+    // If inert is working, focus is not granted to the CTA so activeElement href is not #contact
+    expect(activeHref).not.toBe('#contact');
+  });
+
+  test('first nav pill inside hidden bar is not focusable (inert blocks focus)', async ({ page }) => {
+    const activeHref = await page.evaluate(() => {
+      const pill = document.querySelector('.floating-bar__pill');
+      if (!pill) return null;
+      pill.focus();
+      const active = document.activeElement;
+      return active ? active.getAttribute('href') : null;
+    });
+    // The pill should not receive focus while the bar is inert
+    const pillHref = await page.evaluate(() => {
+      return document.querySelector('.floating-bar__pill')?.getAttribute('href') ?? null;
+    });
+    expect(activeHref).not.toBe(pillHref);
+  });
+
+  test('burger inside hidden bar is not focusable on mobile (inert blocks focus)', async ({ page }) => {
+    if (isDesktop(page)) {
+      test.skip();
+      return;
+    }
+    const activeClass = await page.evaluate(() => {
+      const burger = document.querySelector('.floating-bar__burger');
+      if (!burger) return null;
+      burger.focus();
+      return document.activeElement ? document.activeElement.className : null;
+    });
+    // Burger should not receive focus while the bar is inert
+    expect(activeClass).not.toContain('floating-bar__burger');
+  });
+
+  test('bar root has no inert and aria-hidden="false" after scrolling past the hero', async ({ page }) => {
+    const heroHeight = await page.evaluate(() => {
+      return document.querySelector('.hero')?.offsetHeight ?? window.innerHeight;
+    });
+    await scrollTo(page, heroHeight + 100);
+
+    const bar = page.locator('.floating-bar');
+    await expect(bar).toHaveAttribute('aria-hidden', 'false');
+    const hasInert = await page.evaluate(() => {
+      return document.querySelector('.floating-bar')?.hasAttribute('inert') ?? true;
+    });
+    expect(hasInert).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 9. Suppression accessibility (CR-02) — aria-hidden + inert synced; open menu closes
+// ---------------------------------------------------------------------------
+
+test.describe('Suppression accessibility (CR-02)', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    // Scroll past hero so bar becomes visible first
+    const heroHeight = await page.evaluate(() => {
+      return document.querySelector('.hero')?.offsetHeight ?? window.innerHeight;
+    });
+    await scrollTo(page, heroHeight + 100);
+    await expect(page.locator('.floating-bar')).toHaveClass(/floating-bar--visible/);
+  });
+
+  test('aria-hidden is "true" and inert is set when #contact is in view (suppressed)', async ({ page }) => {
+    await scrollIntoView(page, '#contact');
+    // Wait for the IntersectionObserver to fire and apply --suppressed
+    await page.waitForFunction(() => {
+      return document.querySelector('.floating-bar')?.classList.contains('floating-bar--suppressed');
+    }, { timeout: 3000 });
+
+    await expect(page.locator('.floating-bar')).toHaveAttribute('aria-hidden', 'true');
+
+    const hasInert = await page.evaluate(() => {
+      return document.querySelector('.floating-bar')?.hasAttribute('inert') ?? false;
+    });
+    expect(hasInert).toBe(true);
+  });
+
+  test('mobile: open burger menu auto-closes when #contact is scrolled into view (no focus trap)', async ({ page }) => {
+    if (isDesktop(page)) {
+      test.skip();
+      return;
+    }
+
+    // Open the burger menu
+    const burger = page.locator('.floating-bar__burger');
+    await burger.click();
+    await expect(burger).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('.floating-bar__pills')).toHaveClass(/floating-bar__pills--open/);
+
+    // Now scroll #contact into view — the observer should suppress the bar and close the menu
+    await scrollIntoView(page, '#contact');
+    await page.waitForFunction(() => {
+      const b = document.querySelector('.floating-bar__burger');
+      return b ? b.getAttribute('aria-expanded') === 'false' : false;
+    }, { timeout: 3000 });
+
+    // Menu should have auto-closed on suppression
+    await expect(burger).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('.floating-bar__pills')).not.toHaveClass(/floating-bar__pills--open/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 7. Burger line → X: transition present by default, absent under reducedMotion
+// ---------------------------------------------------------------------------
+
 test.describe('Burger line transition (reduced-motion)', () => {
   // These tests run only on mobile where the burger is visible
   test('burger-line transition-duration is non-zero by default (mobile-375)', async ({ browser }) => {

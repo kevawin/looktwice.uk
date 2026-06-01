@@ -1,65 +1,94 @@
 /* Look Twice — site JS.
    Behaviours:
    - Floating action bar: slides in past the hero; suppressed while #contact is in view (D-12, D-13).
+     setBarHidden(hidden) is the single authority for aria-hidden + inert + the --visible class.
+     Both the scroll-gate (onScroll) and the #contact IntersectionObserver route through it so
+     the two paths cannot set conflicting hidden/visible states (CR-01 + CR-02 fix).
    - Floating burger: mobile circular burger opens/closes nav pills; aria-expanded, Escape, focus return (D-15).
    - Word roller: hero H1 rotating word (untouched).
    Phase 8: nav scroll-state toggle and mobile hamburger overlay removed (D-03, D-04). */
 
 /* ============================================================
-   Floating bar — entrance + suppression while contact section is in view.
+   Floating bar — entrance + suppression + burger nav.
    D-12: appears once scrollY > hero.offsetHeight (threshold recomputed on resize).
    D-13: IntersectionObserver on #contact { threshold:0.15 } suppresses the bar
          while the visitor is reading or actioning the contact CTA.
+   CR-01 fix: setBarHidden adds/removes `inert` on the bar root whenever the bar
+              is hidden (pre-visible or suppressed) so keyboard users cannot reach
+              invisible controls in either motion mode.
+   CR-02 fix: the observer now syncs aria-hidden + inert via setBarHidden and calls
+              closeMenu(false) when the burger is open, preventing a focus trap on
+              an invisible pill.
+   Both IIFEs merged into one so setBarHidden and closeMenu share scope.
    ============================================================ */
 
 (function initFloatingBar() {
-  const bar = document.querySelector('.floating-bar');
+  const bar    = document.querySelector('.floating-bar');
   if (!bar) return;
 
+  const burger = document.querySelector('.floating-bar__burger');
+  const pills  = document.querySelector('.floating-bar__pills');
+
+  // ---- Scroll-gate state ----
   const hero = document.querySelector('.hero');
   const getThreshold = () => (hero ? hero.offsetHeight : window.innerHeight);
-  let threshold = getThreshold();
+  let threshold  = getThreshold();
+  let pastHero   = false;
+  let suppressed = false;
 
   window.addEventListener('resize', () => {
     threshold = getThreshold();
   }, { passive: true });
 
+  // ---- Single hidden/visible authority ----
+  // When hidden === true:  aria-hidden="true", inert, remove --visible.
+  // When hidden === false: aria-hidden="false", remove inert, add --visible.
+  function setBarHidden(hidden) {
+    if (hidden) {
+      bar.setAttribute('aria-hidden', 'true');
+      bar.setAttribute('inert', '');
+      bar.classList.remove('floating-bar--visible');
+    } else {
+      bar.setAttribute('aria-hidden', 'false');
+      bar.removeAttribute('inert');
+      bar.classList.add('floating-bar--visible');
+    }
+  }
+
+  // ---- Scroll-gate ----
   const onScroll = () => {
-    const past = window.scrollY > threshold;
-    bar.classList.toggle('floating-bar--visible', past);
-    bar.setAttribute('aria-hidden', past ? 'false' : 'true');
+    pastHero = window.scrollY > threshold;
+    setBarHidden(!pastHero || suppressed);
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  onScroll(); // apply initial state
 
+  // ---- Contact-suppress IntersectionObserver ----
   const contact = document.querySelector('#contact');
   if (contact && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          bar.classList.toggle('floating-bar--suppressed', entry.isIntersecting);
+          suppressed = entry.isIntersecting;
+          bar.classList.toggle('floating-bar--suppressed', suppressed);
+          setBarHidden(!pastHero || suppressed);
+          // CR-02: close an open mobile menu when the bar is being suppressed so
+          // focus is never trapped on an invisible pill. Pass returnFocus=false
+          // so closeMenu does not force focus back onto the inert burger.
+          if (suppressed && burger && burger.getAttribute('aria-expanded') === 'true') {
+            closeMenu(false);
+          }
         });
       },
       { threshold: 0.15 }
     );
     observer.observe(contact);
   }
-})();
 
-/* ============================================================
-   Floating burger — mobile nav pill open/close.
-   D-15: aria-expanded toggle; open moves focus to first pill; Escape closes
-         and returns focus to the burger; pill click closes and returns focus.
-   Desktop: burger is display:none; pills are always visible via CSS regardless
-            of .floating-bar__pills--open — desktop nav is unaffected by this block.
-   ============================================================ */
-
-(function initFloatingBurger() {
-  const bar    = document.querySelector('.floating-bar');
-  const burger = document.querySelector('.floating-bar__burger');
-  const pills  = document.querySelector('.floating-bar__pills');
-  if (!bar || !burger || !pills) return;
+  // ---- Burger nav (mobile) ----
+  // Guard: if burger or pills are absent (e.g. in a stripped test env) skip wiring.
+  if (!burger || !pills) return;
 
   function openMenu() {
     burger.setAttribute('aria-expanded', 'true');
@@ -69,11 +98,14 @@
     if (firstPill) firstPill.focus();
   }
 
-  function closeMenu() {
+  // returnFocus (default true): when true, return focus to the burger after close.
+  // Pass false on the suppression-driven close so focus is not forced onto the inert burger.
+  function closeMenu(returnFocus) {
+    if (returnFocus === undefined) returnFocus = true;
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Open menu');
     pills.classList.remove('floating-bar__pills--open');
-    burger.focus();
+    if (returnFocus) burger.focus();
   }
 
   burger.addEventListener('click', () => {
@@ -82,7 +114,7 @@
   });
 
   pills.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
+    link.addEventListener('click', () => closeMenu());
   });
 
   document.addEventListener('keydown', (e) => {
