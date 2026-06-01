@@ -157,7 +157,10 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 **Decisions**: to be locked in `08-CONTEXT.md` during discuss. Carryover from refresh P1: reconcile the CTA string — refresh P1 shipped "Free 30-min chat" sitewide, ROADMAP-REFRESH.md Phase 2 still reads "Free 30-min call". Resolve in discuss.
 **UI hint**: yes
-**Plans**: TBD (set at plan stage)
+**Plans**: 3 plans
+  - [ ] 08-01-PLAN.md — Header refactor: non-fixed scroll-away, remove hamburger/overlay/scroll-fade, drop Contact, reorder Approach→Work, align section gutter, keep mobile links (Wave 1)
+  - [ ] 08-02-PLAN.md — Floating action bar: gradient CTA pill + circular white/pink two-line burger, mobile slide-up Approach/Work stack, desktop pill row, scroll-gate + contact-suppress + reduced-motion + focus/keyboard, cache-bust bump (Wave 2)
+  - [ ] 08-03-PLAN.md — Heavy Playwright suite (D-18): dev-only harness + responsive/scroll-away/menu-order/bar-gate/slide-up/desktop-row/focus-trap/line-to-X tests at 375/768/1440 (Wave 3)
 
 ## Progress
 
