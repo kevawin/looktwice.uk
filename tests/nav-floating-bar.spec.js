@@ -174,6 +174,28 @@ test.describe('Floating bar scroll gate', () => {
     await expect(bar).toHaveAttribute('aria-hidden', 'false');
   });
 
+  test('bar appears once the hero text/CTA leaves — not the full (image-tall) hero', async ({ page }) => {
+    // Regression: on mobile the cutout images stack below the hero text, so the
+    // full #hero section is much taller than the text block. The bar must gate on
+    // .hero__text leaving view, not the full section height (which made it appear
+    // way down the page). Use a mobile viewport where the two diverge.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.emulateMedia({ reducedMotion: 'reduce' }); // instant scroll
+    await page.goto('/');
+
+    const { textBottom, heroHeight } = await page.evaluate(() => ({
+      textBottom: Math.round(document.querySelector('.hero__text').getBoundingClientRect().bottom + window.scrollY),
+      heroHeight: document.querySelector('.hero').offsetHeight,
+    }));
+    expect(heroHeight).toBeGreaterThan(textBottom + 100); // images really do extend the section
+
+    // Scroll past the text block but still WITHIN the full hero section height.
+    await scrollTo(page, textBottom + 80);
+    const bar = page.locator('.floating-bar');
+    await expect(bar).toHaveClass(/floating-bar--visible/); // would fail under the old offsetHeight gate
+    await expect(bar).toHaveAttribute('aria-hidden', 'false');
+  });
+
   test('bar is suppressed when #contact is in view', async ({ page }) => {
     // Scroll to just past the hero to make bar visible first
     const heroHeight = await page.evaluate(() => {

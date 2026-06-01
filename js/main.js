@@ -10,7 +10,11 @@
 
 /* ============================================================
    Floating bar — entrance + suppression + burger nav.
-   D-12: appears once scrollY > hero.offsetHeight (threshold recomputed on resize).
+   D-12: appears once the hero text/CTA block (.hero__text) has scrolled out of
+         view, via IntersectionObserver. (Was scrollY > hero.offsetHeight, but on
+         mobile the cutout images stack below the text and inflate the section
+         height, so the bar appeared way down the page. Observing the text block
+         fires when the hero "Let's talk" CTA leaves, on both viewports.)
    D-13: IntersectionObserver on #contact { threshold:0.15 } suppresses the bar
          while the visitor is reading or actioning the contact CTA.
    CR-01 fix: setBarHidden adds/removes `inert` on the bar root whenever the bar
@@ -29,20 +33,11 @@
   const burger = document.querySelector('.floating-bar__burger');
   const pills  = document.querySelector('.floating-bar__pills');
 
-  // ---- Scroll-gate state ----
-  const hero = document.querySelector('.hero');
-  const getThreshold = () => (hero ? hero.offsetHeight : window.innerHeight);
-  let threshold  = getThreshold();
+  // ---- Visibility state ----
+  // pastHero: the hero text/CTA block has scrolled out of view.
+  // suppressed: the #contact section is in view (don't compete with its CTA).
   let pastHero   = false;
   let suppressed = false;
-
-  window.addEventListener('resize', () => {
-    threshold = getThreshold();
-    // CR-01 (WR-01): re-apply the hidden/visible state against the new threshold.
-    // Without this, a resize that crosses the threshold leaves inert/aria-hidden
-    // stale until the next scroll event.
-    onScroll();
-  }, { passive: true });
 
   // ---- Single hidden/visible authority ----
   // When hidden === true:  aria-hidden="true", inert, remove --visible.
@@ -66,14 +61,37 @@
     }
   }
 
-  // ---- Scroll-gate ----
-  const onScroll = () => {
-    pastHero = window.scrollY > threshold;
-    setBarHidden(!pastHero || suppressed);
-  };
+  const applyState = () => setBarHidden(!pastHero || suppressed);
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // apply initial state
+  // ---- Hero gate: show the bar once the hero text/CTA block leaves the viewport ----
+  // We observe `.hero__text` (the headline + "Let's talk" CTA block), NOT the whole
+  // `#hero` section. On mobile the cutout images stack below the text, so the full
+  // section is ~1.6 screens tall — gating on its height made the bar appear way down
+  // the page. We also can't observe the CTA element directly: on mobile it sits below
+  // the fold at load, so it would read as already-out and show the bar immediately.
+  // The text block IS in view at the top on load, so "no longer intersecting" cleanly
+  // means the hero CTA has scrolled away. IntersectionObserver is resize-/load-proof.
+  const heroText = document.querySelector('.hero__text');
+  if ('IntersectionObserver' in window && heroText) {
+    new IntersectionObserver((entries) => {
+      pastHero = !entries[0].isIntersecting;
+      applyState();
+    }, { threshold: 0 }).observe(heroText);
+  } else {
+    // Fallback for browsers without IntersectionObserver: scroll-position gate
+    // against the hero text block's bottom.
+    const hero = document.querySelector('.hero');
+    const heroBottom = () => {
+      const t = heroText || hero;
+      if (!t) return window.innerHeight;
+      return t.getBoundingClientRect().bottom + window.scrollY;
+    };
+    let bottom = heroBottom();
+    const onScroll = () => { pastHero = window.scrollY > bottom; applyState(); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => { bottom = heroBottom(); onScroll(); }, { passive: true });
+    onScroll();
+  }
 
   // ---- Contact-suppress IntersectionObserver ----
   const contact = document.querySelector('#contact');
@@ -82,15 +100,10 @@
       (entries) => {
         entries.forEach((entry) => {
           suppressed = entry.isIntersecting;
-          // WR-02: recompute pastHero from the live scroll position rather than
-          // trusting the cached flag. The observer and scroll listener fire order
-          // is not guaranteed, so a stale pastHero could flash the wrong hidden
-          // state for one frame. Reading scrollY here keeps both paths consistent.
-          pastHero = window.scrollY > threshold;
           bar.classList.toggle('floating-bar--suppressed', suppressed);
-          // setBarHidden now collapses an open menu on every hide path (CR-02 +
-          // the scroll-back-behind-hero path), so no separate close call here.
-          setBarHidden(!pastHero || suppressed);
+          // setBarHidden (via applyState) collapses an open menu on every hide path
+          // (CR-02 + the scroll-back-behind-hero path), so no separate close call here.
+          applyState();
         });
       },
       { threshold: 0.15 }
