@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 08 context gathered
-last_updated: "2026-06-01T09:01:13.108Z"
+status: in_progress
+stopped_at: Phase 08 complete (verified 7/7); Phase 09 (P08 bug fixes & tweaks) registered, discuss next
+last_updated: "2026-06-01T12:30:00.000Z"
 progress:
-  total_phases: 7
-  completed_phases: 4
-  total_plans: 11
-  completed_plans: 14
-  percent: 57
+  total_phases: 9
+  completed_phases: 8
+  total_plans: 4
+  completed_plans: 4
+  percent: 89
 ---
 
 # State: looktwice.uk
@@ -22,20 +22,20 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 08 — nav-floating-bar
+**Current focus:** Phase 09 — P08 bug fixes & tweaks (nav/floating-bar). Phase 08 shipped + verified 7/7 on 2026-06-01; Kris has new menu ideas that deviate from the shipped concept + bugs to fix, captured as a fresh phase.
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 08 (nav-floating-bar) — EXECUTING
-Plan: 1 of 4
+Phase: 09 (P08 bug fixes & tweaks) — DISCUSS
+Plan: not started
 
-- **Milestone:** v1
-- **Phase:** 08 of 5
+- **Milestone:** v1 (in progress)
+- **Phase:** 09 of 9 — discuss stage
 - **Plan:** Not started
-- **Status:** Milestone complete
-- **Progress:** [██████████] 100%
+- **Status:** Phase 08 complete + verified 7/7; Phase 09 registered, gathering bugs + menu deviation
+- **Progress:** [█████████░] 89%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
@@ -165,9 +165,9 @@ None.
 
 **Last session:** 2026-06-01T07:34:06.156Z
 
-**Next session entry point:** Begin GSD Phase 08 (refresh Phase 2) — floating action bar. The bar must answer the two now-dangling segues: Work paragraph (`index.html:220`) and services offer (`index.html:262`). Kris's live-preview visual confirmation at 375px and the dangling-segue copy question are handled separately on the preview.
+**Next session entry point:** GSD Phase 09 (P08 bug fixes & tweaks) — discuss. Phase 08 floating action bar shipped + verified 7/7 (2026-06-01). Kris has bugs in the shipped bar plus new menu ideas that deviate from the original concept (examples to be shared). Capture both in 09 discuss, then plan/execute. NOTE: Phase 09 is a fresh fix/tweak phase, NOT a refresh-roadmap phase — refresh P3 (next in ROADMAP-REFRESH.md) is the Cutout reveal system, unstarted.
 
-**Stopped at:** Phase 08 context gathered
+**Stopped at:** Phase 08 complete; Phase 09 registered, discuss pending
 
 **Files of record:**
 

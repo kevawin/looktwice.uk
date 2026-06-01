@@ -23,6 +23,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 - [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min chat" (completed 2026-06-01)
 - [x] **Phase 8: Navigation & floating action bar** (refresh P2) - Header scrolls away (de-sticky, de-burger, drop Contact), floating gradient CTA pill + white/pink burger nav past the hero (completed 2026-06-01)
+- [ ] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - Fix bugs in the shipped floating action bar + rework the menu concept per Kris's new deviation ideas
 
 ## Phase Details
 
@@ -163,6 +164,19 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   - [x] 08-02-PLAN.md — Floating action bar: gradient CTA pill + circular white/pink two-line burger, mobile slide-up Approach/Work stack, desktop pill row, scroll-gate + contact-suppress + reduced-motion + focus/keyboard, cache-bust bump (Wave 2)
   - [x] 08-03-PLAN.md — Heavy Playwright suite (D-18): dev-only harness + responsive/scroll-away/menu-order/bar-gate/slide-up/desktop-row/focus-trap/line-to-X tests at 375/768/1440 (Wave 3)
 
+### Phase 9: P08 bug fixes & tweaks (fix phase)
+
+**Goal**: Fix the bugs Kris found in the shipped Phase 08 floating action bar and rework the menu concept to match her new ideas (which deviate from the original concept Phase 08 built). Keep the shipped P08 as baseline; this phase corrects and evolves it.
+
+**Depends on**: Phase 8 (navigation & floating action bar, complete + verified 7/7)
+**Requirements**: Bug reports + tweak requests from Kris (captured in `09-CONTEXT.md` during discuss); menu-deviation examples to be shared.
+**Numbering note**: This is a fresh fix/tweak phase, NOT a continuation of ROADMAP-REFRESH.md numbering. Refresh P3 (Cutout reveal system) is still the next *refresh-roadmap* phase and is unstarted.
+**Success Criteria** (what must be TRUE): to be derived in discuss once bugs + menu deviation are captured.
+
+**Decisions**: to be locked in `09-CONTEXT.md` during discuss.
+**UI hint**: yes
+**Plans**: TBD after discuss
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -175,6 +189,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
+| 9. P08 bug fixes & tweaks (fix phase) | 0/0 | Discuss | - |
 
 ## Coverage Summary
 
