@@ -633,3 +633,89 @@ test.describe('Burger line transition (reduced-motion)', () => {
     await ctx.close();
   });
 });
+
+// ---------------------------------------------------------------------------
+// 10. Phase 09 bug fixes — gutter, pills-above-burger, closed-pills hidden,
+//     burger sits at edge when closed, inverted colours. (GSD Phase 09)
+// ---------------------------------------------------------------------------
+
+test.describe('Phase 09 bug fixes', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    const heroHeight = await page.evaluate(
+      () => document.querySelector('.hero')?.offsetHeight ?? window.innerHeight
+    );
+    await scrollTo(page, heroHeight + 100);
+    await expect(page.locator('.floating-bar')).toHaveClass(/floating-bar--visible/);
+    await page.waitForTimeout(400); // let the 300ms slide-in transition settle before reading boxes
+  });
+
+  // Bug 1 — bar edge gutter matches the body section gutter at each breakpoint.
+  test('bar left/right gutter matches the body section gutter', async ({ page }) => {
+    const barLeft = parsePx(await computedStyle(page, '.floating-bar', 'left'));
+    const barRight = parsePx(await computedStyle(page, '.floating-bar', 'right'));
+    const sectionPad = await page.evaluate(() => {
+      const sec = document.querySelector('#situation') || document.querySelector('main section');
+      return parseFloat(getComputedStyle(sec).paddingLeft);
+    });
+    expect(barLeft).toBe(sectionPad);
+    expect(barRight).toBe(sectionPad);
+    // Concrete expected values per breakpoint.
+    expect(barLeft).toBe(isMobile(page) ? 20 : 48);
+  });
+
+  // Bug 5 — inverted colours: Hot Pink bg, white content, on both pill and burger.
+  test('pill is Hot Pink bg with white text', async ({ page }) => {
+    const bg = await computedStyle(page, '.floating-bar__pill', 'background-color');
+    const color = await computedStyle(page, '.floating-bar__pill', 'color');
+    expect(bg).toBe('rgb(224, 0, 110)');   // --color-hot-pink #E0006E
+    expect(color).toBe('rgb(255, 255, 255)');
+  });
+
+  test('burger is Hot Pink bg with white lines', async ({ page }) => {
+    if (isDesktop(page)) return; // burger hidden on desktop
+    const bg = await computedStyle(page, '.floating-bar__burger', 'background-color');
+    const lineBg = await computedStyle(page, '.floating-bar__burger-line', 'background-color');
+    expect(bg).toBe('rgb(224, 0, 110)');
+    expect(lineBg).toBe('rgb(255, 255, 255)');
+  });
+
+  // Bugs 2/3/4 are mobile-only (desktop is a static visible row).
+  test.describe('mobile closed-menu behaviour', () => {
+    test('closed pills are not hit-testable (invisible links not clickable)', async ({ page }) => {
+      if (isDesktop(page)) return;
+      // aria-expanded false = menu closed
+      await expect(page.locator('.floating-bar__burger')).toHaveAttribute('aria-expanded', 'false');
+      const firstPill = page.locator('.floating-bar__pill').first();
+      await expect(firstPill).toBeHidden(); // visibility:hidden → Playwright treats as hidden
+      const vis = await computedStyle(page, '.floating-bar__pills', 'visibility');
+      expect(vis).toBe('hidden');
+    });
+
+    test('burger sits at the bottom gutter when closed (pills reserve no height)', async ({ page }) => {
+      if (isDesktop(page)) return;
+      const gap = parsePx(await computedStyle(page, '.floating-bar', 'bottom')); // 20
+      const burgerBox = await page.locator('.floating-bar__burger').boundingBox();
+      const vh = page.viewportSize().height;
+      const fromBottom = vh - (burgerBox.y + burgerBox.height);
+      // Burger bottom edge should be ~gap px from the viewport bottom (within 2px).
+      expect(Math.abs(fromBottom - gap)).toBeLessThan(2);
+    });
+
+    test('opened pills sit ABOVE the burger', async ({ page }) => {
+      if (isDesktop(page)) return;
+      const burger = page.locator('.floating-bar__burger');
+      await burger.click();
+      await expect(page.locator('.floating-bar__pills')).toHaveClass(/floating-bar__pills--open/);
+      const pillsBox = await page.locator('.floating-bar__pills').boundingBox();
+      const burgerBox = await burger.boundingBox();
+      expect(pillsBox.y).toBeLessThan(burgerBox.y);
+    });
+
+    test('opened pills become hit-testable', async ({ page }) => {
+      if (isDesktop(page)) return;
+      await page.locator('.floating-bar__burger').click();
+      await expect(page.locator('.floating-bar__pill').first()).toBeVisible();
+    });
+  });
+});

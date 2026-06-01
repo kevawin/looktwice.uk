@@ -804,16 +804,21 @@
 /* Bar root — transparent row spanning the bottom edge.
    Individual children re-enable pointer-events:auto. */
 .floating-bar {
+  /* --bar-gap drives every edge offset so the bar's gutter matches the body
+     section gutter at each breakpoint: 20px on mobile (≤640px), 48px on desktop.
+     Mirrors the section padding-inline rule (components.css ≤640px) + the section
+     wrap padding (layout.css). Overridden at min-width:641px below. */
+  --bar-gap: 20px;
   position: fixed;
-  bottom: calc(var(--space-lg) * 0.75);
-  left: calc(var(--space-lg) * 0.75);
-  right: calc(var(--space-lg) * 0.75);
+  bottom: var(--bar-gap);
+  left: var(--bar-gap);
+  right: var(--bar-gap);
   z-index: 150;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   pointer-events: none;
-  transform: translateY(calc(100% + calc(var(--space-lg) * 0.75)));
+  transform: translateY(calc(100% + var(--bar-gap)));
   transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
 }
 
@@ -824,7 +829,7 @@
 .floating-bar--suppressed {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(calc(100% + calc(var(--space-lg) * 0.75)));
+  transform: translateY(calc(100% + var(--bar-gap)));
 }
 
 /* CTA pill — gradient surface, white text.
@@ -858,43 +863,61 @@
   outline-offset: 3px;
 }
 
-/* Nav cluster — contains burger (mobile) + pills */
+/* Nav cluster — contains burger (mobile) + pills.
+   position: relative so the absolutely-positioned mobile pills anchor to it
+   and sit ABOVE the burger without reserving layout height (fixes bugs 2 + 3). */
 .floating-bar__nav {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
 }
 
-/* Pills list — mobile: stacked column above the burger, hidden until open.
-   Desktop (>640px): flex row, always visible, burger hidden. */
+/* Pills list — mobile: stacked column floating ABOVE the burger, fully removed
+   from layout and hit-testing until open. Desktop (≥641px): static flex row,
+   always visible, burger hidden. */
 .floating-bar__pills {
+  position: absolute;
+  bottom: calc(100% + 8px); /* 8px above the nav (burger) top edge */
+  right: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 8px;
   list-style: none;
   padding: 0;
   margin: 0;
-  /* mobile default: hidden (slides up when .floating-bar__pills--open added) */
+  /* mobile default: hidden. visibility:hidden removes the closed pills from the
+     a11y tree AND blocks hit-testing, so the invisible links are no longer
+     clickable (fixes bug 4). Absolute positioning means they reserve no height,
+     so the burger sits at the bottom edge when closed (fixes bug 3). */
   transform: translateY(12px);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 240ms ease-out,
+              visibility 0s linear 300ms;
 }
 
 .floating-bar__pills--open {
   transform: translateY(0);
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 240ms ease-out,
+              visibility 0s linear 0s;
 }
 
-/* Individual nav pill — white bg, Hot Pink text */
+/* Individual nav pill — Hot Pink bg, white text (inverted for visibility, bug 5) */
 .floating-bar__pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-true-white);
-  color: var(--color-hot-pink);
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
   font-family: var(--font-primary);
   font-weight: 700;
   font-size: var(--text-label);
@@ -911,16 +934,18 @@
 }
 
 .floating-bar__pill:hover {
-  background: var(--color-hot-pink);
-  color: var(--color-true-white);
+  background: var(--color-true-white);
+  color: var(--color-hot-pink);
 }
 
+/* Midnight ring: ≥3:1 against both the Hot Pink pill and the light page behind it
+   (a white ring would vanish on the Linen sections the bar floats over). */
 .floating-bar__pill:focus-visible {
-  outline: 2px solid var(--color-hot-pink);
+  outline: 2px solid var(--color-midnight);
   outline-offset: 3px;
 }
 
-/* Circular burger — white bg, Hot Pink lines */
+/* Circular burger — Hot Pink bg, white lines (inverted for visibility, bug 5) */
 .floating-bar__burger {
   display: flex;
   flex-direction: column;
@@ -929,7 +954,7 @@
   gap: 5px;
   width: 48px;
   height: 48px;
-  background: var(--color-true-white);
+  background: var(--color-hot-pink);
   border: 0;
   border-radius: 50%;
   box-shadow: var(--shadow-float);
@@ -939,7 +964,7 @@
 }
 
 .floating-bar__burger:focus-visible {
-  outline: 2px solid var(--color-hot-pink);
+  outline: 2px solid var(--color-midnight);
   outline-offset: 3px;
 }
 
@@ -947,7 +972,7 @@
   display: block;
   width: 20px;
   height: 2px;
-  background: var(--color-hot-pink);
+  background: var(--color-true-white);
   border-radius: 2px;
   transform-origin: center;
   transition: transform 200ms ease-out, opacity 150ms ease-out;
@@ -962,17 +987,25 @@
   transform: translateY(-3.5px) rotate(-45deg);
 }
 
-/* Desktop: no burger, pills always visible as a row */
+/* Desktop: no burger, pills always visible as a static row.
+   Gutter widens to the desktop body section gutter (48px). */
 @media (min-width: 641px) {
+  .floating-bar {
+    --bar-gap: calc(var(--space-lg) * 0.75);
+  }
+
   .floating-bar__burger {
     display: none;
   }
 
   .floating-bar__pills {
+    position: static;
     flex-direction: row;
+    align-items: center;
     gap: 8px;
     transform: none;
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
     transition: none;
   }
