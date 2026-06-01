@@ -21,7 +21,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 ### V1 Refresh milestone (numbering continues from 07; see ROADMAP-REFRESH.md for full per-phase detail)
 
-- [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min call" (completed 2026-06-01)
+- [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min chat" (completed 2026-06-01)
 
 ## Phase Details
 

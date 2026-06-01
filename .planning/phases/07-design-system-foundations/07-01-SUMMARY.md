@@ -81,6 +81,19 @@ None. No placeholder text or empty data sources introduced. The hero label is pr
 
 None. Static HTML/CSS/docs edits only. No new network endpoints, auth paths, file access, or schema changes.
 
+## Deferred / Carryover
+
+Removing the mid-page CTAs in Task 2 left two segue paragraphs dangling without a call to action:
+
+- Work section (`index.html:220`): "Want to see an example of my work and how I think?"
+- Services section (`index.html:262`): "If something here is your problem, the first 30 minutes are on me."
+
+Both now end a section with a question or offer and no button to answer it. This is intentional for this plan — the floating action bar lands in refresh Phase 2 (GSD Phase 08) and must answer these segues (Work pill answers the work paragraph; the gradient CTA pill answers the services offer). Kris may also reword either paragraph in refresh Phase 4 once the floating bar is in place.
+
+Carryover owners:
+- **GSD 08 (refresh Phase 2):** floating action bar must answer both segues.
+- **Refresh Phase 4:** Kris reviews and may reword both paragraphs.
+
 ## Checkpoint
 
 Task 5 is a `checkpoint:human-verify` gate. Human visual verification required:

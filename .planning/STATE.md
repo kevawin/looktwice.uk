@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Phase 07 Plan 01 complete — awaiting human checkpoint visual review"
-last_updated: "2026-06-01T07:04:52Z"
+stopped_at: "Phase 07 Plan 01 complete — checkpoint approved; segue carryover logged to GSD 08 / refresh P4"
+last_updated: "2026-06-01T08:10:00Z"
 progress:
   total_phases: 6
   completed_phases: 3
@@ -28,13 +28,13 @@ progress:
 
 ## Current Position
 
-Phase: 07 (design-system-foundations) — EXECUTING
-Plan: 1 of 1
+Phase: 07 (design-system-foundations) — COMPLETE
+Plan: 1 of 1 complete
 
 - **Milestone:** v1
 - **Phase:** 5 of 5 code-complete
-- **Plan:** Phase 05 docs landed (SUMMARY, VERIFICATION, CUTOVER-PLAYBOOK)
-- **Status:** Executing Phase 07
+- **Plan:** Phase 07 Plan 01 complete (SUMMARY landed; checkpoint approved)
+- **Status:** Phase 07 complete — ready for GSD 08 (floating action bar)
 - **Progress:** [██████████] 100%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
@@ -124,6 +124,7 @@ Plan: 1 of 1
 - [Phase 07]: Plan 07-01: CTA copy unified to "Free 30-min chat" on hero (btn--on-pink) and contact (btn--on-teal); sticky tab label unchanged (GSD 08 scope)
 - [Phase 07]: Plan 07-01: Hero pre-button label changed to reassurance value line "No sale, no follow-up unless you want one." (provisional; Kris confirms in refresh P4)
 - [Phase 07]: Plan 07-01: CLAUDE.md em-dash ban relaxed to allow hyphens in number-word compounds (e.g. "30-min"); all other design bans unchanged
+- [Phase 07]: Plan 07-01: Checkpoint approved 2026-06-01. Removing mid-page CTAs left two segues dangling (work paragraph `index.html:220`, services offer `index.html:262`); GSD 08 floating action bar must answer them and Kris may reword in refresh P4
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -162,11 +163,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-01T07:04:52Z
+**Last session:** 2026-06-01T08:10:00Z
 
-**Next session entry point:** Human visual checkpoint — review `new-site` branch preview on phone and desktop per 07-01-PLAN.md checkpoint task, then type "approved" or describe issues.
+**Next session entry point:** Begin GSD Phase 08 (refresh Phase 2) — floating action bar. The bar must answer the two now-dangling segues: Work paragraph (`index.html:220`) and services offer (`index.html:262`). Kris's live-preview visual confirmation at 375px and the dangling-segue copy question are handled separately on the preview.
 
-**Stopped at:** Phase 07 Plan 01 complete — awaiting human checkpoint visual review
+**Stopped at:** Phase 07 Plan 01 complete — checkpoint approved; segue carryover logged to GSD 08 / refresh P4
 
 **Files of record:**
 
