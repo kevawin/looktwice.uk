@@ -732,5 +732,18 @@ test.describe('Phase 09 bug fixes', () => {
       await page.locator('.floating-bar__burger').click();
       await expect(page.locator('.floating-bar__pill').first()).toBeVisible();
     });
+
+    test('scrolling back behind the hero collapses an open menu', async ({ page }) => {
+      if (isDesktop(page)) return;
+      const burger = page.locator('.floating-bar__burger');
+      await burger.click();
+      await expect(burger).toHaveAttribute('aria-expanded', 'true');
+      // Scroll back up so the bar hides (pastHero false). The open pills must not
+      // linger on screen — the menu collapses and the pills are hidden again.
+      await scrollTo(page, 0);
+      await expect(burger).toHaveAttribute('aria-expanded', 'false');
+      await expect(page.locator('.floating-bar__pills')).not.toHaveClass(/floating-bar__pills--open/);
+      await expect(page.locator('.floating-bar__pill').first()).toBeHidden();
+    });
   });
 });

@@ -52,6 +52,13 @@
       bar.setAttribute('aria-hidden', 'true');
       bar.setAttribute('inert', '');
       bar.classList.remove('floating-bar--visible');
+      // If the mobile menu is open when the bar hides — scrolled back behind the
+      // hero OR suppressed at #contact — collapse it. The open pills extend above
+      // the bar, so the hide transform alone doesn't move them off-screen; without
+      // this they linger, and the bar would also re-appear already-open.
+      if (burger && burger.getAttribute('aria-expanded') === 'true') {
+        closeMenu(false);
+      }
     } else {
       bar.setAttribute('aria-hidden', 'false');
       bar.removeAttribute('inert');
@@ -81,13 +88,9 @@
           // state for one frame. Reading scrollY here keeps both paths consistent.
           pastHero = window.scrollY > threshold;
           bar.classList.toggle('floating-bar--suppressed', suppressed);
+          // setBarHidden now collapses an open menu on every hide path (CR-02 +
+          // the scroll-back-behind-hero path), so no separate close call here.
           setBarHidden(!pastHero || suppressed);
-          // CR-02: close an open mobile menu when the bar is being suppressed so
-          // focus is never trapped on an invisible pill. Pass returnFocus=false
-          // so closeMenu does not force focus back onto the inert burger.
-          if (suppressed && burger && burger.getAttribute('aria-expanded') === 'true') {
-            closeMenu(false);
-          }
         });
       },
       { threshold: 0.15 }
