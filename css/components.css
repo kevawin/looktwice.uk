@@ -849,6 +849,7 @@
   text-decoration: none;
   padding: 14px 28px;
   min-height: 44px;
+  border: 1px solid var(--color-true-white);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-float);
   pointer-events: auto;
@@ -955,7 +956,7 @@
   width: 48px;
   height: 48px;
   background: var(--color-hot-pink);
-  border: 0;
+  border: 1px solid var(--color-true-white);
   border-radius: 50%;
   box-shadow: var(--shadow-float);
   cursor: pointer;
