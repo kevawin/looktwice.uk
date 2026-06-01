@@ -782,3 +782,62 @@ test.describe('Menu link clean-URL navigation', () => {
     await expect(page.locator('.floating-bar__pills')).not.toHaveClass(/floating-bar__pills--open/);
   });
 });
+
+// ---------------------------------------------------------------------------
+// 12. Desktop bar caps at content width; clean URL on header nav + CTA (Phase 09)
+// ---------------------------------------------------------------------------
+
+test.describe('Desktop bar width cap', () => {
+  test.beforeEach(async ({ page }) => {
+    if (isMobile(page)) test.skip();
+    await page.goto('/');
+    const heroHeight = await page.evaluate(
+      () => document.querySelector('.hero')?.offsetHeight ?? window.innerHeight
+    );
+    await scrollTo(page, heroHeight + 100);
+    await expect(page.locator('.floating-bar')).toHaveClass(/floating-bar--visible/);
+    await page.waitForTimeout(400);
+  });
+
+  test('bar width is capped at the content column (≤1280px) and centred', async ({ page }) => {
+    if (isMobile(page)) return;
+    const box = await page.locator('.floating-bar').boundingBox();
+    expect(box.width).toBeLessThanOrEqual(1281);
+    // Centred: left inset ≈ right inset.
+    const vw = page.viewportSize().width;
+    const leftInset = box.x;
+    const rightInset = vw - (box.x + box.width);
+    expect(Math.abs(leftInset - rightInset)).toBeLessThan(2);
+  });
+});
+
+test.describe('Clean URL on all internal links', () => {
+  test('header nav link scrolls without a #hash', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.nav-link[href="#work"]').click();
+    await page.waitForTimeout(600);
+    expect(new URL(page.url()).hash).toBe('');
+    const inView = await page.evaluate(() => {
+      const r = document.querySelector('#work').getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    });
+    expect(inView).toBe(true);
+  });
+
+  test('floating CTA pill scrolls to #contact without a #hash', async ({ page }) => {
+    await page.goto('/');
+    const heroHeight = await page.evaluate(
+      () => document.querySelector('.hero')?.offsetHeight ?? window.innerHeight
+    );
+    await scrollTo(page, heroHeight + 100);
+    await expect(page.locator('.floating-bar')).toHaveClass(/floating-bar--visible/);
+    await page.locator('.floating-bar__cta').click();
+    await page.waitForTimeout(600);
+    expect(new URL(page.url()).hash).toBe('');
+    const inView = await page.evaluate(() => {
+      const r = document.querySelector('#contact').getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    });
+    expect(inView).toBe(true);
+  });
+});

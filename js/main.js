@@ -127,24 +127,40 @@
     else openMenu();
   });
 
+  // Pills only close the menu; the global initSmoothAnchors handler below does the
+  // clean-URL scroll for every internal anchor (including these).
   pills.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', (e) => {
-      // Scroll to the section without writing the #hash into the URL.
-      // scrollIntoView honours CSS scroll-behavior (smooth, suppressed under
-      // prefers-reduced-motion), so motion behaviour is unchanged.
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView();
-      }
-      closeMenu();
-    });
+    link.addEventListener('click', () => closeMenu());
   });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
       closeMenu();
     }
+  });
+})();
+
+/* ============================================================
+   Smooth in-page anchors — clean URL navigation.
+   Intercepts clicks on every internal anchor link (<a href="#section">) so the
+   #hash is not written to the URL. scrollIntoView honours CSS scroll-behavior
+   (smooth, suppressed under prefers-reduced-motion), so motion is unchanged.
+   - Only <a> whose href starts with "#" are touched (the logo wordmark href="/"
+     and the SVG <use href="#logo"> symbol reference are not anchors → ignored).
+   - Links with no matching target (e.g. the #privacy placeholder, a future page)
+     fall through to default behaviour.
+   ============================================================ */
+
+(function initSmoothAnchors() {
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const id = link.getAttribute('href');
+    if (!id || id.length < 2) return; // ignore bare "#"
+    const target = document.querySelector(id);
+    if (!target) return; // no in-page target → leave default behaviour
+    e.preventDefault();
+    target.scrollIntoView();
   });
 })();
 

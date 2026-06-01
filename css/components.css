@@ -993,6 +993,12 @@
 @media (min-width: 641px) {
   .floating-bar {
     --bar-gap: calc(var(--space-lg) * 0.75);
+    /* Cap the bar at the content column width and centre it, so on wide screens
+       the CTA aligns with the content's left edge and the pills with its right
+       edge (matches .hero__inner / section inner max-width: 1280px) instead of
+       stretching to the viewport gutters. */
+    max-width: 1280px;
+    margin-inline: auto;
   }
 
   .floating-bar__burger {
