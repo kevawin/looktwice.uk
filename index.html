@@ -264,13 +264,12 @@
                 method="POST"
                 novalidate>
 
-            <!-- Honeypot — hidden from humans, Formspree _gotcha convention (D-06) -->
             <input type="text"
+                   class="contact__alt"
                    name="_gotcha"
                    tabindex="-1"
                    autocomplete="off"
-                   aria-hidden="true"
-                   style="display:none">
+                   aria-hidden="true">
 
             <div class="contact__field">
               <label class="contact__label" for="contact-name">Your name <span aria-hidden="true">*</span></label>

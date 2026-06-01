@@ -236,8 +236,9 @@
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Honeypot guard — bots fill the hidden field; reject silently (D-06).
-    // Null-guard: privacy extensions can strip the hidden field; missing trap is not a bot.
+    // The _gotcha field stays empty for real people; a filled value means an
+    // automated submit, so drop it silently. Guard for null in case a browser
+    // extension has removed the field.
     const trap = form.querySelector('[name="_gotcha"]');
     if (trap && trap.value) return;
 

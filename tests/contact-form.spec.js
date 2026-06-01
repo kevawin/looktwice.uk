@@ -138,6 +138,18 @@ test.describe('Contact form', () => {
   });
 
   // -------------------------------------------------------------------------
+  // CSP guard: honeypot must be hidden via stylesheet, not an inline style.
+  // Inline style="display:none" is blocked by style-src 'self' and the trap
+  // becomes visible. This locks the fix.
+  // -------------------------------------------------------------------------
+  test('honeypot is hidden and uses no inline style (CSP-safe)', async ({ page }) => {
+    await page.goto('/');
+    const trap = page.locator('input[name="_gotcha"]');
+    await expect(trap).toBeHidden();
+    expect(await trap.getAttribute('style')).toBeNull();
+  });
+
+  // -------------------------------------------------------------------------
   // 4. Error state — 500 from Formspree
   // -------------------------------------------------------------------------
   test('error state: 500 from Formspree shows retry copy with no email address or mailto', async ({ page }) => {

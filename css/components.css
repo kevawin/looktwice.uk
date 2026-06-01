@@ -685,6 +685,13 @@
   max-width: var(--measure);
 }
 
+/* Off-screen spam trap. Kept out of view, tab order, and the a11y tree.
+   Hidden via stylesheet (not an inline style attribute) to satisfy the
+   CSP style-src 'self' policy in _headers. */
+.contact__alt {
+  display: none;
+}
+
 .contact__field {
   display: flex;
   flex-direction: column;
