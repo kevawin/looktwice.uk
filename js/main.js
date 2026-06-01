@@ -1,22 +1,7 @@
 /* Look Twice — site JS.
    Behaviours:
-   - Nav scroll-state toggle (transparent → Linen on first scroll)
-   - Mobile hamburger overlay open/close + Escape + focus return
    - Sticky tab entrance toggle (slides in past hero, hides while contact in view)
-   Phase 6: reveal observer + supporting cutout fallback removed. */
-
-/* ============================================================
-   Nav scroll-state toggle
-   ============================================================ */
-
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-
-const nav = document.querySelector('.nav');
-if (nav) {
-  const toggleScrolled = () => nav.classList.toggle('scrolled', window.scrollY > 0);
-  toggleScrolled();
-  window.addEventListener('scroll', toggleScrolled, { passive: true });
-}
+   Phase 8: nav scroll-state toggle and mobile hamburger overlay removed (D-03, D-04). */
 
 /* ============================================================
    Mobile hamburger overlay

@@ -1,23 +1,5 @@
-/* Look Twice — animations. Phase 6: site-wide reveal-on-scroll dropped (D-6.5).
-   Only nav colour fade, mobile overlay slide, and sticky-tab transition remain. */
-
-/* Nav transition — 200ms ease-out on background-color and color */
-.nav {
-  transition: var(--transition-nav);
-}
-
-/* Mobile overlay slide — 280ms ease-out-quart on transform */
-.nav-overlay {
-  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Reduced-motion guard: drop transform-based transition on overlay; keep nav colour fade.
-   Smooth-scroll guard already lives in base.css. */
-@media (prefers-reduced-motion: reduce) {
-  .nav-overlay {
-    transition: none;
-  }
-}
+/* Look Twice — animations. Phase 8: nav colour fade + overlay slide removed (D-03, D-04).
+   Only word-roller and sticky-tab remain. */
 
 /* ============================================================
    Word roller — hero H1 rotating word
