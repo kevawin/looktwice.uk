@@ -33,6 +33,11 @@ coverage/
 *.swp
 *.swo
 
+# Playwright test artifacts (dev-only — never shipped)
+test-results/
+playwright-report/
+.playwright-browsers/
+
 # Misc
 Thumbs.db
 inspo/
