@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Phase 06 in progress — UAT remediation pass
-last_updated: "2026-05-03T00:00:00.000Z"
+stopped_at: V1 Refresh roadmap prepped (7 phases in ROADMAP-REFRESH.md); next active phase 1 (design-system foundations)
+last_updated: "2026-05-31T00:00:00.000Z"
 progress:
   total_phases: 6
   completed_phases: 5
@@ -22,7 +22,9 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** All phases code-complete. Pre-cutover verification (Lighthouse, visual UAT, tab-walk) is the next gate.
+**Current focus:** V1 Refresh (post-launch review work). Tracked in `ROADMAP-REFRESH.md` as 8 development-flow phases, each running discuss → plan → execute → review. Done = all of a phase's boxes checked. Active phase: **Phase 1 (design-system foundations: type floor, button-style standardisation, CTA copy)**. Phases: 1 foundations → 2 nav/floating bar → 3 cutout reveal system → 4 copy (Kris) → 5 services → 6 credentials → 7 contact mechanic → 8 visual variety (Jamie, last). The cutout primitive (P3, from `image-cutout-demo.html`) is built before the redesigns (P5, P8) that consume it; open gradient-rule conflict noted in its phase. Every review item from `_LT Website Project.md` + Kris's 2026-05-31 review is mapped in the roadmap's coverage map.
+
+**Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
