@@ -33,10 +33,10 @@ Out of scope: copy rewrites (refresh P4), services/layout redesign (P5), credent
 - **D-06:** Hidden honeypot field (bots fill it, humans don't — reject on the client and/or rely on Formspree's `_gotcha` field) plus Formspree's built-in spam filter. No visible captcha. No Turnstile for V1.
 
 ### Privacy / trust
-- **D-07:** One-line data-use reassurance note near the submit button. Direction: "I'll only use this to reply to you. No marketing, no sharing." Final wording is Kris's to confirm in her own voice. No separate privacy-policy page in V1.
+- **D-07:** One-line data-use reassurance note near the submit button. **Confirmed wording (Kris, 2026-06-01):** "I'll only use this to arrange our free 30-minute chat. I won't add you a newsletter or sell your email address to the devil." Use verbatim. No separate privacy-policy page in V1.
 
 ### Endpoint ownership
-- **D-08:** Kris creates the Formspree account using hello@looktwice.uk so submissions land in her inbox and she owns the dashboard. She provides the form endpoint ID to wire in. **Launch blocker:** the form will not deliver until the real endpoint ID is in place. Build/markup/JS/styling can proceed with a clearly-marked placeholder endpoint; the real ID must be swapped in before launch.
+- **D-08:** Formspree endpoint confirmed (Kris, 2026-06-01): **`https://formspree.io/f/xbdbnrkr`** — wire the form `action`/fetch URL to this. Account is Kris's (submissions to her inbox). No longer a launch blocker; the real endpoint is in place.
 
 ### Accessibility (constraint, not optional — WCAG AA per CLAUDE.md)
 - **D-09:** Every field has a real `<label>` (not placeholder-as-label). Required fields use `aria-required`/`required`. Validation errors are announced via an `aria-live="polite"` region and focus moves to the first invalid field. Success message is announced too. Visible focus rings on all inputs and the submit button. Keyboard-only flow is Claude's responsibility to verify, not Kris's.
