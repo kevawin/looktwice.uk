@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: "Phase 10 (refresh P7 — Contact mechanic) context gathered: form chosen over mailto"
-last_updated: "2026-06-01T20:04:38.651Z"
+last_updated: "2026-06-01T20:11:12.012Z"
 progress:
   total_phases: 9
   completed_phases: 4
   total_plans: 13
-  completed_plans: 14
+  completed_plans: 15
   percent: 44
 ---
 
@@ -22,20 +22,20 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 09 complete (bug/tweak scope) 2026-06-01. Next refresh-roadmap phase is refresh P3 = Cutout reveal system (would register as GSD Phase 10). Menu-concept rework deferred — Kris's deviation examples not yet shared. 8 Phase-09 commits unpushed on `new-site`.
+**Current focus:** Phase 10 — contact-mechanic-form-vs-email-v1-refresh-p7
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 09 (P08 bug fixes & tweaks) — DISCUSS
-Plan: not started
+Phase: 10 (contact-mechanic-form-vs-email-v1-refresh-p7) — EXECUTING
+Plan: 1 of 2
 
 - **Milestone:** v1 (in progress)
 - **Phase:** 09 of 9 — discuss stage
 - **Plan:** Not started
-- **Status:** Ready to execute
-- **Progress:** [█████████░] 89%
+- **Status:** Executing Phase 10
+- **Progress:** [██████████] 100%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
@@ -70,7 +70,7 @@ Plan: not started
 - Single-page V1, anchor-scroll nav (logged in PROJECT.md)
 - Plain HTML/CSS + vanilla JS, no framework or build step
 - Cloudflare Pages deploy from `new-site` branch; `main` holds live holding page until cutover
-- Email link (`mailto:`) in V1, no form
+- V1 contact = Formspree form (reversed 2026-06-01: D-01/D-02 in Phase 10 context; mailto removed entirely per D-02)
 - Epilogue 400/700 only; OKLCH design tokens
 - Cutout/drenched aesthetic — colour on surface, B&W in apertures
 - Brand gradient appears in exactly one place: the floating sticky tab
@@ -163,7 +163,7 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-01T19:24:40.972Z
+**Last session:** 2026-06-01T20:11:12.009Z
 
 **Next session entry point:** GSD Phase 09 (P08 bug fixes & tweaks) — discuss. Phase 08 floating action bar shipped + verified 7/7 (2026-06-01). Kris has bugs in the shipped bar plus new menu ideas that deviate from the original concept (examples to be shared). Capture both in 09 discuss, then plan/execute. NOTE: Phase 09 is a fresh fix/tweak phase, NOT a refresh-roadmap phase — refresh P3 (next in ROADMAP-REFRESH.md) is the Cutout reveal system, unstarted.
 

@@ -16,6 +16,7 @@ The website for Look Twice — Kristina (Kris) Evawin's independent brand and CX
 - **Content**: All copy in `CONTENT-DRAFT.md` is directional — Kris refines in her own voice before launch. Several `[DECIDE]` and `[CONFIRM]` markers still open (hero headline, positioning interrupt option, public client names).
 - **Design bans (hard stops)**: no card shadows, no gradient text, no glassmorphism, no mid-tone greys, no decorative card grids, no font-weight 500, no em-dashes in copy (hyphens in number-word compounds such as "30-min" are allowed).
 - **Gradient discipline**: brand gradient appears in exactly one place — the floating sticky tab. Cool accents (Rich Purple, Cool Indigo) are hover/gradient only, never section backgrounds.
+- **Contact:** V1 contact = Formspree contact form at `https://formspree.io/f/xbdbnrkr`. No visible mailto links — form is the single contact route (D-01/D-02 reversal, Jamie review + Kris decision 2026-06-01). Plain HTML + vanilla JS fetch, no SDK.
 <!-- GSD:project-end -->
 
 <!-- GSD:stack-start source:STACK.md -->

@@ -198,7 +198,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **UI hint**: yes
 **Plans**: 2 plans
 
-  - [ ] 10-01-PLAN.md — Form markup + Deep Teal CSS + vanilla-JS fetch submit handler; remove all visible mailto/email (Wave 1)
+  - [x] 10-01-PLAN.md — Form markup + Deep Teal CSS + vanilla-JS fetch submit handler; remove all visible mailto/email (Wave 1)
   - [ ] 10-02-PLAN.md — Reverse the mailto lock in CLAUDE.md + STATE.md; add Playwright E2E spec (mocked Formspree) (Wave 2)
 
 ## Progress
@@ -214,7 +214,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
-| 10. Contact mechanic — form vs email (refresh P7) | 0/2 | Planned | - |
+| 10. Contact mechanic — form vs email (refresh P7) | 1/2 | In Progress|  |
 
 ## Coverage Summary
 
