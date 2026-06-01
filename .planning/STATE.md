@@ -4,13 +4,13 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: "Phase 10 (refresh P7 — Contact mechanic) context gathered: form chosen over mailto"
-last_updated: "2026-06-01T20:11:12.012Z"
+last_updated: "2026-06-01T20:17:03.712Z"
 progress:
   total_phases: 9
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 13
-  completed_plans: 15
-  percent: 44
+  completed_plans: 16
+  percent: 56
 ---
 
 # State: looktwice.uk
@@ -62,6 +62,7 @@ Plan: 1 of 2
 | Phase 02-hero-situation P01 | 6min | 3 tasks | 3 files |
 | Phase 02-hero-situation P02 | 2min | 3 tasks | 3 files |
 | Phase 02-hero-situation P03 | 1m 20s | 2 tasks | 2 files |
+| Phase 10 P02 | 600 | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -125,6 +126,7 @@ Plan: 1 of 2
 - [Phase 07]: Plan 07-01: Hero pre-button label changed to reassurance value line "No sale, no follow-up unless you want one." (provisional; Kris confirms in refresh P4)
 - [Phase 07]: Plan 07-01: CLAUDE.md em-dash ban relaxed to allow hyphens in number-word compounds (e.g. "30-min"); all other design bans unchanged
 - [Phase 07]: Plan 07-01: Checkpoint approved 2026-06-01. Removing mid-page CTAs left two segues dangling (work paragraph `index.html:220`, services offer `index.html:262`); GSD 08 floating action bar must answer them and Kris may reword in refresh P4
+- [Phase ?]: Task 1 (CLAUDE.md + STATE.md reversal) already done in wave 1; Playwright spec added with page.route Formspree mocks, 15 tests green
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -163,7 +165,7 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-01T20:11:12.009Z
+**Last session:** 2026-06-01T20:17:03.709Z
 
 **Next session entry point:** GSD Phase 09 (P08 bug fixes & tweaks) — discuss. Phase 08 floating action bar shipped + verified 7/7 (2026-06-01). Kris has bugs in the shipped bar plus new menu ideas that deviate from the original concept (examples to be shared). Capture both in 09 discuss, then plan/execute. NOTE: Phase 09 is a fresh fix/tweak phase, NOT a refresh-roadmap phase — refresh P3 (next in ROADMAP-REFRESH.md) is the Cutout reveal system, unstarted.
 
