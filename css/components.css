@@ -760,23 +760,27 @@
   min-height: 1.5em;
 }
 
-/* Status icon + text sit on one row. Icon hidden until a successful submit. */
+/* Icon stacked above text, matching the "Three problems" services items.
+   Icon hidden until a successful submit. */
 .contact__status-wrap {
   display: flex;
-  align-items: center;
-  gap: var(--space-xs);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
 }
 
-/* Decorative success icon — stroke treatment matches .services__icon. */
+/* Decorative success icon — same size and stroke treatment as .services__icon. */
 .contact__status-icon {
   display: none;
   flex: none;
-  width: var(--text-title);
-  height: var(--text-title);
+  width: 56px;
+  height: 56px;
   color: var(--color-true-white);
   fill: none;
   stroke: currentColor;
-  stroke-width: 2;
+  /* lucide art is a 24-unit viewBox; 0.86 here renders the same ~2px stroke
+     as .services__icon (stroke-width 2 on a 56-unit viewBox). */
+  stroke-width: 0.86;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
