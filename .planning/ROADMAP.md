@@ -24,7 +24,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min chat" (completed 2026-06-01)
 - [x] **Phase 8: Navigation & floating action bar** (refresh P2) - Header scrolls away (de-sticky, de-burger, drop Contact), floating gradient CTA pill + white/pink burger nav past the hero (completed 2026-06-01)
 - [x] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - 6 commits: gutter alignment, mobile menu stacking/hide, inverted colours + white borders, no stray focus, scroll-collapse, clean-URL on all internal anchors, header + bar aligned to content column (completed 2026-06-01). Menu-concept rework deferred — Kris's deviation examples not yet shared.
-- [ ] **Phase 10: Contact mechanic — form vs email** (refresh P7) - Decision gate: resolve the CLAUDE.md/STATE mailto lock vs Jamie's form suggestion, then style the final contact markup. Started out of refresh order ahead of refresh P3–P6.
+- [ ] **Phase 10: Contact mechanic — form vs email** (refresh P7) - Decision gate resolved: form wins. Build a Formspree contact form (form-only, no visible mailto), remove all visible email, reverse the CLAUDE.md/STATE mailto lock. Started out of refresh order ahead of refresh P3–P6.
 
 ## Phase Details
 
@@ -180,16 +180,26 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 ### Phase 10: Contact mechanic — form vs email (V1 Refresh P7)
 
-**Goal**: Resolve the open conflict over how visitors contact Kris — the current `mailto:` link (locked by CLAUDE.md + STATE for frictionless, zero-dep contact) vs a contact form (Jamie's review suggestion; adds spam risk + a third-party dependency). This is a decision gate before final visual polish so the chosen contact markup can be styled once. If form wins: build markup + service + validation and update the CLAUDE.md V1 contact rule. If mailto stays: no-op, close the phase.
+**Goal**: Replace the `mailto:` contact with a working, accessible Formspree contact form. Decision gate resolved (form wins, 2026-06-01): build form-only contact (name, email, message), remove ALL visible mailto links and the visible email address (D-02), wire a vanilla-JS fetch submit to the real Formspree endpoint with honeypot spam protection and the verbatim data-use note, and reverse the CLAUDE.md + STATE mailto lock.
 
 **Depends on**: Phase 8 (navigation & floating action bar, complete) for the CTA surfaces that point at contact. Independent of refresh P3–P6 (started ahead of them by Kris's choice).
-**Requirements**: Decision recorded in `10-CONTEXT.md` during discuss; conflict between CLAUDE.md/STATE (mailto) and Jamie's review (form) resolved first.
+**Requirements**: No formal REQ IDs — decisions D-01..D-09 locked in `10-CONTEXT.md`. Goal-backward must_haves derived from the phase goal + those decisions.
 **Numbering note**: GSD Phase 10 = refresh-roadmap P7. Refresh P3 (Cutout reveal) and P4–P6 remain unstarted; GSD numbers are assigned in start order, not refresh order.
-**Success Criteria** (what must be TRUE): to be derived in discuss once the form-vs-mailto decision is made.
+**Success Criteria** (what must be TRUE):
 
-**Decisions**: to be locked in `10-CONTEXT.md` during discuss.
-**UI hint**: yes (if a form ships)
-**Plans**: TBD after discuss
+  1. The contact section renders a form (name, email, message) on the Deep Teal surface; no mailto button and no visible email address remain anywhere on the page (D-02)
+  2. A valid submit POSTs to `https://formspree.io/f/xbdbnrkr` via vanilla-JS fetch (`Accept: application/json`) and shows an inline success message with no reload or redirect (D-05, D-08)
+  3. Empty required fields block submit, announce via an `aria-live="polite"` region, and focus moves to the first invalid field; every field has a real `<label>`; all inputs + submit show a visible focus ring (D-09)
+  4. A hidden `_gotcha` honeypot plus Formspree's filter guard against spam; failed submits show a generic retry message with NO email address (D-06, D-02)
+  5. The data-use note appears verbatim per D-07; the form honours all design bans (no shadows, no weight 500, no gradients, no mid-tone greys) and Epilogue 400/700
+  6. CLAUDE.md and STATE.md record the mailto→form reversal with rationale; a Playwright spec covers submit / validation / honeypot / error states against a mocked endpoint
+
+**Decisions**: locked in `10-CONTEXT.md` (D-01..D-09). Pattern map in `10-PATTERNS.md`.
+**UI hint**: yes
+**Plans**: 2 plans
+
+  - [ ] 10-01-PLAN.md — Form markup + Deep Teal CSS + vanilla-JS fetch submit handler; remove all visible mailto/email (Wave 1)
+  - [ ] 10-02-PLAN.md — Reverse the mailto lock in CLAUDE.md + STATE.md; add Playwright E2E spec (mocked Formspree) (Wave 2)
 
 ## Progress
 
@@ -204,7 +214,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
-| 10. Contact mechanic — form vs email (refresh P7) | 0/0 | Discuss | - |
+| 10. Contact mechanic — form vs email (refresh P7) | 0/2 | Planned | - |
 
 ## Coverage Summary
 
