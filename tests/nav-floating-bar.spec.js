@@ -747,3 +747,38 @@ test.describe('Phase 09 bug fixes', () => {
     });
   });
 });
+
+// ---------------------------------------------------------------------------
+// 11. Menu links scroll without writing the #hash to the URL (GSD Phase 09)
+// ---------------------------------------------------------------------------
+
+test.describe('Menu link clean-URL navigation', () => {
+  test.beforeEach(async ({ page }) => {
+    if (isDesktop(page)) test.skip();
+    await page.goto('/');
+    const heroHeight = await page.evaluate(
+      () => document.querySelector('.hero')?.offsetHeight ?? window.innerHeight
+    );
+    await scrollTo(page, heroHeight + 100);
+    await expect(page.locator('.floating-bar')).toHaveClass(/floating-bar--visible/);
+    await page.waitForTimeout(400);
+  });
+
+  test('clicking a pill scrolls to the section without a #hash in the URL', async ({ page }) => {
+    if (isDesktop(page)) return;
+    await page.locator('.floating-bar__burger').click();
+    await expect(page.locator('.floating-bar__pills')).toHaveClass(/floating-bar__pills--open/);
+    await page.locator('.floating-bar__pill[href="#work"]').click();
+    await page.waitForTimeout(600); // let smooth scroll settle
+    // URL must not carry the hash.
+    expect(new URL(page.url()).hash).toBe('');
+    // The #work section must be scrolled into the viewport.
+    const inView = await page.evaluate(() => {
+      const r = document.querySelector('#work').getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    });
+    expect(inView).toBe(true);
+    // Menu closed after navigating.
+    await expect(page.locator('.floating-bar__pills')).not.toHaveClass(/floating-bar__pills--open/);
+  });
+});

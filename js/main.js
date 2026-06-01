@@ -128,7 +128,17 @@
   });
 
   pills.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => closeMenu());
+    link.addEventListener('click', (e) => {
+      // Scroll to the section without writing the #hash into the URL.
+      // scrollIntoView honours CSS scroll-behavior (smooth, suppressed under
+      // prefers-reduced-motion), so motion behaviour is unchanged.
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView();
+      }
+      closeMenu();
+    });
   });
 
   document.addEventListener('keydown', (e) => {
