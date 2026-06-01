@@ -106,11 +106,12 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **Requirements**: V1 Refresh review items (Kris site review 2026-05-31) — see ROADMAP-REFRESH.md Phase 1
 **Success Criteria** (what must be TRUE):
   1. All prose floors at 16px; all sub-labels (eyebrows, chips, captions) floor at 14px — `--text-label` raised 0.8rem (12.8px) → 0.875rem (14px) at `css/tokens.css:50`, and `css/` audited for any other sub-16px prose
-  2. The current 4–5 button variants (`btn--on-pink`, `btn--accent-indigo`, `btn--accent-pink`, `btn--on-teal`, `btn--contact`) collapse to one coherent system that adapts per surface (Hot Pink / Linen / Deep Teal) while reading as one style
-  3. Every CTA label reads "Free 30-min call" sitewide, including the Work-section CTA at `index.html:221`
-  4. The brand gradient still appears in exactly one place (the floating CTA pill, refresh Phase 2 / GSD 08) — button standardisation paints no gradient anywhere else
+  2. The button system collapses by REMOVING the two mid-page in-page CTAs (work `index.html:221`, services `index.html:264`); the two surviving buttons (`btn--on-pink` hero, `btn--on-teal` contact) already share one white-fill-on-colour, invert-on-hover style; unused accent variants (`btn--accent-pink`, `btn--accent-indigo`, `btn--accent-amber`) dropped from `css/components.css`
+  3. The two remaining CTAs (hero `index.html:129`, contact mailto `index.html:279`) read "Free 30-min chat" — one string sitewide
+  4. The brand gradient still appears in exactly one place (the floating CTA pill, refresh Phase 2 / GSD 08) — button work paints no gradient anywhere else
   5. The CLAUDE.md em-dash ban is relaxed to allow hyphens in number-word content
-**Open for discuss**: which single button style wins and how it adapts per surface; keep or drop the hero pre-button label "Schedule a free 30-minute diagnosis." now the button says "Free 30-min call"
+  6. The hero pre-button label (`index.html:127`) is reworded to a value line, not a duplicate of the button — provisional "No sale, no follow-up unless you want one." (final wording confirmed by Kris in refresh P4)
+**Decisions**: locked in `07-CONTEXT.md` (supersedes earlier "Free 30-min call" / per-surface-accent assumptions). See `07-DISCUSSION-LOG.md` for alternatives.
 **UI hint**: yes
 
 ## Progress
