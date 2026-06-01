@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: "Phase 10 (refresh P7 — Contact mechanic) context gathered: form chosen over mailto"
+stopped_at: "Phase 10 (Contact form) COMPLETE + verified + UAT signed off (2026-06-01). Next: V1 Refresh P3 — Cutout reveal system (ROADMAP-REFRESH.md), unstarted."
 last_updated: "2026-06-01T21:46:13.364Z"
 progress:
   total_phases: 9
@@ -22,20 +22,21 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 10 — contact-mechanic-form-vs-email-v1-refresh-p7
+**Current focus:** Phase 10 (Contact form) COMPLETE. Next: V1 Refresh Phase 3 — Cutout reveal system (see ROADMAP-REFRESH.md).
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 10 (contact-mechanic-form-vs-email-v1-refresh-p7) — EXECUTING
-Plan: 1 of 2
+Phase: 10 (contact-mechanic-form-vs-email-v1-refresh-p7) — COMPLETE (2026-06-01)
+Plan: 2 of 2 done, verified 9/9, human UAT signed off.
 
-- **Milestone:** v1 (in progress)
-- **Phase:** 10 of 9
-- **Plan:** Not started
-- **Status:** Milestone complete
-- **Progress:** [██████████] 100%
+NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). See `.planning/ROADMAP-REFRESH.md`. Unstarted → start with `/gsd:discuss-phase`.
+
+- **Milestone:** v1 (GSD numbered phases 1–10 done; V1 Refresh P3–P6 remain)
+- **Phase:** 10 complete; next = Refresh P3 (Cutout reveal)
+- **Status:** Phase 10 closed. Branch `new-site` (not merged to main — more phases first, per Jamie).
+- **Progress:** [██████████] 100% of GSD phase 10
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
@@ -167,9 +168,9 @@ None.
 
 **Last session:** 2026-06-01T20:17:03.709Z
 
-**Next session entry point:** GSD Phase 09 (P08 bug fixes & tweaks) — discuss. Phase 08 floating action bar shipped + verified 7/7 (2026-06-01). Kris has bugs in the shipped bar plus new menu ideas that deviate from the original concept (examples to be shared). Capture both in 09 discuss, then plan/execute. NOTE: Phase 09 is a fresh fix/tweak phase, NOT a refresh-roadmap phase — refresh P3 (next in ROADMAP-REFRESH.md) is the Cutout reveal system, unstarted.
+**Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
 
-**Stopped at:** Phase 10 (refresh P7 — Contact mechanic) context gathered: form chosen over mailto
+**Stopped at:** Phase 10 (Contact form) COMPLETE — 2 plans, verified 9/9, human UAT signed off (2026-06-01). Post-phase on branch `new-site`: real-domain-only Formspree submit guard, in-place submit success UX (button morph + message below), browser-sync hot-reload dev tooling, and a floating-bar mobile fix (gate on `.hero__text` via IntersectionObserver, not full hero height). All pushed to `new-site`; NOT merged to main (more phases first, per Jamie).
 
 **Files of record:**
 
