@@ -47,6 +47,15 @@ function stubFormspree(page, response) {
   });
 }
 
+/**
+ * Opt into the real fetch path. Tests run on localhost, where the form
+ * simulates success and skips Formspree by default; this flag forces the
+ * production submit behaviour so the mocked endpoint is exercised.
+ */
+function forceRealSubmit(page) {
+  return page.addInitScript(() => { window.__LT_FORCE_SUBMIT = true; });
+}
+
 // ---------------------------------------------------------------------------
 // Test suite
 // ---------------------------------------------------------------------------
@@ -57,6 +66,7 @@ test.describe('Contact form', () => {
   // 1. Happy path
   // -------------------------------------------------------------------------
   test('happy path: submit hides form and shows success text', async ({ page }) => {
+    await forceRealSubmit(page);
     await stubFormspree(page, {
       status:      200,
       contentType: 'application/json',
@@ -156,6 +166,7 @@ test.describe('Contact form', () => {
   // 4. Error state — 500 from Formspree
   // -------------------------------------------------------------------------
   test('error state: 500 from Formspree shows retry copy with no email address or mailto', async ({ page }) => {
+    await forceRealSubmit(page);
     await stubFormspree(page, {
       status:      500,
       contentType: 'application/json',
@@ -197,6 +208,31 @@ test.describe('Contact form', () => {
     const html = await res.text();
     expect(html).not.toMatch(/hello@looktwice\.uk/i);
     expect(html).not.toMatch(/"email"\s*:/);
+  });
+
+  // -------------------------------------------------------------------------
+  // Quota guard: off the live domain (localhost, *.pages.dev previews) the
+  // submit is simulated — success shows but Formspree is never called. Protects
+  // the Formspree free-tier quota during testing.
+  // -------------------------------------------------------------------------
+  test('local/preview: submit is simulated and Formspree is never called', async ({ page }) => {
+    let formspreeHit = 0;
+    await page.route('**/formspree.io/**', (route) => {
+      formspreeHit++;
+      route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+    });
+
+    // No forceRealSubmit() — runs as a normal localhost visitor would.
+    await page.goto('/');
+    await scrollToForm(page);
+    await fillValidFields(page);
+    await page.click('button.contact__submit');
+
+    // Success UI still shows...
+    await expect(page.locator('#contact-form')).toHaveAttribute('hidden', /.*/);
+    await expect(page.locator('.contact__status-icon')).toBeVisible();
+    // ...but no real submission left the page.
+    expect(formspreeHit).toBe(0);
   });
 
 });

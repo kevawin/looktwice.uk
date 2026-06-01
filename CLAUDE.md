@@ -79,6 +79,24 @@ When Kris needs to test a change on her phone and live local preview isn't avail
 
 5. **Keep branch names short so the preview URL is guessable as a fallback.** Cloudflare Pages branch alias rule: sanitise the branch name (lowercase, non-alphanumerics → `-`); if sanitised length ≤ 28 chars, the alias is `https://<sanitised>.looktwice-uk.pages.dev` exactly — no hash suffix, fully predictable. Over 28 chars and Cloudflare truncates to 28 and appends a deterministic 4-char hash (e.g. `-mo37`) that we can't pre-compute. **Cap sanitised branch names at ≤ 24 chars** (4-char safety margin). For `claude/`-prefixed branches that means ≤ 17 chars after `claude-`; if the harness appends a 5-char session ID, the descriptive slug must be ≤ 11 chars. Examples: `claude/fix-nav-zRVdj` ✓ (20 chars, predictable URL), `claude/fix-focus-nav-illegibility-v2` ✗ (36 chars, gets truncated + hashed).
 
+## Local preview server (default for live work and testing)
+
+The default local preview is **browser-sync** with hot reload. It is dev-only tooling (in `devDependencies`, `node_modules` is gitignored, nothing ships to the site — this does not break the "no npm deps for V1" rule, which is about the shipped site).
+
+- **Start it:** `npm run dev` → serves the repo on `http://localhost:3000`, reloads the browser on every save to `index.html`, `css/*.css`, `js/*.js`, `images/*`. The terminal also prints an **External** LAN URL (e.g. `http://192.168.1.227:3000`) — open that on a phone on the same wifi to test live local changes without deploying.
+- **Claude spins it up whenever working on the site.** Start `npm run dev` in the background at the start of site work so Kris/Jamie can watch changes land live and test on their phone. Mention the localhost + External URLs when you start it.
+- **Playwright is separate and isolated.** `npm test` runs the suite against its own clean static server on port `7777` (configured in `playwright.config.js`). Do NOT point Playwright at the browser-sync server — its injected live-reload client slows and destabilises the suite. Keep the two on different ports (3000 dev, 7777 tests) so they can run at the same time.
+- **First run after clone:** `npm install` (installs Playwright + browser-sync), then `npx playwright install` for browsers if needed.
+
+## Contact form: live-domain-only submission
+
+The contact form (`initContactForm` in `js/main.js`) only POSTs to Formspree on the live domain. The host check is `/(^|\.)looktwice\.uk$/i.test(location.hostname)`.
+
+- **`*.looktwice.uk` (production):** real Formspree submission.
+- **Everywhere else** — `localhost`, and the `*.pages.dev` Cloudflare previews — the submit is **simulated**: the success UI shows, but no request reaches Formspree. This protects the Formspree free-tier quota during testing.
+- **Tests** opt back into the real fetch path with `window.__LT_FORCE_SUBMIT = true` (set via `page.addInitScript`) so the mocked endpoint is still exercised. See `tests/contact-form.spec.js`.
+- Implication: a real end-to-end submission can only be verified on `looktwice.uk` itself, not on a preview. Do one real test post-launch.
+
 
 
 <!-- GSD:profile-start -->

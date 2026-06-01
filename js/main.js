@@ -233,6 +233,47 @@
   const status = document.querySelector('#contact-status');
   if (!form || !status) return;
 
+  // Real submissions go to Formspree ONLY on the live domain (looktwice.uk and
+  // subdomains). Everywhere else — localhost and the *.pages.dev Cloudflare
+  // previews — the submit is simulated so testing never burns the Formspree
+  // free-tier quota. Tests opt back into the real path via window.__LT_FORCE_SUBMIT.
+  function submitsForReal() {
+    if (window.__LT_FORCE_SUBMIT === true) return true;
+    return /(^|\.)looktwice\.uk$/i.test(window.location.hostname);
+  }
+
+  // Swap the form for the success message: announce via the aria-live region
+  // (textContent only — T-10-01), reveal the icon, then fade the form out and
+  // the message in. Honours prefers-reduced-motion with an instant swap.
+  function showSuccess() {
+    form.reset();
+    status.textContent = 'Thanks, I\'ll be in touch within one working day.';
+    const wrap = status.closest('.contact__status-wrap');
+    if (wrap) wrap.classList.add('contact__status-wrap--success');
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      form.hidden = true;
+      if (wrap) wrap.classList.add('contact__status-wrap--visible');
+      return;
+    }
+
+    let done = false;
+    const finish = function () {
+      if (done) return;
+      done = true;
+      form.hidden = true;
+      if (wrap) wrap.classList.add('contact__status-wrap--visible');
+    };
+    form.addEventListener('transitionend', function onDone(ev) {
+      if (ev.propertyName !== 'opacity') return;
+      form.removeEventListener('transitionend', onDone);
+      finish();
+    });
+    // Fallback if transitionend never fires (no transition support, etc.)
+    setTimeout(finish, 400);
+    form.classList.add('contact__form--leaving');
+  }
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -250,6 +291,12 @@
       return;
     }
 
+    // Off the live domain: simulate success, never hit Formspree.
+    if (!submitsForReal()) {
+      showSuccess();
+      return;
+    }
+
     const data = new FormData(form);
 
     try {
@@ -260,35 +307,7 @@
       });
 
       if (res.ok) {
-        form.reset();
-        // Success announced via aria-live region (D-09); textContent only (T-10-01).
-        // Set the text + success styling now so screen readers announce immediately,
-        // then swap the form for the message: fade the form out, fade the text in.
-        status.textContent = 'Thanks, I\'ll be in touch within one working day.';
-        var wrap = status.closest('.contact__status-wrap');
-        if (wrap) wrap.classList.add('contact__status-wrap--success');
-
-        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduce) {
-          form.hidden = true;
-          if (wrap) wrap.classList.add('contact__status-wrap--visible');
-        } else {
-          var done = false;
-          var finish = function () {
-            if (done) return;
-            done = true;
-            form.hidden = true;
-            if (wrap) wrap.classList.add('contact__status-wrap--visible');
-          };
-          form.addEventListener('transitionend', function onDone(ev) {
-            if (ev.propertyName !== 'opacity') return;
-            form.removeEventListener('transitionend', onDone);
-            finish();
-          });
-          // Fallback if transitionend never fires (no transition support, etc.)
-          setTimeout(finish, 400);
-          form.classList.add('contact__form--leaving');
-        }
+        showSuccess();
       } else {
         // Generic retry copy — no email address in any error state (D-02 + T-10-03)
         status.textContent = 'Something went wrong sending your message. Please try again in a moment.';
