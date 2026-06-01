@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Phase 07 (refresh P1 design-system foundations) context gathered
-last_updated: "2026-06-01T06:44:13.989Z"
+status: executing
+stopped_at: "Phase 07 Plan 01 complete — awaiting human checkpoint visual review"
+last_updated: "2026-06-01T07:04:52Z"
 progress:
   total_phases: 6
-  completed_phases: 2
-  total_plans: 6
-  completed_plans: 9
-  percent: 33
+  completed_phases: 3
+  total_plans: 7
+  completed_plans: 10
+  percent: 50
 ---
 
 # State: looktwice.uk
@@ -22,20 +22,20 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** V1 Refresh (post-launch review work). Tracked in `ROADMAP-REFRESH.md` as 8 development-flow phases, each running discuss → plan → execute → review. Done = all of a phase's boxes checked. Active phase: **Phase 1 (design-system foundations: type floor, button-style standardisation, CTA copy)**. Phases: 1 foundations → 2 nav/floating bar → 3 cutout reveal system → 4 copy (Kris) → 5 services → 6 credentials → 7 contact mechanic → 8 visual variety (Jamie, last). The cutout primitive (P3, from `image-cutout-demo.html`) is built before the redesigns (P5, P8) that consume it; open gradient-rule conflict noted in its phase. Every review item from `_LT Website Project.md` + Kris's 2026-05-31 review is mapped in the roadmap's coverage map.
+**Current focus:** Phase 07 — design-system-foundations
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 05 (hardening-launch) — CODE COMPLETE, verification pending
-Plan: Phase 05 shipped without per-plan PLAN.md files. CONTEXT + RESEARCH + DISCUSSION-LOG + OPEN-DECISIONS + SUMMARY + VERIFICATION + CUTOVER-PLAYBOOK all in `.planning/phases/05-hardening-launch/`.
+Phase: 07 (design-system-foundations) — EXECUTING
+Plan: 1 of 1
 
 - **Milestone:** v1
 - **Phase:** 5 of 5 code-complete
 - **Plan:** Phase 05 docs landed (SUMMARY, VERIFICATION, CUTOVER-PLAYBOOK)
-- **Status:** verifying — Lighthouse run + visual UAT pending before cutover
-- **Progress:** [██████████] 100% code, ~80% if you count human verification
+- **Status:** Executing Phase 07
+- **Progress:** [██████████] 100%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
@@ -119,6 +119,11 @@ Plan: Phase 05 shipped without per-plan PLAN.md files. CONTEXT + RESEARCH + DISC
 - [Phase 05]: favicon.svg is placeholder lettermark using system-fallback font (Helvetica) since Epilogue isn't loaded for favicons; final mark comes with brand-final from Kris/Jamie
 - [Phase 05]: `_headers` extended with HSTS (1y + preload), Permissions-Policy denying camera/mic/geo/payment/usb/interest-cohort, and CSP with `frame-ancestors 'none'` + `upgrade-insecure-requests`
 - [Phase 05]: Cutover (DEPLOY-03) is a manual trigger — `05-CUTOVER-PLAYBOOK.md` documents pre-flight checklist, merge steps, fast/slow rollback paths, post-cutover smoke test
+- [Phase 07]: Plan 07-01: `--text-label` raised from 0.8rem to 0.875rem (14px floor); all sub-label surfaces lifted (buttons, chips, captions)
+- [Phase 07]: Plan 07-01: Work-section "Get in touch" and services-section "Let's talk" mid-page CTAs removed; `.btn--accent-pink/.btn--accent-indigo/.btn--accent-amber` + shared focus-ring block deleted; `.work__cta` layout rule deleted
+- [Phase 07]: Plan 07-01: CTA copy unified to "Free 30-min chat" on hero (btn--on-pink) and contact (btn--on-teal); sticky tab label unchanged (GSD 08 scope)
+- [Phase 07]: Plan 07-01: Hero pre-button label changed to reassurance value line "No sale, no follow-up unless you want one." (provisional; Kris confirms in refresh P4)
+- [Phase 07]: Plan 07-01: CLAUDE.md em-dash ban relaxed to allow hyphens in number-word compounds (e.g. "30-min"); all other design bans unchanged
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -157,11 +162,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-01T06:44:13.986Z
+**Last session:** 2026-06-01T07:04:52Z
 
-**Next session entry point:** Pre-cutover verification — paste preview URL into PageSpeed Insights, run visual UAT at 375/768/1440, confirm tab-walk shows focus rings everywhere; then `05-CUTOVER-PLAYBOOK.md`.
+**Next session entry point:** Human visual checkpoint — review `new-site` branch preview on phone and desktop per 07-01-PLAN.md checkpoint task, then type "approved" or describe issues.
 
-**Stopped at:** Phase 07 (refresh P1 design-system foundations) context gathered
+**Stopped at:** Phase 07 Plan 01 complete — awaiting human checkpoint visual review
 
 **Files of record:**
 

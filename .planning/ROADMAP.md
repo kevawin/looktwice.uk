@@ -21,61 +21,76 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 ### V1 Refresh milestone (numbering continues from 07; see ROADMAP-REFRESH.md for full per-phase detail)
 
-- [ ] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min call"
+- [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min call" (completed 2026-06-01)
 
 ## Phase Details
 
 ### Phase 1: Foundations & Deploy Pipeline
+
 **Goal**: A semantic, token-driven shell ships to a Cloudflare Pages preview from `new-site`, with working sticky nav, so every later phase lands visibly on the staging URL.
 **Depends on**: Nothing (first phase)
 **Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04, FOUND-05, NAV-01, NAV-02, NAV-03, NAV-04, NAV-05, DEPLOY-01, DEPLOY-02
 **Success Criteria** (what must be TRUE):
+
   1. The `new-site` branch deploys to a Cloudflare Pages preview URL on every push, and the preview loads `index.html`
   2. The preview shows a semantic page shell (`<main>` + six empty `<section>` anchors + `<nav>` + `<footer>`) with one H1 reserved for the hero
   3. Epilogue 400/700 loads via Google Fonts with `font-display: swap` and no FOUC of a fallback weight
   4. The sticky top nav is transparent at the top of the page, fills with Linen on first scroll within 200ms, and shows a Hot Pink underline on link hover
   5. The mobile hamburger opens a Midnight overlay with stacked Linen links and correct `aria-expanded` / `aria-controls` state
   6. `tokens.css` exposes every OKLCH colour, the type scale, spacing, radii, shadows, and transitions specified in DESIGN-TOKENS.md
+
 **Plans**: 3 plans
+
   - [x] 01-01-tokens-base-fonts-PLAN.md — File scaffold, tokens.css with full DESIGN-TOKENS.md set, base.css with Andy Bell reset + Epilogue self-host @font-face + scroll-behavior + body defaults, three CSS stubs
   - [x] 01-02-shell-nav-PLAN.md — Overwrite index.html with semantic shell (six sections), wire nav + overlay CSS + JS (sticky transparent → Linen, Hot Pink underline, hamburger overlay with aria + Escape), apply doc-fix correcting eight→six in REQUIREMENTS.md and ROADMAP.md
   - [x] 01-03-deploy-pipeline-PLAN.md — _headers (cache + basic security), push to new-site, verify Cloudflare Pages preview deploy, capture branch-alias URL in STATE.md, confirm main untouched
+
 **UI hint**: yes
 
 ### Phase 2: Hero & Situation
+
 **Goal**: A warm referral landing on the preview sees a Hot Pink hero with Kris's cutout portrait, reads the headline, and scrolls into five recognisable client situations on Linen.
 **Depends on**: Phase 1
 **Requirements**: HERO-01, HERO-02, HERO-03, HERO-04, HERO-05, HERO-06, SITU-01, SITU-02, SITU-03, SITU-04, SITU-05
 **Success Criteria** (what must be TRUE):
+
   1. The hero renders Hot Pink full-bleed at min 90vh, with display headline, subhead, and two CTAs ("BOOK A SESSION" → #contact, "SEE THE WORK" → #work) visible immediately on load with no scroll reveal
   2. On desktop the hero shows a two-column layout (text ~55% left, asymmetric desaturated cutout composition right) with text never overlapping photography; on mobile the headline sits above a scaled cutout and buttons stack
   3. The situation section shows the "THE SITUATION" Midnight chip, section headline, and five numbered blocks (01–05) in client language with no icons, no card boxes, no borders, no shadows
   4. On desktop situations stagger across two columns (01/02/03 left, 04/05 offset right); on mobile they collapse to a single column with --space-md between items
   5. Situation blocks reveal on scroll with 80ms stagger between items via IntersectionObserver, and reduced-motion users get opacity-only fade
+
 **Plans**: 3 plans
+
   - [x] 02-01-hero-PLAN.md — Hero markup + Hot Pink CSS + two-column layout (HERO-01..06)
   - [x] 02-02-situation-PLAN.md — Situation markup + Linen CSS + .chip component + staggered grid (SITU-01..04)
   - [x] 02-03-reveal-observer-PLAN.md — Generic .reveal IntersectionObserver wired to situation chip/headline/blocks (SITU-05)
+
 **UI hint**: yes
 
 ### Phase 3: Mid-page Story
+
 **Goal**: After the situation, the visitor hits a Signal Orange opinionated statement, sees that work exists (placeholder), and reads three problem-first service areas.
 **Depends on**: Phase 2
 **Requirements**: INTR-01, INTR-02, INTR-03, INTR-04, WORK-01, WORK-02, WORK-03, WORK-04, SERV-01, SERV-02, SERV-03, SERV-04, SERV-05
 **Success Criteria** (what must be TRUE):
+
   1. The positioning interrupt renders as a Signal Orange full-bleed surface with one White Headline-scale statement, max-width 800px, left-aligned, and no chip / subheading / CTA
   2. The work section renders on Linen with the "WORK" chip, headline, a 2–3 sentence holding statement under 65ch, and a ghost "GET IN TOUCH" button anchoring to #contact
   3. The services section renders three items separated by 1px Midnight-12% horizontal rules, each with Hot Pink number, Bold service name, and two body sentences — no card grid
   4. A ghost "TALK THROUGH WHAT YOU NEED →" button sits below service 03 and anchors to #contact
   5. Interrupt fades in on scroll; work section reveals on the shared stagger pattern; services reveal headline-first then items 01–03 with 100ms stagger
+
 **Plans**: shipped without per-plan PLAN.md files — see `.planning/phases/03-mid-page-story/03-SUMMARY.md` (cloud-session simplification per HANDOFF.md)
 **UI hint**: yes
 
 ### Phase 4: Conversion & Persistent Surfaces
+
 **Goal**: The visitor reaches a low-friction Deep Teal contact moment, can email Kris in one click, sees a minimal Midnight footer, and a brand-gradient sticky tab follows them after the hero.
 **Depends on**: Phase 3
 **Requirements**: CONT-01, CONT-02, CONT-03, CONT-04, CONT-05, CONT-06, FOOT-01, FOOT-02, FOOT-03, FOOT-04, TAB-01, TAB-02, TAB-03, TAB-04, TAB-05, TAB-06, TAB-07, JS-01, JS-02, JS-03, JS-04, JS-05, JS-06
 **Success Criteria** (what must be TRUE):
+
   1. The contact section renders Deep Teal full-bleed with the "FREE SESSION" ghost-on-dark chip, headline, 2-sentence body, a White → Midnight-on-hover CTA labelled `hello@looktwice.uk` opening a `mailto:` link, and the static prompt copy beneath
   2. Clicking the contact CTA on desktop opens the user's mail client with `mailto:hello@looktwice.uk`; on mobile the same link opens the native mail composer
   3. The Midnight footer shows wordmark + tagline left and LinkedIn / mailto / copyright right on desktop, stacks left-aligned on mobile, and footer links flip to Link Sage on hover
@@ -83,38 +98,46 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   5. Both pill and 4px sticky-tab variants render at build (toggle / both visible) so Kris can pick one before launch
   6. All JS is vanilla (no libraries), uses `{ passive: true }` scroll listeners, and `scroll-behavior: smooth` is suppressed under `prefers-reduced-motion: reduce`
   7. Anchor links from nav, hero buttons, work button, and services button smooth-scroll to the correct sections on click
+
 **Plans**: shipped without per-plan PLAN.md files — see `.planning/phases/04-conversion-persistent/04-SUMMARY.md` (cloud-session simplification per HANDOFF.md)
 **UI hint**: yes
 
 ### Phase 5: Hardening & Launch
+
 **Goal**: The site passes WCAG AA, hits the performance budget, is discoverable in search, holds together at every breakpoint from 375px to 1440px+, and is ready to cut over from the holding page on `main`.
 **Depends on**: Phase 4
 **Requirements**: A11Y-01, A11Y-02, A11Y-03, A11Y-04, A11Y-05, A11Y-06, PERF-01, PERF-02, PERF-03, PERF-04, SEO-01, SEO-02, SEO-03, RESP-01, RESP-02, RESP-03, RESP-04, DEPLOY-03
 **Success Criteria** (what must be TRUE):
+
   1. Lighthouse on the deployed preview reports LCP < 2.5s, CLS < 0.1, FID < 100ms, and total page weight under 500KB excluding images
   2. WCAG AA contrast verified on Hot Pink, Signal Orange, and Deep Teal surfaces (700 weight where 400 fails); heading order is H1 → H2 → H3 with no skips; every image has descriptive alt text; every interactive element shows a visible focus ring and is reachable by keyboard in visual order
   3. With `prefers-reduced-motion: reduce` set, scroll reveals fade opacity-only with no transform and smooth-scroll is disabled
   4. Every section reads cleanly and stays visually intact at iPhone SE width (375px), tablet (768px), and desktop (1440px+); section padding collapses from --space-section to --space-xl on mobile
   5. View source shows correct `<title>`, meta description, canonical, and og: tags; `ProfessionalService` JSON-LD validates; `robots.txt` allows all crawlers and a favicon is present
   6. A documented cutover plan exists for switching Cloudflare Pages production source from `main` to `new-site` (or merging) once Kris approves, with `main` untouched until then
+
 **Plans**: shipped without per-plan PLAN.md files — see `.planning/phases/05-hardening-launch/` (CONTEXT, RESEARCH, DISCUSSION-LOG, OPEN-DECISIONS, SUMMARY, VERIFICATION, CUTOVER-PLAYBOOK)
 **UI hint**: yes
 
 ### Phase 7: Design-system foundations (V1 Refresh P1)
+
 **Goal**: Settle the global primitives — minimum font sizes, one standardised button system, and unified CTA copy — so every later refresh phase renders on consistent foundations.
 **Depends on**: Phase 6 (post-UAT polish, complete)
 **Requirements**: V1 Refresh review items (Kris site review 2026-05-31) — see ROADMAP-REFRESH.md Phase 1
 **Success Criteria** (what must be TRUE):
+
   1. All prose floors at 16px; all sub-labels (eyebrows, chips, captions) floor at 14px — `--text-label` raised 0.8rem (12.8px) → 0.875rem (14px) at `css/tokens.css:50`, and `css/` audited for any other sub-16px prose
   2. The button system collapses by REMOVING the two mid-page in-page CTAs (work `index.html:221`, services `index.html:264`); the two surviving buttons (`btn--on-pink` hero, `btn--on-teal` contact) already share one white-fill-on-colour, invert-on-hover style; unused accent variants (`btn--accent-pink`, `btn--accent-indigo`, `btn--accent-amber`) dropped from `css/components.css`
   3. The two remaining CTAs (hero `index.html:129`, contact mailto `index.html:279`) read "Free 30-min chat" — one string sitewide
   4. The brand gradient still appears in exactly one place (the floating CTA pill, refresh Phase 2 / GSD 08) — button work paints no gradient anywhere else
   5. The CLAUDE.md em-dash ban is relaxed to allow hyphens in number-word content
   6. The hero pre-button label (`index.html:127`) is reworded to a value line, not a duplicate of the button — provisional "No sale, no follow-up unless you want one." (final wording confirmed by Kris in refresh P4)
+
 **Decisions**: locked in `07-CONTEXT.md` (supersedes earlier "Free 30-min call" / per-surface-accent assumptions). See `07-DISCUSSION-LOG.md` for alternatives.
 **UI hint**: yes
 **Plans**: 1 plan
-  - [ ] 07-01-PLAN.md — token bump (14px label floor), button-variant removal, CTA copy unify, hero label reword, CLAUDE.md em-dash relaxation
+
+  - [x] 07-01-PLAN.md — token bump (14px label floor), button-variant removal, CTA copy unify, hero label reword, CLAUDE.md em-dash relaxation
 
 ## Progress
 
@@ -126,7 +149,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 4. Conversion & Persistent Surfaces | 0/0 | Not started | - |
 | 5. Hardening & Launch | 0/0 | Not started | - |
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
-| 7. Design-system foundations (refresh P1) | 0/0 | Not started | - |
+| 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 
 ## Coverage Summary
 
