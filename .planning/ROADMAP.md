@@ -113,6 +113,8 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   6. The hero pre-button label (`index.html:127`) is reworded to a value line, not a duplicate of the button — provisional "No sale, no follow-up unless you want one." (final wording confirmed by Kris in refresh P4)
 **Decisions**: locked in `07-CONTEXT.md` (supersedes earlier "Free 30-min call" / per-surface-accent assumptions). See `07-DISCUSSION-LOG.md` for alternatives.
 **UI hint**: yes
+**Plans**: 1 plan
+  - [ ] 07-01-PLAN.md — token bump (14px label floor), button-variant removal, CTA copy unify, hero label reword, CLAUDE.md em-dash relaxation
 
 ## Progress
 
