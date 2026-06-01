@@ -23,7 +23,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 - [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min chat" (completed 2026-06-01)
 - [x] **Phase 8: Navigation & floating action bar** (refresh P2) - Header scrolls away (de-sticky, de-burger, drop Contact), floating gradient CTA pill + white/pink burger nav past the hero (completed 2026-06-01)
-- [ ] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - Fix bugs in the shipped floating action bar + rework the menu concept per Kris's new deviation ideas
+- [x] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - 6 commits: gutter alignment, mobile menu stacking/hide, inverted colours + white borders, no stray focus, scroll-collapse, clean-URL on all internal anchors, header + bar aligned to content column (completed 2026-06-01). Menu-concept rework deferred — Kris's deviation examples not yet shared.
 
 ## Phase Details
 
@@ -189,7 +189,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
-| 9. P08 bug fixes & tweaks (fix phase) | 0/0 | Discuss | - |
+| 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 
 ## Coverage Summary
 

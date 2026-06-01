@@ -22,7 +22,7 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 09 — P08 bug fixes & tweaks (nav/floating-bar). Phase 08 shipped + verified 7/7 on 2026-06-01; Kris has new menu ideas that deviate from the shipped concept + bugs to fix, captured as a fresh phase.
+**Current focus:** Phase 09 complete (bug/tweak scope) 2026-06-01. Next refresh-roadmap phase is refresh P3 = Cutout reveal system (would register as GSD Phase 10). Menu-concept rework deferred — Kris's deviation examples not yet shared. 8 Phase-09 commits unpushed on `new-site`.
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
