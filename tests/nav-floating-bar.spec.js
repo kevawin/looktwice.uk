@@ -122,31 +122,26 @@ test.describe('Header nav', () => {
     // which also satisfies the test.
   });
 
-  test('nav gutter padding-left uses the shared gutter expression (matches sections and footer, desktop only)', async ({ page }) => {
-    // At mobile (<=640px) sections override padding-inline to 20px while the nav
-    // stays at calc(var(--space-lg)*0.75) = 48px — this is intentional per the
-    // Phase 8 mobile layout. The gutter alignment assertion is only meaningful at
-    // desktop where both resolve to 48px.
-    if (isMobile(page)) {
-      test.skip();
-      return;
-    }
-
-    // Sections use centered inner wrappers (max-width + margin:auto), not explicit
-    // padding-inline. The shared horizontal gutter expression is
-    // calc(var(--space-lg) * 0.75) = 48px — used by .nav, .footer, and all sections
-    // at viewport > 640px.
-    const navPaddingLeft = await computedStyle(page, '.nav', 'padding-left');
-    const footerPaddingLeft = await computedStyle(page, '.footer', 'padding-left');
-    const sectionPaddingLeft = await computedStyle(page, '#work', 'padding-left');
-
-    const navPx = parsePx(navPaddingLeft);
-    const footerPx = parsePx(footerPaddingLeft);
-    const sectionPx = parsePx(sectionPaddingLeft);
-
-    // Allow 1px tolerance for sub-pixel rounding.
-    expect(Math.abs(navPx - footerPx)).toBeLessThanOrEqual(1);
-    expect(Math.abs(navPx - sectionPx)).toBeLessThanOrEqual(1);
+  test('nav logo + menu align to the content column at every breakpoint', async ({ page }) => {
+    // The nav logo left edge and the menu right edge must land on the content
+    // column edges (.hero__inner) at all widths: 20px gutter ≤640, 48px gutter
+    // ≥641, capped + centred at the 1280px content column on wide screens.
+    const edges = await page.evaluate(() => {
+      const rect = (sel) => {
+        const el = document.querySelector(sel);
+        const b = el.getBoundingClientRect();
+        return { left: b.left, right: b.right };
+      };
+      return {
+        content: rect('.hero__inner'),
+        logo: rect('.nav-wordmark'),
+        links: rect('.nav-links'),
+      };
+    });
+    // Logo left aligns with content left.
+    expect(Math.abs(edges.logo.left - edges.content.left)).toBeLessThan(2);
+    // Menu right aligns with content right.
+    expect(Math.abs(edges.links.right - edges.content.right)).toBeLessThan(2);
   });
 });
 
@@ -693,6 +688,24 @@ test.describe('Phase 09 bug fixes', () => {
     const lineBg = await computedStyle(page, '.floating-bar__burger-line', 'background-color');
     expect(bg).toBe('rgb(224, 0, 110)');
     expect(lineBg).toBe('rgb(255, 255, 255)');
+  });
+
+  test('CTA, burger and pills all have a 1px white border', async ({ page }) => {
+    const white = 'rgb(255, 255, 255)';
+    const ctaW = await computedStyle(page, '.floating-bar__cta', 'border-top-width');
+    const ctaC = await computedStyle(page, '.floating-bar__cta', 'border-top-color');
+    const pillW = await computedStyle(page, '.floating-bar__pill', 'border-top-width');
+    const pillC = await computedStyle(page, '.floating-bar__pill', 'border-top-color');
+    expect(ctaW).toBe('1px');
+    expect(ctaC).toBe(white);
+    expect(pillW).toBe('1px');
+    expect(pillC).toBe(white);
+    if (isMobile(page)) {
+      const burgerW = await computedStyle(page, '.floating-bar__burger', 'border-top-width');
+      const burgerC = await computedStyle(page, '.floating-bar__burger', 'border-top-color');
+      expect(burgerW).toBe('1px');
+      expect(burgerC).toBe(white);
+    }
   });
 
   // Bugs 2/3/4 are mobile-only (desktop is a static visible row).

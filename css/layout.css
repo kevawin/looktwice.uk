@@ -15,7 +15,21 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  padding: var(--space-sm) calc(var(--space-lg) * 0.75);
+  /* Align the logo + menu to the content column, matching the floating bar.
+     max-width = content cap (1280px) + both desktop gutters, so the inline
+     padding lands the logo/menu exactly on the content's left/right edges:
+       ≤640px  → 20px gutter (matches section padding-inline)
+       ≥641px  → 48px gutter; capped + centred at 1280px content on wide screens. */
+  max-width: calc(1280px + 2 * (var(--space-lg) * 0.75));
+  margin-inline: auto;
+  padding-block: var(--space-sm);
+  padding-inline: 20px;
+}
+
+@media (min-width: 641px) {
+  .nav {
+    padding-inline: calc(var(--space-lg) * 0.75);
+  }
 }
 
 .nav-links {
