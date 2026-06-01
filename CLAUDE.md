@@ -14,7 +14,7 @@ The website for Look Twice — Kristina (Kris) Evawin's independent brand and CX
 - **Accessibility**: WCAG AA minimum on every surface. prefers-reduced-motion respected. One H1 per page (hero).
 - **Performance**: LCP < 2.5s, CLS < 0.1, FID < 100ms, page weight < 500KB excluding images. Images in WebP with srcset; lazy-load below the fold.
 - **Content**: All copy in `CONTENT-DRAFT.md` is directional — Kris refines in her own voice before launch. Several `[DECIDE]` and `[CONFIRM]` markers still open (hero headline, positioning interrupt option, public client names).
-- **Design bans (hard stops)**: no card shadows, no gradient text, no glassmorphism, no mid-tone greys, no decorative card grids, no font-weight 500, no em-dashes in copy.
+- **Design bans (hard stops)**: no card shadows, no gradient text, no glassmorphism, no mid-tone greys, no decorative card grids, no font-weight 500, no em-dashes in copy (hyphens in number-word compounds such as "30-min" are allowed).
 - **Gradient discipline**: brand gradient appears in exactly one place — the floating sticky tab. Cool accents (Rich Purple, Cool Indigo) are hover/gradient only, never section backgrounds.
 <!-- GSD:project-end -->
 
