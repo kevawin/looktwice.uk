@@ -87,6 +87,7 @@ The default local preview is **browser-sync** with hot reload. It is dev-only to
 - **Claude spins it up whenever working on the site.** Start `npm run dev` in the background at the start of site work so Kris/Jamie can watch changes land live and test on their phone. Mention the localhost + External URLs when you start it.
 - **Playwright is separate and isolated.** `npm test` runs the suite against its own clean static server on port `7777` (configured in `playwright.config.js`). Do NOT point Playwright at the browser-sync server — its injected live-reload client slows and destabilises the suite. Keep the two on different ports (3000 dev, 7777 tests) so they can run at the same time.
 - **First run after clone:** `npm install` (installs Playwright + browser-sync), then `npx playwright install` for browsers if needed.
+- **Claude Code app:** `.claude/launch.json` sets `dev (browser-sync, hot reload)` on port 3000 as the **default** run/preview config (the no-cache python server on 4173 is kept as a fallback). So running or previewing the site via the Claude Code app uses the browser-sync server. browser-sync defaults live in `bs-config.js` (no auto-open, no UI panel, prints the LAN ip:port for phone testing).
 
 ## Contact form: live-domain-only submission
 
