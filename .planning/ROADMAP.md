@@ -24,6 +24,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min chat" (completed 2026-06-01)
 - [x] **Phase 8: Navigation & floating action bar** (refresh P2) - Header scrolls away (de-sticky, de-burger, drop Contact), floating gradient CTA pill + white/pink burger nav past the hero (completed 2026-06-01)
 - [x] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - 6 commits: gutter alignment, mobile menu stacking/hide, inverted colours + white borders, no stray focus, scroll-collapse, clean-URL on all internal anchors, header + bar aligned to content column (completed 2026-06-01). Menu-concept rework deferred — Kris's deviation examples not yet shared.
+- [ ] **Phase 10: Contact mechanic — form vs email** (refresh P7) - Decision gate: resolve the CLAUDE.md/STATE mailto lock vs Jamie's form suggestion, then style the final contact markup. Started out of refresh order ahead of refresh P3–P6.
 
 ## Phase Details
 
@@ -177,6 +178,19 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **UI hint**: yes
 **Plans**: TBD after discuss
 
+### Phase 10: Contact mechanic — form vs email (V1 Refresh P7)
+
+**Goal**: Resolve the open conflict over how visitors contact Kris — the current `mailto:` link (locked by CLAUDE.md + STATE for frictionless, zero-dep contact) vs a contact form (Jamie's review suggestion; adds spam risk + a third-party dependency). This is a decision gate before final visual polish so the chosen contact markup can be styled once. If form wins: build markup + service + validation and update the CLAUDE.md V1 contact rule. If mailto stays: no-op, close the phase.
+
+**Depends on**: Phase 8 (navigation & floating action bar, complete) for the CTA surfaces that point at contact. Independent of refresh P3–P6 (started ahead of them by Kris's choice).
+**Requirements**: Decision recorded in `10-CONTEXT.md` during discuss; conflict between CLAUDE.md/STATE (mailto) and Jamie's review (form) resolved first.
+**Numbering note**: GSD Phase 10 = refresh-roadmap P7. Refresh P3 (Cutout reveal) and P4–P6 remain unstarted; GSD numbers are assigned in start order, not refresh order.
+**Success Criteria** (what must be TRUE): to be derived in discuss once the form-vs-mailto decision is made.
+
+**Decisions**: to be locked in `10-CONTEXT.md` during discuss.
+**UI hint**: yes (if a form ships)
+**Plans**: TBD after discuss
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -190,6 +204,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
+| 10. Contact mechanic — form vs email (refresh P7) | 0/0 | Discuss | - |
 
 ## Coverage Summary
 
