@@ -111,7 +111,7 @@ This document evolves at phase transitions and milestone boundaries.
 
 ## Current State
 
-Phase 01 (foundations + deploy pipeline) complete. Token surface, modern reset, self-hosted Epilogue 400/700, six-section semantic shell, sticky nav scroll-toggle, Midnight hamburger overlay, Cloudflare Pages headers, and live branch-alias preview at https://new-site.looktwice-uk.pages.dev. Production `looktwice.uk` still serves the holding page on `main`. Phase 02 (hero + situation) is next.
+Phase 08 (nav + floating bar) complete — the final roadmap phase. The persistent header now scrolls away with the page; past the hero a floating action bar takes over with a gradient CTA pill (the one place the brand gradient appears) and a white/pink burger nav. Old mobile-nav machinery (hamburger overlay, scroll colour fade) removed. The bar's hidden/visible state is centralised in `setBarHidden()` — adds native `inert` and syncs `aria-hidden` in both the scroll-gate and the `#contact` suppression observer, so keyboard users cannot reach the bar while it is invisible (WCAG 4.1.2). A Playwright QA harness (dev-only, not shipped) covers the nav behaviour: 75 passing assertions across 375/768/1440px. Earlier phases delivered the token surface, self-hosted Epilogue 400/700, Hot Pink hero with cutout portrait, five Linen situation cards, and the Cloudflare Pages deploy pipeline. Live branch-alias preview at https://new-site.looktwice-uk.pages.dev; production `looktwice.uk` still serves the holding page on `main`. All roadmap phases verified passed.
 
 ---
-*Last updated: 2026-04-30 after Phase 01 completion*
+*Last updated: 2026-06-01 after Phase 08 completion*
