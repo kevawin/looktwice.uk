@@ -258,6 +258,7 @@ Each requirement maps to exactly one phase.
 | DEPLOY-03 | Phase 5 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 77 total
 - Mapped to phases: 77
 - Unmapped: 0 ✓

@@ -174,7 +174,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 5. Hardening & Launch | 0/0 | Not started | - |
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
-| 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete   | 2026-06-01 |
+| 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 
 ## Coverage Summary
 
