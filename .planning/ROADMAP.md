@@ -22,6 +22,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 ### V1 Refresh milestone (numbering continues from 07; see ROADMAP-REFRESH.md for full per-phase detail)
 
 - [x] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min chat" (completed 2026-06-01)
+- [ ] **Phase 8: Navigation & floating action bar** (refresh P2) - Header scrolls away (de-sticky, de-burger, drop Contact), floating gradient CTA pill + white/pink burger nav past the hero
 
 ## Phase Details
 
@@ -139,6 +140,25 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
   - [x] 07-01-PLAN.md — token bump (14px label floor), button-variant removal, CTA copy unify, hero label reword, CLAUDE.md em-dash relaxation
 
+### Phase 8: Navigation & floating action bar (V1 Refresh P2)
+
+**Goal**: The header stops being persistent and scrolls away; a floating action bar takes over past the hero — a gradient CTA pill plus white/pink burger nav — so navigation never double-menus and the persistent CTA re-answers the two mid-page segues that refresh P1 left dangling.
+**Depends on**: Phase 7 (design-system foundations — button system + CTA copy), complete
+**Requirements**: V1 Refresh review items (Kris site review 2026-05-31) — see ROADMAP-REFRESH.md Phase 2
+**Success Criteria** (what must be TRUE):
+
+  1. The header no longer sticks or fixes; it scrolls away with the page, and the scroll-driven background/colour animation is removed (markup + JS)
+  2. The responsive burger + full-screen overlay is removed entirely (markup + JS); "Contact" is dropped from the menu; remaining menu items are reordered to match page order; header left/right padding aligns to the page section gutter (logo left, menu right)
+  3. A floating action bar appears only after the hero (reusing the existing scroll-entrance gate at `js/main.js`), never overlapping the header — no double-menu
+  4. The bar's left element is a gradient CTA pill (the one place the brand gradient appears), labelled with the unified CTA string; its right element is a circular white-bg/pink-text burger whose two lines rotate into an X on tap
+  5. On mobile, tapping the burger reveals Work + Approach pills (white/pink) sliding up stacked above it; tapping the X slides them down. On desktop there is no burger — the pills are always visible as a row: ( CTA ) ( Work ) ( Approach )
+  6. Keyboard + focus management is correct: `aria-expanded` on the burger, logical pill tab order, Escape closes, focus returns to the burger on close; line→X and slide animations collapse to opacity/instant under `prefers-reduced-motion: reduce`
+  7. The persistent floating CTA covers the two dangling segues refresh P1 left (work paragraph `index.html:220`, services offer `index.html:262`) — confirmed in discuss
+
+**Decisions**: to be locked in `08-CONTEXT.md` during discuss. Carryover from refresh P1: reconcile the CTA string — refresh P1 shipped "Free 30-min chat" sitewide, ROADMAP-REFRESH.md Phase 2 still reads "Free 30-min call". Resolve in discuss.
+**UI hint**: yes
+**Plans**: TBD (set at plan stage)
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -150,6 +170,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 5. Hardening & Launch | 0/0 | Not started | - |
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
+| 8. Navigation & floating action bar (refresh P2) | 0/0 | Not started | - |
 
 ## Coverage Summary
 
