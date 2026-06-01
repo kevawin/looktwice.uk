@@ -556,6 +556,15 @@ test.describe('Suppression accessibility (CR-02)', () => {
     // Menu should have auto-closed on suppression
     await expect(burger).toHaveAttribute('aria-expanded', 'false');
     await expect(page.locator('.floating-bar__pills')).not.toHaveClass(/floating-bar__pills--open/);
+
+    // WR-03: the actual focus-trap condition. Suppression makes the bar inert,
+    // and the suppression-driven close passes returnFocus=false, so focus must
+    // NOT remain anywhere inside the (now inert) floating bar.
+    const focusInBar = await page.evaluate(() => {
+      const bar = document.querySelector('.floating-bar');
+      return bar ? bar.contains(document.activeElement) : false;
+    });
+    expect(focusInBar).toBe(false);
   });
 });
 

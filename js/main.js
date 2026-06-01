@@ -38,6 +38,10 @@
 
   window.addEventListener('resize', () => {
     threshold = getThreshold();
+    // CR-01 (WR-01): re-apply the hidden/visible state against the new threshold.
+    // Without this, a resize that crosses the threshold leaves inert/aria-hidden
+    // stale until the next scroll event.
+    onScroll();
   }, { passive: true });
 
   // ---- Single hidden/visible authority ----
@@ -71,6 +75,11 @@
       (entries) => {
         entries.forEach((entry) => {
           suppressed = entry.isIntersecting;
+          // WR-02: recompute pastHero from the live scroll position rather than
+          // trusting the cached flag. The observer and scroll listener fire order
+          // is not guaranteed, so a stale pastHero could flash the wrong hidden
+          // state for one frame. Reading scrollY here keeps both paths consistent.
+          pastHero = window.scrollY > threshold;
           bar.classList.toggle('floating-bar--suppressed', suppressed);
           setBarHidden(!pastHero || suppressed);
           // CR-02: close an open mobile menu when the bar is being suppressed so
