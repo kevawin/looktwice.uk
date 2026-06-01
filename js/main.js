@@ -4,46 +4,6 @@
    Phase 8: nav scroll-state toggle and mobile hamburger overlay removed (D-03, D-04). */
 
 /* ============================================================
-   Mobile hamburger overlay
-   ============================================================ */
-
-const hamburger = document.querySelector('.nav-hamburger');
-const overlay = document.querySelector('.nav-overlay');
-const closeBtn = document.querySelector('.nav-overlay-close');
-
-function openOverlay() {
-  overlay.classList.add('open');
-  hamburger.setAttribute('aria-expanded', 'true');
-  overlay.setAttribute('aria-hidden', 'false');
-}
-
-function closeOverlay() {
-  overlay.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', 'false');
-  overlay.setAttribute('aria-hidden', 'true');
-  hamburger.focus();
-}
-
-if (hamburger && overlay && closeBtn) {
-  hamburger.addEventListener('click', () => {
-    if (overlay.classList.contains('open')) closeOverlay();
-    else openOverlay();
-  });
-
-  closeBtn.addEventListener('click', closeOverlay);
-
-  overlay.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeOverlay);
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) {
-      closeOverlay();
-    }
-  });
-}
-
-/* ============================================================
    Sticky tab — entrance + suppression while contact section is in view.
    D-6.11: contact has its own CTA; the sticky tab would be redundant noise
    while the visitor is reading or actioning that CTA. IntersectionObserver
