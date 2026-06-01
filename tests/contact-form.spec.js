@@ -75,6 +75,9 @@ test.describe('Contact form', () => {
     // Status region has non-empty success text (wait for it)
     await expect(page.locator('#contact-status')).not.toBeEmpty();
 
+    // Success icon is revealed (hidden in every other state)
+    await expect(page.locator('.contact__status-icon')).toBeVisible();
+
     // Page did not navigate away
     expect(page.url()).toMatch(/\/$/);
   });

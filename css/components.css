@@ -683,6 +683,12 @@
   gap: var(--space-md);
   width: 100%;
   max-width: var(--measure);
+  transition: opacity 280ms ease;
+}
+
+/* Fade the form out before it is removed on a successful submit. */
+.contact__form--leaving {
+  opacity: 0;
 }
 
 /* Off-screen spam trap. Kept out of view, tab order, and the a11y tree.
@@ -754,12 +760,57 @@
   min-height: 1.5em;
 }
 
+/* Status icon + text sit on one row. Icon hidden until a successful submit. */
+.contact__status-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* Decorative success icon — stroke treatment matches .services__icon. */
+.contact__status-icon {
+  display: none;
+  flex: none;
+  width: var(--text-title);
+  height: var(--text-title);
+  color: var(--color-true-white);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Success state: matches the section segue — title size, bold — and fades in
+   as the form fades out. Validation and error messages keep the base body
+   style; only the success state enlarges and reveals the icon. */
+.contact__status-wrap--success {
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.contact__status-wrap--success .contact__status-icon {
+  display: block;
+}
+
+.contact__status-wrap--success .contact__status {
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+}
+
+.contact__status-wrap--success.contact__status-wrap--visible {
+  opacity: 1;
+}
+
 .contact__submit {
   align-self: flex-start;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contact__status {
+  .contact__form,
+  .contact__status,
+  .contact__status-wrap--success {
     transition: none;
   }
 }

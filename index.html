@@ -25,11 +25,11 @@
 
   <link rel="preload" href="/fonts/epilogue-400.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/css/tokens.css?v=13">
-  <link rel="stylesheet" href="/css/base.css?v=13">
-  <link rel="stylesheet" href="/css/layout.css?v=13">
-  <link rel="stylesheet" href="/css/components.css?v=13">
-  <link rel="stylesheet" href="/css/animations.css?v=13">
+  <link rel="stylesheet" href="/css/tokens.css?v=14">
+  <link rel="stylesheet" href="/css/base.css?v=14">
+  <link rel="stylesheet" href="/css/layout.css?v=14">
+  <link rel="stylesheet" href="/css/components.css?v=14">
+  <link rel="stylesheet" href="/css/animations.css?v=14">
 
   <script type="application/ld+json">
   {
@@ -252,11 +252,19 @@
           <p class="contact__body">
             No commitment. No pitch. If we're a fit, we'll figure out next steps. If not, you'll leave with a clearer view of what to work on.
           </p>
-          <div id="contact-status"
-               role="status"
-               aria-live="polite"
-               aria-atomic="true"
-               class="contact__status"></div>
+          <div class="contact__status-wrap">
+            <!-- Decorative success icon (lucide "mail-check", inlined). Shown only on success. -->
+            <svg class="contact__status-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              <path d="m16 19 2 2 4-4"/>
+            </svg>
+            <div id="contact-status"
+                 role="status"
+                 aria-live="polite"
+                 aria-atomic="true"
+                 class="contact__status"></div>
+          </div>
 
           <form class="contact__form"
                 id="contact-form"
@@ -349,6 +357,6 @@
     </div>
   </div>
 
-  <script src="/js/main.js?v=13" defer></script>
+  <script src="/js/main.js?v=14" defer></script>
 </body>
 </html>

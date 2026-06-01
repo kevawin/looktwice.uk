@@ -261,9 +261,34 @@
 
       if (res.ok) {
         form.reset();
-        form.hidden = true;
-        // Success announced via aria-live region (D-09); textContent only (T-10-01)
+        // Success announced via aria-live region (D-09); textContent only (T-10-01).
+        // Set the text + success styling now so screen readers announce immediately,
+        // then swap the form for the message: fade the form out, fade the text in.
         status.textContent = 'Thanks, I\'ll be in touch within one working day.';
+        var wrap = status.closest('.contact__status-wrap');
+        if (wrap) wrap.classList.add('contact__status-wrap--success');
+
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) {
+          form.hidden = true;
+          if (wrap) wrap.classList.add('contact__status-wrap--visible');
+        } else {
+          var done = false;
+          var finish = function () {
+            if (done) return;
+            done = true;
+            form.hidden = true;
+            if (wrap) wrap.classList.add('contact__status-wrap--visible');
+          };
+          form.addEventListener('transitionend', function onDone(ev) {
+            if (ev.propertyName !== 'opacity') return;
+            form.removeEventListener('transitionend', onDone);
+            finish();
+          });
+          // Fallback if transitionend never fires (no transition support, etc.)
+          setTimeout(finish, 400);
+          form.classList.add('contact__form--leaving');
+        }
       } else {
         // Generic retry copy — no email address in any error state (D-02 + T-10-03)
         status.textContent = 'Something went wrong sending your message. Please try again in a moment.';
