@@ -214,7 +214,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
-| 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete   | 2026-06-01 |
+| 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
 
 ## Coverage Summary
 
