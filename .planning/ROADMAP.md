@@ -17,7 +17,11 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 3: Mid-page Story** - Positioning interrupt (Signal Orange), work placeholder, services (three problem-first areas)
 - [x] **Phase 4: Conversion & Persistent Surfaces** - Deep Teal contact, Midnight footer, floating sticky tab, all JS behaviours wired
 - [x] **Phase 5: Hardening & Launch** - Accessibility, performance, SEO, responsive verification, cutover plan (code complete; Kris-side Lighthouse + UAT + cutover trigger pending)
-- [ ] **Phase 6: Post-UAT Polish** - Brand colour truth, nav cascade fix, logo + hero composition, drop chips/animations, situation 5-col + decorative numbers, work bio expansion, how-I-work icons, contact split, footer additions
+- [x] **Phase 6: Post-UAT Polish** - Brand colour truth, nav cascade fix, logo + hero composition, drop chips/animations, situation 5-col + decorative numbers, work bio expansion, how-I-work icons, contact split, footer additions
+
+### V1 Refresh milestone (numbering continues from 07; see ROADMAP-REFRESH.md for full per-phase detail)
+
+- [ ] **Phase 7: Design-system foundations** (refresh P1) - Min font sizes, one button style, unified CTA copy "Free 30-min call"
 
 ## Phase Details
 
@@ -96,6 +100,19 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **Plans**: shipped without per-plan PLAN.md files — see `.planning/phases/05-hardening-launch/` (CONTEXT, RESEARCH, DISCUSSION-LOG, OPEN-DECISIONS, SUMMARY, VERIFICATION, CUTOVER-PLAYBOOK)
 **UI hint**: yes
 
+### Phase 7: Design-system foundations (V1 Refresh P1)
+**Goal**: Settle the global primitives — minimum font sizes, one standardised button system, and unified CTA copy — so every later refresh phase renders on consistent foundations.
+**Depends on**: Phase 6 (post-UAT polish, complete)
+**Requirements**: V1 Refresh review items (Kris site review 2026-05-31) — see ROADMAP-REFRESH.md Phase 1
+**Success Criteria** (what must be TRUE):
+  1. All prose floors at 16px; all sub-labels (eyebrows, chips, captions) floor at 14px — `--text-label` raised 0.8rem (12.8px) → 0.875rem (14px) at `css/tokens.css:50`, and `css/` audited for any other sub-16px prose
+  2. The current 4–5 button variants (`btn--on-pink`, `btn--accent-indigo`, `btn--accent-pink`, `btn--on-teal`, `btn--contact`) collapse to one coherent system that adapts per surface (Hot Pink / Linen / Deep Teal) while reading as one style
+  3. Every CTA label reads "Free 30-min call" sitewide, including the Work-section CTA at `index.html:221`
+  4. The brand gradient still appears in exactly one place (the floating CTA pill, refresh Phase 2 / GSD 08) — button standardisation paints no gradient anywhere else
+  5. The CLAUDE.md em-dash ban is relaxed to allow hyphens in number-word content
+**Open for discuss**: which single button style wins and how it adapts per surface; keep or drop the hero pre-button label "Schedule a free 30-minute diagnosis." now the button says "Free 30-min call"
+**UI hint**: yes
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -105,6 +122,8 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 3. Mid-page Story | 0/0 | Not started | - |
 | 4. Conversion & Persistent Surfaces | 0/0 | Not started | - |
 | 5. Hardening & Launch | 0/0 | Not started | - |
+| 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
+| 7. Design-system foundations (refresh P1) | 0/0 | Not started | - |
 
 ## Coverage Summary
 
