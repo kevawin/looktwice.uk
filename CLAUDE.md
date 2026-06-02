@@ -99,6 +99,19 @@ Whenever Claude proposes a follow-up command for the user to run **after a `/cle
 
 Claude cannot run `/clear` or paste into the composer — those are the user's keystrokes. Claude's job is only to put the exact command on the clipboard and say it's done, so the user clears and pastes without retyping. Copy only the single command string, no backticks or surrounding prose. Applies to any post-clear handoff, not just GSD.
 
+## Cutout primitive (build-time SVG codegen)
+
+The hero cutout (and any future section cutouts) is generated at build time by `buildCutout.js`. Source `index.html` carries a `<!-- CUTOUT:hero -->` marker; `node build.js` replaces it with an inline `<svg>` in `dist/index.html` — the source marker never reaches the browser.
+
+Key design rules honoured by the codegen:
+- **Field colour:** the area outside the window shapes is the solid section colour (Hot Pink for hero), not the brand gradient. D-01/D-02 — the brand gradient appears only on the floating CTA pill, nowhere else.
+- **B&W imagery:** revealed imagery is desaturated via SVG `feColorMatrix type="saturate" values="0"` (D-03). CSS `filter: grayscale()` is not used — it is unreliable on SVG `<image>` in Safari.
+- **Single shared image:** all window shapes share one `<image>` element behind one `<mask>` (D-09). No base64 — the `<image href>` points to a manifest-resolved `/images/scene-cafe-960.webp` path (D-06).
+- **CLS guard:** the `<svg>` carries intrinsic `width` and `height` attributes so the browser reserves the correct space before CSS loads (Pitfall 3).
+- **Shipped artifact:** the output is plain static SVG/HTML — no client-side runtime, no base64, no JavaScript.
+
+Five shape presets live in `buildCutout.js` `SHAPE_PRESETS`: `circle`, `down-triangle`, `up-triangle`, `pill`, `rounded-rect`. Future sections add their own entries to `CUTOUT_CONFIGS` in the same file (planned for refresh P5 Services, P8 Visual variety).
+
 ## Contact form: live-domain-only submission
 
 The contact form (`initContactForm` in `js/main.js`) only POSTs to Formspree on the live domain. The host check is `/(^|\.)looktwice\.uk$/i.test(location.hostname)`.
