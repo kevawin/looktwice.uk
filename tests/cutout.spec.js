@@ -42,14 +42,15 @@ function loadModule() {
   return require(modPath);
 }
 
-/** Minimal manifest matching buildImages() shape. */
+/** Minimal manifest matching buildImages() shape. `h` = intrinsic height
+ *  (scene-cafe is 1600x2400, so h = w * 1.5) — needed by focal-point cutouts. */
 function makeManifest() {
   return {
     'scene-cafe': [
-      { w: 480,  avif: '/images/scene-cafe-480.avif',  webp: '/images/scene-cafe-480.webp' },
-      { w: 960,  avif: '/images/scene-cafe-960.avif',  webp: '/images/scene-cafe-960.webp' },
-      { w: 1440, avif: '/images/scene-cafe-1440.avif', webp: '/images/scene-cafe-1440.webp' },
-      { w: 1920, avif: '/images/scene-cafe-1920.avif', webp: '/images/scene-cafe-1920.webp' },
+      { w: 480,  h: 720,  avif: '/images/scene-cafe-480.avif',  webp: '/images/scene-cafe-480.webp' },
+      { w: 960,  h: 1440, avif: '/images/scene-cafe-960.avif',  webp: '/images/scene-cafe-960.webp' },
+      { w: 1440, h: 2160, avif: '/images/scene-cafe-1440.avif', webp: '/images/scene-cafe-1440.webp' },
+      { w: 1920, h: 2880, avif: '/images/scene-cafe-1920.avif', webp: '/images/scene-cafe-1920.webp' },
     ],
   };
 }
@@ -216,6 +217,43 @@ test.describe('SVG string generation (D-03, D-09)', () => {
     expect(svg).toContain('viewBox="0 0 1000 1064"');
     expect(svg).toContain('width="1000"');
     expect(svg).toContain('height="1064"');
+  });
+
+  // --- Focal-point cover + multi-shape (productionised hero) ---
+
+  test('no focus → centred xMidYMid slice', () => {
+    const svg = makeSvg({ focus: undefined });
+    if (!svg) return;
+    expect(svg).toContain('preserveAspectRatio="xMidYMid slice"');
+  });
+
+  test('focus + known aspect → cover geometry with preserveAspectRatio="none"', () => {
+    // box 1000x500 (aspect 2) over a 0.667 image → match width, rH = 1000/0.667 = 1500.
+    const svg = makeSvg({ viewBox: '0 0 1000 500', width: 1000, height: 500, focus: { x: 0.5, y: 0.5 } });
+    if (!svg) return;
+    expect(svg, 'focus disables aspect-ratio slicing').toContain('preserveAspectRatio="none"');
+    expect(svg, 'image scaled to cover the box (1000x1500)').toMatch(/width="1000" height="1500"/);
+    // centred vertically: iy = (500 - 1500) * 0.5 = -500
+    expect(svg, 'focus.y offsets the image').toContain('y="-500"');
+  });
+
+  test('focus.y shifts the cover offset (object-position style)', () => {
+    const svg = makeSvg({ viewBox: '0 0 1000 500', width: 1000, height: 500, focus: { x: 0.5, y: 0.66 } });
+    if (!svg) return;
+    // iy = (500 - 1500) * 0.66 = -660
+    expect(svg).toContain('y="-660"');
+  });
+
+  test('multiple shapes all land in the single mask (N-shape support)', () => {
+    const svg = makeSvg({ shapes: [
+      { type: 'circle',       opts: { cx: 100, cy: 100, r: 50 } },
+      { type: 'rounded-rect', opts: { x: 200, y: 50, w: 300, h: 300, rx: 40 } },
+    ] });
+    if (!svg) return;
+    expect((svg.match(/<circle/g) || []).length, 'circle present').toBe(1);
+    expect(svg, 'squircle rx present').toContain('rx="40"');
+    // still one shared image (D-09 holds with N shapes)
+    expect((svg.match(/<image/g) || []).length).toBe(1);
   });
 
 });
@@ -394,6 +432,21 @@ test.describe('Build output — dist/index.html', () => {
     expect(head, 'head must have a preload link').toContain('rel="preload"');
     expect(head, 'preload must be for an image').toContain('as="image"');
     expect(head, 'preload must reference the hero scene image').toContain('scene-cafe');
+  });
+
+  test('hero is a circle + squircle, focus-positioned (productionised contract)', () => {
+    const htmlPath = path.join(DIST, 'index.html');
+    if (!fs.existsSync(htmlPath)) {
+      test.skip();
+      return;
+    }
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    const svgMatch = html.match(/<svg class="cutout[\s\S]*?<\/svg>/);
+    expect(svgMatch, 'cutout SVG must be present').not.toBeNull();
+    const svg = svgMatch[0];
+    expect(svg, 'circle window present').toContain('<circle');
+    expect(svg, 'squircle window present (rx = triangle corner radius)').toContain('rx="83"');
+    expect(svg, 'image is focus-positioned (cover + offset, not slice)').toContain('preserveAspectRatio="none"');
   });
 
 });
