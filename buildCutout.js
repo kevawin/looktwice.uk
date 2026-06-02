@@ -55,7 +55,7 @@ const SHAPE_PRESETS = {
 
   // Pill / stadium shape (bottom band in demo).
   // x/y/w/h extracted verbatim from image-cutout-demo.html; rx = h/2 produces the stadium.
-  'pill': ({ x = 0, y = 544.6, w = 1000, h = 519.6 } = {}) =>
+  'pill': ({ x = 0, y = 544.6, w = 1000, h = 519.4 } = {}) =>
     `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${h / 2}" fill="white"/>`,
 
   // Circle with parameterised centre and radius.
@@ -82,7 +82,6 @@ const CUTOUT_CONFIGS = [
     viewBox:      '0 0 1000 519.6',
     width:        1000,
     height:       519.6,
-    loading:      'eager',
     fetchpriority: 'high',
     alt:          '',               // decorative — hero <h1> carries the meaning
     // scene-cafe is portrait (1600x2400) cover-cropped into this wide band;
@@ -116,7 +115,7 @@ const CUTOUT_CONFIGS = [
  * @returns {string} Inline SVG markup string
  */
 function buildSvgString(config, manifest) {
-  const { id, image, viewBox, width, height, loading, fetchpriority, alt, shapes } = config;
+  const { id, image, viewBox, width, height, fetchpriority, alt, shapes } = config;
 
   const entries = manifest[image];
   const entry   = entries && entries.find(e => e.w === CUTOUT_IMAGE_WIDTH);
