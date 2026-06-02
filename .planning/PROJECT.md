@@ -111,7 +111,9 @@ This document evolves at phase transitions and milestone boundaries.
 
 ## Current State
 
+Phase 11 (cutout reveal system, V1 Refresh P3) complete. The hero is now a build-time generated SVG cutout: a single B&W image (`feColorMatrix` desaturate, not CSS filter) revealed through a window in the solid Hot Pink field, with no gradient. A reusable `buildCutout(manifest)` codegen module (`buildCutout.js`) holds the five-shape preset vocabulary and emits static SVG; `build.js` injects it at a `<!-- CUTOUT:hero -->` marker between `buildImages` and `buildHtml`, the dead `rewriteHeroImg` is gone, and the hero image is preloaded to protect LCP after the `<img>`→SVG swap. Hero styling lives on a `.cutout` primitive class for reuse by later refresh phases. Locked behind `tests/cutout.spec.js` (build-output + browser-render assertions) and documented in CLAUDE.md as build-time SVG codegen. Phase 12 (build pipeline) and Phase 11 both verified passed on `new-site`. Earlier phases below.
+
 Phase 08 (nav + floating bar) complete — the final roadmap phase. The persistent header now scrolls away with the page; past the hero a floating action bar takes over with a gradient CTA pill (the one place the brand gradient appears) and a white/pink burger nav. Old mobile-nav machinery (hamburger overlay, scroll colour fade) removed. The bar's hidden/visible state is centralised in `setBarHidden()` — adds native `inert` and syncs `aria-hidden` in both the scroll-gate and the `#contact` suppression observer, so keyboard users cannot reach the bar while it is invisible (WCAG 4.1.2). A Playwright QA harness (dev-only, not shipped) covers the nav behaviour: 75 passing assertions across 375/768/1440px. Earlier phases delivered the token surface, self-hosted Epilogue 400/700, Hot Pink hero with cutout portrait, five Linen situation cards, and the Cloudflare Pages deploy pipeline. Live branch-alias preview at https://new-site.looktwice-uk.pages.dev; production `looktwice.uk` still serves the holding page on `main`. All roadmap phases verified passed.
 
 ---
-*Last updated: 2026-06-01 after Phase 08 completion*
+*Last updated: 2026-06-02 after Phase 11 completion*
