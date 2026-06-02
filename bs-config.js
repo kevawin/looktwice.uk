@@ -17,13 +17,13 @@ function lanIp() {
 }
 
 module.exports = {
-  server: '.',                 // serve the repo root as static files
+  server: 'dist',              // serve built output (build.js --watch writes here)
   port: 3000,                  // dev preview port (Playwright uses 7777 separately)
   host: lanIp(),               // pin the External URL to the LAN IP
   open: false,                 // never open a browser — use VS Code / the Claude Code app
   notify: false,               // no in-page "Connected" toast
   ui: false,                   // skip the browser-sync control UI on :3001
-  files: ['index.html', 'css/*.css', 'js/*.js', 'images/*'],
+  files: ['dist/**'],          // reload whenever build.js writes to dist/
 
   // browser-sync always prints both "Local" (localhost) and "External" (LAN IP)
   // and the order can't be changed. Re-print the phone-reachable URL last so it

@@ -306,4 +306,56 @@ async function build() {
   console.log(`[build] done in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 }
 
-build().catch(e => { console.error(e); process.exit(1); });
+// ---------------------------------------------------------------------------
+// Watch mode  (node build.js --watch)
+// ---------------------------------------------------------------------------
+
+/**
+ * Watch mode: run an initial full build, then watch source dirs for changes.
+ * On change, rebuild into dist/ so browser-sync (watching dist/**) hot-reloads.
+ *
+ * Uses built-in fs.watch — no extra dependency. Debounced at 200ms to coalesce
+ * rapid saves (e.g. editor auto-save on each keystroke) into a single rebuild.
+ *
+ * Source dirs watched:
+ *   index.html, css/, js/, images/, _headers
+ * These match the source inputs to build.js steps 1–5.
+ */
+async function watch() {
+  await build();
+
+  const WATCH_TARGETS = [
+    path.join(ROOT, 'index.html'),
+    path.join(ROOT, 'css'),
+    path.join(ROOT, 'js'),
+    path.join(ROOT, 'images'),
+    path.join(ROOT, '_headers'),
+  ];
+
+  console.log('[build:watch] Watching source files… (Ctrl-C to stop)');
+
+  let rebuildTimer = null;
+
+  function scheduleRebuild(filename) {
+    if (rebuildTimer) clearTimeout(rebuildTimer);
+    rebuildTimer = setTimeout(async () => {
+      rebuildTimer = null;
+      console.log(`[build:watch] Change detected${filename ? ': ' + filename : ''} — rebuilding…`);
+      await build();
+    }, 200);
+  }
+
+  for (const target of WATCH_TARGETS) {
+    if (!fs.existsSync(target)) continue;
+    fs.watch(target, { recursive: true }, (_event, filename) => {
+      scheduleRebuild(filename || target);
+    });
+  }
+}
+
+const isWatch = process.argv.includes('--watch');
+if (isWatch) {
+  watch().catch(e => { console.error(e); process.exit(1); });
+} else {
+  build().catch(e => { console.error(e); process.exit(1); });
+}
