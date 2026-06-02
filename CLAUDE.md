@@ -112,6 +112,13 @@ Key design rules honoured by the codegen:
 
 Five shape presets live in `buildCutout.js` `SHAPE_PRESETS`: `circle`, `down-triangle`, `up-triangle`, `pill`, `rounded-rect`. Future sections add their own entries to `CUTOUT_CONFIGS` in the same file (planned for refresh P5 Services, P8 Visual variety).
 
+### Composing a cutout (multi-shape + focus)
+
+- **Multiple shapes per cutout:** a config's `shapes` array takes any number of entries — each is `{ type, opts }` where `opts` are coordinates in the cutout's viewBox space. All shapes share the one `<image>`/`<mask>` (D-09 holds), so a shape on the left reveals the left of the image, a shape on the right reveals the right. To frame several subjects in one photo, set the cutout's `viewBox` to the image's pixel size (coords map 1:1) and place a shape over each subject. A squircle = `rounded-rect` with a generous `rx`.
+- **Focal point:** an optional per-cutout `focus: { x, y }` (fractions 0–1, like CSS `object-position`) scales the image to *cover* the viewBox and offsets it so the focal region stays in frame. Use it when the image aspect differs from the cutout (e.g. a portrait photo in a wide hero band — the hero uses `focus: { x: 0.5, y: 0.66 }` to lift the people up). Omit `focus` to centre-crop (`xMidYMid slice`). Focus needs the image aspect, which `build.js` stores as `h` on each manifest entry.
+- **Focus is per cutout, not per shape** — all shapes in one cutout see the same focused image. Different focal points → separate cutouts (one image each).
+- **Picking coordinates:** ask Claude to read an image and return the shape coords / focal point; the hero's circle + squircle were placed this way.
+
 ## Contact form: live-domain-only submission
 
 The contact form (`initContactForm` in `js/main.js`) only POSTs to Formspree on the live domain. The host check is `/(^|\.)looktwice\.uk$/i.test(location.hostname)`.
