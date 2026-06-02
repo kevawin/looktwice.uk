@@ -26,7 +26,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - 6 commits: gutter alignment, mobile menu stacking/hide, inverted colours + white borders, no stray focus, scroll-collapse, clean-URL on all internal anchors, header + bar aligned to content column (completed 2026-06-01). Menu-concept rework deferred — Kris's deviation examples not yet shared.
 - [x] **Phase 10: Contact mechanic — form vs email** (refresh P7) - Decision gate resolved: form wins. Build a Formspree contact form (form-only, no visible mailto), remove all visible email, reverse the CLAUDE.md/STATE mailto lock. Started out of refresh order ahead of refresh P3–P6. (completed 2026-06-01)
 - [x] **Phase 12: Build pipeline & tooling foundation** - Stand up the Cloudflare Pages build command, build-time image optimization (srcset/AVIF/WebP), CSS/JS minify + autoprefix, and wire dev/test to serve built output. Records the CLAUDE.md tech-stack relaxation (2026-06-02). **Executes BEFORE Phase 11** (prerequisite for the cutout build function). (completed 2026-06-02)
-- [ ] **Phase 11: Cutout reveal system** (refresh P3) - Reusable `buildCutout(image, shapes)` cutout primitive (SVG-mask, single shared image) + hero refactor. Depends on Phase 12's build pipeline. GSD numbers = registration order; execution order is 12 then 11.
+- [x] **Phase 11: Cutout reveal system** (refresh P3) - Reusable `buildCutout(image, shapes)` cutout primitive (SVG-mask, single shared image) + hero refactor. Depends on Phase 12's build pipeline. GSD numbers = registration order; execution order is 12 then 11. (completed 2026-06-02)
 
 ## Phase Details
 
@@ -260,7 +260,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 11-03-PLAN.md — tests/cutout.spec.js + CLAUDE.md cutout build-model note (D-03/06/07/09/10a)
+- [x] 11-03-PLAN.md — tests/cutout.spec.js + CLAUDE.md cutout build-model note (D-03/06/07/09/10a)
 
 ## Progress
 
@@ -275,7 +275,7 @@ Plans:
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 12. Build pipeline & tooling foundation | 3/3 | Complete   | 2026-06-02 |
-| 11. Cutout reveal system (refresh P3) | 2/3 | In Progress|  |
+| 11. Cutout reveal system (refresh P3) | 3/3 | Complete   | 2026-06-02 |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 | 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
 
