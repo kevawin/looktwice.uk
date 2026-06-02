@@ -209,16 +209,20 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **Depends on**: Phase 8 (nav/floating bar, complete). Independent of refresh P4–P6. Partly unblocked — `kris-portrait.webp` + `scene-cafe.webp` already in repo; new section imagery from Kris/Jamie still pending for non-hero bands.
 **Requirements**: No formal REQ IDs — decisions locked in `11-CONTEXT.md` during discuss. See `ROADMAP-REFRESH.md` Phase 3 for full task detail.
 **Numbering note**: GSD Phase 11 = refresh-roadmap P3. Refresh P4–P6 + P8 remain unstarted; GSD numbers assigned in start order, not refresh order.
-**Success Criteria** (what must be TRUE): to be derived in discuss once the gradient-conflict, shape presets, and hero-scope decisions are locked.
+**Success Criteria** (what must be TRUE): to be derived in plan from the locked decisions below.
 
-**Open decisions for discuss**:
-  1. Gradient-vs-solid surface behind the windows — hard CLAUDE.md conflict (gradient locked to the floating CTA pill only). Solid section colours vs relax the rule. Kris decides.
-  2. Which shape presets to support (down-triangle, up-triangle, pill, rounded-rect) and per-section choices.
-  3. Does the hero cutout refactor ship here, or wait until refresh P8?
+**Decisions** (locked in `11-CONTEXT.md`, 2026-06-02):
+  - D-01/02 Surface: field = solid section colour, windows reveal a B&W image behind. Gradient rule untouched (no CLAUDE.md relaxation for gradient).
+  - D-03 Apertures: B&W/grayscale.
+  - D-04/08 Reusable `buildCutout(image, shapes)` function; five presets — circle, down-triangle, up-triangle, pill, rounded-rect.
+  - D-05 Hero: refactor onto the primitive this phase.
+  - D-06 Images: external WebP + srcset, lazy below fold, no base64. Hero eager.
+  - D-07 Motion: static, no scroll animation.
+  - D-09 Single shared `<image>` behind one `<mask>` with all shape paths in one viewBox coordinate space — never per-shape image copies.
+  - D-10/10a Cloudflare **deploy-time build command** generates static HTML. **Relaxes the CLAUDE.md "no build step / no bundlers" V1 rule** — CLAUDE.md updated this phase (constraint reversal, mirrors Phase 10).
 
-**Decisions**: to be locked in `11-CONTEXT.md`.
 **UI hint**: yes
-**Plans**: TBD after discuss
+**Plans**: TBD after plan-phase
 
 ## Progress
 

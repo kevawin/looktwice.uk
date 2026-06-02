@@ -9,11 +9,14 @@
 Build the cutout-reveal technique from `image-cutout-demo.html` once, as a reusable `.cutout` component, and refactor the existing hero onto it. The component is an SVG `<mask>`: the section's solid colour is the field, white shapes are "windows" that reveal a black-and-white image sitting behind. This realizes the project's locked "cutout/drenched aesthetic — colour on surface, B&W in apertures."
 
 **In scope:**
-- A reusable `.cutout` primitive (SVG-mask pattern + authored shape presets + layout tokens).
-- Refactor the current single-shape hero cutout onto the new primitive.
+- A reusable `buildCutout(image, shapes)` build function + the five-preset shape vocabulary (D-04, D-08).
+- A Cloudflare deploy-time build command that runs the function and emits static HTML (D-10).
+- Updating CLAUDE.md to permit the deploy-time build (constraint reversal, D-10a).
+- Refactor the current single-shape hero cutout onto the new primitive (D-05).
 - Responsive stacking/reflow of windows on mobile.
-- External-WebP image handling within the perf budget (srcset, lazy below the fold).
+- External-WebP image handling within the perf budget (srcset, lazy below the fold; no base64).
 - Accessibility: decorative windows `aria-hidden` / empty alt; meaningful imagery gets real alt.
+- Wiring Playwright + browser-sync to run against built output.
 
 **Out of scope (other phases):**
 - Services-section imagery using the primitive → refresh P5 (Services redesign).
@@ -44,10 +47,26 @@ Build the cutout-reveal technique from `image-cutout-demo.html` once, as a reusa
 ### Motion
 - **D-07:** **Static render — no scroll animation** on the cutout windows this phase. Keeps the primitive simple; no new reduced-motion branch beyond what exists. Animated/wipe reveals are deferred to P8 if ever pursued.
 
+### Reusable build function
+- **D-08:** The primitive is delivered as a **reusable build function** with an API shaped like `buildCutout(image, shapes)` — it receives one image and a set of shapes and produces the masked SVG markup. The five presets (D-04) are the `shapes` vocabulary.
+
+### Single shared image / single mask (hard technical constraint)
+- **D-09:** All shapes reveal the **same image**, via **one `<image>` element behind one `<mask>` that holds all the shape paths, in a single shared SVG `viewBox` coordinate space.** The image is drawn once and positioned once; each white shape is a window at its own coordinates in that same space. This is what keeps the shapes correctly positioned relative to each other and guarantees they all reveal one continuous photo. **Never per-shape image copies / never multiple masked image instances.** (This is exactly the demo's mechanic.)
+
+### Pipeline (relaxes a hard CLAUDE.md rule)
+- **D-10:** The build function runs as a **Cloudflare Pages deploy-time build command**. `index.html` (or marked cutout regions) is **generated at deploy** from a source template/config + the build script. Output is static HTML — so the hero stays LCP-safe and no-JS-safe (the reason for choosing build-time over runtime JS).
+- **D-10a — CLAUDE.md reversal required this phase:** This **relaxes the CLAUDE.md V1 hard rule** "no frameworks, no preprocessors, no bundlers, no npm deps for V1 / no build step." It is **build-time code generation that emits plain static HTML**, not a shipped framework or runtime dependency. CLAUDE.md MUST be updated this phase to permit a deploy-time build, document the source→output split, and record the rationale — mirroring the Phase 10 mailto→form constraint-reversal pattern (reversal recorded in CLAUDE.md + STATE).
+
 ### Claude's Discretion
 - Exact mask `viewBox` coordinates, per-shape path math, and token names for window layout.
-- Whether each shape preset is a CSS class, an SVG symbol in the existing sprite, or a small templated SVG — planner/researcher decides the cleanest reuse pattern.
+- The internal form of each shape preset (path string, parameterised generator, etc.) — planner/researcher decides the cleanest reuse pattern inside the function.
 - Per-section window composition (how many windows, which shapes) for the hero refactor, within D-03/D-04.
+
+### Open questions for research/planning (raised by D-08/D-10)
+- **Template strategy:** token-replace inside a committed `index.html`, vs a separate template + data config that generates the final `index.html`. Pick the one with the smallest source/output divergence.
+- **Build tooling:** prefer a **zero-dependency Node script** to honour "minimal" — only add an npm dep if genuinely needed. Build script is shipped-pipeline tooling now, not just dev-only.
+- **Cloudflare config:** set the Pages build command + output directory; decide whether output stays repo-root or moves to `dist/`. Keep `main`/holding-page deploy untouched.
+- **Test + dev interplay:** Playwright (port 7777) and browser-sync (port 3000) must run against **built** output — wire `npm run build` ahead of `npm test`, and point browser-sync at the build result. Do not let the generated file and the committed source drift untested.
 </decisions>
 
 <canonical_refs>
@@ -61,7 +80,14 @@ Build the cutout-reveal technique from `image-cutout-demo.html` once, as a reusa
 ### Locked project rules this phase touches
 - `CLAUDE.md` — "Gradient discipline: brand gradient appears in exactly one place — the floating sticky tab." D-01/D-02 preserve this; do not relax it.
 - `CLAUDE.md` — "Cutout/drenched aesthetic — colour on surface, B&W in apertures." This phase realizes it. Performance budget: LCP < 2.5s, CLS < 0.1, page weight < 500KB excl. images; WebP + srcset, lazy below fold.
+- `CLAUDE.md` — "no frameworks, no preprocessors, no bundlers, no npm deps for V1." **D-10a relaxes this for a deploy-time build that emits static HTML.** Edit CLAUDE.md this phase (mirror the Phase 10 reversal pattern; see `10-CONTEXT.md` and the CLAUDE.md "Local preview server" note for how dev-tooling carve-outs were worded).
 - `.planning/ROADMAP-REFRESH.md` §"Phase 3: Cutout reveal system" — full task list + Playwright lean.
+
+### Build/test pipeline files to touch
+- `package.json` — add a `build` script (the buildCutout runner); ensure `test` runs against built output.
+- `playwright.config.js` — port 7777 static server; must serve built output.
+- `bs-config.js` / browser-sync — port 3000 dev server; point at build result, keep hot reload.
+- Cloudflare Pages project settings — build command + output directory (leave `main` holding-page deploy untouched).
 
 ### Current code to refactor
 - `index.html:112-122` — current `.hero__cutouts` / `.hero__cutout` markup (single `scene-cafe.webp`, grayscale rounded-rect).

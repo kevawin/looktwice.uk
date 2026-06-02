@@ -87,6 +87,33 @@
 
 ---
 
+## Reusable build function (follow-up round, 2026-06-02)
+
+**User's choice:** Deliver as a reusable function `buildCutout(image, shapes)` — takes one image + a set of shapes, builds the shapes with the image revealed behind. (D-08)
+**Notes:** Reusability is the explicit goal, stated by Jamie.
+
+---
+
+## Single shared image / single mask
+
+**User's choice (free-text):** "this should be multiple shapes revealing the same image — which means the image must always be positioned correctly in each so that the shape is correctly positioned in all shapes relative to each other."
+**Notes:** Confirmed as the demo's mechanic — one `<image>` behind one `<mask>` with all shape paths in a single shared viewBox coordinate space. Image drawn/positioned once. Hard constraint: never per-shape image copies. (D-09)
+
+---
+
+## Pipeline (build function wiring)
+
+| Option | Description | Selected |
+|--------|-------------|----------|
+| Local script, static output | node script run by hand, output committed; no CLAUDE.md change | |
+| Cloudflare deploy-time build | Cloudflare runs build each push; index.html generated at deploy | ✓ |
+| Hand-author from presets, no script | Ship presets, author hero by hand, add fn later | |
+
+**User's choice:** Cloudflare deploy-time build — "we're running on cloudflare so this could just be a build command."
+**Notes:** Relaxes the CLAUDE.md "no build step / no bundlers" V1 hard rule. Claude flagged the conflict; user accepted. CLAUDE.md must be updated this phase (constraint-reversal, mirrors Phase 10 mailto→form). Output is static HTML → hero stays LCP-safe and no-JS-safe. (D-10, D-10a)
+
+---
+
 ## Claude's Discretion
 
 - Mask viewBox coordinates, per-shape path math, window-layout token names.
