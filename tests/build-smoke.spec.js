@@ -120,18 +120,18 @@ for (const w of IMAGE_WIDTHS) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. dist/index.html contains srcset rewrite (AVIF source injected)
+// 6. dist/index.html contains Phase 11 SVG cutout (build rewrite applied)
 // ---------------------------------------------------------------------------
-test('dist/index.html contains srcset and type="image/avif" (build rewrite applied)', () => {
+test('dist/index.html contains SVG cutout and no CUTOUT marker (Phase 11 build applied)', () => {
   const htmlPath = path.join(DIST, 'index.html');
   expect(fs.existsSync(htmlPath)).toBe(true);
 
   const html = fs.readFileSync(htmlPath, 'utf8');
 
-  expect(html, 'dist/index.html must contain srcset attribute').toContain('srcset');
-  expect(html, 'dist/index.html must contain type="image/avif" <source>').toContain('type="image/avif"');
-  expect(html, 'dist/index.html must contain type="image/webp" <source>').toContain('type="image/webp"');
-  expect(html, 'dist/index.html must preserve fetchpriority="high" on fallback <img>').toContain('fetchpriority="high"');
+  expect(html, 'dist/index.html must contain injected <svg class="cutout"').toContain('<svg class="cutout');
+  expect(html, 'dist/index.html must contain feColorMatrix (grayscale filter)').toContain('feColorMatrix');
+  expect(html, 'dist/index.html must NOT contain unconsumed CUTOUT marker').not.toContain('<!-- CUTOUT:hero -->');
+  expect(html, 'dist/index.html must preserve fetchpriority="high" on hero preload').toContain('fetchpriority="high"');
 });
 
 // ---------------------------------------------------------------------------
