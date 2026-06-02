@@ -5,15 +5,15 @@
 // Usage:  node build.js
 //
 // Phase 11 extension seam:
-//   After buildImages() returns its manifest and before buildHtml(manifest) runs,
-//   Phase 11 inserts: manifest = await buildCutout(manifest);
-//   That step codegen's SVG cutout masks using the same image manifest and injects
-//   them into the dist/ HTML. No other file needs changing.
+//   After buildHtml() writes dist/index.html, buildCutout() reads and rewrites it
+//   to inject SVG cutout masks. See the seam in build() for exact placement.
 
 'use strict';
 
 const fs   = require('node:fs');
 const path = require('node:path');
+
+const { buildCutout } = require('./buildCutout');
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -174,65 +174,13 @@ async function buildImages() {
 }
 
 // ---------------------------------------------------------------------------
-// Step 4: buildHtml  — rewrite hero <img> with AVIF/WebP <source srcset>
-//
-// PHASE 11 SEAM — insert buildCutout step between buildImages and buildHtml:
-//   manifest = await buildCutout(manifest);  // Phase 11 adds SVG cutout codegen here
+// Step 4: buildHtml  — write source HTML to dist/
 // ---------------------------------------------------------------------------
 
-function buildHtml(manifest) {
+function buildHtml() {
   const srcHtml = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  const html    = rewriteHeroImg(srcHtml, manifest);
-  fs.writeFileSync(path.join(DIST, 'index.html'), html, 'utf8');
-  console.log('[build] HTML rewritten → dist/index.html');
-}
-
-/**
- * Rewrite the hero <picture class="hero__cutout"> block.
- * Injects <source type="image/avif"> and <source type="image/webp"> before the
- * existing <img>, keeping the <img> as a fallback with all its attributes intact.
- *
- * Targets the pattern:
- *   <picture class="hero__cutout">
- *     <img src="/images/scene-cafe.webp" …>
- *   </picture>
- *
- * Only rewrites the hero__cutout picture; leaves all other markup untouched.
- */
-function rewriteHeroImg(html, manifest) {
-  // Match the hero__cutout <picture> block — content between opening and closing tag.
-  // The regex is intentionally non-greedy and scoped to picture.hero__cutout.
-  return html.replace(
-    /(<picture\s[^>]*class="hero__cutout"[^>]*>)([\s\S]*?)(<\/picture>)/,
-    (_, openTag, inner, closeTag) => {
-      // Extract the <img> element from the current inner content.
-      const imgMatch = inner.match(/<img\b[\s\S]*?>/);
-      if (!imgMatch) return _; // nothing to rewrite — leave intact
-
-      // Extract src to find the source image basename (e.g. "scene-cafe").
-      const srcMatch = imgMatch[0].match(/\bsrc="\/images\/([^"]+)"/);
-      if (!srcMatch) return _;
-
-      const srcFile  = srcMatch[1]; // e.g. "scene-cafe.webp"
-      const baseName = path.basename(srcFile, path.extname(srcFile)); // "scene-cafe"
-      const entries  = manifest[baseName];
-      if (!entries) return _; // no encoded variants — leave as-is
-
-      const sizes = '(max-width: 768px) 85vw, 40vw';
-
-      const avifSrcset = entries.map(e => `${e.avif} ${e.w}w`).join(', ');
-      const webpSrcset = entries.map(e => `${e.webp} ${e.w}w`).join(', ');
-
-      const avifSource = `  <source type="image/avif"\n          srcset="${avifSrcset}"\n          sizes="${sizes}">`;
-      const webpSource = `  <source type="image/webp"\n          srcset="${webpSrcset}"\n          sizes="${sizes}">`;
-
-      // Preserve the original <img> exactly — only add <source> elements before it.
-      const imgEl = imgMatch[0].replace(/^\s+/, '  '); // normalise leading whitespace
-      const newInner = `\n${avifSource}\n${webpSource}\n  ${imgEl}\n`;
-
-      return `${openTag}${newInner}${closeTag}`;
-    }
-  );
+  fs.writeFileSync(path.join(DIST, 'index.html'), srcHtml, 'utf8');
+  console.log('[build] HTML written → dist/index.html');
 }
 
 // ---------------------------------------------------------------------------
@@ -293,15 +241,15 @@ async function build() {
   const t0 = Date.now();
   cleanDist();
   await buildCss();
-  const manifest = await buildImages();
+  let manifest = await buildImages();
 
   // ---- PHASE 11 SEAM -------------------------------------------------------
-  // Insert:  manifest = await buildCutout(manifest);
-  // Phase 11's buildCutout(manifest) generates SVG cutout masks from the image
-  // manifest, writes them to dist/, and returns an augmented manifest.
+  // buildCutout runs AFTER buildHtml writes dist/index.html so it can read
+  // and rewrite the marker in place. Order: buildHtml → buildCutout → copyStatic.
   // --------------------------------------------------------------------------
 
-  buildHtml(manifest);
+  buildHtml();
+  manifest = await buildCutout(manifest);
   copyStatic();
   console.log(`[build] done in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 }
@@ -330,6 +278,7 @@ async function watch() {
     path.join(ROOT, 'js'),
     path.join(ROOT, 'images'),
     path.join(ROOT, '_headers'),
+    path.join(ROOT, 'buildCutout.js'),
   ];
 
   console.log('[build:watch] Watching source files… (Ctrl-C to stop)');
