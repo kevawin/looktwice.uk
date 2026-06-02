@@ -223,7 +223,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **Plans**: 3 plans
 
 - [x] 12-01-PLAN.md — build.js core: deps install, Lightning CSS minify, sharp AVIF+WebP x4 widths + srcset rewrite, static-asset copy into dist/, mtime image cache, build-smoke spec
-- [ ] 12-02-PLAN.md — dev/test wiring: Playwright builds-first + serves dist/ on 7777, browser-sync serves dist/ on 3000 with source-watch rebuild + hot reload
+- [x] 12-02-PLAN.md — dev/test wiring: Playwright builds-first + serves dist/ on 7777, browser-sync serves dist/ on 3000 with source-watch rebuild + hot reload
 - [ ] 12-03-PLAN.md — Cloudflare branch gate (build.sh on CF_PAGES_BRANCH), preview header check, blocking human-verify that main holding page stays untouched
 
 ### Phase 11: Cutout reveal system (V1 Refresh P3)
@@ -261,7 +261,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
-| 12. Build pipeline & tooling foundation | 1/3 | In Progress|  |
+| 12. Build pipeline & tooling foundation | 2/3 | In Progress|  |
 | 11. Cutout reveal system (refresh P3) | 0/0 | Not started | - |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 | 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
