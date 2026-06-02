@@ -92,7 +92,7 @@ test.describe('SHAPE_PRESETS library', () => {
   test('down-triangle preset returns a path with the exact demo d-attribute', () => {
     const mod = loadModule();
     // Access SHAPE_PRESETS if exported; else rely on SVG string tests below.
-    if (!mod.SHAPE_PRESETS) return; // optional export
+    expect(mod.SHAPE_PRESETS, 'SHAPE_PRESETS must be exported').toBeDefined();
     const shape = mod.SHAPE_PRESETS['down-triangle']();
     expect(shape).toContain('M 83.14,0');
     expect(shape).toContain('558.43,72.04');
@@ -101,7 +101,7 @@ test.describe('SHAPE_PRESETS library', () => {
 
   test('up-triangle preset returns a path with the exact demo d-attribute', () => {
     const mod = loadModule();
-    if (!mod.SHAPE_PRESETS) return;
+    expect(mod.SHAPE_PRESETS, 'SHAPE_PRESETS must be exported').toBeDefined();
     const shape = mod.SHAPE_PRESETS['up-triangle']();
     expect(shape).toContain('M 658.43,72.04');
     expect(shape).toContain('Q 700,0 741.57,72.04');
@@ -110,7 +110,7 @@ test.describe('SHAPE_PRESETS library', () => {
 
   test('pill preset returns a rect with rx = height/2 (stadium shape)', () => {
     const mod = loadModule();
-    if (!mod.SHAPE_PRESETS) return;
+    expect(mod.SHAPE_PRESETS, 'SHAPE_PRESETS must be exported').toBeDefined();
     const shape = mod.SHAPE_PRESETS['pill']();
     expect(shape).toContain('<rect');
     expect(shape).toContain('rx=');
@@ -119,7 +119,7 @@ test.describe('SHAPE_PRESETS library', () => {
 
   test('circle preset returns a circle element', () => {
     const mod = loadModule();
-    if (!mod.SHAPE_PRESETS) return;
+    expect(mod.SHAPE_PRESETS, 'SHAPE_PRESETS must be exported').toBeDefined();
     const shape = mod.SHAPE_PRESETS['circle']();
     expect(shape).toContain('<circle');
     expect(shape).toContain('fill="white"');
@@ -127,7 +127,7 @@ test.describe('SHAPE_PRESETS library', () => {
 
   test('rounded-rect preset returns a rect with rx attribute', () => {
     const mod = loadModule();
-    if (!mod.SHAPE_PRESETS) return;
+    expect(mod.SHAPE_PRESETS, 'SHAPE_PRESETS must be exported').toBeDefined();
     const shape = mod.SHAPE_PRESETS['rounded-rect']();
     expect(shape).toContain('<rect');
     expect(shape).toContain('rx=');
@@ -144,10 +144,10 @@ test.describe('SVG string generation (D-03, D-09)', () => {
 
   function makeSvg(overrides = {}) {
     const mod = loadModule();
-    if (!mod.buildSvgString) {
-      // If not exported, we test via the dist file in browser tests.
-      return null;
-    }
+    // Exports are part of the contract (module.exports = { buildCutout,
+    // buildSvgString, SHAPE_PRESETS, CUTOUT_CONFIGS }). Assert rather than skip
+    // so a dropped export fails loudly instead of silently passing (WR-04).
+    expect(mod.buildSvgString, 'buildSvgString must be exported for unit testing').toBeDefined();
     const config = {
       id: 'test',
       image: 'scene-cafe',
@@ -165,46 +165,39 @@ test.describe('SVG string generation (D-03, D-09)', () => {
 
   test('SVG contains exactly one <image element (D-09)', () => {
     const svg = makeSvg();
-    if (!svg) return;
     const count = (svg.match(/<image/g) || []).length;
     expect(count, 'must have exactly one <image (D-09)').toBe(1);
   });
 
   test('SVG contains feColorMatrix for grayscale (D-03)', () => {
     const svg = makeSvg();
-    if (!svg) return;
     expect(svg).toContain('feColorMatrix');
   });
 
   test('SVG image href points to scene-cafe-960.webp (manifest pick)', () => {
     const svg = makeSvg();
-    if (!svg) return;
     expect(svg).toContain('scene-cafe-960.webp');
   });
 
   test('SVG contains no base64 data (D-06)', () => {
     const svg = makeSvg();
-    if (!svg) return;
     expect(svg).not.toContain('data:image');
   });
 
   test('SVG IDs are suffixed with config.id (Pitfall 1)', () => {
     const svg = makeSvg({ id: 'testid' });
-    if (!svg) return;
     expect(svg).toContain('cutout-grayscale-testid');
     expect(svg).toContain('cutout-windows-testid');
   });
 
   test('decorative SVG has aria-hidden="true" and role="presentation"', () => {
     const svg = makeSvg({ alt: '' });
-    if (!svg) return;
     expect(svg).toContain('aria-hidden="true"');
     expect(svg).toContain('role="presentation"');
   });
 
   test('meaningful SVG has role="img", aria-labelledby, and <title>', () => {
     const svg = makeSvg({ id: 'hero', alt: 'Coffee shop scene' });
-    if (!svg) return;
     expect(svg).toContain('role="img"');
     expect(svg).toContain('aria-labelledby="cutout-title-hero"');
     expect(svg).toContain('<title id="cutout-title-hero">Coffee shop scene</title>');
@@ -213,7 +206,6 @@ test.describe('SVG string generation (D-03, D-09)', () => {
 
   test('SVG has viewBox and intrinsic width/height attributes (CLS guard)', () => {
     const svg = makeSvg();
-    if (!svg) return;
     expect(svg).toContain('viewBox="0 0 1000 1064"');
     expect(svg).toContain('width="1000"');
     expect(svg).toContain('height="1064"');
@@ -223,14 +215,12 @@ test.describe('SVG string generation (D-03, D-09)', () => {
 
   test('no focus → centred xMidYMid slice', () => {
     const svg = makeSvg({ focus: undefined });
-    if (!svg) return;
     expect(svg).toContain('preserveAspectRatio="xMidYMid slice"');
   });
 
   test('focus + known aspect → cover geometry with preserveAspectRatio="none"', () => {
     // box 1000x500 (aspect 2) over a 0.667 image → match width, rH = 1000/0.667 = 1500.
     const svg = makeSvg({ viewBox: '0 0 1000 500', width: 1000, height: 500, focus: { x: 0.5, y: 0.5 } });
-    if (!svg) return;
     expect(svg, 'focus disables aspect-ratio slicing').toContain('preserveAspectRatio="none"');
     expect(svg, 'image scaled to cover the box (1000x1500)').toMatch(/width="1000" height="1500"/);
     // centred vertically: iy = (500 - 1500) * 0.5 = -500
@@ -239,7 +229,6 @@ test.describe('SVG string generation (D-03, D-09)', () => {
 
   test('focus.y shifts the cover offset (object-position style)', () => {
     const svg = makeSvg({ viewBox: '0 0 1000 500', width: 1000, height: 500, focus: { x: 0.5, y: 0.66 } });
-    if (!svg) return;
     // iy = (500 - 1500) * 0.66 = -660
     expect(svg).toContain('y="-660"');
   });
@@ -249,7 +238,6 @@ test.describe('SVG string generation (D-03, D-09)', () => {
       { type: 'circle',       opts: { cx: 100, cy: 100, r: 50 } },
       { type: 'rounded-rect', opts: { x: 200, y: 50, w: 300, h: 300, rx: 40 } },
     ] });
-    if (!svg) return;
     expect((svg.match(/<circle/g) || []).length, 'circle present').toBe(1);
     expect(svg, 'squircle rx present').toContain('rx="40"');
     // still one shared image (D-09 holds with N shapes)
@@ -266,7 +254,7 @@ test.describe('Error handling', () => {
 
   test('unknown shape type throws with [buildCutout] prefix', () => {
     const mod = loadModule();
-    if (!mod.buildSvgString) return;
+    expect(mod.buildSvgString, 'buildSvgString must be exported').toBeDefined();
     const config = {
       id: 'hero',
       image: 'scene-cafe',
@@ -284,7 +272,7 @@ test.describe('Error handling', () => {
 
   test('missing manifest entry throws with [buildCutout] prefix', () => {
     const mod = loadModule();
-    if (!mod.buildSvgString) return;
+    expect(mod.buildSvgString, 'buildSvgString must be exported').toBeDefined();
     const config = {
       id: 'hero',
       image: 'not-in-manifest',
@@ -302,7 +290,7 @@ test.describe('Error handling', () => {
 
   test('image present but missing the 960px width throws (fail-closed, WR-02)', () => {
     const mod = loadModule();
-    if (!mod.buildSvgString) return;
+    expect(mod.buildSvgString, 'buildSvgString must be exported').toBeDefined();
     const manifest = { odd: [{ w: 480, h: 720, webp: '/images/odd-480.webp' }] }; // no 960 entry
     const config = {
       id: 'x', image: 'odd', viewBox: '0 0 100 100', width: 100, height: 100,
@@ -313,7 +301,7 @@ test.describe('Error handling', () => {
 
   test('alt text is XML-escaped in the <title> (WR-01, no markup injection)', () => {
     const mod = loadModule();
-    if (!mod.buildSvgString) return;
+    expect(mod.buildSvgString, 'buildSvgString must be exported').toBeDefined();
     const config = {
       id: 'hero', image: 'scene-cafe', viewBox: '0 0 1000 1064', width: 1000, height: 1064,
       alt: 'Tom & Jerry <script>"x"', shapes: [{ type: 'rounded-rect' }],

@@ -95,7 +95,7 @@ for (const file of CSS_FILES) {
 
     expect(
       distSize,
-      `dist/css/${file} (${distSize}B) must be smaller than source (${srcSize}B) — CSS not minified`,
+      `dist/css/${file} appears not minified: dist (${distSize}B) is not smaller than source (${srcSize}B)`,
     ).toBeLessThan(srcSize);
   });
 }
