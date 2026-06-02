@@ -194,7 +194,9 @@ Supply-chain note: `build.sh` uses `npm ci` (not `npm install`) to enforce the c
 
 ### A1 caveat — main no-op behaviour
 
-Cloudflare does **not** explicitly document what it does when the build command exits 0 without producing `dist/` under a single project configured with output directory `dist/`. The assumption (A1) is that Cloudflare falls back to deploying the branch's root files. This was human-verified: a trivial commit was pushed to `main` and the live `looktwice.uk` holding page confirmed unchanged (Task 3, checkpoint:human-verify, Plan 12-03). If that verification reveals main IS affected, see the two-projects fallback below.
+Cloudflare does **not** explicitly document what it does when the build command exits 0 without producing `dist/` under a single project configured with output directory `dist/`. The assumption (A1) is that Cloudflare falls back to deploying the branch's root files.
+
+> **NOT YET VERIFIED — deferred to cutover (owner decision, 2026-06-02).** Plan 12-03 Task 3 (`checkpoint:human-verify`) would push a trivial commit to `main` and confirm the live `looktwice.uk` holding page is unchanged. This was **deliberately deferred**: Cloudflare does not auto-rebuild `main` when the global build config changes — it only applies on the next `main` deploy, and no one commits to `main` before cutover. So the A1 risk is not exercised until cutover. **This check MUST be run as part of the cutover sequence** (or earlier, if any `main` deploy is triggered). If it reveals `main` IS affected, switch to the two-projects fallback below.
 
 ### Two-projects fallback
 
