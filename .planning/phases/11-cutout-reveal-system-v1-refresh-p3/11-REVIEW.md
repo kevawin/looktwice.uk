@@ -15,7 +15,9 @@ findings:
   warning: 4
   info: 5
   total: 9
-status: issues_found
+status: resolved
+resolved: 2026-06-02
+resolved_count: 9
 ---
 
 # Phase 11: Code Review Report
@@ -23,7 +25,28 @@ status: issues_found
 **Reviewed:** 2026-06-02
 **Depth:** standard
 **Files Reviewed:** 6
-**Status:** issues_found
+**Status:** resolved (all 9 findings fixed 2026-06-02 — see Resolution)
+
+## Resolution (2026-06-02)
+
+All 9 findings were fixed after review (post-phase, on `new-site`). The original
+findings are preserved below as the record. Per-finding status:
+
+| Finding | Status | Fixed in |
+|---------|--------|----------|
+| WR-01 unescaped `alt` | ✅ resolved | `ad326c4` — `escapeXml(alt)` in `<title>` |
+| WR-02 manifest fallback | ✅ resolved | `ad326c4` — explicit `CUTOUT_IMAGE_WIDTH`, fail-closed throw |
+| WR-03 zero-byte cache hit | ✅ resolved | `8155c24` — `allCached` also checks `size > 0` |
+| WR-04 silent `if(!x) return` test skips | ✅ resolved | `91e90c1` — assert exports, removed all silent skips |
+| IN-01 dead `loading` field | ✅ resolved | `7a537aa` — removed from config + destructure |
+| IN-02 magic numbers | ✅ resolved | `ad326c4` — named `CUTOUT_IMAGE_WIDTH`, positional fallback removed |
+| IN-03 pill default overshoot | ✅ resolved | `7a537aa` — pill default `h` 519.6 → 519.4 |
+| IN-04 backwards smoke message | ✅ resolved | `91e90c1` — reworded for failure clarity |
+| IN-05 no-op `await`/reassignment | ✅ resolved | `8155c24` — dropped the reassignment |
+
+Full suite green after fixes: 305 passed, 31 skipped, 0 failed.
+
+---
 
 ## Summary
 
