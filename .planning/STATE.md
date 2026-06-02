@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Phase 10 closed. Branch `new-site` (not merged to main — more phases first, per Jamie).
-stopped_at: Phase 11 (Cutout reveal) context gathered
-last_updated: "2026-06-02T17:43:03.041Z"
+stopped_at: Phase 12 (build pipeline) context gathered; runs before Phase 11
+last_updated: "2026-06-02T18:08:10.147Z"
 progress:
-  total_phases: 10
+  total_phases: 11
   completed_phases: 5
   total_plans: 13
   completed_plans: 16
-  percent: 50
+  percent: 45
 ---
 
 # State: looktwice.uk
@@ -166,11 +166,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-02T17:43:03.038Z
+**Last session:** 2026-06-02T18:08:10.145Z
 
 **Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
 
-**Stopped at:** Phase 11 (Cutout reveal) context gathered
+**Stopped at:** Phase 12 (build pipeline) context gathered; runs before Phase 11
 
 **Files of record:**
 
