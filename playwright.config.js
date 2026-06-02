@@ -27,7 +27,9 @@ module.exports = defineConfig({
     // destabilises the suite (CLAUDE.md hard rule: dev 3000, tests 7777).
     command: 'npm run build && python3 -m http.server 7777 --directory dist',
     port: 7777,
-    reuseExistingServer: true,
+    // Never reuse an existing 7777 server in CI — a stale dist/ would let the
+    // suite pass without proving the current source builds (WR-01).
+    reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },
 

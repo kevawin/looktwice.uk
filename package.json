@@ -4,7 +4,7 @@
   "description": "Dev tooling for looktwice.uk — test runner only, not shipped to the site",
   "scripts": {
     "build": "node build.js",
-    "build:watch": "node build.js --watch & browser-sync start --config bs-config.js",
+    "build:watch": "node build.js --watch & WATCH_PID=$!; trap 'kill $WATCH_PID 2>/dev/null' EXIT INT TERM; browser-sync start --config bs-config.js",
     "dev": "npm run build:watch",
     "test": "npm run build && playwright test",
     "test:ui": "npm run build && playwright test --ui"

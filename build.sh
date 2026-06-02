@@ -10,12 +10,12 @@
 # Do NOT change to npm install — npm ci enforces the lockfile exactly.
 set -euo pipefail
 
-if [ "${CF_PAGES_BRANCH}" = "new-site" ]; then
+if [ "${CF_PAGES_BRANCH:-}" = "new-site" ]; then
   echo "Branch 'new-site' — running build."
   npm ci
   npm run build
 else
-  echo "Branch '${CF_PAGES_BRANCH}' — no build (holding page deploys as-is)."
+  echo "Branch '${CF_PAGES_BRANCH:-<unset>}' — no build (holding page deploys as-is)."
   # main must ship its own files unchanged.
   # Do NOT create or alter dist/ here — Cloudflare will deploy the branch
   # files from the repo root directly (A1 caveat: see cutover playbook).
