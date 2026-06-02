@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: "Phase 10 (Contact form) COMPLETE + verified + UAT signed off (2026-06-01). Next: V1 Refresh P3 — Cutout reveal system (ROADMAP-REFRESH.md), unstarted."
-last_updated: "2026-06-01T21:46:13.364Z"
+status: Phase 10 closed. Branch `new-site` (not merged to main — more phases first, per Jamie).
+stopped_at: Phase 11 (Cutout reveal) context gathered
+last_updated: "2026-06-02T17:43:03.041Z"
 progress:
-  total_phases: 9
+  total_phases: 10
   completed_phases: 5
   total_plans: 13
   completed_plans: 16
-  percent: 56
+  percent: 50
 ---
 
 # State: looktwice.uk
@@ -166,11 +166,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-01T20:17:03.709Z
+**Last session:** 2026-06-02T17:43:03.038Z
 
 **Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
 
-**Stopped at:** Phase 10 (Contact form) COMPLETE — 2 plans, verified 9/9, human UAT signed off (2026-06-01). Post-phase on branch `new-site`: real-domain-only Formspree submit guard, in-place submit success UX (button morph + message below), browser-sync hot-reload dev tooling, and a floating-bar mobile fix (gate on `.hero__text` via IntersectionObserver, not full hero height). All pushed to `new-site`; NOT merged to main (more phases first, per Jamie).
+**Stopped at:** Phase 11 (Cutout reveal) context gathered
 
 **Files of record:**
 
