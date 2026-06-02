@@ -247,7 +247,12 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   - D-10/10a Cloudflare **deploy-time build command** generates static HTML. **Relaxes the CLAUDE.md "no build step / no bundlers" V1 rule** — CLAUDE.md updated this phase (constraint reversal, mirrors Phase 10).
 
 **UI hint**: yes
-**Plans**: TBD after plan-phase
+**Plans**: 3 plans (3 waves, sequential by build-data dependency)
+
+Plans:
+- [ ] 11-01-PLAN.md — Author buildCutout.js: five shape presets + SVG mask generator (D-03/04/08/09)
+- [ ] 11-02-PLAN.md — Wire buildCutout into build.js, swap hero markup + preload, refactor hero CSS (D-01/02/05/06/07/10)
+- [ ] 11-03-PLAN.md — tests/cutout.spec.js + CLAUDE.md cutout build-model note (D-03/06/07/09/10a)
 
 ## Progress
 
@@ -262,7 +267,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 12. Build pipeline & tooling foundation | 3/3 | Complete   | 2026-06-02 |
-| 11. Cutout reveal system (refresh P3) | 0/0 | Not started | - |
+| 11. Cutout reveal system (refresh P3) | 0/3 | Planned | - |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 | 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
 
