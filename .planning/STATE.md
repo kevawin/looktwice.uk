@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Phase 12 (build pipeline) planned — 3 plans, checker PASSED. Ready to execute (runs before Phase 11).
-last_updated: "2026-06-02T20:05:55.531Z"
+stopped_at: Phase 11 (cutout reveal system) complete + verified. Hero refined to circle+squircle with focal-point/multi-shape support and hardened (quick tasks 260602-tm1/v7i/vg6); pushed to new-site. Next: V1 Refresh P4 (copy), P5 (services), P6 (credentials).
+last_updated: "2026-06-02T21:45:42.000Z"
 progress:
-  total_phases: 11
+  total_phases: 10
   completed_phases: 7
   total_plans: 19
-  completed_plans: 22
-  percent: 64
+  completed_plans: 19
+  percent: 70
 ---
 
 # State: looktwice.uk
@@ -22,23 +22,20 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 11 — cutout-reveal-system-v1-refresh-p3
+**Current focus:** Phase 11 complete. Next: V1 Refresh P4 (copy), P5 (services), P6 (credentials).
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 11 (cutout-reveal-system-v1-refresh-p3) — EXECUTING
-Plan: Not started
+Phase: 11 (cutout-reveal-system-v1-refresh-p3) — COMPLETE + VERIFIED
+Hero refined post-verification to circle + squircle (focal-point + multi-shape cutout support) and hardened; all on new-site.
 
-NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). See `.planning/ROADMAP-REFRESH.md`. Unstarted → start with `/gsd:discuss-phase`.
+NEXT: V1 Refresh P4 — Copy pass (Kris voice). See `.planning/ROADMAP-REFRESH.md`. Start with `/gsd:discuss-phase`. Then P5 (services redesign, consumes the cutout primitive) and P6 (credentials).
 
-- **Milestone:** v1 (GSD numbered phases 1–10 done; V1 Refresh P3–P6 remain)
-- **Phase:** 12
-- **Status:** Ready to plan
-- **Progress:** [██████████] 100%
-- **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
-- **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
+- **Milestone:** v1 (GSD phases 6–12 done; V1 Refresh P4/P5/P6 remain)
+- **Status:** Phase 11 done — ready to discuss/plan next phase
+- **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias for `new-site` — auto-updates on push)
 
 ## Configuration
 
