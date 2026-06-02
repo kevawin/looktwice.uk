@@ -3,12 +3,16 @@
   "private": true,
   "description": "Dev tooling for looktwice.uk — test runner only, not shipped to the site",
   "scripts": {
-    "dev": "browser-sync start --config bs-config.js",
-    "test": "playwright test",
-    "test:ui": "playwright test --ui"
+    "build": "node build.js",
+    "build:watch": "node build.js --watch & browser-sync start --server dist --files 'dist/**' --port 3000 --no-open --no-ui",
+    "dev": "npm run build:watch",
+    "test": "npm run build && playwright test",
+    "test:ui": "npm run build && playwright test --ui"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",
-    "browser-sync": "^3.0.4"
+    "browser-sync": "^3.0.4",
+    "lightningcss": "^1.32.0",
+    "sharp": "^0.34.5"
   }
 }
