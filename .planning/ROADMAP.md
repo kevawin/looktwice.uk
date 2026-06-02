@@ -275,7 +275,7 @@ Plans:
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 12. Build pipeline & tooling foundation | 3/3 | Complete   | 2026-06-02 |
-| 11. Cutout reveal system (refresh P3) | 3/3 | Complete   | 2026-06-02 |
+| 11. Cutout reveal system (refresh P3) | 3/3 | Complete    | 2026-06-02 |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 | 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
 

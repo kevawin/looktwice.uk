@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
+status: planning
 stopped_at: Phase 12 (build pipeline) planned — 3 plans, checker PASSED. Ready to execute (runs before Phase 11).
-last_updated: "2026-06-02T19:58:21.913Z"
+last_updated: "2026-06-02T20:05:55.531Z"
 progress:
   total_phases: 11
   completed_phases: 7
@@ -29,13 +29,13 @@ progress:
 ## Current Position
 
 Phase: 11 (cutout-reveal-system-v1-refresh-p3) — EXECUTING
-Plan: 3 of 3
+Plan: Not started
 
 NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). See `.planning/ROADMAP-REFRESH.md`. Unstarted → start with `/gsd:discuss-phase`.
 
 - **Milestone:** v1 (GSD numbered phases 1–10 done; V1 Refresh P3–P6 remain)
-- **Phase:** 10 complete; next = Refresh P3 (Cutout reveal)
-- **Status:** Phase complete — ready for verification
+- **Phase:** 12
+- **Status:** Ready to plan
 - **Progress:** [██████████] 100%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
