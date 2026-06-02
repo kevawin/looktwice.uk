@@ -18,6 +18,21 @@ const path = require('node:path');
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
 
+// The manifest width the cutout <image href> resolves to. Must exist in build.js
+// IMG_WIDTHS. Explicit + fail-closed: if no entry of this width exists we throw
+// rather than silently picking an arbitrary resolution (WR-02).
+const CUTOUT_IMAGE_WIDTH = 960;
+
+/** Escape a string for safe interpolation into SVG/XML text (e.g. <title>). */
+function escapeXml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ---------------------------------------------------------------------------
 // Shape preset generators — return SVG element strings in viewBox coordinates.
 // Five presets per D-04: circle, down-triangle, up-triangle, pill, rounded-rect.
@@ -104,8 +119,8 @@ function buildSvgString(config, manifest) {
   const { id, image, viewBox, width, height, loading, fetchpriority, alt, shapes } = config;
 
   const entries = manifest[image];
-  const entry   = (entries && entries.find(e => e.w === 960)) || (entries && entries[1]);
-  if (!entry) throw new Error(`[buildCutout] no manifest entry for image: ${image}`);
+  const entry   = entries && entries.find(e => e.w === CUTOUT_IMAGE_WIDTH);
+  if (!entry) throw new Error(`[buildCutout] no ${CUTOUT_IMAGE_WIDTH}px manifest entry for image: ${image}`);
 
   const href = entry.webp; // single-resolution href; SVG <image> does not support srcset
 
@@ -130,7 +145,7 @@ function buildSvgString(config, manifest) {
     : `role="img" aria-labelledby="cutout-title-${id}"`;
   const titleEl = isDecorative
     ? ''
-    : `\n  <title id="cutout-title-${id}">${alt}</title>`;
+    : `\n  <title id="cutout-title-${id}">${escapeXml(alt)}</title>`;
 
   const fetchpriorityAttr = fetchpriority
     ? `\n         fetchpriority="${fetchpriority}"`
