@@ -270,6 +270,37 @@ test.describe('Error handling', () => {
 
 test.describe('buildCutout(manifest) marker replacement', () => {
 
+  // These tests mutate dist/index.html. Running them in parallel across three
+  // viewport projects causes races. Serial mode + desktop-only skips prevent
+  // cross-project file corruption while still exercising the full behaviour once.
+  // afterAll restores the full build output so browser-render tests see the real page.
+  test.describe.configure({ mode: 'serial' });
+
+  const _distHtml = path.join(ROOT, 'dist', 'index.html');
+
+  test.beforeEach(({ }, testInfo) => {
+    if (testInfo.project.name !== 'desktop-1440') {
+      testInfo.skip();
+    }
+  });
+
+  test.afterAll(() => {
+    // Rebuild dist/index.html so subsequent test groups see the real build output.
+    // We call `buildCutout` after re-injecting the marker into a placeholder so the
+    // file is valid HTML with the cutout, not just the marker-replaced snippet.
+    // The simplest safe restore: re-run `buildCutout` on the actual source.
+    // Since buildCutout reads dist/index.html and replaces the marker, and we just
+    // left it in a mutated state, we need to write the real file back.
+    // We achieve this by invoking the build module with the actual manifest.
+    // The safest approach: call node build.js synchronously.
+    const { execSync } = require('node:child_process');
+    try {
+      execSync('node build.js', { cwd: ROOT, stdio: 'ignore' });
+    } catch (_) {
+      // If rebuild fails, the file may be stale but the test suite continues.
+    }
+  });
+
   test('replaces <!-- CUTOUT:hero --> marker with <svg class="cutout', async () => {
     const tmpDir = path.join(ROOT, 'dist');
     fs.mkdirSync(tmpDir, { recursive: true });
@@ -349,6 +380,48 @@ test.describe('Build output — dist/index.html', () => {
     expect(html, 'href must reference scene-cafe-960.webp').toContain('scene-cafe-960.webp');
     expect(html, 'CUTOUT marker must be replaced').not.toContain('<!-- CUTOUT:hero -->');
     expect(html, 'no base64 image data').not.toContain('data:image/');
+  });
+
+  test('SVG carries intrinsic width and height (CLS guard, Pitfall 3)', () => {
+    const htmlPath = path.join(DIST, 'index.html');
+    if (!fs.existsSync(htmlPath)) {
+      test.skip();
+      return;
+    }
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    expect(html, 'SVG must have width="1000"').toContain('width="1000"');
+    expect(html, 'SVG must have height="1064"').toContain('height="1064"');
+  });
+
+  test('exactly one <image element inside the cutout SVG (D-09 single shared image)', () => {
+    const htmlPath = path.join(DIST, 'index.html');
+    if (!fs.existsSync(htmlPath)) {
+      test.skip();
+      return;
+    }
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    // Extract the cutout SVG block and count <image occurrences within it.
+    const svgMatch = html.match(/<svg class="cutout[\s\S]*?<\/svg>/);
+    expect(svgMatch, 'cutout SVG must be present').not.toBeNull();
+    const svgBlock = svgMatch[0];
+    const imageCount = (svgBlock.match(/<image/g) || []).length;
+    expect(imageCount, 'must have exactly one <image (D-09)').toBe(1);
+  });
+
+  test('head contains rel="preload" as="image" for hero image (LCP guard, Pitfall 4)', () => {
+    const htmlPath = path.join(DIST, 'index.html');
+    if (!fs.existsSync(htmlPath)) {
+      test.skip();
+      return;
+    }
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    // Extract the <head> block and assert the preload link is present.
+    const headMatch = html.match(/<head[\s\S]*?<\/head>/i);
+    expect(headMatch, '<head> block must be present').not.toBeNull();
+    const head = headMatch[0];
+    expect(head, 'head must have a preload link').toContain('rel="preload"');
+    expect(head, 'preload must be for an image').toContain('as="image"');
+    expect(head, 'preload must reference the hero scene image').toContain('scene-cafe');
   });
 
 });
