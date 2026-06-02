@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 12 (build pipeline) planned — 3 plans, checker PASSED. Ready to execute (runs before Phase 11).
-last_updated: "2026-06-02T19:40:14.219Z"
+last_updated: "2026-06-02T19:46:31.148Z"
 progress:
   total_phases: 11
   completed_phases: 6
   total_plans: 19
-  completed_plans: 20
+  completed_plans: 21
   percent: 55
 ---
 
@@ -29,7 +29,7 @@ progress:
 ## Current Position
 
 Phase: 11 (cutout-reveal-system-v1-refresh-p3) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 
 NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). See `.planning/ROADMAP-REFRESH.md`. Unstarted → start with `/gsd:discuss-phase`.
 
@@ -65,6 +65,7 @@ NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). S
 | Phase 02-hero-situation P03 | 1m 20s | 2 tasks | 2 files |
 | Phase 10 P02 | 600 | 2 tasks | 1 files |
 | Phase 11 P01 | 187 | 2 tasks | 2 files |
+| Phase 11 P02 | 300 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -130,6 +131,8 @@ NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). S
 - [Phase 07]: Plan 07-01: Checkpoint approved 2026-06-01. Removing mid-page CTAs left two segues dangling (work paragraph `index.html:220`, services offer `index.html:262`); GSD 08 floating action bar must answer them and Kris may reword in refresh P4
 - [Phase ?]: Task 1 (CLAUDE.md + STATE.md reversal) already done in wave 1; Playwright spec added with page.route Formspree mocks, 15 tests green
 - [Phase ?]: Hero cutout defaults to single rounded-rect window (D-05 discretion)
+- [Phase ?]: buildCutout called AFTER buildHtml at Phase 11 seam (reads already-written dist/index.html)
+- [Phase ?]: build-smoke test updated from rewriteHeroImg assertions to Phase 11 SVG cutout assertions
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -168,7 +171,7 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-02T19:40:09.271Z
+**Last session:** 2026-06-02T19:46:20.368Z
 
 **Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
 
