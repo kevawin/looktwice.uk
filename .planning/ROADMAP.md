@@ -250,8 +250,16 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 **Plans**: 3 plans (3 waves, sequential by build-data dependency)
 
 Plans:
+**Wave 1**
+
 - [ ] 11-01-PLAN.md — Author buildCutout.js: five shape presets + SVG mask generator (D-03/04/08/09)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 11-02-PLAN.md — Wire buildCutout into build.js, swap hero markup + preload, refactor hero CSS (D-01/02/05/06/07/10)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 11-03-PLAN.md — tests/cutout.spec.js + CLAUDE.md cutout build-model note (D-03/06/07/09/10a)
 
 ## Progress
