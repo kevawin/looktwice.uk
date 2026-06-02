@@ -270,67 +270,41 @@ test.describe('Error handling', () => {
 
 test.describe('buildCutout(manifest) marker replacement', () => {
 
-  // These tests mutate dist/index.html. Running them in parallel across three
-  // viewport projects causes races. Serial mode + desktop-only skips prevent
-  // cross-project file corruption while still exercising the full behaviour once.
-  // afterAll restores the full build output so browser-render tests see the real page.
-  test.describe.configure({ mode: 'serial' });
+  // Use a temp file (not dist/index.html) via the opts.htmlPath override added
+  // in buildCutout.js. This prevents cross-project file-system races when three
+  // Playwright workers run in parallel — each worker gets its own isolated path.
 
-  const _distHtml = path.join(ROOT, 'dist', 'index.html');
-
-  test.beforeEach(({ }, testInfo) => {
-    if (testInfo.project.name !== 'desktop-1440') {
-      testInfo.skip();
-    }
-  });
-
-  test.afterAll(() => {
-    // Rebuild dist/index.html so subsequent test groups see the real build output.
-    // We call `buildCutout` after re-injecting the marker into a placeholder so the
-    // file is valid HTML with the cutout, not just the marker-replaced snippet.
-    // The simplest safe restore: re-run `buildCutout` on the actual source.
-    // Since buildCutout reads dist/index.html and replaces the marker, and we just
-    // left it in a mutated state, we need to write the real file back.
-    // We achieve this by invoking the build module with the actual manifest.
-    // The safest approach: call node build.js synchronously.
-    const { execSync } = require('node:child_process');
-    try {
-      execSync('node build.js', { cwd: ROOT, stdio: 'ignore' });
-    } catch (_) {
-      // If rebuild fails, the file may be stale but the test suite continues.
-    }
-  });
-
-  test('replaces <!-- CUTOUT:hero --> marker with <svg class="cutout', async () => {
-    const tmpDir = path.join(ROOT, 'dist');
+  /** @returns {string} A per-worker temp path that does not collide across projects. */
+  function tempHtml(label, projectName) {
+    const tmpDir = path.join(ROOT, 'test-results', 'cutout-tmp');
     fs.mkdirSync(tmpDir, { recursive: true });
-    const htmlPath = path.join(tmpDir, 'index.html');
+    return path.join(tmpDir, `${label}-${projectName}.html`);
+  }
+
+  test('replaces <!-- CUTOUT:hero --> marker with <svg class="cutout', async ({ }, testInfo) => {
+    const htmlPath = tempHtml('replace', testInfo.project.name);
     fs.writeFileSync(htmlPath, '<div><!-- CUTOUT:hero --></div>', 'utf8');
 
     const { buildCutout } = loadModule();
-    await buildCutout(makeManifest());
+    await buildCutout(makeManifest(), { htmlPath });
 
     const out = fs.readFileSync(htmlPath, 'utf8');
     expect(out, 'marker must be replaced').not.toContain('<!-- CUTOUT:hero -->');
     expect(out, 'SVG must be present').toContain('<svg class="cutout');
   });
 
-  test('returns manifest unchanged', async () => {
-    const tmpDir = path.join(ROOT, 'dist');
-    fs.mkdirSync(tmpDir, { recursive: true });
-    const htmlPath = path.join(tmpDir, 'index.html');
+  test('returns manifest unchanged', async ({ }, testInfo) => {
+    const htmlPath = tempHtml('returns', testInfo.project.name);
     fs.writeFileSync(htmlPath, '<div><!-- CUTOUT:hero --></div>', 'utf8');
 
     const { buildCutout } = loadModule();
     const m = makeManifest();
-    const result = await buildCutout(m);
+    const result = await buildCutout(m, { htmlPath });
     expect(result).toBe(m);
   });
 
-  test('logs a warning (not throw) when marker is absent', async () => {
-    const tmpDir = path.join(ROOT, 'dist');
-    fs.mkdirSync(tmpDir, { recursive: true });
-    const htmlPath = path.join(tmpDir, 'index.html');
+  test('logs a warning (not throw) when marker is absent', async ({ }, testInfo) => {
+    const htmlPath = tempHtml('warn', testInfo.project.name);
     fs.writeFileSync(htmlPath, '<div>no marker here</div>', 'utf8');
 
     const warnCalls = [];
@@ -338,20 +312,18 @@ test.describe('buildCutout(manifest) marker replacement', () => {
     console.warn = (...args) => warnCalls.push(args.join(' '));
 
     const { buildCutout } = loadModule();
-    await buildCutout(makeManifest()); // must not throw
+    await buildCutout(makeManifest(), { htmlPath }); // must not throw
 
     console.warn = origWarn;
     expect(warnCalls.some(w => w.includes('marker not found'))).toBe(true);
   });
 
-  test('generated SVG references scene-cafe-960.webp (not base64)', async () => {
-    const tmpDir = path.join(ROOT, 'dist');
-    fs.mkdirSync(tmpDir, { recursive: true });
-    const htmlPath = path.join(tmpDir, 'index.html');
+  test('generated SVG references scene-cafe-960.webp (not base64)', async ({ }, testInfo) => {
+    const htmlPath = tempHtml('base64', testInfo.project.name);
     fs.writeFileSync(htmlPath, '<div><!-- CUTOUT:hero --></div>', 'utf8');
 
     const { buildCutout } = loadModule();
-    await buildCutout(makeManifest());
+    await buildCutout(makeManifest(), { htmlPath });
 
     const out = fs.readFileSync(htmlPath, 'utf8');
     expect(out).toContain('scene-cafe-960.webp');

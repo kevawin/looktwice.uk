@@ -172,8 +172,13 @@ ${shapesMarkup}
  * @param {object} manifest - buildImages() manifest
  * @returns {Promise<object>} The manifest, unchanged
  */
-async function buildCutout(manifest) {
-  const htmlPath = path.join(DIST, 'index.html');
+/**
+ * @param {object} manifest - buildImages() manifest
+ * @param {{ htmlPath?: string }} [opts] - optional overrides (htmlPath for testing)
+ * @returns {Promise<object>} The manifest, unchanged
+ */
+async function buildCutout(manifest, opts = {}) {
+  const htmlPath = opts.htmlPath || path.join(DIST, 'index.html');
   let html = fs.readFileSync(htmlPath, 'utf8');
 
   for (const config of CUTOUT_CONFIGS) {
