@@ -113,6 +113,7 @@ async function buildImages() {
     const srcPath  = path.join(srcImagesDir, rasterFile);
     const baseName = path.basename(rasterFile, path.extname(rasterFile));
     const mtime    = fs.statSync(srcPath).mtimeMs;
+    const srcMeta  = await sharp(srcPath).metadata(); // intrinsic aspect for focal-point cutouts
 
     // Check cached outputs exist in .cache/images/ (persists across dist/ cleans).
     const cachedOutputs = IMG_WIDTHS.flatMap(w => [
@@ -156,6 +157,7 @@ async function buildImages() {
 
     manifest[baseName] = IMG_WIDTHS.map(w => ({
       w,
+      h: srcMeta.width ? Math.round(w * srcMeta.height / srcMeta.width) : w,
       avif: `/images/${baseName}-${w}.avif`,
       webp: `/images/${baseName}-${w}.webp`,
     }));

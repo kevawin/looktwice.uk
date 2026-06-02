@@ -70,9 +70,15 @@ const CUTOUT_CONFIGS = [
     loading:      'eager',
     fetchpriority: 'high',
     alt:          '',               // decorative — hero <h1> carries the meaning
+    // scene-cafe is portrait (1600x2400) cover-cropped into this wide band;
+    // focus.y lifts the people (counter level) up to the shapes' centre.
+    focus:        { x: 0.5, y: 0.66 },
     shapes: [
-      { type: 'down-triangle' },
-      { type: 'up-triangle' },
+      // Circle (left) — over the barista / counter, same slot as the down-triangle
+      { type: 'circle',       opts: { cx: 250, cy: 260, r: 250 } },
+      // Squircle (right) — over the centre woman + right customers, same slot as the
+      // up-triangle. rx 83 = the triangles' corner radius (their Q-curve setback).
+      { type: 'rounded-rect', opts: { x: 510, y: 15, w: 490, h: 490, rx: 83 } },
     ],
   },
 ];
@@ -130,6 +136,28 @@ function buildSvgString(config, manifest) {
     ? `\n         fetchpriority="${fetchpriority}"`
     : '';
 
+  // Focal-point cover (CSS object-position style). When config.focus = {x, y}
+  // (fractions 0..1) is set and the image aspect is known (entry.h), scale the
+  // image to COVER the viewBox and offset it so the focal point stays in frame.
+  // Falls back to centred "xMidYMid slice" when no focus is given.
+  const round = v => Math.round(v * 100) / 100;
+  const focus = config.focus;
+  let imageGeom;
+  if (focus && entry.h) {
+    const iAspect   = entry.w / entry.h;   // image width / height
+    const boxAspect = width / height;
+    let rW, rH;
+    if (boxAspect > iAspect) { rW = width; rH = width / iAspect; }
+    else                     { rH = height; rW = height * iAspect; }
+    const ix = (width - rW) * focus.x;     // (container - content) * fraction
+    const iy = (height - rH) * focus.y;
+    imageGeom = `x="${round(ix)}" y="${round(iy)}" width="${round(rW)}" height="${round(rH)}"
+         preserveAspectRatio="none"`;
+  } else {
+    imageGeom = `x="0" y="0" width="${width}" height="${height}"
+         preserveAspectRatio="xMidYMid slice"`;
+  }
+
   return `<svg class="cutout cutout--${id}" viewBox="${viewBox}" width="${width}" height="${height}"
      preserveAspectRatio="xMidYMid slice"
      xmlns="http://www.w3.org/2000/svg"
@@ -144,8 +172,7 @@ ${shapesMarkup}
     </mask>
   </defs>
   <image href="${href}"
-         x="0" y="0" width="${width}" height="${height}"
-         preserveAspectRatio="xMidYMid slice"
+         ${imageGeom}
          mask="url(#${maskId})"
          filter="url(#${filterId})"
          decoding="async"${fetchpriorityAttr}/>
