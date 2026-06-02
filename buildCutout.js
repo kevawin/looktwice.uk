@@ -55,27 +55,24 @@ const SHAPE_PRESETS = {
 // ---------------------------------------------------------------------------
 // Cutout region configs — one entry per instance rendered on the page.
 //
-// Hero defaults to a SINGLE rounded-rect window (D-05 discretion note):
-//   - Matches the visual shape of the current hero <picture> cutout.
-//   - Lowest LCP/CLS risk for the first ship.
-//   - Proves the primitive on a real surface immediately.
-//
-// The demo's multi-window arrangement (down-triangle + up-triangle + pill) is
-// noted here as a deferred design option for a future iteration.
+// Hero uses the demo's two interlocking triangles (down-triangle top-left +
+// up-triangle top-right). The triangle paths span y 0→519.6, so the viewBox
+// height is set to 519.6 — no empty Hot Pink band below the shapes.
 // ---------------------------------------------------------------------------
 
 const CUTOUT_CONFIGS = [
   {
     id:           'hero',
     image:        'scene-cafe',     // manifest key from buildImages()
-    viewBox:      '0 0 1000 1064',
+    viewBox:      '0 0 1000 519.6',
     width:        1000,
-    height:       1064,
+    height:       519.6,
     loading:      'eager',
     fetchpriority: 'high',
     alt:          '',               // decorative — hero <h1> carries the meaning
     shapes: [
-      { type: 'rounded-rect' },     // single window; matches existing hero shape
+      { type: 'down-triangle' },
+      { type: 'up-triangle' },
     ],
   },
 ];
