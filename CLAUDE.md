@@ -9,7 +9,7 @@ The website for Look Twice — Kristina (Kris) Evawin's independent brand and CX
 
 ### Constraints
 
-- **Tech stack**: Plain HTML + CSS + minimal vanilla JS — no frameworks, no preprocessors, no bundlers, no npm deps for V1.
+- **Tech stack**: HTML + CSS + vanilla JS as the shipped output. A **build step is now allowed** (Cloudflare Pages build command) — build tooling, preprocessors, and npm deps are permitted when they earn their place. The *shipped* artifact stays plain static HTML/CSS/JS (no client-side framework runtime); keep shipped JS lean. Build-time tooling that emits static output is fine: image optimization (responsive srcset, AVIF/WebP, compression), CSS/JS minify + autoprefix (PostCSS or Lightning CSS). **No Tailwind / no utility-CSS framework** — the OKLCH token + component-CSS system in `css/` is the source of brand truth; do not migrate it to utilities. (Relaxed 2026-06-02, Jamie finishing as the technical owner: the original "no frameworks / no build" rule was a guardrail for Kris as a non-technical editor, now superseded. Brand/design rules below are unaffected — those are Kris's, not technical guardrails.)
 - **Typography**: Epilogue only, weights 400 and 700. No 500. No second family. Google Fonts (or self-hosted woff2) with font-display: swap.
 - **Accessibility**: WCAG AA minimum on every surface. prefers-reduced-motion respected. One H1 per page (hero).
 - **Performance**: LCP < 2.5s, CLS < 0.1, FID < 100ms, page weight < 500KB excluding images. Images in WebP with srcset; lazy-load below the fold.
@@ -81,7 +81,7 @@ When Kris needs to test a change on her phone and live local preview isn't avail
 
 ## Local preview server (default for live work and testing)
 
-The default local preview is **browser-sync** with hot reload. It is dev-only tooling (in `devDependencies`, `node_modules` is gitignored, nothing ships to the site — this does not break the "no npm deps for V1" rule, which is about the shipped site).
+The default local preview is **browser-sync** with hot reload. It is dev-only tooling (in `devDependencies`, `node_modules` is gitignored). Note the tech-stack rule now permits a build step and npm deps (relaxed 2026-06-02) — the constraint that remains is that the *shipped* artifact is plain static HTML/CSS/JS with no client-side framework runtime. With a build now in play, browser-sync and the test runner should serve **built** output (see the build-pipeline phase).
 
 - **Start it:** `npm run dev` → serves the repo on `http://localhost:3000`, reloads the browser on every save to `index.html`, `css/*.css`, `js/*.js`, `images/*`. The terminal also prints an **External** LAN URL (e.g. `http://192.168.1.227:3000`) — open that on a phone on the same wifi to test live local changes without deploying.
 - **Claude spins it up whenever working on the site.** Start `npm run dev` in the background at the start of site work so Kris/Jamie can watch changes land live and test on their phone. Mention the localhost + External URLs when you start it.

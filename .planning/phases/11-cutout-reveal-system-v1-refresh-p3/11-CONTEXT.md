@@ -62,11 +62,10 @@ Build the cutout-reveal technique from `image-cutout-demo.html` once, as a reusa
 - The internal form of each shape preset (path string, parameterised generator, etc.) — planner/researcher decides the cleanest reuse pattern inside the function.
 - Per-section window composition (how many windows, which shapes) for the hero refactor, within D-03/D-04.
 
-### Open questions for research/planning (raised by D-08/D-10)
-- **Template strategy:** token-replace inside a committed `index.html`, vs a separate template + data config that generates the final `index.html`. Pick the one with the smallest source/output divergence.
-- **Build tooling:** prefer a **zero-dependency Node script** to honour "minimal" — only add an npm dep if genuinely needed. Build script is shipped-pipeline tooling now, not just dev-only.
-- **Cloudflare config:** set the Pages build command + output directory; decide whether output stays repo-root or moves to `dist/`. Keep `main`/holding-page deploy untouched.
-- **Test + dev interplay:** Playwright (port 7777) and browser-sync (port 3000) must run against **built** output — wire `npm run build` ahead of `npm test`, and point browser-sync at the build result. Do not let the generated file and the committed source drift untested.
+### Build pipeline is owned by Phase 12 (prerequisite)
+The Cloudflare deploy-time build, image pipeline, CSS/JS minify, source→output model, Cloudflare config, and dev/test wiring are **set up in Phase 12 (Build pipeline & tooling foundation), which executes before this phase.** Phase 11 **consumes** that pipeline — it adds the `buildCutout(image, shapes)` codegen into the build Phase 12 establishes, and refactors the hero. Do not re-decide pipeline mechanics here; read `12-CONTEXT.md` once it exists and slot the cutout build step into the established build.
+
+CLAUDE.md tech-stack relaxation (build step + npm deps allowed; shipped artifact stays plain static; no Tailwind) was **already recorded in CLAUDE.md on 2026-06-02** — so D-10a is largely done at the doc level; Phase 12 implements the pipeline it permits.
 </decisions>
 
 <canonical_refs>

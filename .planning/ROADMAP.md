@@ -25,7 +25,8 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 8: Navigation & floating action bar** (refresh P2) - Header scrolls away (de-sticky, de-burger, drop Contact), floating gradient CTA pill + white/pink burger nav past the hero (completed 2026-06-01)
 - [x] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - 6 commits: gutter alignment, mobile menu stacking/hide, inverted colours + white borders, no stray focus, scroll-collapse, clean-URL on all internal anchors, header + bar aligned to content column (completed 2026-06-01). Menu-concept rework deferred — Kris's deviation examples not yet shared.
 - [x] **Phase 10: Contact mechanic — form vs email** (refresh P7) - Decision gate resolved: form wins. Build a Formspree contact form (form-only, no visible mailto), remove all visible email, reverse the CLAUDE.md/STATE mailto lock. Started out of refresh order ahead of refresh P3–P6. (completed 2026-06-01)
-- [ ] **Phase 11: Cutout reveal system** (refresh P3) - Reusable SVG-mask cutout primitive extracted from `image-cutout-demo.html`; refactor hero cutouts onto it. Resolves gradient-vs-solid surface conflict. GSD numbers assigned in start order, not refresh order.
+- [ ] **Phase 12: Build pipeline & tooling foundation** - Stand up the Cloudflare Pages build command, build-time image optimization (srcset/AVIF/WebP), CSS/JS minify + autoprefix, and wire dev/test to serve built output. Records the CLAUDE.md tech-stack relaxation (2026-06-02). **Executes BEFORE Phase 11** (prerequisite for the cutout build function).
+- [ ] **Phase 11: Cutout reveal system** (refresh P3) - Reusable `buildCutout(image, shapes)` cutout primitive (SVG-mask, single shared image) + hero refactor. Depends on Phase 12's build pipeline. GSD numbers = registration order; execution order is 12 then 11.
 
 ## Phase Details
 
@@ -202,11 +203,29 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   - [x] 10-01-PLAN.md — Form markup + Deep Teal CSS + vanilla-JS fetch submit handler; remove all visible mailto/email (Wave 1)
   - [x] 10-02-PLAN.md — Reverse the mailto lock in CLAUDE.md + STATE.md; add Playwright E2E spec (mocked Formspree) (Wave 2)
 
+### Phase 12: Build pipeline & tooling foundation
+
+**Goal**: Convert the project from "static files served as-is" to a built artifact, so later phases (starting with the Phase 11 cutout build function) have a real pipeline. Set the Cloudflare Pages build command, add build-time image optimization (responsive srcset + AVIF/WebP + compression), CSS/JS minify + autoprefix (PostCSS or Lightning CSS), and point browser-sync (3000) + Playwright (7777) at the built output. Records the CLAUDE.md tech-stack relaxation (2026-06-02): build step + npm deps now allowed; shipped artifact stays plain static HTML/CSS/JS, no client-side framework, no Tailwind.
+
+**Depends on**: Phase 8 (complete). **Executes before Phase 11.**
+**Requirements**: No formal REQ IDs — derived in discuss. Tech-stack relaxation already recorded in `CLAUDE.md` (2026-06-02).
+**Numbering note**: GSD Phase 12 = registration order. It runs BEFORE Phase 11 (which was registered first but depends on this pipeline).
+**Open decisions for discuss**:
+  1. Build tool choice: zero-dep Node script vs a light builder; PostCSS vs Lightning CSS for CSS.
+  2. Image pipeline: which formats/sizes, where generated assets live, how `srcset` is wired into markup.
+  3. Source→output model: token-replace in committed `index.html` vs template→generated output; output dir (root vs `dist/`).
+  4. Cloudflare Pages config: build command + output directory; keep `main` holding-page deploy untouched.
+  5. Dev/test wiring: `npm run build` ahead of `npm test`; browser-sync serving built output without breaking hot reload.
+
+**Decisions**: to be locked in `12-CONTEXT.md`.
+**UI hint**: no (infrastructure)
+**Plans**: TBD after discuss
+
 ### Phase 11: Cutout reveal system (V1 Refresh P3)
 
 **Goal**: Build the cutout-reveal technique from `image-cutout-demo.html` once, as a reusable `.cutout` component, so later refresh phases (5 Services, 8 Visual variety) and a hero refactor all consume the same SVG-mask primitive. Realizes the locked "cutout/drenched aesthetic — colour on surface, B&W in apertures."
 
-**Depends on**: Phase 8 (nav/floating bar, complete). Independent of refresh P4–P6. Partly unblocked — `kris-portrait.webp` + `scene-cafe.webp` already in repo; new section imagery from Kris/Jamie still pending for non-hero bands.
+**Depends on**: Phase 12 (build pipeline & tooling foundation) — provides the Cloudflare build command + image pipeline the cutout build function runs on. Also Phase 8 (nav/floating bar, complete). Independent of refresh P4–P6. Partly unblocked — `kris-portrait.webp` + `scene-cafe.webp` already in repo; new section imagery from Kris/Jamie still pending for non-hero bands.
 **Requirements**: No formal REQ IDs — decisions locked in `11-CONTEXT.md` during discuss. See `ROADMAP-REFRESH.md` Phase 3 for full task detail.
 **Numbering note**: GSD Phase 11 = refresh-roadmap P3. Refresh P4–P6 + P8 remain unstarted; GSD numbers assigned in start order, not refresh order.
 **Success Criteria** (what must be TRUE): to be derived in plan from the locked decisions below.
@@ -236,6 +255,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
+| 12. Build pipeline & tooling foundation | 0/0 | Not started (runs before 11) | - |
 | 11. Cutout reveal system (refresh P3) | 0/0 | Not started | - |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 | 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
