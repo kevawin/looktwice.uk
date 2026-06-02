@@ -21,8 +21,10 @@ const path = require('node:path');
 
 const ROOT      = __dirname;
 const DIST      = path.join(ROOT, 'dist');
-const CACHE_DIR = path.join(ROOT, '.cache');
-const CACHE_FILE = path.join(CACHE_DIR, 'images.json');
+const CACHE_DIR        = path.join(ROOT, '.cache');
+const CACHE_FILE       = path.join(CACHE_DIR, 'images.json');
+// Encoded image outputs are stored in .cache/images/ so they survive dist/ cleans.
+const CACHE_IMAGES_DIR = path.join(CACHE_DIR, 'images');
 
 const CSS_FILES = [
   'tokens.css',
@@ -91,8 +93,10 @@ async function buildImages() {
   const outImagesDir = path.join(DIST, 'images');
   fs.mkdirSync(outImagesDir, { recursive: true });
 
-  // Load or initialise the mtime skip-cache.
-  fs.mkdirSync(CACHE_DIR, { recursive: true });
+  // Encoded outputs are kept in .cache/images/ so they survive dist/ cleans.
+  // The mtime cache maps source filename → mtimeMs; if it matches and all cached
+  // outputs exist, we skip re-encoding and just copy from .cache/images/ to dist/images/.
+  fs.mkdirSync(CACHE_IMAGES_DIR, { recursive: true });
   const cache = fs.existsSync(CACHE_FILE)
     ? JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'))
     : {};
@@ -110,25 +114,41 @@ async function buildImages() {
     const baseName = path.basename(rasterFile, path.extname(rasterFile));
     const mtime    = fs.statSync(srcPath).mtimeMs;
 
-    // Check all expected outputs exist.
-    const expectedOutputs = IMG_WIDTHS.flatMap(w => [
-      path.join(outImagesDir, `${baseName}-${w}.avif`),
-      path.join(outImagesDir, `${baseName}-${w}.webp`),
+    // Check cached outputs exist in .cache/images/ (persists across dist/ cleans).
+    const cachedOutputs = IMG_WIDTHS.flatMap(w => [
+      path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.avif`),
+      path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.webp`),
     ]);
-    const allExist = expectedOutputs.every(p => fs.existsSync(p));
+    const allCached = cachedOutputs.every(p => fs.existsSync(p));
 
-    if (cache[rasterFile] === mtime && allExist) {
+    if (cache[rasterFile] === mtime && allCached) {
       console.log(`[build] images: skipped ${rasterFile} (cache hit)`);
+      // Copy cached outputs directly to dist/images/ — no re-encode needed.
+      for (const w of IMG_WIDTHS) {
+        for (const ext of ['avif', 'webp']) {
+          const cached = path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.${ext}`);
+          const out    = path.join(outImagesDir, `${baseName}-${w}.${ext}`);
+          fs.copyFileSync(cached, out);
+        }
+      }
     } else {
       console.log(`[build] images: encoding ${rasterFile} at ${IMG_WIDTHS.join('/')}px…`);
       for (const w of IMG_WIDTHS) {
         const pipeline = sharp(srcPath).resize({ width: w, withoutEnlargement: true });
         await pipeline.clone()
           .avif({ quality: 50, effort: 4 })
-          .toFile(path.join(outImagesDir, `${baseName}-${w}.avif`));
+          .toFile(path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.avif`));
         await pipeline.clone()
           .webp({ quality: 78, effort: 4 })
-          .toFile(path.join(outImagesDir, `${baseName}-${w}.webp`));
+          .toFile(path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.webp`));
+      }
+      // Copy fresh encodes to dist/images/.
+      for (const w of IMG_WIDTHS) {
+        for (const ext of ['avif', 'webp']) {
+          const cached = path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.${ext}`);
+          const out    = path.join(outImagesDir, `${baseName}-${w}.${ext}`);
+          fs.copyFileSync(cached, out);
+        }
       }
       cache[rasterFile] = mtime;
       fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
