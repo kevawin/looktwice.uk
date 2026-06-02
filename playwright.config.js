@@ -21,12 +21,14 @@ module.exports = defineConfig({
   },
 
   webServer: {
-    // python3 -m http.server: serves the repo root as static files on the given port.
-    // stdout/stderr from python go to the Playwright log.
-    command: 'python3 -m http.server 7777',
+    // Build dist/ first, then serve it on 7777 (BUILD-06).
+    // First build includes image encode — raise timeout to 60s to avoid flaky CI.
+    // Do NOT reuse the browser-sync dev server on 3000 — its injected reload client
+    // destabilises the suite (CLAUDE.md hard rule: dev 3000, tests 7777).
+    command: 'npm run build && python3 -m http.server 7777 --directory dist',
     port: 7777,
     reuseExistingServer: true,
-    timeout: 15_000,
+    timeout: 60_000,
   },
 
   projects: [
