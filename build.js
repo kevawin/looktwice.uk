@@ -126,7 +126,10 @@ async function buildImages() {
       path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.avif`),
       path.join(CACHE_IMAGES_DIR, `${baseName}-${w}.webp`),
     ]);
-    const allCached = cachedOutputs.every(p => fs.existsSync(p));
+    // Non-zero size guard (WR-03): a truncated/0-byte cache file (interrupted
+    // encode, disk-full) passes existsSync but would ship a broken image — treat
+    // it as a cache miss so it re-encodes.
+    const allCached = cachedOutputs.every(p => fs.existsSync(p) && fs.statSync(p).size > 0);
 
     if (cache[rasterFile] === mtime && allCached) {
       console.log(`[build] images: skipped ${rasterFile} (cache hit)`);
@@ -258,7 +261,9 @@ async function build() {
 
   buildHtml();
   const buildCutout = loadBuildCutout();
-  manifest = await buildCutout(manifest);
+  // buildCutout rewrites dist/index.html in place and returns the manifest
+  // unchanged; manifest is not read again, so no reassignment (IN-05).
+  await buildCutout(manifest);
   copyStatic();
   console.log(`[build] done in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 }
