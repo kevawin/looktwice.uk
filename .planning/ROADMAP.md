@@ -219,7 +219,10 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 **Decisions**: to be locked in `12-CONTEXT.md`.
 **UI hint**: no (infrastructure)
-**Plans**: TBD after discuss
+**Plans**: 3 plans
+- [ ] 12-01-PLAN.md — build.js core: deps install, Lightning CSS minify, sharp AVIF+WebP x4 widths + srcset rewrite, static-asset copy into dist/, mtime image cache, build-smoke spec
+- [ ] 12-02-PLAN.md — dev/test wiring: Playwright builds-first + serves dist/ on 7777, browser-sync serves dist/ on 3000 with source-watch rebuild + hot reload
+- [ ] 12-03-PLAN.md — Cloudflare branch gate (build.sh on CF_PAGES_BRANCH), preview header check, blocking human-verify that main holding page stays untouched
 
 ### Phase 11: Cutout reveal system (V1 Refresh P3)
 
