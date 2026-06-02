@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Phase 10 closed. Branch `new-site` (not merged to main — more phases first, per Jamie).
+status: executing
 stopped_at: Phase 12 (build pipeline) planned — 3 plans, checker PASSED. Ready to execute (runs before Phase 11).
-last_updated: "2026-06-02T18:25:30.487Z"
+last_updated: "2026-06-02T18:32:25.284Z"
 progress:
   total_phases: 11
   completed_phases: 5
@@ -22,20 +22,20 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 10 (Contact form) COMPLETE. Next: V1 Refresh Phase 3 — Cutout reveal system (see ROADMAP-REFRESH.md).
+**Current focus:** Phase 12 — build-pipeline-tooling-foundation
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 10 (contact-mechanic-form-vs-email-v1-refresh-p7) — COMPLETE (2026-06-01)
-Plan: 2 of 2 done, verified 9/9, human UAT signed off.
+Phase: 12 (build-pipeline-tooling-foundation) — EXECUTING
+Plan: 1 of 3
 
 NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). See `.planning/ROADMAP-REFRESH.md`. Unstarted → start with `/gsd:discuss-phase`.
 
 - **Milestone:** v1 (GSD numbered phases 1–10 done; V1 Refresh P3–P6 remain)
 - **Phase:** 10 complete; next = Refresh P3 (Cutout reveal)
-- **Status:** Phase 10 closed. Branch `new-site` (not merged to main — more phases first, per Jamie).
+- **Status:** Executing Phase 12
 - **Progress:** [██████████] 100% of GSD phase 10
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
