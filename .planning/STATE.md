@@ -165,7 +165,7 @@ NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). S
 |---|-------------|------|--------|-----------|
 | 260510-ZMD | Rotating-word hero headline | 2026-05-10 | — | [260510-ZMD-rotating-word-hero-headline](./quick/260510-ZMD-rotating-word-hero-headline/) |
 | 260602-tm1 | Hero cutout → two interlocking triangles (demo top band) | 2026-06-02 | d14f4b1 | [260602-tm1-change-hero-cutout-to-two-interlocking-t](./quick/260602-tm1-change-hero-cutout-to-two-interlocking-t/) |
-| 260602-v7i | Hero → circle + squircle; focal-point + multi-shape cutout support | 2026-06-02 | (pending) | [260602-v7i-productionise-circle-squircle-hero-with-](./quick/260602-v7i-productionise-circle-squircle-hero-with-/) |
+| 260602-v7i | Hero → circle + squircle; focal-point + multi-shape cutout support | 2026-06-02 | 57f9355 | [260602-v7i-productionise-circle-squircle-hero-with-](./quick/260602-v7i-productionise-circle-squircle-hero-with-/) |
 
 ### Blockers
 
