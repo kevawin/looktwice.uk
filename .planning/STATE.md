@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 12 (build pipeline) planned — 3 plans, checker PASSED. Ready to execute (runs before Phase 11).
-last_updated: "2026-06-02T19:32:10.732Z"
+last_updated: "2026-06-02T19:40:14.219Z"
 progress:
   total_phases: 11
   completed_phases: 6
   total_plans: 19
-  completed_plans: 19
+  completed_plans: 20
   percent: 55
 ---
 
@@ -22,21 +22,21 @@ progress:
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 12 — build-pipeline-tooling-foundation
+**Current focus:** Phase 11 — cutout-reveal-system-v1-refresh-p3
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 12 — COMPLETE
-Plan: 1 of 3
+Phase: 11 (cutout-reveal-system-v1-refresh-p3) — EXECUTING
+Plan: 2 of 3
 
 NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). See `.planning/ROADMAP-REFRESH.md`. Unstarted → start with `/gsd:discuss-phase`.
 
 - **Milestone:** v1 (GSD numbered phases 1–10 done; V1 Refresh P3–P6 remain)
 - **Phase:** 10 complete; next = Refresh P3 (Cutout reveal)
 - **Status:** Ready to execute
-- **Progress:** [██████████] 100% of GSD phase 10
+- **Progress:** [██████████] 100%
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
 
@@ -64,6 +64,7 @@ NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). S
 | Phase 02-hero-situation P02 | 2min | 3 tasks | 3 files |
 | Phase 02-hero-situation P03 | 1m 20s | 2 tasks | 2 files |
 | Phase 10 P02 | 600 | 2 tasks | 1 files |
+| Phase 11 P01 | 187 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -128,6 +129,7 @@ NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). S
 - [Phase 07]: Plan 07-01: CLAUDE.md em-dash ban relaxed to allow hyphens in number-word compounds (e.g. "30-min"); all other design bans unchanged
 - [Phase 07]: Plan 07-01: Checkpoint approved 2026-06-01. Removing mid-page CTAs left two segues dangling (work paragraph `index.html:220`, services offer `index.html:262`); GSD 08 floating action bar must answer them and Kris may reword in refresh P4
 - [Phase ?]: Task 1 (CLAUDE.md + STATE.md reversal) already done in wave 1; Playwright spec added with page.route Formspree mocks, 15 tests green
+- [Phase ?]: Hero cutout defaults to single rounded-rect window (D-05 discretion)
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -166,7 +168,7 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-02T18:25:30.483Z
+**Last session:** 2026-06-02T19:40:09.271Z
 
 **Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
 

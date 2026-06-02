@@ -252,7 +252,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 Plans:
 **Wave 1**
 
-- [ ] 11-01-PLAN.md — Author buildCutout.js: five shape presets + SVG mask generator (D-03/04/08/09)
+- [x] 11-01-PLAN.md — Author buildCutout.js: five shape presets + SVG mask generator (D-03/04/08/09)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -275,7 +275,7 @@ Plans:
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
 | 12. Build pipeline & tooling foundation | 3/3 | Complete   | 2026-06-02 |
-| 11. Cutout reveal system (refresh P3) | 0/3 | Planned | - |
+| 11. Cutout reveal system (refresh P3) | 1/3 | In Progress|  |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 | 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
 
