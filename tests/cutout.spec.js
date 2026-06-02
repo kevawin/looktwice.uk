@@ -297,7 +297,30 @@ test.describe('Error handling', () => {
       shapes: [{ type: 'rounded-rect' }],
     };
     expect(() => mod.buildSvgString(config, makeManifest()))
-      .toThrow('[buildCutout] no manifest entry for image: not-in-manifest');
+      .toThrow('[buildCutout] no 960px manifest entry for image: not-in-manifest');
+  });
+
+  test('image present but missing the 960px width throws (fail-closed, WR-02)', () => {
+    const mod = loadModule();
+    if (!mod.buildSvgString) return;
+    const manifest = { odd: [{ w: 480, h: 720, webp: '/images/odd-480.webp' }] }; // no 960 entry
+    const config = {
+      id: 'x', image: 'odd', viewBox: '0 0 100 100', width: 100, height: 100,
+      alt: '', shapes: [{ type: 'circle', opts: {} }],
+    };
+    expect(() => mod.buildSvgString(config, manifest)).toThrow('960px');
+  });
+
+  test('alt text is XML-escaped in the <title> (WR-01, no markup injection)', () => {
+    const mod = loadModule();
+    if (!mod.buildSvgString) return;
+    const config = {
+      id: 'hero', image: 'scene-cafe', viewBox: '0 0 1000 1064', width: 1000, height: 1064,
+      alt: 'Tom & Jerry <script>"x"', shapes: [{ type: 'rounded-rect' }],
+    };
+    const svg = mod.buildSvgString(config, makeManifest());
+    expect(svg, 'raw angle brackets must not survive').not.toContain('<script>');
+    expect(svg).toContain('Tom &amp; Jerry &lt;script&gt;&quot;x&quot;');
   });
 
 });
