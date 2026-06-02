@@ -25,6 +25,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 8: Navigation & floating action bar** (refresh P2) - Header scrolls away (de-sticky, de-burger, drop Contact), floating gradient CTA pill + white/pink burger nav past the hero (completed 2026-06-01)
 - [x] **Phase 9: P08 bug fixes & tweaks** (fix phase, not a refresh-roadmap phase) - 6 commits: gutter alignment, mobile menu stacking/hide, inverted colours + white borders, no stray focus, scroll-collapse, clean-URL on all internal anchors, header + bar aligned to content column (completed 2026-06-01). Menu-concept rework deferred — Kris's deviation examples not yet shared.
 - [x] **Phase 10: Contact mechanic — form vs email** (refresh P7) - Decision gate resolved: form wins. Build a Formspree contact form (form-only, no visible mailto), remove all visible email, reverse the CLAUDE.md/STATE mailto lock. Started out of refresh order ahead of refresh P3–P6. (completed 2026-06-01)
+- [ ] **Phase 11: Cutout reveal system** (refresh P3) - Reusable SVG-mask cutout primitive extracted from `image-cutout-demo.html`; refactor hero cutouts onto it. Resolves gradient-vs-solid surface conflict. GSD numbers assigned in start order, not refresh order.
 
 ## Phase Details
 
@@ -201,6 +202,24 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
   - [x] 10-01-PLAN.md — Form markup + Deep Teal CSS + vanilla-JS fetch submit handler; remove all visible mailto/email (Wave 1)
   - [x] 10-02-PLAN.md — Reverse the mailto lock in CLAUDE.md + STATE.md; add Playwright E2E spec (mocked Formspree) (Wave 2)
 
+### Phase 11: Cutout reveal system (V1 Refresh P3)
+
+**Goal**: Build the cutout-reveal technique from `image-cutout-demo.html` once, as a reusable `.cutout` component, so later refresh phases (5 Services, 8 Visual variety) and a hero refactor all consume the same SVG-mask primitive. Realizes the locked "cutout/drenched aesthetic — colour on surface, B&W in apertures."
+
+**Depends on**: Phase 8 (nav/floating bar, complete). Independent of refresh P4–P6. Partly unblocked — `kris-portrait.webp` + `scene-cafe.webp` already in repo; new section imagery from Kris/Jamie still pending for non-hero bands.
+**Requirements**: No formal REQ IDs — decisions locked in `11-CONTEXT.md` during discuss. See `ROADMAP-REFRESH.md` Phase 3 for full task detail.
+**Numbering note**: GSD Phase 11 = refresh-roadmap P3. Refresh P4–P6 + P8 remain unstarted; GSD numbers assigned in start order, not refresh order.
+**Success Criteria** (what must be TRUE): to be derived in discuss once the gradient-conflict, shape presets, and hero-scope decisions are locked.
+
+**Open decisions for discuss**:
+  1. Gradient-vs-solid surface behind the windows — hard CLAUDE.md conflict (gradient locked to the floating CTA pill only). Solid section colours vs relax the rule. Kris decides.
+  2. Which shape presets to support (down-triangle, up-triangle, pill, rounded-rect) and per-section choices.
+  3. Does the hero cutout refactor ship here, or wait until refresh P8?
+
+**Decisions**: to be locked in `11-CONTEXT.md`.
+**UI hint**: yes
+**Plans**: TBD after discuss
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -213,6 +232,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
 | 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
 | 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
+| 11. Cutout reveal system (refresh P3) | 0/0 | Not started | - |
 | 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
 | 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
 
