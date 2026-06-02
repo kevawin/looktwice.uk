@@ -362,7 +362,7 @@ test.describe('Build output — dist/index.html', () => {
     }
     const html = fs.readFileSync(htmlPath, 'utf8');
     expect(html, 'SVG must have width="1000"').toContain('width="1000"');
-    expect(html, 'SVG must have height="1064"').toContain('height="1064"');
+    expect(html, 'SVG must have height="519.6"').toContain('height="519.6"');
   });
 
   test('exactly one <image element inside the cutout SVG (D-09 single shared image)', () => {
