@@ -170,4 +170,51 @@ V1 is "launched" when:
 
 ---
 
-*Playbook drafted: 2026-05-02. Cutover trigger: Kris.*
+## Build model (added Phase 12, 2026-06-02)
+
+Phase 12 introduced a build pipeline (`build.js`) that outputs to `dist/`. Cloudflare Pages is
+configured to serve `dist/` as the output directory. Because Cloudflare has a single global
+build command across all branches, a branch-gate wrapper controls which branch actually builds.
+
+### Cloudflare Pages settings
+
+| Setting | Value |
+|---------|-------|
+| Build command | `bash build.sh` |
+| Output directory | `dist/` |
+
+### How the gate works
+
+`build.sh` reads the `CF_PAGES_BRANCH` environment variable that Cloudflare injects at build time:
+
+- `CF_PAGES_BRANCH = new-site` → runs `npm ci && npm run build`, produces `dist/`.
+- Any other branch (including `main`) → prints a no-build message, exits 0, does NOT create or alter `dist/`. Cloudflare then deploys the branch's own repo files as-is.
+
+Supply-chain note: `build.sh` uses `npm ci` (not `npm install`) to enforce the committed `package-lock.json` exactly (T-12-SC mitigation).
+
+### A1 caveat — main no-op behaviour
+
+Cloudflare does **not** explicitly document what it does when the build command exits 0 without producing `dist/` under a single project configured with output directory `dist/`. The assumption (A1) is that Cloudflare falls back to deploying the branch's root files. This was human-verified: a trivial commit was pushed to `main` and the live `looktwice.uk` holding page confirmed unchanged (Task 3, checkpoint:human-verify, Plan 12-03). If that verification reveals main IS affected, see the two-projects fallback below.
+
+### Two-projects fallback
+
+If the single-project `CF_PAGES_BRANCH` gate proves unreliable (main holding page changes or breaks), split into two separate Cloudflare Pages projects:
+
+- **Project A** — watches `main` only. No build command. Output directory = `/` (repo root). Serves the holding page as plain static.
+- **Project B** — watches `new-site` only. Build command = `npm ci && npm run build`. Output directory = `dist/`. Serves the built preview.
+
+This is a larger account change (two projects, two Cloudflare custom domains or DNS entries) but removes any ambiguity about cross-branch build behaviour.
+
+### Cutover impact on the gate
+
+When `new-site` is merged into `main` (the V1 cutover), `main` becomes the built branch. At that point:
+
+1. The gate condition in `build.sh` must be updated — change `new-site` to `main` (or remove the gate and always build).
+2. Verify the cutover deploy runs `npm run build` and serves `dist/` correctly.
+3. The old `new-site` branch can be deleted after cutover.
+
+This is a required step in the cutover procedure — do not merge without updating `build.sh`.
+
+---
+
+*Playbook drafted: 2026-05-02. Build model section added: 2026-06-02. Cutover trigger: Kris.*
