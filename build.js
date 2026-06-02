@@ -13,7 +13,13 @@
 const fs   = require('node:fs');
 const path = require('node:path');
 
-const { buildCutout } = require('./buildCutout');
+// buildCutout is re-required fresh per build (loadBuildCutout) so `node build.js
+// --watch` picks up edits to buildCutout.js without a dev-server restart — Node
+// caches modules, so the stale cached copy would otherwise be reused on rebuild.
+function loadBuildCutout() {
+  delete require.cache[require.resolve('./buildCutout')];
+  return require('./buildCutout').buildCutout;
+}
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -251,6 +257,7 @@ async function build() {
   // --------------------------------------------------------------------------
 
   buildHtml();
+  const buildCutout = loadBuildCutout();
   manifest = await buildCutout(manifest);
   copyStatic();
   console.log(`[build] done in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
