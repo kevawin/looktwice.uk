@@ -90,6 +90,15 @@ The default local preview is **browser-sync** with hot reload. It is dev-only to
 - **First run after clone:** `npm install` (installs Playwright + browser-sync), then `npx playwright install` for browsers if needed.
 - **Claude Code app:** `.claude/launch.json` sets `dev (browser-sync, hot reload)` on port 3000 as the **default** run/preview config (the no-cache python server on 4173 is kept as a fallback). So running or previewing the site via the Claude Code app uses the browser-sync server. browser-sync defaults live in `bs-config.js` (no auto-open, no UI panel, prints the LAN ip:port for phone testing).
 
+## Follow-up command handoff (copy-before-clear)
+
+Whenever Claude proposes a follow-up command for the user to run **after a `/clear`** (e.g. a `/gsd-...` command), Claude must:
+
+1. `pbcopy` the exact command (macOS): `printf '%s' '/gsd-execute-phase 12' | pbcopy` (substitute the real command).
+2. Tell the user plainly: "Copied — `/clear` then paste (Cmd-V)."
+
+Claude cannot run `/clear` or paste into the composer — those are the user's keystrokes. Claude's job is only to put the exact command on the clipboard and say it's done, so the user clears and pastes without retyping. Copy only the single command string, no backticks or surrounding prose. Applies to any post-clear handoff, not just GSD.
+
 ## Contact form: live-domain-only submission
 
 The contact form (`initContactForm` in `js/main.js`) only POSTs to Formspree on the live domain. The host check is `/(^|\.)looktwice\.uk$/i.test(location.hostname)`.
