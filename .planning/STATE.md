@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
+status: completed
 stopped_at: Phase 12 (build pipeline) planned — 3 plans, checker PASSED. Ready to execute (runs before Phase 11).
-last_updated: "2026-06-02T18:32:25.284Z"
+last_updated: "2026-06-02T19:12:00.121Z"
 progress:
   total_phases: 11
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 16
-  completed_plans: 16
-  percent: 45
+  completed_plans: 19
+  percent: 55
 ---
 
 # State: looktwice.uk
@@ -28,14 +28,14 @@ progress:
 
 ## Current Position
 
-Phase: 12 (build-pipeline-tooling-foundation) — EXECUTING
+Phase: 12 — COMPLETE
 Plan: 1 of 3
 
 NEXT: V1 Refresh Phase 3 — Cutout reveal system (SVG-mask cutout primitive). See `.planning/ROADMAP-REFRESH.md`. Unstarted → start with `/gsd:discuss-phase`.
 
 - **Milestone:** v1 (GSD numbered phases 1–10 done; V1 Refresh P3–P6 remain)
 - **Phase:** 10 complete; next = Refresh P3 (Cutout reveal)
-- **Status:** Executing Phase 12
+- **Status:** Phase 12 complete
 - **Progress:** [██████████] 100% of GSD phase 10
 - **Preview URL:** https://claude-new-site-qgsb8.looktwice-uk.pages.dev (Cloudflare Pages branch alias for current working branch)
 - **Legacy preview URL:** https://new-site.looktwice-uk.pages.dev (Phase 1+2 shipped here on `new-site`)
