@@ -1,5 +1,7 @@
 # Roadmap: V1 Refresh
 
+> **SUPERSEDED 2026-06-03.** Phases 1, 2, 3, 7 shipped (GSD phases 7, 8, 11, 10). The unstarted phases — **P4 copy, P5 services, P6 credentials, P8 visual variety** — are replaced by the **V1 Restructure** build order (GSD phases 13-21) in `ROADMAP.md`. This file is kept as history and for the per-phase task detail the new phases still draw on. Do not start work from this file; use `ROADMAP.md` + `.planning/design-inputs.md`.
+
 **Source:** Jamie website review (2026-05-04) + founder positioning chat (2026-05-08) + Kris site review (2026-05-31)
 **Branch:** new-site
 **Rule:** Check for uncommitted work before starting any phase. No new work on top of uncommitted work.

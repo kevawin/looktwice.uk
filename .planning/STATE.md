@@ -3,38 +3,38 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Phase 11 (cutout reveal system) complete + verified. Hero refined to circle+squircle with focal-point/multi-shape support and hardened (quick tasks 260602-tm1/v7i/vg6); pushed to new-site. Next: V1 Refresh P4 (copy), P5 (services), P6 (credentials).
-last_updated: "2026-06-02T21:45:42.000Z"
+stopped_at: Roadmap reset 2026-06-03 — V1 Restructure. Phases 13-21 added to ROADMAP.md in build order (supersedes ROADMAP-REFRESH.md P4/P5/P6/P8). Next: Phase 13 Design contract (impeccable setup → DESIGN.md).
+last_updated: "2026-06-03T00:00:00.000Z"
 progress:
-  total_phases: 10
-  completed_phases: 7
+  total_phases: 21
+  completed_phases: 12
   total_plans: 19
   completed_plans: 19
-  percent: 70
+  percent: 57
 ---
 
 # State: looktwice.uk
 
-**Last updated:** 2026-05-02
-**Session:** Phase 05 code complete — A11Y contrast remediation, "Dig. Reveal. Sharpen." lead-in, work paragraph rewrite, sticky-tab pill cleanup, SEO meta + JSON-LD ProfessionalService, robots.txt, favicon.svg, _headers HSTS+CSP+Permissions-Policy, inline onerror refactored to JS listener. Cutover playbook documented; awaiting Kris-side Lighthouse + UAT before merge.
+**Last updated:** 2026-06-03
+**Session:** V1 Restructure roadmap reset. Approved a recognition-led page order (Intro → Process → Services → About Kristina → Experience/proof → Contact) and added phases 13-21 in build order to ROADMAP.md, superseding ROADMAP-REFRESH.md P4/P5/P6/P8. impeccable skill installed and adopted as the design engine — DESIGN.md becomes the design contract (supersedes gsd-ui-phase/UI-SPEC for this work); GSD stays the workflow spine. Identity-preservation OFF: inherited design rules ruled keep/override/kill in Phase 13. Design inputs (B&W↔colour scroll reveal, motion philosophy, pip-decks/bgn/Koto steals, rule-override list) captured in `.planning/design-inputs.md`. Next: Phase 13 design contract.
 
 ## Project Reference
 
 **Core Value:** A warm referral lands, recognises their own problem in Kris's words within 60 seconds, and emails her — because the site is the demonstration of what she does, not just the description.
 
-**Current focus:** Phase 11 complete. Next: V1 Refresh P4 (copy), P5 (services), P6 (credentials).
+**Current focus:** V1 Restructure. Phases 13-21 set in build order. Next: Phase 13 — Design contract (impeccable setup → DESIGN.md).
 
 **Refresh decisions locked 2026-05-31:** all CTAs → "Free 30-min call"; header scrolls away (no sticky, no burger, no overlay, no Contact item); floating bar = gradient CTA pill (left) + white/pink circular burger (right) revealing Work/Approach pills, always-visible on desktop as ( Free 30-min call ) ( Work ) ( Approach ); two floating elements approved (supersedes Jamie 2026-05-04); prose ≥16px / sub-labels ≥14px; CLAUDE.md em-dash ban to relax for number-word hyphens. Playwright visual/QA testing decided per item in its discuss phase.
 
 ## Current Position
 
-Phase: 11 (cutout-reveal-system-v1-refresh-p3) — COMPLETE + VERIFIED
-Hero refined post-verification to circle + squircle (focal-point + multi-shape cutout support) and hardened; all on new-site.
+Phase: V1 Restructure — phases 13-21 planned (build order). No active phase yet; next is Phase 13 (design contract).
+Prior: phases 1-12 all complete (build, refresh foundations, nav/floating bar, contact form, build pipeline, cutout system). Hero on circle + squircle.
 
-NEXT: V1 Refresh P4 — Copy pass (Kris voice). See `.planning/ROADMAP-REFRESH.md`. Start with `/gsd:discuss-phase`. Then P5 (services redesign, consumes the cutout primitive) and P6 (credentials).
+NEXT: Phase 13 — Design contract (impeccable setup → DESIGN.md). Run impeccable setup (triggers init → captures DESIGN.md from existing css/ tokens), then the rule-by-rule keep/override/kill audit with Jamie. See `.planning/ROADMAP.md` (V1 Restructure) + `.planning/design-inputs.md`.
 
-- **Milestone:** v1 (GSD phases 6–12 done; V1 Refresh P4/P5/P6 remain)
-- **Status:** Phase 11 done — ready to discuss/plan next phase
+- **Milestone:** v1 (GSD phases 1-12 done; V1 Restructure phases 13-21 remain)
+- **Status:** Roadmap reset done — ready to start Phase 13 (design contract)
 - **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias for `new-site` — auto-updates on push)
 
 ## Configuration

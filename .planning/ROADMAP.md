@@ -12,8 +12,8 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 ## Phases
 
-- [ ] **Phase 1: Foundations & Deploy Pipeline** - File structure, design tokens, base CSS, fonts, semantic shell, nav, Cloudflare Pages preview live
-- [ ] **Phase 2: Hero & Situation** - Above-the-fold identity (Hot Pink hero + cutout) and self-identification (Linen situation, five blocks)
+- [x] **Phase 1: Foundations & Deploy Pipeline** - File structure, design tokens, base CSS, fonts, semantic shell, nav, Cloudflare Pages preview live (completed 2026-04-30)
+- [x] **Phase 2: Hero & Situation** - Above-the-fold identity (Hot Pink hero + cutout) and self-identification (Linen situation, five blocks) (completed 2026-04-30)
 - [x] **Phase 3: Mid-page Story** - Positioning interrupt (Signal Orange), work placeholder, services (three problem-first areas)
 - [x] **Phase 4: Conversion & Persistent Surfaces** - Deep Teal contact, Midnight footer, floating sticky tab, all JS behaviours wired
 - [x] **Phase 5: Hardening & Launch** - Accessibility, performance, SEO, responsive verification, cutover plan (code complete; Kris-side Lighthouse + UAT + cutover trigger pending)
@@ -27,6 +27,20 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - [x] **Phase 10: Contact mechanic — form vs email** (refresh P7) - Decision gate resolved: form wins. Build a Formspree contact form (form-only, no visible mailto), remove all visible email, reverse the CLAUDE.md/STATE mailto lock. Started out of refresh order ahead of refresh P3–P6. (completed 2026-06-01)
 - [x] **Phase 12: Build pipeline & tooling foundation** - Stand up the Cloudflare Pages build command, build-time image optimization (srcset/AVIF/WebP), CSS/JS minify + autoprefix, and wire dev/test to serve built output. Records the CLAUDE.md tech-stack relaxation (2026-06-02). **Executes BEFORE Phase 11** (prerequisite for the cutout build function). (completed 2026-06-02)
 - [x] **Phase 11: Cutout reveal system** (refresh P3) - Reusable `buildCutout(image, shapes)` cutout primitive (SVG-mask, single shared image) + hero refactor. Depends on Phase 12's build pipeline. GSD numbers = registration order; execution order is 12 then 11. (completed 2026-06-02)
+
+### V1 Restructure (build order — supersedes ROADMAP-REFRESH.md P4/P5/P6/P8)
+
+Finishing V1 properly (V1 never shipped). Same milestone. Structure + offer first; voice + visual polish last. Each phase's design step runs through the **impeccable** skill against `DESIGN.md` (built in Phase 13). Target page order (visitor-facing): Intro → Process → Services → About Kristina → Experience/proof → Contact. Design inputs captured in `.planning/design-inputs.md`.
+
+- [ ] **Phase 13: Design contract** - impeccable setup → DESIGN.md. Rule-by-rule audit (keep/override/kill) of inherited design rules, shape vocabulary, motion philosophy, B&W↔colour scroll-reveal signature interaction. Foundation every later phase reads.
+- [ ] **Phase 14: Define the offer** - Decision/spec, not layout. Named priced service packages (the spine). Jamie stands in for Kris.
+- [ ] **Phase 15: Services section** - Build the defined offer; pip-decks scannability; carve-out from the no-card-grids ban for a priced comparison layout.
+- [ ] **Phase 16: Process section** - The journey steps; bgn.agency structure. Open: replace Dig.Reveal.Sharpen in Approach vs new block (decided in discuss).
+- [ ] **Phase 17: About Kristina** - New section — who am I buying. Does not exist today.
+- [ ] **Phase 18: Experience / proof** - Clients · agencies · sectors (old credentials work); logos stubbed with placeholders.
+- [ ] **Phase 19: Intro re-tighten + recognition beat** - Rework hero, compress "Sound familiar?" into one beat, decide fate of the 5-card situation section. After the offer exists.
+- [ ] **Phase 20: Copy voice pass** - Kris's voice over the whole page; near-last (structure first, voice last).
+- [ ] **Phase 21: Visual variety, motion & shape consistency** - Cross-cutting, LAST. Break the rectangle, apply shape vocabulary, implement B&W↔colour scroll reveal + subtle interactions, final impeccable polish+audit sweep.
 
 ## Phase Details
 
@@ -262,22 +276,148 @@ Plans:
 
 - [x] 11-03-PLAN.md — tests/cutout.spec.js + CLAUDE.md cutout build-model note (D-03/06/07/09/10a)
 
+### Phase 13: Design contract
+
+**Goal**: A negotiated `DESIGN.md` exists as the single design source of truth — shape vocabulary, type, colour, motion philosophy, and a ruled-on set of inherited rules — that every later restructure phase reads.
+**Depends on**: Phase 11 (cutout system). Foundation phase; no content dependencies.
+**Design**: impeccable global setup (register = brand). Ingests `.planning/design-inputs.md` and the existing `css/` OKLCH tokens. **Identity-preservation is OFF** — each inherited rule (card-shadow ban, no-card-grids, gradient-only-on-tab, no-500/Epilogue-only, B&W cutouts, no mid-tone greys) is ruled keep/override/kill by Jamie.
+**Success Criteria** (what must be TRUE):
+
+  1. `DESIGN.md` documents a named shape vocabulary (shapes + fixed radii) every section must reuse
+  2. Each flagged inherited rule has an explicit keep/override/kill decision recorded with rationale
+  3. Motion philosophy (subtle, on-brand) and the B&W↔colour scroll-reveal are specified as principles, with a prefers-reduced-motion fallback
+  4. The colour/type contract extends the existing OKLCH tokens (no fresh palette) unless a rule was explicitly overridden
+
+**UI hint**: yes (design system)
+
+### Phase 14: Define the offer
+
+**Goal**: The set of services Kris sells is defined as named, priced packages — the spine every downstream section references.
+**Depends on**: Phase 13 (sequence). Content/strategy decision; design-independent.
+**Success Criteria** (what must be TRUE):
+
+  1. Each service is a named package with a price (or clear price model) and a one-line outcome statement
+  2. The offer distinguishes what's productised (fixed scope/price) from bespoke
+  3. Process (16), Services (15), About (17) and Intro (19) all have a defined offer to reference
+
+**Notes**: Jamie stands in for Kris; she iterates later. Highest-leverage, highest-risk decision in the restructure.
+**UI hint**: no (decision/spec)
+
+### Phase 15: Services section
+
+**Goal**: The defined offer renders as a scannable, buyable services section with priced packages.
+**Depends on**: Phase 14 (the offer), Phase 13 (contract).
+**Design**: impeccable `shape` → build → `critique`/`polish` against DESIGN.md. Pip-decks scannability. Uses the priced-comparison carve-out from the no-card-grids rule (ruled in Phase 13).
+**Success Criteria** (what must be TRUE):
+
+  1. Each package shows name, price, outcome, and what's included — scannable in seconds
+  2. Any read-more/expand earns its place (real hidden content), is keyboard-accessible, and the mobile column stack is verified
+  3. A clear CTA routes each package to contact
+
+**UI hint**: yes
+
+### Phase 16: Process section
+
+**Goal**: A clear step-by-step process tells a buyer exactly what working with Kris is like, start to finish.
+**Depends on**: Phase 13 (contract). Independent of Phase 15.
+**Design**: bgn.agency structure (plain numbered steps, image per step, short paragraphs), minus the JS-takeover. impeccable `shape`.
+**Open decision (discuss)**: does this replace "Dig. Reveal. Sharpen." in the Approach section, or sit as a new block? Resolved in discuss with the page in front of us.
+**Success Criteria** (what must be TRUE):
+
+  1. The process reads as an ordered sequence of concrete steps (sign-up → understand → research → report → improve → outcome), each with a short description
+  2. Numbered markers are justified (it IS a real sequence) per the impeccable scaffolding rule
+  3. Step copy is draft/placeholder; final voice lands in Phase 20
+
+**UI hint**: yes
+
+### Phase 17: About Kristina
+
+**Goal**: A new section answers "who am I buying" — Kris as the person and practitioner behind the offer.
+**Depends on**: Phase 13 (contract).
+**Success Criteria** (what must be TRUE):
+
+  1. The section establishes who Kris is, her credibility, and why she's the right person — without restating the services
+  2. It pairs with the proof section (18) without duplicating it
+  3. Draft copy; final voice in Phase 20
+
+**UI hint**: yes
+
+### Phase 18: Experience / proof
+
+**Goal**: A three-layer credibility block — clients, agencies, sectors — gives reassurance after desire exists (page position 5, not the lead).
+**Depends on**: Phase 13 (contract). Supersedes ROADMAP-REFRESH.md P6 (credentials).
+**Success Criteria** (what must be TRUE):
+
+  1. Three subsections render: client brands, agency credits (TBWA/Havas/MediaCom), sector icons/labels
+  2. Logo assets are stubbed with placeholders where Kris's files/permissions are pending; layout works with placeholders
+  3. Responsive grid + visual hierarchy verified
+
+**UI hint**: yes
+
+### Phase 19: Intro re-tighten + recognition beat
+
+**Goal**: The hero hooks and lets a warm referral recognise their own problem in one compressed beat, then routes to a CTA that promises the now-defined offer.
+**Depends on**: Phase 14 (offer), Phase 13 (contract).
+**Success Criteria** (what must be TRUE):
+
+  1. The hero is text-light and scannable with one sharp recognition beat (the old "Sound familiar?" compressed)
+  2. A decision is recorded on the 5-card situation section (keep compressed / fold into hero / drop)
+  3. The CTA promises something concrete tied to the defined offer
+
+**UI hint**: yes
+
+### Phase 20: Copy voice pass
+
+**Goal**: Kris's voice runs across the whole page — every section's draft copy rewritten in her words, last so it's done against the real structure.
+**Depends on**: Phases 15-19 (all sections exist).
+**Success Criteria** (what must be TRUE):
+
+  1. Every section's copy reads in Kris's voice — conversational, output-focused (not problem-only), no AI-clever filler
+  2. A reassurance line sits near each CTA ("No sale, no follow-up unless you want one")
+  3. impeccable copy rules honoured (no em-dashes, no buzzwords, no aphoristic cadence)
+
+**Notes**: Jamie stands in; Kris iterates.
+**UI hint**: no (copy)
+
+### Phase 21: Visual variety, motion & shape consistency
+
+**Goal**: The page stops being rectangle-on-rectangle — one shape vocabulary applied consistently, the B&W↔colour scroll reveal live, subtle on-brand motion, and a final quality sweep. Supersedes ROADMAP-REFRESH.md P8.
+**Depends on**: Phases 15-19 (all sections built), Phase 13 (contract). Cross-cutting — LAST on purpose (it restyles every section).
+**Design**: impeccable global-end `polish` + `audit`. `live` mode for in-browser shape/layout iteration.
+**Success Criteria** (what must be TRUE):
+
+  1. The shape vocabulary from DESIGN.md is applied consistently across all sections (cures the current inconsistency)
+  2. The B&W↔colour scroll reveal works on cutout imagery via scroll-driven `feColorMatrix`, with a prefers-reduced-motion fallback
+  3. Section rhythm is varied (rectangle monotony broken) per the chosen direction
+  4. Final polish + audit pass: AI-slop test, WCAG AA, performance budget intact
+
+**UI hint**: yes
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundations & Deploy Pipeline | 0/3 | Not started | - |
-| 2. Hero & Situation | 0/3 | Not started | - |
-| 3. Mid-page Story | 0/0 | Not started | - |
-| 4. Conversion & Persistent Surfaces | 0/0 | Not started | - |
-| 5. Hardening & Launch | 0/0 | Not started | - |
+| 1. Foundations & Deploy Pipeline | 3/3 | Complete | 2026-04-30 |
+| 2. Hero & Situation | 3/3 | Complete | 2026-04-30 |
+| 3. Mid-page Story | shipped | Complete | 2026-05-01 |
+| 4. Conversion & Persistent Surfaces | shipped | Complete | 2026-05-01 |
+| 5. Hardening & Launch | shipped | Complete (code; cutover pending) | 2026-05-03 |
 | 6. Post-UAT Polish | shipped | Complete | 2026-05-04 |
-| 7. Design-system foundations (refresh P1) | 1/1 | Complete   | 2026-06-01 |
-| 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete    | 2026-06-01 |
-| 12. Build pipeline & tooling foundation | 3/3 | Complete   | 2026-06-02 |
-| 11. Cutout reveal system (refresh P3) | 3/3 | Complete    | 2026-06-02 |
-| 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete (bug/tweak scope) | 2026-06-01 |
-| 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete    | 2026-06-01 |
+| 7. Design-system foundations (refresh P1) | 1/1 | Complete | 2026-06-01 |
+| 8. Navigation & floating action bar (refresh P2) | 4/4 | Complete | 2026-06-01 |
+| 9. P08 bug fixes & tweaks (fix phase) | shipped | Complete | 2026-06-01 |
+| 10. Contact mechanic — form vs email (refresh P7) | 2/2 | Complete | 2026-06-01 |
+| 11. Cutout reveal system (refresh P3) | 3/3 | Complete | 2026-06-02 |
+| 12. Build pipeline & tooling foundation | 3/3 | Complete | 2026-06-02 |
+| 13. Design contract | 0/0 | Not started | - |
+| 14. Define the offer | 0/0 | Not started | - |
+| 15. Services section | 0/0 | Not started | - |
+| 16. Process section | 0/0 | Not started | - |
+| 17. About Kristina | 0/0 | Not started | - |
+| 18. Experience / proof | 0/0 | Not started | - |
+| 19. Intro re-tighten + recognition beat | 0/0 | Not started | - |
+| 20. Copy voice pass | 0/0 | Not started | - |
+| 21. Visual variety, motion & shape consistency | 0/0 | Not started | - |
 
 ## Coverage Summary
 
@@ -312,4 +452,4 @@ Plans:
 - All five phases involve UI work — every detail block carries a UI hint.
 
 ---
-*Last updated: 2026-04-29 after roadmap creation*
+*Last updated: 2026-06-03 — V1 Restructure reset: phases 13-21 added (build order), superseding ROADMAP-REFRESH.md P4/P5/P6/P8. Earlier Phase Details/Progress rows for phases 1-5 are stale (pre-2026-04-29) and left as history.*
