@@ -43,16 +43,17 @@
      =========================================================== */
   --font-primary: 'Epilogue', system-ui, sans-serif;
 
-  --text-display:  clamp(3rem, 7vw, 5.5rem);
-  --text-headline: clamp(1.75rem, 3.5vw, 2.75rem);
-  --text-title:    clamp(1.25rem, 2vw, 1.5rem);
-  --text-body:     clamp(1rem, 1.5vw, 1.1rem);
+  --text-display:  clamp(2.75rem, 6vw, 5rem);
+  --text-headline: clamp(2rem, 4vw, 3rem);
+  --text-title:    clamp(1.5rem, 1.5vw + 1.1rem, 1.875rem);
+  --text-lead:     clamp(1.25rem, 1.2vw + 1rem, 1.5rem);
+  --text-body:     clamp(1.125rem, 1vw + 0.9rem, 1.25rem);
   --text-label:    0.875rem;
-  --text-mega:     clamp(3.5rem, 9vw, 7rem);
 
   --lh-display:  1;
   --lh-headline: 1.1;
-  --lh-title:    1.2;
+  --lh-title:    1.25;
+  --lh-lead:     1.5;
   --lh-body:     1.7;
   --lh-label:    1.4;
 
