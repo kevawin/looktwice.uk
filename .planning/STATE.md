@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Roadmap reset 2026-06-03 — V1 Restructure. Phases 13-21 added to ROADMAP.md in build order (supersedes ROADMAP-REFRESH.md P4/P5/P6/P8). Next: Phase 13 Design contract (impeccable setup → DESIGN.md).
-last_updated: "2026-06-03T00:00:00.000Z"
+status: completed
+stopped_at: Phase 13 context gathered
+last_updated: "2026-06-03T21:52:48.731Z"
 progress:
-  total_phases: 21
-  completed_phases: 12
+  total_phases: 20
+  completed_phases: 7
   total_plans: 19
-  completed_plans: 19
-  percent: 57
+  completed_plans: 22
+  percent: 35
 ---
 
 # State: looktwice.uk
@@ -171,11 +171,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-02T19:58:21.909Z
+**Last session:** 2026-06-03T21:52:48.727Z
 
 **Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
 
-**Stopped at:** Phase 12 (build pipeline) planned — 3 plans, checker PASSED. Ready to execute (runs before Phase 11).
+**Stopped at:** Phase 13 context gathered
 
 **Files of record:**
 
