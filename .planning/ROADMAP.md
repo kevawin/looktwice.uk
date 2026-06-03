@@ -30,7 +30,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 
 ### V1 Restructure (build order — supersedes ROADMAP-REFRESH.md P4/P5/P6/P8)
 
-Finishing V1 properly (V1 never shipped). Same milestone. Structure + offer first; voice + visual polish last. Each phase's design step runs through the **impeccable** skill against `DESIGN.md` (built in Phase 13). Target page order (visitor-facing): Intro → Process → Services → About Kristina → Experience/proof → Contact. Design inputs captured in `.planning/design-inputs.md`.
+Finishing V1 properly (V1 never shipped). Same milestone. Structure + offer first; voice + visual polish last. Each phase's design step runs through the **impeccable** skill against `DESIGN.md` (built in Phase 13). **The GSD↔impeccable handoff per phase — when impeccable runs, in what mode, where GSD resumes — is encoded in `.planning/DESIGN-WORKFLOW.md`; read it before planning any phase 14-21.** Target page order (visitor-facing): Intro → Process → Services → About Kristina → Experience/proof → Contact. Design inputs captured in `.planning/design-inputs.md`.
 
 - [ ] **Phase 13: Design contract** - impeccable setup → DESIGN.md. Rule-by-rule audit (keep/override/kill) of inherited design rules, shape vocabulary, motion philosophy, B&W↔colour scroll-reveal signature interaction. Foundation every later phase reads.
 - [ ] **Phase 14: Define the offer** - Decision/spec, not layout. Named priced service packages (the spine). Jamie stands in for Kris.
