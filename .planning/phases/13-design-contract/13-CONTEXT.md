@@ -41,7 +41,7 @@ is OFF — inherited rules are not auto-kept.
 ### Shape vocabulary
 - **D-11: Build on existing presets.** Seed the vocabulary from the five shipped cutout presets (`circle`, `down-triangle`, `up-triangle`, `pill`, `rounded-rect` in `buildCutout.js`) plus current radius tokens; impeccable rationalises them into a named vocabulary, adding/removing as needed. Continuity with the shipped hero, minimal churn.
 - **D-12: Strict reuse — no new shapes without a contract update.** Every section MUST draw from the named set; introducing a new shape requires updating `DESIGN.md` first. This is the deliberate cure for the current shape inconsistency (Koto reference). Note: discipline on the shape *system* is intentional even though the inherited *bans* were loosened — the bans were guardrails, the vocabulary is the positive system.
-- **D-13: Govern everything shaped under one consolidated fixed-radius set.** The vocabulary covers cutout apertures, container/card corners, buttons, and dividers. impeccable tightens the currently-scattered radii (`--radius-sm` 4 / `--radius-md` 10 / `--radius-cutout` 16 / `--radius-lg` 20 / `--radius-pill` 999) into one disciplined fixed-radius scale. Satisfies success criterion 1 ("shapes + fixed radii") in this phase, not a later one.
+- **D-13: Govern everything shaped under one fixed-radius set; consolidation deferred to Phase 21.** The vocabulary covers cutout apertures, container/card corners, buttons, and dividers. The named shapes are locked now; the current five radii (`--radius-sm` 4 / `--radius-md` 10 / `--radius-cutout` 16 / `--radius-lg` 20 / `--radius-pill` 999) stand and are named by the vocabulary. **Whether to consolidate the close middle steps is deferred to Phase 21** (Jamie: "I need to see them" — decide when shapes are applied sitewide). No radius value changes before then. (Updated from the original "consolidate now" intent after Jamie ruled to see them in context first.)
 
 ### Motion & scroll-reveal
 - **D-14: Motion principle = the "look twice" feel.** The design language should create subtle interactions that make the user literally look twice — *did that image just move?* This is the north star; every per-phase animation is justified against it (and against motion restraint — few, intentional, brand-reinforcing, never decorative).
@@ -49,8 +49,24 @@ is OFF — inherited rules are not auto-kept.
 - **D-16: Reduced-motion fallback = everything static, content fully visible.** Under `prefers-reduced-motion: reduce`: no parallax, no reveals, no movement; cutout images rest in their default state (B&W on colour); content shows immediately with zero motion dependence. Matches impeccable's rule that reveals enhance an already-visible default. This is the one motion item fixed in the contract now.
 - **D-17: Drop the old scroll-reveal; build fresh.** The legacy IntersectionObserver opacity+stagger content reveal is already gone from the code (verified: `js/main.js` only uses IntersectionObserver for the floating-bar scroll-gate and `#contact` suppression; `css/animations.css` holds only the word-roller). The contract does not carry it forward — Phase 21 builds fresh "look twice" patterns from a clean slate.
 
+### Contract authoring session (impeccable, 2026-06-03)
+
+DESIGN.md was authored this session (impeccable proposes, Jamie rules — D-03). Jamie then reopened every carried-forward "locked" state ("nothing stays locked just because it was locked before"). Additional rulings:
+
+- **D-18: DESIGN.md authored + DESIGN.json retired.** Root `DESIGN.md` rewritten in the Stitch six-section format (frontmatter mirrors `css/tokens.css`; motion + shape folded into Overview, since the format forbids extra top-level sections). `DESIGN.json` deleted (D-02). Note: Stitch is only the file format — zero design decisions came from it.
+- **D-19: North star "The Second Look" — kept.** It is the brand name and the "look twice" motion idea; stays the organising metaphor (reopened and reaffirmed, not inherited-by-default).
+- **D-20: Surface model = neutral spine + accent punctuation (replaces the two-mode system).** Linen/Midnight is the default ground; colour-drenched surfaces are reserved for emotional/conversion beats (hero, interrupt, contact). Better for a 6-section page than the inherited drenched-vs-Linen binary.
+- **D-21: Cutouts are a key-moment device, not every section.** Used at openers; other sections express the second look via motion/layout (leans on Phase 21).
+- **D-22: Cutout apertures reveal images ONLY.** Never a colour or gradient fill inside a window. The field is the section surface; a cutout on a gradient-background section is a build-time judgement ("decide after seeing it").
+- **D-23: Gradient = soft discipline + sparing backgrounds.** Available, spent on deliberate moments (CTA, recommended tier), not default fill; allowed sparingly as a section background. (Extends D-08.)
+- **D-24: Palette kept as Kris's brand law.** The 6 accents + neutrals + exact hex stand; reopening colour is Kris's call, not a technical one. Mutable, not frozen.
+- **D-25: Functional neutrals — prefer faded brand colours over true grey.** Where a mid-tone grey would go (helper text, placeholders, disabled), reach first for low-opacity Midnight or a faded accent (the `midnight-12/15` pattern). Refines D-07's "greys available."
+- **D-26: Cool accents allowed as drenched section backgrounds.** Rich Purple / Cool Indigo can own a gravitas punctuation beat, not just hover/gradient. Revises the old "never a background" rule.
+- **D-27: Type scale revised (Jamie approved via live demo).** Body up (18–20px), new **Lead** step (20–24px), Title up (24–30px), Headline 32–48px, Display 44–80px, `--text-mega` dropped (declared but unused). Line-heights unchanged. `css/tokens.css` sync is a follow-up implementation step (changes body size sitewide → lands with a visual check, not in this contract-only phase).
+- **D-28: Spacing scale kept as-is** (8px base 8/16/32/64/96/120 — sound).
+
 ### Claude's Discretion
-- Exact shape names, the consolidated radius values, and the precise wording of the motion/rule sections are impeccable's to propose (per D-03), with Jamie ruling on the draft.
+- Precise wording of the motion/rule sections is impeccable's to propose, with Jamie ruling.
 - How aggressively to push the "judgement" framing on the killed bans (D-05/06/07/08) so the contract still steers away from the generic-consultant look.
 
 </decisions>
@@ -113,7 +129,10 @@ is OFF — inherited rules are not auto-kept.
 <deferred>
 ## Deferred Ideas
 
-- **Parallax behind cutouts, colour-on-white imagery, specific micro-reveals** — candidate "look twice" interactions; explored and implemented in **Phase 21** (visual variety, motion & shape consistency), not baked into the contract (D-15).
+- **Sync `css/tokens.css` to the revised type scale (D-27)** — update `--text-display/headline/title/body`, add `--text-lead`, remove `--text-mega`. Changes body size sitewide, so do it with a visual check (a quick task, or folded into the first build phase). The contract leads; tokens follow.
+- **Radius consolidation (D-13)** — decide in **Phase 21** when shapes are applied sitewide.
+- **Parallax behind cutouts, colour-on-white imagery, specific micro-reveals** — candidate "look twice" interactions; explored and implemented in **Phase 21** (visual variety, motion & shape consistency), not baked into the contract (D-15, D-21).
+- **CLAUDE.md / PROJECT.md rule updates** — record the design-rule reversals so the old bans don't contradict the contract: DESIGN.md lock lifted (D-01), shadows/grids/greys/gradient-scarcity killed (D-05/06/07/08/23), Epilogue no-500 softened (D-09), gradient-discipline + cool-accent-background rules revised (D-23/26).
 - **Adding a third Epilogue weight (likely 500)** — door left open (D-09); decided when a real hierarchy need appears, likely **Phase 15** pricing tables.
 - **Priced-package comparison layout using the now-allowed card grid** — **Phase 15** (services), enabled by D-06.
 - **Accessibility/contrast re-check after killing the bans** — killing shadows/greys/gradient-scarcity and possibly adding a weight has WCAG-AA implications; verify on each surface as those phases build (the AA-minimum constraint still holds project-wide).
