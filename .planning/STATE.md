@@ -164,6 +164,7 @@ NEXT: Phase 13 — Design contract (impeccable setup → DESIGN.md). Run impecca
 | 260602-tm1 | Hero cutout → two interlocking triangles (demo top band) | 2026-06-02 | d14f4b1 | [260602-tm1-change-hero-cutout-to-two-interlocking-t](./quick/260602-tm1-change-hero-cutout-to-two-interlocking-t/) |
 | 260602-v7i | Hero → circle + squircle; focal-point + multi-shape cutout support | 2026-06-02 | 57f9355 | [260602-v7i-productionise-circle-squircle-hero-with-](./quick/260602-v7i-productionise-circle-squircle-hero-with-/) |
 | 260602-vg6 | Harden buildCutout (escape alt, fail-closed manifest) + watch-mode require fix | 2026-06-02 | ad326c4 | [260602-vg6-harden-buildcutout-escape-alt-fail-close](./quick/260602-vg6-harden-buildcutout-escape-alt-fail-close/) |
+| 260603-x5b | Sync tokens.css to Phase 13 type scale (body up, new lead step, mega dropped) | 2026-06-03 | 77b20dc | [260603-x5b-sync-tokens-css-to-phase-13-type-scale](./quick/260603-x5b-sync-tokens-css-to-phase-13-type-scale/) |
 
 ### Blockers
 
