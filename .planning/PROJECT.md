@@ -42,16 +42,16 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - Blog, newsletter, interactive features — outside the proof-and-credibility job
 - JS frameworks (React/Vue/Next), CSS preprocessors, bundlers, npm deps — brochure site, no need
 - Touching `main` branch — holds the live holding page; all build work on `new-site`
-- Modifying root `DESIGN.md` / `PRODUCT.md` during build — source of truth
-- Decorative motion, parallax, ambient animation — restraint is the brand
-- Mid-tone greys, glassmorphism, gradient text, card shadows, font-weight 500, em-dashes in copy — design bans
+- Modifying root `PRODUCT.md` during build — source of truth. (Root `DESIGN.md` is now the *editable* design contract, not off-limits — Phase 13 lifted that lock; `DESIGN.json` retired.)
+- Decorative motion, parallax, ambient animation — restraint is the brand (subtle "look twice" interactions are the exception, per DESIGN.md)
+- Still banned: glassmorphism, gradient text, em-dashes in copy. **No longer banned (Phase 13, available with judgement — see DESIGN.md):** card shadows, mid-tone greys (prefer faded brand colours), decorative card grids, font-weight 500.
 
 ## Context
 
 **Pre-existing material (treat as source of truth):**
 
 - `PRODUCT.md` (root) — audience, voice, design principles, brand personality
-- `DESIGN.md` / `DESIGN.json` (root) — full design system reference
+- `DESIGN.md` (root) — the negotiated design contract (Phase 13); single design source of truth, editable, supersedes `DESIGN.json` (retired)
 - `.planning/seeds/PROJECT.md` — original PRD / vision
 - `.planning/seeds/HOMEPAGE-SPEC.md` — section-by-section UI spec
 - `.planning/seeds/DESIGN-TOKENS.md` — implementation-ready CSS tokens
@@ -71,12 +71,13 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - **Tech stack**: Plain HTML + CSS + minimal vanilla JS — no frameworks, no preprocessors, no bundlers, no npm deps for V1.
 - **Hosting**: Cloudflare Pages, static deploy from `new-site` branch. Already-registered domain `looktwice.uk` on Cloudflare DNS.
 - **Branch policy**: All work on `new-site`. `main` is the live holding page — do not touch until cutover.
-- **Typography**: Epilogue only, weights 400 and 700. No 500. No second family. Google Fonts (or self-hosted woff2) with font-display: swap.
+- **Typography**: Epilogue only, no second family (firm). Weights 400/700 today; a third weight (likely 500) is not banned, added on real need (Phase 13 D-09). Self-hosted woff2, font-display: swap.
 - **Accessibility**: WCAG AA minimum on every surface. prefers-reduced-motion respected. One H1 per page (hero).
 - **Performance**: LCP < 2.5s, CLS < 0.1, FID < 100ms, page weight < 500KB excluding images. Images in WebP with srcset; lazy-load below the fold.
 - **Content**: All copy in `CONTENT-DRAFT.md` is directional — Kris refines in her own voice before launch. Several `[DECIDE]` and `[CONFIRM]` markers still open (hero headline, positioning interrupt option, public client names).
-- **Design bans (hard stops)**: no card shadows, no gradient text, no glassmorphism, no mid-tone greys, no decorative card grids, no font-weight 500, no em-dashes in copy.
-- **Gradient discipline**: brand gradient appears in exactly one place — the floating sticky tab. Cool accents (Rich Purple, Cool Indigo) are hover/gradient only, never section backgrounds.
+- **Design authority**: root `DESIGN.md` (Phase 13 contract) is the design source of truth; the bans below are revised by it. Read it before design work.
+- **Design bans (revised Phase 13)**: still banned — gradient text, glassmorphism, em-dashes in copy. Available with judgement (DESIGN.md governs) — card shadows, mid-tone greys (prefer faded brand colours), decorative card grids, font-weight 500.
+- **Gradient discipline (revised Phase 13)**: scarcity rule lifted — gradient is available, including sparingly as a section background, spent deliberately not as default fill. Cool accents (Rich Purple, Cool Indigo) may now drench a section as a gravitas beat.
 
 ## Key Decisions
 

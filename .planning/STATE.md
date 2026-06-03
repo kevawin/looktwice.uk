@@ -28,13 +28,13 @@ progress:
 
 ## Current Position
 
-Phase: V1 Restructure — phases 13-21 planned (build order). No active phase yet; next is Phase 13 (design contract).
-Prior: phases 1-12 all complete (build, refresh foundations, nav/floating bar, contact form, build pipeline, cutout system). Hero on circle + squircle.
+Phase: V1 Restructure — Phase 13 (design contract) COMPLETE. Next: Phase 14 (define the offer).
+Prior: phases 1-13 complete. Phase 13 produced the negotiated root `DESIGN.md` contract (DESIGN.json retired); type scale synced to tokens.css (quick 260603-x5b); CLAUDE.md + PROJECT.md rule reversals recorded.
 
-NEXT: Phase 13 — Design contract (impeccable setup → DESIGN.md). Run impeccable setup (triggers init → captures DESIGN.md from existing css/ tokens), then the rule-by-rule keep/override/kill audit with Jamie. See `.planning/ROADMAP.md` (V1 Restructure) + `.planning/design-inputs.md`.
+NEXT: **Phase 14 — Define the offer.** Run `/gsd-discuss-phase 14`. Per `.planning/DESIGN-WORKFLOW.md` this is a **GSD-only** phase (decision/spec — named, priced service packages; no impeccable design step). Jamie stands in for Kris. Read `DESIGN.md` (design authority) + `.planning/ROADMAP.md` Phase 14.
 
-- **Milestone:** v1 (GSD phases 1-12 done; V1 Restructure phases 13-21 remain)
-- **Status:** Roadmap reset done — ready to start Phase 13 (design contract)
+- **Milestone:** v1 (GSD phases 1-13 done; V1 Restructure phases 14-21 remain)
+- **Status:** Phase 13 complete — ready to discuss Phase 14 (define the offer)
 - **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias for `new-site` — auto-updates on push)
 
 ## Configuration
@@ -174,9 +174,9 @@ None.
 
 **Last session:** 2026-06-03T22:48:33.757Z
 
-**Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
+**Next session entry point:** Phase 14 — Define the offer. Run `/gsd-discuss-phase 14`. GSD-only phase (named, priced service packages; no impeccable step — see `.planning/DESIGN-WORKFLOW.md`). Jamie stands in for Kris.
 
-**Stopped at:** Phase 13 complete — DESIGN.md contract authored, DESIGN.json retired
+**Stopped at:** Phase 13 complete — DESIGN.md contract authored + reconciled; DESIGN.json retired; tokens.css type scale synced (quick 260603-x5b); CLAUDE.md/PROJECT.md rule reversals recorded. Phase 13 follow-ups all closed.
 
 **Files of record:**
 
@@ -189,7 +189,9 @@ None.
 - `.planning/seeds/ARCHITECTURE.md`
 - `.planning/seeds/DESIGN-TOKENS.md`
 - `.planning/seeds/CONTENT-DRAFT.md`
-- root `PRODUCT.md`, `DESIGN.md`, `DESIGN.json` (source of truth, do not modify)
+- root `PRODUCT.md` (source of truth, do not modify)
+- root `DESIGN.md` (Phase 13 design contract — the editable design source of truth; `DESIGN.json` retired)
+- `.planning/DESIGN-WORKFLOW.md` (GSD↔impeccable handoff per phase)
 
 ---
 *State initialized: 2026-04-29*
