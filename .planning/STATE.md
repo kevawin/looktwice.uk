@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Phase 13 context gathered
-last_updated: "2026-06-03T21:52:48.731Z"
+stopped_at: Phase 13 complete — DESIGN.md contract authored, DESIGN.json retired
+last_updated: "2026-06-03T22:48:33.760Z"
 progress:
   total_phases: 20
   completed_phases: 7
@@ -171,11 +171,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-03T21:52:48.727Z
+**Last session:** 2026-06-03T22:48:33.757Z
 
 **Next session entry point:** V1 Refresh Phase 3 — Cutout reveal system (reusable SVG-mask cutout primitive; refactor hero onto it). See `.planning/ROADMAP-REFRESH.md` Phase 3. Unstarted → `/gsd:discuss-phase`. Open decision noted there: cutout windows over solid section colours vs relaxing the gradient rule (Kris decides). GSD numbered phases 1–10 are all complete.
 
-**Stopped at:** Phase 13 context gathered
+**Stopped at:** Phase 13 complete — DESIGN.md contract authored, DESIGN.json retired
 
 **Files of record:**
 
