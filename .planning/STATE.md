@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 14-01-PLAN.md (offer spine locked)
-last_updated: "2026-06-07T07:43:58.892Z"
+stopped_at: Phase 15 context gathered (offer rebuilt as catalogue)
+last_updated: "2026-06-07T18:27:48.180Z"
 progress:
   total_phases: 20
   completed_phases: 8
@@ -176,11 +176,11 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-07T07:43:49.173Z
+**Last session:** 2026-06-07T18:27:48.169Z
 
 **Next session entry point:** Phase 14 — Define the offer. Run `/gsd-discuss-phase 14`. GSD-only phase (named, priced service packages; no impeccable step — see `.planning/DESIGN-WORKFLOW.md`). Jamie stands in for Kris.
 
-**Stopped at:** Phase 14 context gathered
+**Stopped at:** Phase 15 context gathered (offer rebuilt as catalogue)
 
 **Files of record:**
 
