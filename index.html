@@ -7,7 +7,7 @@
   <meta name="description" content="Independent brand and customer experience strategy." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -36,7 +36,7 @@
       );
       background-attachment: fixed;
       color: var(--navy);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -47,24 +47,25 @@
 
     header {
       margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
     }
 
     .wordmark {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.9rem, 4vw, 2.25rem);
-      letter-spacing: 0.04em;
-      color: var(--navy);
+      display: block;
+      width: clamp(8.5rem, 17vw, 10.5rem);
+      height: auto;
     }
 
     .tagline {
-      margin-top: 0.5rem;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       font-weight: 400;
-      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
       color: var(--navy-soft);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      line-height: 1.7;
     }
 
     main {
@@ -72,7 +73,7 @@
     }
 
     .headline {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       font-weight: 700;
       font-size: clamp(1.35rem, 2.2vw, 1.6rem);
       line-height: 1.2;
@@ -81,7 +82,7 @@
     }
 
     .body-text {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       font-weight: 500;
       font-size: clamp(0.95rem, 1.5vw, 1.05rem);
       line-height: 1.75;
@@ -89,7 +90,7 @@
     }
 
     .body-text p + p {
-      margin-top: 0.4rem;
+      margin-top: 1.1rem;
     }
 
     .body-text a {
@@ -106,7 +107,7 @@
 
     footer {
       margin-top: 3rem;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.08em;
       color: var(--navy-mid);
@@ -137,8 +138,8 @@
   <div class="overlay"></div>
 
   <header>
-    <div class="wordmark">Look Twice</div>
-    <div class="tagline">Independent brand &amp; customer experience strategy</div>
+    <img class="wordmark" src="images/LookTwice_logo.svg" alt="Look Twice" />
+    <div class="tagline">Independent brand &amp;<br />customer experience<br />strategy</div>
   </header>
 
   <main>
@@ -150,7 +151,7 @@
     </div>
   </main>
 
-  <footer>&copy; 2026 Look Twice</footer>
+  <footer>&copy; 2026 Look Twice Ltd &middot; Company No. 17243993<br />Registered in England &amp; Wales</footer>
 
 </body>
 </html>
