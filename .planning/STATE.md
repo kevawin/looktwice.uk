@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
+status: executing
 stopped_at: Phase 14 context gathered
-last_updated: "2026-06-07T07:06:48.036Z"
+last_updated: "2026-06-07T07:32:22.174Z"
 progress:
   total_phases: 20
   completed_phases: 7
-  total_plans: 19
+  total_plans: 20
   completed_plans: 22
   percent: 35
 ---
@@ -34,7 +34,7 @@ Prior: phases 1-13 complete. Phase 13 produced the negotiated root `DESIGN.md` c
 NEXT: **Phase 14 — Define the offer.** Run `/gsd-discuss-phase 14`. Per `.planning/DESIGN-WORKFLOW.md` this is a **GSD-only** phase (decision/spec — named, priced service packages; no impeccable design step). Jamie stands in for Kris. Read `DESIGN.md` (design authority) + `.planning/ROADMAP.md` Phase 14.
 
 - **Milestone:** v1 (GSD phases 1-13 done; V1 Restructure phases 14-21 remain)
-- **Status:** Phase 13 complete — ready to discuss Phase 14 (define the offer)
+- **Status:** Ready to execute
 - **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias for `new-site` — auto-updates on push)
 
 ## Configuration
