@@ -39,3 +39,7 @@ Thumbs.db
 .agents/
 .claude/
 skills-lock.json
+
+# Local-only working files (not for the live site)
+images/
+inspo/
