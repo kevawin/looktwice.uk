@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 14 context gathered
-last_updated: "2026-06-07T07:32:22.174Z"
+stopped_at: Completed 14-01-PLAN.md (offer spine locked)
+last_updated: "2026-06-07T07:43:58.892Z"
 progress:
   total_phases: 20
-  completed_phases: 7
+  completed_phases: 8
   total_plans: 20
-  completed_plans: 22
-  percent: 35
+  completed_plans: 23
+  percent: 40
 ---
 
 # State: looktwice.uk
@@ -28,12 +28,12 @@ progress:
 
 ## Current Position
 
-Phase: V1 Restructure — Phase 13 (design contract) COMPLETE. Next: Phase 14 (define the offer).
-Prior: phases 1-13 complete. Phase 13 produced the negotiated root `DESIGN.md` contract (DESIGN.json retired); type scale synced to tokens.css (quick 260603-x5b); CLAUDE.md + PROJECT.md rule reversals recorded.
+Phase: V1 Restructure — Phase 14 (define the offer) COMPLETE. Next: Phase 15 (Services section).
+Prior: phases 1-14 complete. Phase 14 produced `.planning/OFFER.md`, the locked offer spine (free-call entry + Diagnose/Strategy/Embed rungs, provisional prices, one-line outcomes, productised/bespoke split, 20 [CONFIRM-KRIS] markers awaiting Kris's sign-off).
 
-NEXT: **Phase 14 — Define the offer.** Run `/gsd-discuss-phase 14`. Per `.planning/DESIGN-WORKFLOW.md` this is a **GSD-only** phase (decision/spec — named, priced service packages; no impeccable design step). Jamie stands in for Kris. Read `DESIGN.md` (design authority) + `.planning/ROADMAP.md` Phase 14.
+NEXT: **Phase 15 — Services section.** Renders the OFFER.md rungs as a scannable, buyable priced comparison. impeccable design phase (shape → build → critique/polish against DESIGN.md; pip-decks scannability; priced-comparison carve-out). Read `.planning/OFFER.md`, `DESIGN.md`, and `.planning/ROADMAP.md` Phase 15.
 
-- **Milestone:** v1 (GSD phases 1-13 done; V1 Restructure phases 14-21 remain)
+- **Milestone:** v1 (GSD phases 1-14 done; V1 Restructure phases 15-21 remain)
 - **Status:** Ready to execute
 - **Preview URL:** https://new-site.looktwice-uk.pages.dev (Cloudflare Pages branch alias for `new-site` — auto-updates on push)
 
@@ -63,6 +63,7 @@ NEXT: **Phase 14 — Define the offer.** Run `/gsd-discuss-phase 14`. Per `.plan
 | Phase 10 P02 | 600 | 2 tasks | 1 files |
 | Phase 11 P01 | 187 | 2 tasks | 2 files |
 | Phase 11 P02 | 300 | 3 tasks | 4 files |
+| Phase 14-define-the-offer P01 | 8 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -130,6 +131,9 @@ NEXT: **Phase 14 — Define the offer.** Run `/gsd-discuss-phase 14`. Per `.plan
 - [Phase ?]: Hero cutout defaults to single rounded-rect window (D-05 discretion)
 - [Phase ?]: buildCutout called AFTER buildHtml at Phase 11 seam (reads already-written dist/index.html)
 - [Phase ?]: build-smoke test updated from rewriteHeroImg assertions to Phase 11 SVG cutout assertions
+- [Phase 14]: Plan 14-01: Offer locked as a three-rung commitment ladder (Diagnose / Strategy / Embed) plus a free-call entry, written to `.planning/OFFER.md` as the content contract for Phases 15/16/17/19
+- [Phase 14]: Plan 14-01: Productised → bespoke split fixed per rung (Diagnose = Productised/fixed, Strategy = Semi-productised/scoped, Embed = Bespoke/retainer); provisional public names The Diagnostic / Strategy Sprint / Embedded Partner; all prices/names/outcomes carry [CONFIRM-KRIS] (20 markers) pending Kris
+- [Phase 14]: Plan 14-01: D-10 one-line outcomes carried with em-dashes replaced by commas to honour the CLAUDE.md em-dash ban (substance preserved); three RESEARCH open questions carried into OFFER.md Open Items for Kris
 
 ### Open Content Decisions (block launch, not phases)
 
@@ -172,7 +176,7 @@ None.
 
 ## Session Continuity
 
-**Last session:** 2026-06-07T07:06:48.033Z
+**Last session:** 2026-06-07T07:43:49.173Z
 
 **Next session entry point:** Phase 14 — Define the offer. Run `/gsd-discuss-phase 14`. GSD-only phase (named, priced service packages; no impeccable step — see `.planning/DESIGN-WORKFLOW.md`). Jamie stands in for Kris.
 

@@ -33,7 +33,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 Finishing V1 properly (V1 never shipped). Same milestone. Structure + offer first; voice + visual polish last. Each phase's design step runs through the **impeccable** skill against `DESIGN.md` (built in Phase 13). **The GSD↔impeccable handoff per phase — when impeccable runs, in what mode, where GSD resumes — is encoded in `.planning/DESIGN-WORKFLOW.md`; read it before planning any phase 14-21.** Target page order (visitor-facing): Intro → Process → Services → About Kristina → Experience/proof → Contact. Design inputs captured in `.planning/design-inputs.md`.
 
 - [x] **Phase 13: Design contract** - impeccable setup → DESIGN.md (completed 2026-06-03). Root DESIGN.md rewritten as the negotiated contract; DESIGN.json retired. All six inherited rules ruled keep/override/kill; surface model reset to neutral-spine + accent punctuation; strict shape vocabulary; "The Second Look" motion north star + static reduced-motion; type scale revised. Follow-ups complete: tokens.css synced to the new type scale (quick 260603-x5b); CLAUDE.md + PROJECT.md rule reversals recorded.
-- [ ] **Phase 14: Define the offer** - Decision/spec, not layout. Named priced service packages (the spine). Jamie stands in for Kris.
+- [x] **Phase 14: Define the offer** - Decision/spec, not layout. Named priced service packages (the spine). Jamie stands in for Kris. (completed 2026-06-07)
 - [ ] **Phase 15: Services section** - Build the defined offer; pip-decks scannability; carve-out from the no-card-grids ban for a priced comparison layout.
 - [ ] **Phase 16: Process section** - The journey steps; bgn.agency structure. Open: replace Dig.Reveal.Sharpen in Approach vs new block (decided in discuss).
 - [ ] **Phase 17: About Kristina** - New section — who am I buying. Does not exist today.
@@ -304,7 +304,7 @@ Plans:
 **UI hint**: no (decision/spec)
 **Plans**: 1 plan
 
-  - [ ] 14-01-PLAN.md — Author .planning/OFFER.md: the locked offer spine (free-call entry + Diagnose/Strategy/Embed rungs, prices, outcomes, productised/bespoke split, all [CONFIRM-KRIS]); record the path in STATE.md
+  - [x] 14-01-PLAN.md — Author .planning/OFFER.md: the locked offer spine (free-call entry + Diagnose/Strategy/Embed rungs, prices, outcomes, productised/bespoke split, all [CONFIRM-KRIS]); record the path in STATE.md
 
 ### Phase 15: Services section
 
@@ -413,7 +413,7 @@ Plans:
 | 11. Cutout reveal system (refresh P3) | 3/3 | Complete | 2026-06-02 |
 | 12. Build pipeline & tooling foundation | 3/3 | Complete | 2026-06-02 |
 | 13. Design contract | 0/0 | Not started | - |
-| 14. Define the offer | 0/0 | Not started | - |
+| 14. Define the offer | 1/1 | Complete   | 2026-06-07 |
 | 15. Services section | 0/0 | Not started | - |
 | 16. Process section | 0/0 | Not started | - |
 | 17. About Kristina | 0/0 | Not started | - |
