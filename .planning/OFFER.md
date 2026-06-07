@@ -19,7 +19,7 @@ This is a commitment ladder, not a Good/Better/Best tier choice. Each rung is a 
 
 **This is the single primary CTA site-wide.** It is the way in for every rung. It is **not a priced rung**, Diagnose is the first thing a client pays for (D-07/D-08).
 
-**Free call vs the paid Diagnose:** the free call is a 30-min conversation that names the problem at the surface, enough to know whether the Diagnostic is the right next step. Diagnose is a deeper investigation (document review, stakeholder interviews, research) with a written output. The free call is discovery, the Diagnostic is investigation.
+**Free call vs the paid Diagnose:** the free call is a 30-min conversation that names the problem at the surface, enough to know whether the Diagnostic is the right next step. Diagnose is a deeper investigation (stakeholder interviews, market research, analysis of current brand communications) with a written report of findings. The free call is discovery, the Diagnostic is investigation.
 
 ## Rung 1: The Diagnostic `[CONFIRM-KRIS]`
 
@@ -28,13 +28,13 @@ This is a commitment ladder, not a Good/Better/Best tier choice. Each rung is a 
 **Price:** ~£2,000 fixed `[CONFIRM-KRIS]`
 **Duration:** ~2-3 weeks `[CONFIRM-KRIS]`
 **One-line outcome:** "Name the real problem, not the symptom, with a clear direction out." `[CONFIRM-KRIS]`
-**What's included:** `[CONFIRM-KRIS]`
+**What's included:** (process confirmed by Kris 2026-06-07)
 
-- One structured 60-min kick-off (with Kris plus 1-2 key stakeholders)
-- Review of existing brand and CX materials (brief, guidelines, research, comms)
-- Stakeholder conversations (up to 3 internal, 2-3 customer if available)
-- Written diagnostic output: the real problem, the root cause, a clear direction
-- 60-min debrief and Q&A call
+- Initial call and discussion
+- Interview(s) with key stakeholder(s)
+- Market research
+- Analysis of current brand communications
+- Report of findings
 
 **Disciplines drawn on:** brand strategy, CX/experience strategy, research & insight (what this draws on, applied within the rung, not sold separately).
 **Output type:** written report plus debrief call.
@@ -93,9 +93,11 @@ These are not cumulative tiers. Each rung is a different kind of engagement for 
 
 ## Open Items for Kris
 
-1. **Rung vocabulary.** The public names ("The Diagnostic", "Strategy Sprint", "Embedded Partner") are provisional. Does Kris already have her own client vocabulary for these rungs? `[CONFIRM-KRIS]`
-2. **Embed anchor.** "from ~£2,500/month" sits at the low end of the UK fractional advisory market (light-touch advisory typically starts around £1,800-£3,500/month). Should the anchor move up to a mid-market equivalent of from ~£3,000/month? `[CONFIRM-KRIS]`
-3. **The Diagnostic process.** The distinction from a thorough free call is investigation depth plus a written output. What does Kris's actual Diagnostic process involve (which documents she reviews, how many stakeholders she typically interviews)? The included-items list above is a sensible default for her to refine. `[CONFIRM-KRIS]`
+All three open questions answered by Kris on 2026-06-07. Decisions recorded below.
+
+1. **Rung vocabulary.** Decided: keep the current public names ("The Diagnostic", "Strategy Sprint", "Embedded Partner") for now. May revisit before launch.
+2. **Embed anchor.** Decided: keep "from ~£2,500/month". Not moving to ~£3,000/month.
+3. **The Diagnostic process.** Resolved: call and discussion, interview(s) with stakeholder(s), market research, analysis of current brand communications, report of findings. Reflected in the Rung 1 included-items list above.
 
 ## Confirmation Required Before Launch
 
