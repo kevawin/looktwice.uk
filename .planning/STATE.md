@@ -180,6 +180,7 @@ None.
 
 **Files of record:**
 
+- `.planning/OFFER.md` — the locked offer spine (Phase 14). Content contract consumed by Phases 15/16/17/19; all `[CONFIRM-KRIS]` items await Kris's sign-off.
 - `.planning/PROJECT.md`
 - `.planning/REQUIREMENTS.md`
 - `.planning/ROADMAP.md`
