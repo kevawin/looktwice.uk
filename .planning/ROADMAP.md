@@ -302,6 +302,9 @@ Plans:
 
 **Notes**: Jamie stands in for Kris; she iterates later. Highest-leverage, highest-risk decision in the restructure.
 **UI hint**: no (decision/spec)
+**Plans**: 1 plan
+
+  - [ ] 14-01-PLAN.md — Author .planning/OFFER.md: the locked offer spine (free-call entry + Diagnose/Strategy/Embed rungs, prices, outcomes, productised/bespoke split, all [CONFIRM-KRIS]); record the path in STATE.md
 
 ### Phase 15: Services section
 
