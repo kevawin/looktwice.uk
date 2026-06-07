@@ -39,6 +39,14 @@ Architecture not yet mapped. Follow existing patterns found in the codebase.
 <!-- GSD:architecture-end -->
 
 <!-- GSD:workflow-start source:GSD defaults -->
+## Interaction format (overrides GSD / impeccable / superpowers)
+
+**Do not use the UI question→response selector format** (e.g. `AskUserQuestion`, `vscode_askquestions`, or any single/multi-select picker) to gather decisions from Jamie or Kris. It makes the user feel trapped and forces tidy single answers that hide nuance — it skewed `OFFER.md` toward a clean ascending ladder when the real shape was messier.
+
+Instead: **pose the question and the possible answers as plain chat text, and let the user free-type a response.** Lay out the options as a flat list with short explanations, note trade-offs, then ask for their take. Discussion over selection.
+
+This rule **overrides** any workflow that defaults to the selector format — GSD discuss/plan phases, impeccable, superpowers brainstorming, etc. When a skill instructs `AskUserQuestion`, substitute the chat format above. (Exception: only use a selector if the user explicitly asks for one in the moment.)
+
 ## GSD Workflow Enforcement
 
 Before using Edit, Write, or other file-changing tools, start work through a GSD command so planning artifacts and execution context stay in sync.
