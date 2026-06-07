@@ -1,156 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Look Twice | Independent brand and customer experience strategy</title>
-  <meta name="description" content="Independent brand and customer experience strategy." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Look Twice | Independent Brand & CX Strategy</title>
 
-    :root {
-      --navy: #e3e3f4;
-      --navy-mid: #e3e3f499;
-      --navy-soft: #e3e3f4cc;
-    }
+  <meta name="description" content="Closing the gap between brand promise and lived customer experience. Independent brand and CX strategy for SMEs and scale-ups.">
+  <link rel="canonical" href="https://looktwice.uk/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-    html, body {
-      height: 100%;
-    }
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://looktwice.uk/">
+  <meta property="og:title" content="Look Twice | Independent Brand & CX Strategy">
+  <meta property="og:description" content="Closing the gap between brand promise and lived customer experience.">
+  <meta property="og:image" content="https://looktwice.uk/images/og-share-1200x630.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_GB">
 
-    body {
-      background: linear-gradient(135deg,
-        #ff9900 0%,
-        #ff4400 25%,
-        #ff1144 45%,
-        #ff0077 65%,
-        #cc00aa 82%,
-        #5500aa 100%
-      );
-      background-attachment: fixed;
-      color: var(--navy);
-      font-family: 'DM Sans', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 4rem 6rem;
-    }
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Look Twice | Independent Brand & CX Strategy">
+  <meta name="twitter:description" content="Closing the gap between brand promise and lived customer experience.">
+  <meta name="twitter:image" content="https://looktwice.uk/images/og-share-1200x630.jpg">
 
-    header {
-      margin-bottom: 4rem;
-    }
+  <link rel="preload" href="/fonts/epilogue-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/images/scene-cafe-960.webp" as="image" fetchpriority="high">
 
-    .wordmark {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.9rem, 4vw, 2.25rem);
-      letter-spacing: 0.04em;
-      color: var(--navy);
-    }
+  <link rel="stylesheet" href="/css/tokens.css?v=17">
+  <link rel="stylesheet" href="/css/base.css?v=17">
+  <link rel="stylesheet" href="/css/layout.css?v=17">
+  <link rel="stylesheet" href="/css/components.css?v=17">
+  <link rel="stylesheet" href="/css/animations.css?v=17">
 
-    .tagline {
-      margin-top: 0.5rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-      color: var(--navy-soft);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    main {
-      max-width: 38rem;
-    }
-
-    .headline {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.35rem, 2.2vw, 1.6rem);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      color: var(--navy);
-    }
-
-    .body-text {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
-      line-height: 1.75;
-      color: var(--navy-soft);
-    }
-
-    .body-text p + p {
-      margin-top: 0.4rem;
-    }
-
-    .body-text a {
-      color: var(--navy);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--navy-mid);
-      transition: text-decoration-color 0.2s ease;
-    }
-
-    .body-text a:hover {
-      text-decoration-color: var(--navy);
-    }
-
-    footer {
-      margin-top: 3rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--navy-mid);
-    }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.20);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    header, main, footer {
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 3rem 2rem;
-      }
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Look Twice",
+    "alternateName": "Look Twice Consultancy",
+    "description": "Independent brand and customer experience strategy for SMEs and scale-ups.",
+    "url": "https://looktwice.uk",
+    "image": "https://looktwice.uk/images/kris-portrait.webp",
+    "logo": "https://looktwice.uk/images/logo-looktwice.svg",
+    "founder": {
+      "@type": "Person",
+      "name": "Kristina Evawin",
+      "jobTitle": "Brand and CX Strategist",
+      "sameAs": "https://www.linkedin.com/in/krisevawin/"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "United Kingdom"
+    },
+    "knowsAbout": [
+      "Brand strategy",
+      "Customer experience strategy",
+      "Research and insight"
+    ],
+    "priceRange": "$$$"
+  }
+  </script>
 </head>
 <body>
 
-  <div class="overlay"></div>
+  <!-- Logo symbol — single source, used in nav + footer via <use>. currentColor follows surface. -->
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="logo" viewBox="0 0 691 321">
+      <path d="M437 60.9414L479.924 0H522.39L475.357 63.6543L525 148H481.028L451.933 93.3779L437 113.74V321H397V0H437V60.9414Z"/>
+      <path d="M517.434 174C529.352 174 539.516 175.959 547.926 179.876C556.401 183.793 563.189 188.931 568.287 195.289C573.452 201.647 577.027 208.454 579.014 215.711C580.338 220.656 581 225.441 581 230.064H540.774C540.774 228.009 540.642 226.211 540.377 224.67C539.781 220.496 538.49 216.867 536.504 213.784C534.518 210.702 531.902 208.326 528.657 206.656C525.479 204.922 521.738 204.055 517.434 204.055C512.269 204.055 507.6 205.532 503.429 208.486C499.257 211.44 495.914 216.096 493.397 222.454C490.948 228.812 489.723 237.128 489.723 247.403C489.723 257.614 490.947 265.931 493.397 272.354C495.914 278.775 499.257 283.495 503.429 286.514C507.6 289.532 512.269 291.041 517.434 291.041C521.142 291.041 524.419 290.399 527.267 289.114C530.18 287.766 532.63 285.903 534.616 283.527C536.603 281.151 538.126 278.39 539.186 275.243C540.245 272.032 540.774 268.564 540.774 264.84H581C581 271.326 579.708 277.877 577.126 284.491C574.61 291.041 570.737 297.078 565.506 302.601C560.341 308.124 553.752 312.588 545.74 315.991C537.795 319.331 528.359 321 517.434 321C503.065 321 490.749 317.886 480.485 311.656C470.288 305.363 462.475 296.692 457.045 285.646C451.682 274.601 449 261.853 449 247.403C449 232.954 451.682 220.238 457.045 209.257C462.475 198.211 470.288 189.573 480.485 183.344C490.749 177.114 503.065 174 517.434 174Z"/>
+      <path d="M182.853 203.85H148.426V320.763H108.327V203.85H74V174H182.853V203.85Z"/>
+      <path d="M246.847 290.437L263.953 174H313.007L330.02 290.366L340.568 174H381.861L361.563 320.763H300.172L288.522 217.626L276.789 320.763H215.298L195 174H236.293L246.847 290.437Z"/>
+      <path d="M690.222 203.85H635.397V232.207H679.177V262.058H635.397V290.912H690.222V320.763H595V174H690.222V203.85Z"/>
+      <path d="M40.4004 115.791H93V148H0V0H40.4004V115.791Z"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M165.009 0C174.648 2.00602e-05 183.756 1.58378 192.332 4.75195C200.908 7.85544 208.453 12.5109 214.968 18.7178C221.549 24.9248 226.702 32.6195 230.425 41.8008C234.148 50.982 236.009 61.6504 236.009 73.8057C236.009 85.8965 234.114 96.5656 230.324 105.812C226.535 115.057 221.317 122.816 214.669 129.088C208.087 135.36 200.508 140.08 191.933 143.248C183.423 146.416 174.449 148 165.009 148C155.502 148 146.461 146.416 137.885 143.248C129.376 140.08 121.83 135.36 115.249 129.088C108.668 122.816 103.482 115.057 99.6924 105.812C95.9031 96.5656 94.0088 85.8965 94.0088 73.8057C94.0088 61.6503 95.87 50.982 99.5928 41.8008C103.382 32.6195 108.535 24.9248 115.05 18.7178C121.631 12.5109 129.176 7.85542 137.686 4.75195C146.261 1.58378 155.369 0 165.009 0ZM165.009 30.2598C160.156 30.2598 155.402 31.5525 150.749 34.1387C146.162 36.6603 142.372 41.0895 139.381 47.4258C136.389 53.6974 134.894 62.4909 134.894 73.8057C134.894 85.1206 136.389 93.9788 139.381 100.38C142.372 106.716 146.162 111.21 150.749 113.861C155.402 116.448 160.156 117.74 165.009 117.74C169.928 117.74 174.682 116.448 179.269 113.861C183.922 111.21 187.712 106.684 190.637 100.283C193.628 93.8822 195.124 85.056 195.124 73.8057C195.124 62.4909 193.628 53.6974 190.637 47.4258C187.645 41.0894 183.856 36.6603 179.269 34.1387C174.682 31.5524 169.928 30.2598 165.009 30.2598Z"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M317.009 0C326.648 2.00602e-05 335.756 1.58378 344.332 4.75195C352.908 7.85544 360.453 12.5109 366.968 18.7178C373.549 24.9248 378.702 32.6195 382.425 41.8008C386.148 50.982 388.009 61.6504 388.009 73.8057C388.009 85.8965 386.114 96.5656 382.324 105.812C378.535 115.057 373.317 122.816 366.669 129.088C360.087 135.36 352.508 140.08 343.933 143.248C335.423 146.416 326.449 148 317.009 148C307.502 148 298.461 146.416 289.885 143.248C281.376 140.08 273.83 135.36 267.249 129.088C260.668 122.816 255.482 115.057 251.692 105.812C247.903 96.5656 246.009 85.8965 246.009 73.8057C246.009 61.6503 247.87 50.982 251.593 41.8008C255.382 32.6195 260.535 24.9248 267.05 18.7178C273.631 12.5109 281.176 7.85542 289.686 4.75195C298.261 1.58378 307.369 0 317.009 0ZM317.009 30.2598C312.156 30.2598 307.402 31.5525 302.749 34.1387C298.162 36.6603 294.372 41.0895 291.381 47.4258C288.389 53.6974 286.894 62.4909 286.894 73.8057C286.894 85.1206 288.389 93.9788 291.381 100.38C294.372 106.716 298.162 111.21 302.749 113.861C307.402 116.448 312.156 117.74 317.009 117.74C321.928 117.74 326.682 116.448 331.269 113.861C335.922 111.21 339.712 106.684 342.637 100.283C345.628 93.8822 347.124 85.056 347.124 73.8057C347.124 62.4909 345.628 53.6974 342.637 47.4258C339.645 41.0894 335.856 36.6603 331.269 34.1387C326.682 31.5524 321.928 30.2598 317.009 30.2598Z"/>
+    </symbol>
+  </svg>
 
-  <header>
-    <div class="wordmark">Look Twice</div>
-    <div class="tagline">Independent brand &amp; customer experience strategy</div>
-  </header>
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="nav-wordmark" href="/" aria-label="Look Twice, home">
+      <svg class="nav-logo" viewBox="0 0 691 321" role="img" aria-label="Look Twice"><use href="#logo"/></svg>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a class="nav-link" href="#approach">APPROACH</a></li>
+      <li><a class="nav-link" href="#work">WORK</a></li>
+    </ul>
+  </nav>
 
   <main>
-    <h1 class="headline">Not quite ready for your second look yet.</h1>
+    <section id="hero" class="hero">
+      <div class="hero__inner">
+        <div class="hero__text">
+          <h1 class="hero__headline">
+            Improve the return on your investment in <span class="word-roller" aria-hidden="true">acquisition</span><span class="visually-hidden">acquisition</span>
+          </h1>
+          <p class="hero__subhead">
+            I take you from "I got it from some website" to "OMG you have to try this company."
+          </p>
+          <p class="hero__pitch">
+            That happens when the promise of your marketing matches the experience of your brand. When it doesn't, you're paying to acquire people who won't come back and won't tell anyone else about you.
+          </p>
+          <p class="hero__pitch">
+            I find where the experience contradicts the story you're telling, fix what's causing it, and make the whole thing pull in one direction.
+          </p>
+          <!-- provisional: reassurance value line; Kris confirms final wording in refresh P4 -->
+          <p class="hero__cta-label">No sale, no follow-up unless you want one.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--on-pink" href="#contact">Free 30-min chat</a>
+          </div>
+        </div>
 
-    <div class="body-text">
-      <p>Curious? Find me on <a href="https://www.linkedin.com/in/krisevawin/" target="_blank" rel="noopener noreferrer">LinkedIn</a> in the meantime.</p>
-      <p>Or if your brand makes a promise your experience isn&rsquo;t keeping, <span style="white-space: nowrap;">let&rsquo;s talk: <a href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></span></p>
-    </div>
+        <div class="hero__cutouts"><!-- CUTOUT:hero --></div>
+      </div>
+    </section>
+
+    <section id="process" class="process">
+      <div class="process__inner">
+        <header class="process__header">
+          <h2 class="process__headline">What it's like to work with me</h2>
+          <p class="process__intro">Seven stages from first conversation to ongoing measurement. Not every client needs all seven - you can enter at any point, and exit when the work is done.</p>
+        </header>
+
+        <ol class="process__list" role="list">
+
+          <li class="process__item">
+            <div class="process__row">
+              <div class="process__row-left">
+                <svg class="process__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span class="process__step" aria-hidden="true">0</span>
+                <h3 class="process__name">Discovery</h3>
+              </div>
+              <button class="process__toggle" aria-expanded="false" aria-controls="process-panel-0" aria-label="Expand Discovery">
+                <svg class="process__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+            <p class="process__summary">Before any work begins, we scope what's actually needed. One conversation, then a proposal that reflects your situation.</p>
+            <div id="process-panel-0" class="process__panel">
+              <div class="process__panel-inner">
+                <p class="process__detail">The free 30-minute call is the start of this. I take the time to understand your business, your brief, and your constraints before suggesting a scope - so the proposal reflects what you actually need, not a standard retainer.</p>
+                <ul class="process__bullets">
+                  <li>One conversation to understand the brief, the context, and what success looks like</li>
+                  <li>A proposal built for your situation, not a templated package</li>
+                  <li>No obligation until you've seen the thinking and agreed the scope</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="process__item">
+            <div class="process__row">
+              <div class="process__row-left">
+                <svg class="process__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                  <line x1="4" y1="22" x2="4" y2="15"/>
+                </svg>
+                <span class="process__step" aria-hidden="true">1</span>
+                <h3 class="process__name">Kick-off</h3>
+              </div>
+              <button class="process__toggle" aria-expanded="false" aria-controls="process-panel-1" aria-label="Expand Kick-off">
+                <svg class="process__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+            <p class="process__summary">Get properly oriented. We clarify the real problem, align on objectives, and set up the engagement to run well from the start.</p>
+            <div id="process-panel-1" class="process__panel">
+              <div class="process__panel-inner">
+                <p class="process__detail">The first session is a working session, not a formality. We define the problem clearly, agree on what success looks like, and map who needs to be involved and when. Sometimes the brief shifts here - and that's exactly the point.</p>
+                <ul class="process__bullets">
+                  <li>Agreed brief and objectives to work against from day one</li>
+                  <li>Access to the right data, research, and people identified early</li>
+                  <li>A project plan built around how you actually work</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="process__item">
+            <div class="process__row">
+              <div class="process__row-left">
+                <svg class="process__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                </svg>
+                <span class="process__step" aria-hidden="true">2</span>
+                <h3 class="process__name">Explore</h3>
+              </div>
+              <button class="process__toggle" aria-expanded="false" aria-controls="process-panel-2" aria-label="Expand Explore">
+                <svg class="process__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+            <p class="process__summary">Research before recommendations. I build the evidence base before forming a view - no brief goes unchanged once I've looked properly.</p>
+            <div id="process-panel-2" class="process__panel">
+              <div class="process__panel-inner">
+                <p class="process__detail">Customer interviews, stakeholder conversations, competitive benchmarking, journey mapping - whatever the situation needs. Quick wins are identified here so momentum builds while the strategy is underway.</p>
+                <ul class="process__bullets">
+                  <li>Customer and stakeholder interviews, not just desk research</li>
+                  <li>A map of the current experience as customers actually live it</li>
+                  <li>Quick wins identified early and actioned in parallel with the strategy</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="process__item">
+            <div class="process__row">
+              <div class="process__row-left">
+                <svg class="process__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+                <span class="process__step" aria-hidden="true">3</span>
+                <h3 class="process__name">Define</h3>
+              </div>
+              <button class="process__toggle" aria-expanded="false" aria-controls="process-panel-3" aria-label="Expand Define">
+                <svg class="process__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+            <p class="process__summary">The pivot from research to strategy. We agree on what the real problem is before building anything. Most briefs describe a symptom.</p>
+            <div id="process-panel-3" class="process__panel">
+              <div class="process__panel-inner">
+                <p class="process__detail">I present what the research has revealed and we agree on what we're actually solving for. This is often where the framing shifts - and that's exactly the point. No strategy until we're solving the right problem.</p>
+                <ul class="process__bullets">
+                  <li>A shared understanding of the real problem, not just the perceived one</li>
+                  <li>Priorities linked to business goals and constraints</li>
+                  <li>Agreement on the scope needed: brand strategy, CX strategy, or both</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="process__item">
+            <div class="process__row">
+              <div class="process__row-left">
+                <svg class="process__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                  <polyline points="2 17 12 22 22 17"/>
+                  <polyline points="2 12 12 17 22 12"/>
+                </svg>
+                <span class="process__step" aria-hidden="true">4</span>
+                <h3 class="process__name">Develop</h3>
+              </div>
+              <button class="process__toggle" aria-expanded="false" aria-controls="process-panel-4" aria-label="Expand Develop">
+                <svg class="process__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+            <p class="process__summary">Build the strategy - brand, experience, or both. Done collaboratively in workshops, so it holds up when I'm not in the room.</p>
+            <div id="process-panel-4" class="process__panel">
+              <div class="process__panel-inner">
+                <p class="process__detail">I work through workshops with your team, not at them. We define what the brand stands for, how the customer experience should deliver it, and the specific moments that create disproportionate impact for your business.</p>
+                <ul class="process__bullets">
+                  <li>Brand platform: positioning, personality, narrative, and reasons to believe</li>
+                  <li>Brand Basics (the non-negotiables) and Brand Amplifiers (the moments only you would create)</li>
+                  <li>CX designed through the lens of the brand, validated with real customers</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="process__item">
+            <div class="process__row">
+              <div class="process__row-left">
+                <svg class="process__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <polyline points="9 11 12 14 22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+                <span class="process__step" aria-hidden="true">5</span>
+                <h3 class="process__name">Make it practical</h3>
+              </div>
+              <button class="process__toggle" aria-expanded="false" aria-controls="process-panel-5" aria-label="Expand Make it practical">
+                <svg class="process__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+            <p class="process__summary">Turn the strategy into something the organisation can actually use. I provide the blueprint and the facilitation - implementation sits with your teams.</p>
+            <div id="process-panel-5" class="process__panel">
+              <div class="process__panel-inner">
+                <p class="process__detail">Strategy that lives in a deck doesn't change anything. This stage equips your people to deliver it - clear priorities, assigned owners, defined behaviours, and a comms brief that keeps everyone pulling in the same direction.</p>
+                <ul class="process__bullets">
+                  <li>Implementation plan with owners, timelines, and KPIs</li>
+                  <li>Staff behavioural framework aligned to your brand and CX standards</li>
+                  <li>Phased rollout: pilot first, review, refine, then scale</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="process__item">
+            <div class="process__row">
+              <div class="process__row-left">
+                <svg class="process__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="2" y="14" width="5" height="8"/>
+                  <rect x="9" y="8" width="5" height="14"/>
+                  <rect x="16" y="3" width="5" height="19"/>
+                </svg>
+                <span class="process__step" aria-hidden="true">6</span>
+                <h3 class="process__name">Measure</h3>
+              </div>
+              <button class="process__toggle" aria-expanded="false" aria-controls="process-panel-6" aria-label="Expand Measure">
+                <svg class="process__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+            <p class="process__summary">Set up the infrastructure to know whether it's working - and a feedback loop so the strategy keeps pace with the business.</p>
+            <div id="process-panel-6" class="process__panel">
+              <div class="process__panel-inner">
+                <p class="process__detail">Often built into the close of an engagement rather than a standalone piece of work. We define the KPIs that actually matter, build a monitoring cadence, and create a process for continuous improvement.</p>
+                <ul class="process__bullets">
+                  <li>KPIs tied to brand vision and business goals, not just operational metrics</li>
+                  <li>A dashboard and review cadence your team can sustain</li>
+                  <li>A continuous improvement loop: diagnose early, prioritise, act</li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <section id="situation" class="situation">
+      <div class="situation__inner">
+        <header class="situation__header">
+          <h2 class="situation__headline">Sound familiar?</h2>
+        </header>
+
+        <ol class="situation__grid" role="list">
+          <li class="situation__block">
+            <span class="situation__number" aria-hidden="true">01</span>
+            <h3 class="situation__title">The brand hasn't caught up with the growth</h3>
+            <p class="situation__body">The business has grown faster than the brand. Something feels off, the website, the pitch, the way the team talks about what you do, but nobody can name it precisely.</p>
+          </li>
+
+          <li class="situation__block">
+            <span class="situation__number" aria-hidden="true">02</span>
+            <h3 class="situation__title">The strategy exists on paper</h3>
+            <p class="situation__body">You inherited a brand strategy you didn't build and don't believe in. It lives in a deck. It's not driving decisions, and nobody references it unless they have to.</p>
+          </li>
+
+          <li class="situation__block">
+            <span class="situation__number" aria-hidden="true">03</span>
+            <h3 class="situation__title">The experience is good. The story isn't.</h3>
+            <p class="situation__body">Operations are solid, the product is strong. But the marketing isn't sticking, the premium pricing isn't landing, and the brand doesn't reflect what you actually deliver.</p>
+          </li>
+
+          <li class="situation__block">
+            <span class="situation__number" aria-hidden="true">04</span>
+            <h3 class="situation__title">The rebrand landed. Nothing changed.</h3>
+            <p class="situation__body">Six months ago, you launched a new brand. It looks better. But the experience hasn't caught up, the way things feel to customers, the way the team talks about the business.</p>
+          </li>
+
+          <li class="situation__block">
+            <span class="situation__number" aria-hidden="true">05</span>
+            <h3 class="situation__title">You need senior firepower without a full hire</h3>
+            <p class="situation__body">A project that spans brand, CX, and comms, and you need someone who can work at strategy level. A senior thinking partner for the duration, not an account manager with a team behind them.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="approach" class="interrupt">
+      <div class="interrupt__inner">
+        <p class="interrupt__lead">
+          If you asked me for three words to capture how I work, I'd say:
+        </p>
+        <h2 class="interrupt__headline">Dig. Reveal. Sharpen.</h2>
+        <p class="interrupt__statement">
+          Most briefs describe a symptom, not the problem. I dig until I find it. Then I show what was already there but missed, the thing that's been normalised, taken for granted, or seen too narrowly.
+        </p>
+      </div>
+    </section>
+
+    <section id="work" class="work">
+      <div class="work__inner">
+        <header class="work__header">
+          <h2 class="work__headline">Twelve years finding the gap.</h2>
+        </header>
+        <p class="work__body">
+          I've spent over twelve years building strategy across brand, CX, and comms. Agency-side at TBWA\MCR, Havas Lynx, and Mediacom, then independently. My experience spans:
+        </p>
+        <ul class="work__sectors" role="list">
+          <li class="work__sector">Retail</li>
+          <li class="work__sector">FMCG</li>
+          <li class="work__sector">Healthcare</li>
+          <li class="work__sector">Leisure</li>
+          <li class="work__sector">Finance</li>
+          <li class="work__sector">Hospitality</li>
+        </ul>
+        <p class="work__body">
+          I'm as comfortable building a brand platform as I am mapping a patient journey or writing a comms strategy. Because I've worked across disciplines, I tend to spot the connections, and the contradictions, that specialists miss.
+        </p>
+        <p class="work__segue">
+          Want to see an example of my work and how I think?
+        </p>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="services__inner">
+        <header class="services__header">
+          <h2 class="services__headline">Three problems. One frame.</h2>
+        </header>
+
+        <ol class="services__list" role="list">
+          <li class="services__item">
+            <svg class="services__icon" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+              <rect x="6" y="6" width="28" height="28"/>
+              <circle cx="38" cy="38" r="12"/>
+            </svg>
+            <h3 class="services__title">Brand strategy</h3>
+            <p class="services__body">When the brand isn't doing what it should, or doesn't reflect the business you've become. I work on positioning, narrative, and the strategic foundations that make everything else coherent.</p>
+          </li>
+
+          <li class="services__item">
+            <svg class="services__icon" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+              <rect x="4" y="6" width="32" height="18" rx="2"/>
+              <rect x="20" y="32" width="32" height="18" rx="2"/>
+              <line x1="36" y1="24" x2="20" y2="32"/>
+            </svg>
+            <h3 class="services__title">Experience and CX strategy</h3>
+            <p class="services__body">When the promise and the reality don't match. I map the gap between what a brand commits to and what customers actually experience, then build the strategy to close it.</p>
+          </li>
+
+          <li class="services__item">
+            <svg class="services__icon" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+              <circle cx="22" cy="22" r="14"/>
+              <line x1="32" y1="32" x2="46" y2="46"/>
+            </svg>
+            <h3 class="services__title">Research and insight</h3>
+            <p class="services__body">When you need to understand what's actually going on before deciding what to do about it. Customer research, stakeholder interviews, category analysis, the kind of investigation that changes the brief.</p>
+          </li>
+        </ol>
+
+        <p class="services__segue">
+          If something here is your problem, the first 30 minutes are on me.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="contact__inner">
+        <div class="contact__intro">
+          <h2 class="contact__headline">What happens at our free session?</h2>
+          <p class="contact__body">
+            A useful 30-minute conversation, not a sales call. We'll talk through what's going on in your business, the symptom, the situation, what you've already tried, and I'll help you separate the surface issue from the real underlying problem.
+          </p>
+          <p class="contact__body">
+            No commitment. No pitch. If we're a fit, we'll figure out next steps. If not, you'll leave with a clearer view of what to work on.
+          </p>
+          <form class="contact__form"
+                id="contact-form"
+                action="https://formspree.io/f/xbdbnrkr"
+                method="POST"
+                novalidate>
+
+            <input type="text"
+                   class="contact__alt"
+                   name="_gotcha"
+                   tabindex="-1"
+                   autocomplete="off"
+                   aria-hidden="true">
+
+            <div class="contact__field">
+              <label class="contact__label" for="contact-name">Your name <span aria-hidden="true">*</span></label>
+              <input class="contact__input"
+                     id="contact-name"
+                     type="text"
+                     name="name"
+                     required
+                     aria-required="true"
+                     autocomplete="name">
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="contact-email">Your email <span aria-hidden="true">*</span></label>
+              <input class="contact__input"
+                     id="contact-email"
+                     type="email"
+                     name="email"
+                     required
+                     aria-required="true"
+                     autocomplete="email">
+            </div>
+
+            <div class="contact__field">
+              <label class="contact__label" for="contact-message">Tell me about your situation <span aria-hidden="true">*</span></label>
+              <textarea class="contact__input contact__input--textarea"
+                        id="contact-message"
+                        name="message"
+                        required
+                        aria-required="true"
+                        rows="6"
+                        placeholder="What the business does, what the problem feels like right now, what you've already tried."></textarea>
+            </div>
+
+            <p class="contact__privacy">I'll only use this to arrange our free 30-minute chat. I won't add you a newsletter or sell your email address to the devil.</p>
+
+            <button class="btn btn--on-teal contact__submit" type="submit">
+              <span class="contact__submit-label">Send</span>
+              <!-- lucide "loader-circle" — spins while sending -->
+              <svg class="contact__submit-spinner" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+              </svg>
+              <!-- lucide "check" — replaces the spinner on success -->
+              <svg class="contact__submit-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M20 6 9 17l-5-5"/>
+              </svg>
+            </button>
+
+          </form>
+
+          <div id="contact-status"
+               role="status"
+               aria-live="polite"
+               aria-atomic="true"
+               class="contact__status"></div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>&copy; 2026 Look Twice</footer>
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a class="footer__logo-link" href="/" aria-label="Look Twice, home">
+          <svg class="footer__logo" viewBox="0 0 691 321" role="img" aria-label="Look Twice"><use href="#logo"/></svg>
+        </a>
+        <span class="footer__tagline">Independent brand &amp; CX strategy</span>
+        <span class="footer__location">UK-wide, based in Manchester</span>
+      </div>
+      <ul class="footer__meta" role="list">
+        <li><a class="footer__link" href="https://www.linkedin.com/in/krisevawin/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a class="footer__link" href="#privacy">Privacy policy</a></li>
+        <li><span class="footer__copy">&copy; 2026 Look Twice</span></li>
+      </ul>
+    </div>
+  </footer>
 
+  <div class="floating-bar" aria-hidden="true">
+    <a class="floating-bar__cta" href="#contact">Free 30-min chat</a>
+    <div class="floating-bar__nav">
+      <button class="floating-bar__burger"
+              type="button"
+              aria-expanded="false"
+              aria-label="Open menu"
+              aria-controls="floating-bar-pills">
+        <span class="floating-bar__burger-line" aria-hidden="true"></span>
+        <span class="floating-bar__burger-line" aria-hidden="true"></span>
+      </button>
+      <ul class="floating-bar__pills" id="floating-bar-pills" role="list">
+        <li><a class="floating-bar__pill" href="#approach">Approach</a></li>
+        <li><a class="floating-bar__pill" href="#work">Work</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="/js/main.js?v=17" defer></script>
 </body>
 </html>

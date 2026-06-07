@@ -1,0 +1,24 @@
+/* Look Twice — animations. Phase 8: nav colour fade + overlay slide removed (D-03, D-04).
+   Sticky-tab replaced by floating-bar in Phase 8 Plan 02. Word-roller unchanged. */
+
+/* ============================================================
+   Word roller — hero H1 rotating word
+   ============================================================ */
+
+/* Typewriter: main.js types the word char-by-char, types 3 trailing dots,
+   holds, deletes, then moves to the next word.
+   display:block drops the word onto its own line, always, right after
+   "investment in". min-height reserves one line so the empty pause between
+   words keeps the space — content below never jumps. The word owns the full
+   width of its line, so nowrap stays on one line without the old min-width. */
+.word-roller {
+  display: block;
+  min-height: 1lh;
+  font-style: italic;
+  color: var(--color-warm-amber);
+  white-space: nowrap;
+  padding-right: 3px; /* guards italic last-glyph clipping on iOS */
+}
+
+/* Reduced motion: main.js never starts the loop and rests on the first
+   word, so there is no animation to override here. */

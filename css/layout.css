@@ -1,0 +1,184 @@
+/* Look Twice — layout. Page shell, nav, sections grid layout. */
+
+main {
+  display: block;
+}
+
+/* ============================================================
+   Nav layout — cascade bug fixed (Phase 6).
+   .nav-hamburger visibility is now owned entirely by components.css
+   to avoid layout.css/components.css cascade fights.
+   ============================================================ */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  /* Align the logo + menu to the content column, matching the floating bar.
+     max-width = content cap (1280px) + both desktop gutters, so the inline
+     padding lands the logo/menu exactly on the content's left/right edges:
+       ≤640px  → 20px gutter (matches section padding-inline)
+       ≥641px  → 48px gutter; capped + centred at 1280px content on wide screens. */
+  max-width: calc(1280px + 2 * (var(--space-lg) * 0.75));
+  margin-inline: auto;
+  padding-block: var(--space-sm);
+  padding-inline: 20px;
+}
+
+@media (min-width: 641px) {
+  .nav {
+    padding-inline: calc(var(--space-lg) * 0.75);
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  padding: var(--space-lg) calc(var(--space-lg) * 0.75);
+  min-height: 64px;
+}
+
+/* ============================================================
+   Hero layout (Phase 6 — wider text column).
+   Two-column at >=769px: text 60% / image 40%, more breathing room.
+   The hero copy is now substantially longer than V1, so the text
+   column needs the extra width to reach the image edge cleanly.
+   ============================================================ */
+
+.hero__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 60fr) minmax(0, 40fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .hero__inner {
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* ============================================================
+   Situation layout (Phase 6 — 5-column desktop prototype, D-6.8).
+   - mobile (<641): 1 column
+   - tablet (641–1279): 2 columns
+   - desktop (>=1280): 5 columns
+   The 5-col variant is a Kris-feedback prototype — fall back to 2-col
+   if Kris finds it cramped.
+   ============================================================ */
+
+.situation__inner {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+}
+
+.situation__grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 641px) {
+  .situation__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .situation__grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+/* Process layout — capped at 900px for readable accordion lines. */
+.process__inner {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   Inner wrappers for interrupt / work / services / contact.
+   Cap content at 1280px, centre, single column unless overridden.
+   ============================================================ */
+
+.interrupt__inner,
+.work__inner,
+.services__inner,
+.contact__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+/* Services layout (Phase 6 — 3-column with icons, D-6.9). */
+.services__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .services__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+/* Work layout — bio paragraph + sector list + CTA stacked. */
+.work__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Contact layout (Phase 6 — split, D-6.10).
+   Desktop: title + intro + CTA on the left, what-to-bring list on the right.
+   Mobile: stack. */
+.contact__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 900px) {
+  .contact__inner {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+}

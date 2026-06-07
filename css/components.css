@@ -1,0 +1,1439 @@
+/* Look Twice — components. Phase 6 rewrite: drops chips, drops ghost button system,
+   introduces pill CTA system + decorative situation numbers + service icons + contact split. */
+
+/* ============================================================
+   Nav (in-flow, scrolls away with the page)
+   ============================================================ */
+
+.nav-wordmark {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-logo {
+  display: block;
+  width: auto;
+  height: 28px;
+  fill: currentColor;
+}
+
+@media (min-width: 769px) {
+  .nav-logo {
+    height: 34px;
+  }
+}
+
+.nav-link {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  padding: var(--space-xs) 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-hot-pink);
+  transition: width 180ms ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+/* Focus ring override: nav sits on Hot Pink hero before scroll — Hot Pink ring is invisible.
+   Use white over the unscrolled (hero) surface, default to global Hot Pink once Linen kicks in. */
+.nav .nav-link:focus-visible,
+.nav .nav-wordmark:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Pill CTA system (Phase 6 D-6.3).
+   Shape consistent with the sticky tab. Two surface contexts:
+   - On colour: white fill + surface-colour text → hover: outlined white.
+   - On Linen: accent fill + white text → hover: outlined accent.
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  border: 2px solid currentColor;
+  background: currentColor;
+  cursor: pointer;
+  transition: var(--transition-button);
+}
+
+/* On-colour variants — white fill, surface-colour text. Hover inverts. */
+.btn--on-pink {
+  background: var(--color-true-white);
+  color: var(--color-hot-pink);
+  border-color: var(--color-true-white);
+}
+
+.btn--on-pink:hover,
+.btn--on-pink:focus-visible {
+  background: transparent;
+  color: var(--color-true-white);
+  border-color: var(--color-true-white);
+}
+
+.btn--on-pink:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 4px;
+}
+
+.btn--on-teal {
+  background: var(--color-true-white);
+  color: var(--color-deep-teal);
+  border-color: var(--color-true-white);
+}
+
+.btn--on-teal:hover,
+.btn--on-teal:focus-visible {
+  background: transparent;
+  color: var(--color-true-white);
+  border-color: var(--color-true-white);
+}
+
+.btn--on-teal:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 4px;
+}
+
+
+/* ============================================================
+   Hero (#hero) — Hot Pink full-bleed (Phase 6 simplified).
+   Single rounded-rect portrait cutout (broken supporting circle dropped).
+   ============================================================ */
+
+.hero {
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-xl) var(--space-lg);
+  padding-inline: calc(var(--space-lg) * 0.75);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--color-true-white);
+  margin: 0;
+  margin-block-start: var(--space-md);
+  text-wrap: pretty;
+}
+
+.hero__subhead {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  opacity: 1;
+  max-width: none;
+  margin-block-start: var(--space-md);
+  margin-block-end: 0;
+}
+
+.hero__pitch {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  margin-block-start: var(--space-md);
+  margin-block-end: 0;
+  max-width: none;
+}
+
+.hero__pitch em {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.hero__cta-label {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  color: var(--color-true-white);
+  opacity: 0.8;
+  margin-block-start: var(--space-lg);
+  margin-block-end: 0;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-md);
+  margin-block-start: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.hero__readon {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-true-white);
+  border-bottom: 1px solid var(--color-true-white);
+  padding-block-end: 2px;
+}
+
+.hero__readon:hover,
+.hero__readon:focus-visible {
+  opacity: 0.85;
+}
+
+.hero__readon:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 4px;
+}
+
+/* === Cutout primitive (.cutout) === */
+
+.cutout {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero__cutouts {
+  width: 100%;
+  max-width: 460px;
+  justify-self: end;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-block: var(--space-xl) var(--space-lg);
+  }
+
+  .hero__cutouts {
+    width: 80%;
+    margin-block-start: var(--space-md);
+    max-width: none;
+    justify-self: center;
+  }
+
+  .hero__ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
+  }
+
+  .hero__readon {
+    align-self: flex-start;
+  }
+}
+
+/* ============================================================
+   Process (#process) — Midnight, accordion stages.
+   ============================================================ */
+
+.process {
+  background: var(--color-midnight);
+  color: var(--color-linen);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.process__header {
+  margin-block-end: var(--space-lg);
+}
+
+.process__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-linen);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.process__intro {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  opacity: 0.7;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.process__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.process__item {
+  border-top: 1px solid rgba(249, 246, 241, 0.12);
+  padding-block: var(--space-md);
+}
+
+.process__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-sm);
+}
+
+.process__row-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.process__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--color-hot-pink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.process__step {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-hot-pink);
+  flex-shrink: 0;
+  min-width: 1.8ch;
+}
+
+.process__name {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-linen);
+  margin: 0;
+}
+
+.process__toggle {
+  flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid rgba(249, 246, 241, 0.25);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  color: var(--color-linen);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 180ms ease-out, border-color 180ms ease-out;
+}
+
+.process__toggle:hover {
+  background: rgba(249, 246, 241, 0.08);
+  border-color: rgba(249, 246, 241, 0.45);
+}
+
+.process__toggle:focus-visible {
+  outline: 2px solid var(--color-hot-pink);
+  outline-offset: 3px;
+}
+
+.process__chevron {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 280ms ease;
+}
+
+.process__item--open .process__chevron {
+  transform: rotate(180deg);
+}
+
+.process__summary {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  opacity: 0.7;
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/* Accordion panel — CSS grid row animation */
+.process__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease;
+}
+
+.process__panel--open {
+  grid-template-rows: 1fr;
+}
+
+.process__panel-inner {
+  overflow: hidden;
+}
+
+.process__detail {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  max-width: var(--measure);
+  margin: 0;
+  padding-block-start: var(--space-md);
+  border-top: 1px solid rgba(249, 246, 241, 0.15);
+  margin-block-start: var(--space-md);
+}
+
+.process__bullets {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-sm) 0 var(--space-xs) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  max-width: var(--measure);
+}
+
+.process__bullets li {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-linen);
+  opacity: 0.85;
+  padding-inline-start: 20px;
+  position: relative;
+}
+
+.process__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 8px;
+  height: 2px;
+  background: var(--color-hot-pink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process__panel,
+  .process__chevron {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .process {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Situation (#situation) — Linen, decorative numbers (D-6.8).
+   Numbers: oversized, Hot Pink, 700 weight, sit above title.
+   ============================================================ */
+
+.situation {
+  background: var(--color-linen);
+  color: var(--color-midnight);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.situation__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-lg);
+}
+
+.situation__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.situation__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.situation__number {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 5vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-hot-pink);
+  display: inline-block;
+  margin-block-end: var(--space-xs);
+}
+
+.situation__title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.situation__body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  max-width: var(--measure);
+  margin-block-start: var(--space-xs);
+  margin-block-end: 0;
+}
+
+@media (min-width: 1280px) {
+  .situation__body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .situation__number {
+    font-size: clamp(2.5rem, 4vw, 3.25rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .situation {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Interrupt (#approach) — Signal Orange full-bleed.
+   Phase 6: hierarchy flipped — "Dig. Reveal. Sharpen." is the H2.
+   Lead-in and explainer drop to body scale.
+   ============================================================ */
+
+.interrupt {
+  background: var(--color-signal-orange);
+  color: var(--color-true-white);
+  padding-block: var(--space-xl);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.interrupt__lead {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  max-width: 800px;
+  margin: 0 0 var(--space-md) 0;
+}
+
+.interrupt__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--color-true-white);
+  margin: 0 0 var(--space-md) 0;
+  text-wrap: balance;
+}
+
+.interrupt__statement {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ============================================================
+   Work (#work) — Linen, expanded bio + sector list (D-6.4).
+   ============================================================ */
+
+.work {
+  background: var(--color-linen);
+  color: var(--color-midnight);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.work__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.work__body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.work__sectors {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+}
+
+.work__sector {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--color-cool-indigo);
+}
+
+.work__close {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.work__segue {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-cool-indigo);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+
+@media (max-width: 640px) {
+  .work {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Services / How-I-work (#services) — Linen, 3-col + icons (D-6.9).
+   Drops the rule-line stack from Phase 3.
+   ============================================================ */
+
+.services {
+  background: var(--color-linen);
+  color: var(--color-midnight);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.services__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-lg);
+}
+
+.services__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.services__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg) 0;
+}
+
+.services__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.services__icon {
+  width: 56px;
+  height: 56px;
+  display: block;
+  color: var(--color-hot-pink);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.services__title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-midnight);
+  margin: 0;
+}
+
+.services__body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.services__segue {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-hot-pink);
+  margin: 0 0 var(--space-md) 0;
+  max-width: var(--measure);
+}
+
+@media (max-width: 640px) {
+  .services {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Contact (#contact) — Deep Teal full-bleed, split layout (D-6.10).
+   Left column: title + intro + CTA. Right column: what-to-bring list.
+   ============================================================ */
+
+.contact {
+  background: var(--color-deep-teal);
+  color: var(--color-true-white);
+  padding-block: var(--space-section);
+  padding-inline: calc(var(--space-lg) * 0.75);
+}
+
+.contact__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.contact__headline {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: var(--ls-headline);
+  color: var(--color-true-white);
+  margin: 0;
+}
+
+.contact__body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.contact__cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  margin-block-start: var(--space-sm);
+}
+
+.contact__email {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  color: var(--color-true-white);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-true-white);
+  padding-block-end: 2px;
+}
+
+.contact__email:hover,
+.contact__email:focus-visible {
+  opacity: 0.85;
+}
+
+.contact__email:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 4px;
+}
+
+.contact__list-title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  color: var(--color-true-white);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.contact__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact__list li {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  padding-inline-start: 28px;
+  position: relative;
+}
+
+.contact__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 14px;
+  height: 2px;
+  background: var(--color-true-white);
+}
+
+/* Contact form — inputs, labels, status, privacy note */
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: var(--measure);
+  transition: opacity 320ms ease;
+}
+
+/* On a successful submit the form stays in place but dims and locks — the
+   typed words remain visible ("received this"). */
+.contact__form--submitted {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Off-screen spam trap. Kept out of view, tab order, and the a11y tree.
+   Hidden via stylesheet (not an inline style attribute) to satisfy the
+   CSP style-src 'self' policy in _headers. */
+.contact__alt {
+  display: none;
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact__label {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  color: var(--color-true-white);
+}
+
+.contact__input {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-midnight);
+  background: var(--color-true-white);
+  border: 2px solid var(--color-true-white);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.contact__input:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 4px;
+  border-color: var(--color-true-white);
+}
+
+.contact__input--textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact__privacy {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: 0;
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.contact__status {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-true-white);
+  margin: 0;
+  min-height: 1.5em;
+}
+
+/* Success message sits below the button. Title size + bold (matching the
+   section segue), fades in. Validation and error messages keep the base body
+   style above — only the success modifier enlarges. */
+.contact__status {
+  transition: opacity 320ms ease;
+}
+
+.contact__status--success {
+  font-weight: 700;
+  font-size: var(--text-title);
+  line-height: var(--lh-title);
+  margin-top: var(--space-sm);
+  /* Fade in: start transparent, then the keyframe brings it up. Using an
+     animation (not a class toggle) avoids a JS reflow step. */
+  animation: contact-status-in 320ms ease forwards;
+}
+
+@keyframes contact-status-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* --- Submit button: Send label → spinner → mail-check tick, in place --- */
+.contact__submit {
+  align-self: flex-start;
+  position: relative;          /* anchor the centred spinner + tick */
+}
+
+/* The label stays in normal flow so the button keeps its "Send" width; it just
+   fades out. The spinner and tick are centred over that same box. */
+.contact__submit-label {
+  transition: opacity 160ms ease;
+}
+
+.contact__submit-spinner,
+.contact__submit-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  margin: -0.625em 0 0 -0.625em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 160ms ease;
+  pointer-events: none;
+}
+
+.contact__submit--sending .contact__submit-label,
+.contact__submit--sent .contact__submit-label {
+  opacity: 0;
+}
+
+.contact__submit--sending .contact__submit-spinner {
+  opacity: 1;
+  animation: contact-spin 0.8s linear infinite;
+}
+
+.contact__submit--sent .contact__submit-icon {
+  opacity: 1;
+}
+
+/* Keep the disabled "sent" button looking intentional, not greyed-out. */
+.contact__submit:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+@keyframes contact-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact__form,
+  .contact__status,
+  .contact__status--success,
+  .contact__submit-label,
+  .contact__submit-spinner,
+  .contact__submit-icon {
+    transition: none;
+    animation: none;
+  }
+  /* No spin — the spinner still shows briefly as a static ring before the tick. */
+  .contact__submit--sending .contact__submit-spinner {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact {
+    padding-block: var(--space-xl);
+  }
+}
+
+/* ============================================================
+   Footer — Midnight surface, two-column desktop, stacked mobile.
+   Phase 6 additions: Manchester location, Privacy policy link.
+   ============================================================ */
+
+.footer {
+  background: var(--color-midnight);
+  color: var(--color-linen);
+  padding: var(--space-lg) calc(var(--space-lg) * 0.75);
+}
+
+.footer__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer__logo-link {
+  display: inline-flex;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer__logo {
+  display: block;
+  width: auto;
+  height: 32px;
+  fill: currentColor;
+}
+
+.footer__tagline {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-linen);
+  opacity: 0.6;
+}
+
+.footer__location {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-linen);
+  opacity: 0.85;
+}
+
+.footer__meta {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  align-items: flex-end;
+}
+
+.footer__link,
+.footer__copy {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-linen);
+  text-decoration: none;
+  transition: color 180ms ease-out;
+}
+
+.footer__link:hover,
+.footer__link:focus-visible {
+  color: var(--color-cool-indigo);
+}
+
+@media (max-width: 640px) {
+  .hero,
+  .process,
+  .situation,
+  .interrupt,
+  .work,
+  .services,
+  .contact,
+  .footer {
+    padding-inline: 20px;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer__meta {
+    align-items: flex-start;
+  }
+}
+
+/* ============================================================
+   Floating action bar — brand gradient CTA pill (left) + circular burger / nav pills (right).
+   Phase 8: replaces the old sticky-tab. The CTA pill is the ONLY place --gradient-brand appears.
+   D-11: gradient one-surface rule. D-12/D-13: scroll-gate + contact-suppress via JS.
+   D-14: reduced-motion guard. D-16: per-surface AA focus rings.
+   ============================================================ */
+
+/* Bar root — transparent row spanning the bottom edge.
+   Individual children re-enable pointer-events:auto. */
+.floating-bar {
+  /* --bar-gap drives every edge offset so the bar's gutter matches the body
+     section gutter at each breakpoint: 20px on mobile (≤640px), 48px on desktop.
+     Mirrors the section padding-inline rule (components.css ≤640px) + the section
+     wrap padding (layout.css). Overridden at min-width:641px below. */
+  --bar-gap: 20px;
+  position: fixed;
+  bottom: var(--bar-gap);
+  left: var(--bar-gap);
+  right: var(--bar-gap);
+  z-index: 150;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  transform: translateY(calc(100% + var(--bar-gap)));
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease-out;
+}
+
+.floating-bar--visible {
+  transform: translateY(0);
+}
+
+.floating-bar--suppressed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(100% + var(--bar-gap)));
+}
+
+/* CTA pill — gradient surface, white text.
+   D-11: the ONLY element in the site with --gradient-brand. */
+.floating-bar__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-brand);
+  color: var(--color-true-white);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  min-height: 44px;
+  border: 1px solid var(--color-true-white);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+}
+
+.floating-bar__cta:hover {
+  filter: brightness(1.07);
+}
+
+.floating-bar__cta:focus-visible {
+  outline: 2px solid var(--color-true-white);
+  outline-offset: 3px;
+}
+
+/* Nav cluster — contains burger (mobile) + pills.
+   position: relative so the absolutely-positioned mobile pills anchor to it
+   and sit ABOVE the burger without reserving layout height (fixes bugs 2 + 3). */
+.floating-bar__nav {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/* Pills list — mobile: stacked column floating ABOVE the burger, fully removed
+   from layout and hit-testing until open. Desktop (≥641px): static flex row,
+   always visible, burger hidden. */
+.floating-bar__pills {
+  position: absolute;
+  bottom: calc(100% + 8px); /* 8px above the nav (burger) top edge */
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* mobile default: hidden. visibility:hidden removes the closed pills from the
+     a11y tree AND blocks hit-testing, so the invisible links are no longer
+     clickable (fixes bug 4). Absolute positioning means they reserve no height,
+     so the burger sits at the bottom edge when closed (fixes bug 3). */
+  transform: translateY(12px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 240ms ease-out,
+              visibility 0s linear 300ms;
+}
+
+.floating-bar__pills--open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 240ms ease-out,
+              visibility 0s linear 0s;
+}
+
+/* Individual nav pill — Hot Pink bg, white text (inverted for visibility, bug 5) */
+.floating-bar__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-hot-pink);
+  color: var(--color-true-white);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 24px;
+  min-height: 44px;
+  border: 1px solid var(--color-true-white);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.floating-bar__pill:hover {
+  background: var(--color-true-white);
+  color: var(--color-hot-pink);
+}
+
+/* Midnight ring: ≥3:1 against both the Hot Pink pill and the light page behind it
+   (a white ring would vanish on the Linen sections the bar floats over). */
+.floating-bar__pill:focus-visible {
+  outline: 2px solid var(--color-midnight);
+  outline-offset: 3px;
+}
+
+/* Circular burger — Hot Pink bg, white lines (inverted for visibility, bug 5) */
+.floating-bar__burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 48px;
+  height: 48px;
+  background: var(--color-hot-pink);
+  border: 1px solid var(--color-true-white);
+  border-radius: 50%;
+  box-shadow: var(--shadow-float);
+  cursor: pointer;
+  pointer-events: auto;
+  padding: 0;
+}
+
+.floating-bar__burger:focus-visible {
+  outline: 2px solid var(--color-midnight);
+  outline-offset: 3px;
+}
+
+.floating-bar__burger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-true-white);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 200ms ease-out, opacity 150ms ease-out;
+}
+
+/* Burger → X when menu is open */
+.floating-bar__burger[aria-expanded="true"] .floating-bar__burger-line:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.floating-bar__burger[aria-expanded="true"] .floating-bar__burger-line:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* Desktop: no burger, pills always visible as a static row.
+   Gutter widens to the desktop body section gutter (48px). */
+@media (min-width: 641px) {
+  .floating-bar {
+    --bar-gap: calc(var(--space-lg) * 0.75);
+    /* Cap the bar at the content column width and centre it, so on wide screens
+       the CTA aligns with the content's left edge and the pills with its right
+       edge (matches .hero__inner / section inner max-width: 1280px) instead of
+       stretching to the viewport gutters. */
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+
+  .floating-bar__burger {
+    display: none;
+  }
+
+  .floating-bar__pills {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+  }
+}
+
+/* Reduced-motion: strip transforms, use opacity only.
+   Burger snaps to X (rotate still applied as static end-state, transition:none). */
+@media (prefers-reduced-motion: reduce) {
+  .floating-bar {
+    transform: none;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+
+  .floating-bar--visible {
+    transform: none;
+    opacity: 1;
+  }
+
+  .floating-bar--suppressed {
+    transform: none;
+    opacity: 0;
+  }
+
+  .floating-bar__pills {
+    transform: none;
+    transition: opacity 200ms ease-out;
+  }
+
+  .floating-bar__pills--open {
+    transform: none;
+  }
+
+  .floating-bar__burger-line {
+    transition: none;
+  }
+}

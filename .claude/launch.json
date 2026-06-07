@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev (browser-sync, hot reload)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": false
+    },
+    {
+      "name": "static (no-cache python fallback)",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [".claude/server.py"],
+      "port": 4173
+    }
+  ]
+}

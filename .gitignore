@@ -33,9 +33,25 @@ coverage/
 *.swp
 *.swo
 
+# Playwright test artifacts (dev-only — never shipped)
+test-results/
+playwright-report/
+.playwright-browsers/
+
 # Misc
 Thumbs.db
+inspo/
 *.log
 .agents/
-.claude/
+.claude/*
+!.claude/launch.json
+!.claude/server.py
 skills-lock.json
+
+# Image curation working folders (raw Unsplash sort bins — not site assets)
+images/1 Yes/
+images/2 Kinda/
+images/3 Tricky/
+images/temp*.jpeg
+images/temp*.jpg
+images/temp*.png
