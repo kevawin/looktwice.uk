@@ -147,19 +147,20 @@ body.show-safe .banner::after { display: block; }
   width: 100%;               /* stretches to the row's text width */
 }
 
-/* Bar extensions — each bar extends 3-4 letters past the text on the
-   side where there's NO opposing-line text above/below.
-   Top bar (under Line 1) extends LEFT only — outer side of the
-   staggered layout, where Line 2 has no text below it.
-   Bottom bar (over Line 2) extends RIGHT only — outer side, where
-   Line 1 has no text above it. */
+/* Bar extensions — each bar extends ~3 letters past the text on the
+   INNER side (toward / into the overlap zone), strengthening the
+   central = mark while leaving single-bar tails at each outer end.
+   Top bar: left edge aligned with the "L" of "Look", extends right
+   past "brand" / "brand...".
+   Bottom bar: right edge aligned with the "s" of "eyes", extends
+   left past "this" / "...this". */
 .banner--split .row--left  .bar {
-  width: calc(100% + 70px);
-  margin-left: -70px;
+  width: calc(100% + 60px);
+  margin-right: -60px;       /* visual extension to the RIGHT only */
 }
 .banner--split .row--right .bar {
-  width: calc(100% + 35px);
-  margin-right: -35px;
+  width: calc(100% + 60px);
+  margin-left: -60px;        /* visual extension to the LEFT only */
 }
 
 .banner--split .banner__line { white-space: nowrap; }
