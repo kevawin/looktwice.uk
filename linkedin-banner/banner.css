@@ -71,7 +71,21 @@ body {
 .banner {
   width: 1128px;
   height: 191px;
-  background: var(--pink);
+  /* Subtle gradient overlay — makes the banner read as a zoomed-in
+     detail of the logo's gradient swatch. Warm-amber tint in the
+     top-left (where the logo will sit, echoing the warm corner of
+     the logo gradient), faint rich-purple tint trailing into the
+     bottom-right. Body of the banner stays the solid brand pink. */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(245, 147, 0, 0.30) 0%,
+      rgba(245, 147, 0, 0.12) 14%,
+      rgba(245, 147, 0, 0) 28%,
+      transparent 55%,
+      rgba(108, 44, 140, 0.14) 100%
+    ),
+    var(--pink);
   color: var(--white);
   font-family: 'Epilogue', system-ui, sans-serif;
   font-weight: 700;
@@ -132,7 +146,10 @@ body.show-safe .banner::after { display: block; }
 .banner--split {
   display: flex;
   align-items: center;
-  padding: 22px 60px 22px 220px;
+  /* Left padding pushed 220 → 260 to give the LinkedIn company-logo
+     overlay (~180 px wide) clearer breathing room before the text /
+     bar starts. Right padding unchanged. */
+  padding: 22px 60px 22px 260px;
 }
 .banner--split .split-stack {
   display: flex;

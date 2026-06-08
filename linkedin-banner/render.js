@@ -1,6 +1,7 @@
-/* Render LinkedIn banner variants to exact 1128 × 191 PNGs.
-   Strategy: render at 2x via Playwright for crisp glyphs, downscale
-   to 1128 × 191 with sharp (Lanczos3 by default → sharp on text). */
+/* Render LinkedIn banner variants to two output sizes:
+   - 1× (1128 × 191) for in-repo preview comparison
+   - 2× (2256 × 382) for LinkedIn upload — LinkedIn downscales for
+     display so the 2× upload renders sharper on retina screens. */
 
 const { chromium } = require('@playwright/test');
 const sharp = require('sharp');
@@ -10,7 +11,7 @@ const http = require('http');
 
 const W = 1128;
 const H = 191;
-const SCALE = 2;
+const SCALE = 2;            // Playwright deviceScaleFactor
 
 const PORT = 4811;
 const ROOT = path.resolve(__dirname, '..');
@@ -78,14 +79,20 @@ function startStaticServer() {
       omitBackground: false,
       type: 'png',
     });
-    // Downscale 2x → 1x with sharp.
-    const outPath = path.join(OUT_DIR, `look-twice-linkedin-${v}.png`);
+    // 1× — preview-comparison size (downscale 2× source via lanczos3).
+    const out1xPath = path.join(OUT_DIR, `look-twice-linkedin-${v}.png`);
     await sharp(buffer)
       .resize(W, H, { kernel: sharp.kernel.lanczos3, fit: 'fill' })
       .png({ compressionLevel: 9 })
-      .toFile(outPath);
-    const meta = await sharp(outPath).metadata();
-    console.log(`✓ ${v}: ${outPath} — ${meta.width}×${meta.height}`);
+      .toFile(out1xPath);
+    // 2× — LinkedIn-upload size (keep native 2× pixels, no resize).
+    const out2xPath = path.join(OUT_DIR, `look-twice-linkedin-${v}@2x.png`);
+    await sharp(buffer)
+      .png({ compressionLevel: 9 })
+      .toFile(out2xPath);
+    const m1 = await sharp(out1xPath).metadata();
+    const m2 = await sharp(out2xPath).metadata();
+    console.log(`✓ ${v}: 1× ${m1.width}×${m1.height} · 2× ${m2.width}×${m2.height}`);
     await ctx.close();
   }
 
