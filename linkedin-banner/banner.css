@@ -1,7 +1,13 @@
 /* Look Twice — LinkedIn company banner.
    Spec: 1128 × 191 px (LinkedIn company page header).
    Brand: solid hot-pink, Epilogue 700 white, italic word in warm-amber.
-   Brand device: two short horizontal white bars, stacked. */
+   Brand device: two parallel horizontal white lines, each entering from
+   the opposite side — echoes the LOOK/TWICE divider in the wordmark and
+   the "look twice" / two-perspectives idea.
+
+   LinkedIn profile-pic safe zone: the company logo overlay sits at the
+   bottom-left of the banner, ~180 px wide and overlapping the bottom
+   half of the banner. All copy clears this zone. */
 
 @font-face {
   font-family: 'Epilogue';
@@ -36,7 +42,7 @@ body {
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
   min-height: 100vh;
 }
 
@@ -49,6 +55,19 @@ body {
   margin-bottom: 8px;
 }
 
+.preview-toggle {
+  font-size: 13px;
+  color: #ccc;
+  margin-bottom: 20px;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ============================================================
+   Banner shell
+   ============================================================ */
 .banner {
   width: 1128px;
   height: 191px;
@@ -58,7 +77,6 @@ body {
   font-weight: 700;
   position: relative;
   overflow: hidden;
-  /* tighten optical kerning for headline at this size */
   letter-spacing: -0.01em;
 }
 
@@ -73,61 +91,129 @@ body {
   font-style: italic;
   font-weight: 700;
   color: var(--amber);
-  /* iOS guard: italic last-glyph clipping */
-  padding-right: 2px;
+  padding-right: 2px; /* iOS guard: italic last-glyph clipping */
 }
 
-/* Brand device — two short horizontal white bars stacked.
-   Bar dimensions tuned to read as a mark, not a divider. */
-.bars {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* LinkedIn profile-pic safe-zone overlay — debug only.
+   Toggle by adding .show-safe to <body>. */
+.banner::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  bottom: -52px;       /* logo extends below the banner edge */
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,255,255,0.55);
+  pointer-events: none;
+  display: none;
 }
-
-.bars > span {
-  display: block;
-  background: var(--white);
-  height: 5px;
-  border-radius: 0;
-}
+body.show-safe .banner::after { display: block; }
 
 /* ============================================================
-   V1 — italic "again" + small mark top-left
+   Brand device — two parallel horizontal lines, each anchored
+   to the opposite side. Two scales: wide (full-banner span)
+   and mark (compact). All variations use the same device.
+   ============================================================ */
+
+/* WIDE — top bar from the left, bottom bar from the right.
+   Sits in the upper band of the banner. */
+.lines--wide {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 22px;
+  pointer-events: none;
+}
+.lines--wide span {
+  position: absolute;
+  height: 6px;
+  background: var(--white);
+}
+.lines--wide span:nth-child(1) { top: 0;  left: 0;  width: 64%; }
+.lines--wide span:nth-child(2) { top: 14px; right: 0;  width: 64%; }
+
+/* MARK — short, offset pair. Used as a small wordmark-style accent. */
+.lines--mark {
+  display: block;
+  position: relative;
+  width: 110px;
+  height: 18px;
+}
+.lines--mark span {
+  position: absolute;
+  height: 5px;
+  background: var(--white);
+}
+.lines--mark span:nth-child(1) { top: 0;  left: 0;  width: 78px; }
+.lines--mark span:nth-child(2) { top: 11px; right: 0; width: 78px; }
+
+/* DIVIDER — inline between text lines. Same offset language. */
+.lines--divider {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  margin: 4px 0;
+}
+.lines--divider span {
+  position: absolute;
+  height: 4px;
+  background: var(--white);
+}
+.lines--divider span:nth-child(1) { top: 0; left: 0;  width: 38%; }
+.lines--divider span:nth-child(2) { top: 8px; right: 0; width: 38%; }
+
+/* ============================================================
+   V1 — Right-anchored copy + WIDE lines across top.
+   Pic zone (bottom-left) stays clear. Lines are the hero device.
    ============================================================ */
 .banner--v1 {
-  padding: 28px 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 0;
 }
-.banner--v1 .bars > span { width: 56px; }
-.banner--v1 .banner__copy { max-width: 920px; }
+.banner--v1 .banner__copy {
+  position: absolute;
+  right: 60px;
+  bottom: 26px;
+  text-align: right;
+  max-width: 920px;
+}
 
 /* ============================================================
-   V2 — italic "customer's eyes" + right column accent
+   V2 — Centre-offset, left-aligned copy + lines as divider
+   between the two text lines. Block shifted right to clear pic.
    ============================================================ */
 .banner--v2 {
-  padding: 36px 60px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 48px;
-}
-.banner--v2 .banner__copy { max-width: 880px; }
-.banner--v2 .bars { align-self: center; }
-.banner--v2 .bars > span { width: 72px; }
-
-/* ============================================================
-   V3 — italic "again" + divider between text lines
-   ============================================================ */
-.banner--v3 {
-  padding: 28px 60px;
+  padding: 28px 60px 28px 220px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
+  gap: 0;
 }
-.banner--v3 .banner__copy { font-size: 32px; }
-.banner--v3 .bars { flex-direction: row; gap: 10px; }
-.banner--v3 .bars > span { width: 40px; height: 4px; }
+.banner--v2 .banner__copy {
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+/* ============================================================
+   V3 — Right-anchored copy + small MARK device upper-left of
+   the text block. Minimal, logo-ette feel.
+   ============================================================ */
+.banner--v3 {
+  padding: 0;
+}
+.banner--v3 .v3-stack {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: right;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+.banner--v3 .lines--mark { width: 120px; }
+.banner--v3 .lines--mark span:nth-child(1) { width: 84px; }
+.banner--v3 .lines--mark span:nth-child(2) { width: 84px; }
