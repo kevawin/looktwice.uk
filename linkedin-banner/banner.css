@@ -71,27 +71,62 @@ body {
 .banner {
   width: 1128px;
   height: 191px;
-  /* Subtle gradient overlay — makes the banner read as a zoomed-in
-     detail of the logo's gradient swatch. Warm-amber tint in the
-     top-left (where the logo will sit, echoing the warm corner of
-     the logo gradient), faint rich-purple tint trailing into the
-     bottom-right. Body of the banner stays the solid brand pink. */
-  background:
-    linear-gradient(
-      135deg,
-      rgba(245, 147, 0, 0.30) 0%,
-      rgba(245, 147, 0, 0.12) 14%,
-      rgba(245, 147, 0, 0) 28%,
-      transparent 55%,
-      rgba(108, 44, 140, 0.14) 100%
-    ),
-    var(--pink);
+  /* Per-variant gradient overlay set below — warm-amber top-left,
+     rich-purple bottom-right, pure hot-pink mid-band. */
+  background: var(--pink);
   color: var(--white);
   font-family: 'Epilogue', system-ui, sans-serif;
   font-weight: 700;
   position: relative;
   overflow: hidden;
   letter-spacing: -0.01em;
+}
+
+/* Gradient intensity ramp — palette warm-amber (#F59300) TL,
+   palette rich-purple (#6C2C8C) BR, hot-pink mid-band. */
+.banner[data-variant="v1"] {
+  background:
+    linear-gradient(135deg,
+      rgba(245, 147, 0, 0.55) 0%,
+      rgba(245, 147, 0, 0.20) 18%,
+      rgba(245, 147, 0, 0) 32%,
+      transparent 60%,
+      rgba(108, 44, 140, 0.25) 100%
+    ),
+    var(--pink);
+}
+.banner[data-variant="v2"] {
+  background:
+    linear-gradient(135deg,
+      rgba(245, 147, 0, 0.75) 0%,
+      rgba(245, 147, 0, 0.32) 20%,
+      rgba(245, 147, 0, 0) 35%,
+      transparent 58%,
+      rgba(108, 44, 140, 0.42) 100%
+    ),
+    var(--pink);
+}
+.banner[data-variant="v3"] {
+  background:
+    linear-gradient(135deg,
+      rgba(245, 147, 0, 0.90) 0%,
+      rgba(245, 147, 0, 0.45) 22%,
+      rgba(245, 147, 0, 0) 38%,
+      transparent 56%,
+      rgba(108, 44, 140, 0.58) 100%
+    ),
+    var(--pink);
+}
+.banner[data-variant="v4"] {
+  background:
+    linear-gradient(135deg,
+      rgba(245, 147, 0, 1.0) 0%,
+      rgba(245, 147, 0, 0.60) 24%,
+      rgba(245, 147, 0, 0) 42%,
+      transparent 54%,
+      rgba(108, 44, 140, 0.78) 100%
+    ),
+    var(--pink);
 }
 
 .banner__line {
@@ -108,13 +143,8 @@ body {
   padding-right: 2px; /* iOS guard: italic last-glyph clipping */
 }
 
-/* Amber lightness ramp — tested per variant. V1 = brand baseline
-   (#F59300, same as logo gradient warm corner). V2-V4 step lighter
-   for contrast testing against the hot-pink ground. */
-.banner[data-variant="v1"] .banner__line em { color: #F59300; }  /* baseline */
-.banner[data-variant="v2"] .banner__line em { color: #F8A11A; }  /* +1 step */
-.banner[data-variant="v3"] .banner__line em { color: #FBAF34; }  /* +2 steps */
-.banner[data-variant="v4"] .banner__line em { color: #FFBD4E; }  /* +3 steps */
+/* Italic word colour locked to palette warm-amber across all
+   variants (lightness ramp dropped — Kris's call). */
 
 /* LinkedIn profile-pic safe-zone overlay — debug only.
    Company pages render the logo as a rounded square (not a circle —
