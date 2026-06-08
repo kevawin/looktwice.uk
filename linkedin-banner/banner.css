@@ -94,6 +94,14 @@ body {
   padding-right: 2px; /* iOS guard: italic last-glyph clipping */
 }
 
+/* Amber lightness ramp — tested per variant. V1 = brand baseline
+   (#F59300, same as logo gradient warm corner). V2-V4 step lighter
+   for contrast testing against the hot-pink ground. */
+.banner[data-variant="v1"] .banner__line em { color: #F59300; }  /* baseline */
+.banner[data-variant="v2"] .banner__line em { color: #F8A11A; }  /* +1 step */
+.banner[data-variant="v3"] .banner__line em { color: #FBAF34; }  /* +2 steps */
+.banner[data-variant="v4"] .banner__line em { color: #FFBD4E; }  /* +3 steps */
+
 /* LinkedIn profile-pic safe-zone overlay — debug only.
    Company pages render the logo as a rounded square (not a circle —
    personal profiles are circles). Square sits bottom-left, half over
