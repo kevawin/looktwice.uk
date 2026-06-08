@@ -95,15 +95,17 @@ body {
 }
 
 /* LinkedIn profile-pic safe-zone overlay — debug only.
-   Toggle by adding .show-safe to <body>. */
+   Company pages render the logo as a rounded square (not a circle —
+   personal profiles are circles). Square sits bottom-left, half over
+   the banner, half below. Toggle by adding .show-safe to <body>. */
 .banner::after {
   content: "";
   position: absolute;
-  left: 24px;
-  bottom: -52px;       /* logo extends below the banner edge */
-  width: 168px;
-  height: 168px;
-  border-radius: 50%;
+  left: 32px;
+  bottom: -75px;       /* logo extends below the banner edge */
+  width: 150px;
+  height: 150px;
+  border-radius: 18px;
   border: 2px dashed rgba(255,255,255,0.55);
   pointer-events: none;
   display: none;
@@ -112,50 +114,58 @@ body.show-safe .banner::after { display: block; }
 
 /* ============================================================
    Brand device — the "=" mark between text lines.
-   Two parallel white bars, equal length, vertically stacked.
-   Matches the LOOK/TWICE divider in the wordmark.
+   Two parallel white bars stretching the FULL WIDTH of the text
+   block, vertically stacked. Matches the LOOK/TWICE divider in
+   the wordmark where the lines span the full word width.
    ============================================================ */
 .eq {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
+  width: 100%;          /* span the text block */
   flex-shrink: 0;
 }
 .eq > span {
   display: block;
   height: 5px;
   background: var(--white);
+  width: 100%;
 }
 
-/* Default = width — tuned per variant below. */
-.eq--centred > span { width: 64px; }
-.eq--inline   > span { width: 56px; }
-
 /* ============================================================
-   V1 / V2 — centred stack (LOOK / = / TWICE rhythm).
-   Both text lines centred horizontally; = centred between them.
-   Identical layout, only the italic word differs.
+   V1 — centred. Both text lines centred; = matches the wider
+   line's width via an inner wrapper that sizes to the widest
+   child (display: inline-block on the wrapper).
    ============================================================ */
 .banner--centred {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   padding: 22px 60px;
+}
+.banner--centred .stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;   /* children stretch to wrapper's width */
+  gap: 9px;
 }
 .banner--centred .banner__line { text-align: center; }
 
 /* ============================================================
-   V3 — left-aligned alternative, block shifted right past the
-   pic safe zone. Same =-divider device, just anchored left.
+   V2 — split. Line 1 left-aligned, line 2 right-aligned, =
+   bridges the full text-block width between them. Text block
+   sits clear of the profile-pic safe zone (left padding 220px).
    ============================================================ */
-.banner--left {
+.banner--split {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
+  align-items: center;
   padding: 22px 60px 22px 220px;
 }
-.banner--left .banner__line { text-align: left; }
+.banner--split .stack {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+}
+.banner--split .banner__line--left  { text-align: left; }
+.banner--split .banner__line--right { text-align: right; }

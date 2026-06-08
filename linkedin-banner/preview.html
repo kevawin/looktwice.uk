@@ -10,33 +10,28 @@
 
 <label class="preview-toggle">
   <input type="checkbox" id="safe-toggle">
-  Show LinkedIn profile-pic safe zone (dashed circle = where the company logo will sit)
+  Show LinkedIn profile-pic safe zone (dashed rounded square = where the company logo will sit)
 </label>
 
 <div>
-  <p class="preview-label">V1 — centred =-divider / italic "again"</p>
+  <p class="preview-label">V1 — centred / =-divider stretched to text width / italic "again"</p>
   <div class="banner banner--centred" data-variant="v1">
-    <p class="banner__line">Look <em>again</em> at your brand</p>
-    <div class="eq eq--centred" aria-hidden="true"><span></span><span></span></div>
-    <p class="banner__line">This time through your customer's eyes</p>
+    <div class="stack">
+      <p class="banner__line">Look <em>again</em> at your brand</p>
+      <div class="eq" aria-hidden="true"><span></span><span></span></div>
+      <p class="banner__line">This time through your customer's eyes</p>
+    </div>
   </div>
 </div>
 
 <div>
-  <p class="preview-label">V2 — centred =-divider / italic "customer's eyes"</p>
-  <div class="banner banner--centred" data-variant="v2">
-    <p class="banner__line">Look again at your brand</p>
-    <div class="eq eq--centred" aria-hidden="true"><span></span><span></span></div>
-    <p class="banner__line">This time through your <em>customer's&nbsp;eyes</em></p>
-  </div>
-</div>
-
-<div>
-  <p class="preview-label">V3 — left-aligned (shifted right past pic) =-divider / italic "again"</p>
-  <div class="banner banner--left" data-variant="v3">
-    <p class="banner__line">Look <em>again</em> at your brand</p>
-    <div class="eq eq--inline" aria-hidden="true"><span></span><span></span></div>
-    <p class="banner__line">This time through your customer's eyes</p>
+  <p class="preview-label">V2 — split (left/right) / =-divider bridges full text-block width / italic "again"</p>
+  <div class="banner banner--split" data-variant="v2">
+    <div class="stack">
+      <p class="banner__line banner__line--left">Look <em>again</em> at your brand</p>
+      <div class="eq" aria-hidden="true"><span></span><span></span></div>
+      <p class="banner__line banner__line--right">This time through your customer's eyes</p>
+    </div>
   </div>
 </div>
 

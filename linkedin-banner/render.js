@@ -47,7 +47,7 @@ function startStaticServer() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const server = await startStaticServer();
   const browser = await chromium.launch();
-  const variants = ['v1', 'v2', 'v3'];
+  const variants = ['v1', 'v2'];
 
   for (const v of variants) {
     const ctx = await browser.newContext({
