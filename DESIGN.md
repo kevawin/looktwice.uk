@@ -422,7 +422,7 @@ runtime effect.
 - **Don't** spend the brand gradient as a default fill. It is available, but it is a moment.
 - **Don't** fill a cutout aperture with colour or a gradient — a cutout window always reveals a photograph.
 - **Don't** drench every section. Colour is punctuation on a Linen/Midnight spine; wall-to-wall colour flattens the pacing.
-- **Don't** use glassmorphism, or `#000000` as a background (Midnight is the dark surface).
+- **Don't** use `#000000` as a background (Midnight is the dark surface). (Glassmorphism is no longer banned — available with judgement per Jamie's ruling 2026-06-08; first use is the frosted floating-bar treatment.)
 - **Don't** add a shadow to make an ordinary card feel designed. Elevation is earned; redesign
   the card instead.
 - **Don't** gate content visibility on a scroll/class transition — the section will ship blank

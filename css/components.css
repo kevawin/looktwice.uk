@@ -1235,19 +1235,77 @@
   text-decoration: none;
   padding: 14px 28px;
   min-height: 44px;
-  border: 1px solid var(--color-true-white);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-float);
+  transition: background 0.3s ease, color 0.3s ease;
   pointer-events: auto;
+  position: relative;
 }
 
-.floating-bar__cta:hover {
-  filter: brightness(1.07);
+/* Hover fill is a fading white veil, NOT a background swap — the resting
+   background is the brand gradient (a background-image), which cannot be
+   transitioned, so swapping it would snap. The veil fades over 0.3s to match
+   the menu pills' background-color fade. The label sits above the veil. */
+/* Hover/active fill — ONE shared mechanic for all three controls (CTA, pills,
+   burger): a white veil (::after) that FADES IN on top of the existing
+   background. The background itself never changes. A background swap read as the
+   control "going transparent" (page showed through) and was inconsistent with
+   the CTA; the veil keeps each control's own colour underneath and just frosts
+   it. Labels/lines sit above the veil via z-index. */
+.floating-bar__cta-label,
+.floating-bar__pill-label {
+  position: relative;
+  z-index: 1;
+}
+
+.floating-bar__cta::after,
+.floating-bar__pill::after,
+.floating-bar__burger::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.floating-bar__cta:hover::after,
+.floating-bar__pill:hover::after,
+.floating-bar__burger:hover::after {
+  opacity: 1;
+}
+
+.floating-bar__cta:hover,
+.floating-bar__pill:hover {
+  color: var(--color-midnight);
+}
+
+.floating-bar__burger:hover .floating-bar__burger-line {
+  background: var(--color-midnight);
 }
 
 .floating-bar__cta:focus-visible {
   outline: 2px solid var(--color-true-white);
   outline-offset: 3px;
+}
+
+/* Frost ring — translucent white halo OUTSIDE the solid fill (z-index:-1 places
+   it behind the fill; inset:-3px makes it poke out as a 3px ring). No blur: over
+   the flat sections a backdrop blur showed nothing, drew a dark fringe on the
+   rounded edges (worst on the circular burger), and flickered during the open
+   animation. The white tint alone gives a clean light ring on every control. */
+.floating-bar__cta::before,
+.floating-bar__pill::before,
+.floating-bar__burger::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.4);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Nav cluster — contains burger (mobile) + pills.
@@ -1314,16 +1372,12 @@
   text-decoration: none;
   padding: 12px 24px;
   min-height: 44px;
-  border: 1px solid var(--color-true-white);
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-float);
+  transition: color 0.3s ease;
   pointer-events: auto;
   white-space: nowrap;
-}
-
-.floating-bar__pill:hover {
-  background: var(--color-true-white);
-  color: var(--color-hot-pink);
+  position: relative;
 }
 
 /* Midnight ring: ≥3:1 against both the Hot Pink pill and the light page behind it
@@ -1343,12 +1397,13 @@
   width: 48px;
   height: 48px;
   background: var(--color-hot-pink);
-  border: 1px solid var(--color-true-white);
+  border: none;
   border-radius: 50%;
   box-shadow: var(--shadow-float);
   cursor: pointer;
   pointer-events: auto;
   padding: 0;
+  position: relative;
 }
 
 .floating-bar__burger:focus-visible {
@@ -1358,12 +1413,14 @@
 
 .floating-bar__burger-line {
   display: block;
+  position: relative;
+  z-index: 1;
   width: 20px;
   height: 2px;
   background: var(--color-true-white);
   border-radius: 2px;
   transform-origin: center;
-  transition: transform 200ms ease-out, opacity 150ms ease-out;
+  transition: transform 200ms ease-out, opacity 150ms ease-out, background 0.3s ease;
 }
 
 /* Burger → X when menu is open */

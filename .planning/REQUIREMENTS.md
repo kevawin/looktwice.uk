@@ -167,7 +167,7 @@ Deferred to a future milestone. Documented now so they're not forgotten.
 | Case study detail pages in V1 | Content not yet ready; placeholder section only |
 | Decorative motion, parallax, ambient animation | Restraint is the brand — motion only when it aids understanding |
 | Mid-tone grey backgrounds | Hard design ban — Midnight or Linen only |
-| Glassmorphism, backdrop-filter blur | Hard design ban |
+| Glassmorphism, backdrop-filter blur | ~~Hard design ban~~ — unbanned 2026-06-08 (Jamie); now available with judgement, see DESIGN.md |
 | Card shadows / hover-state shadows | Flat system; shadow only on floating sticky tab |
 | `font-weight: 500` and a second font family | Epilogue 400/700 only |
 | Em-dashes in copy | Voice rule — commas, colons, or new sentences instead |

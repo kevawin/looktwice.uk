@@ -44,7 +44,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - Touching `main` branch — holds the live holding page; all build work on `new-site`
 - Modifying root `PRODUCT.md` during build — source of truth. (Root `DESIGN.md` is now the *editable* design contract, not off-limits — Phase 13 lifted that lock; `DESIGN.json` retired.)
 - Decorative motion, parallax, ambient animation — restraint is the brand (subtle "look twice" interactions are the exception, per DESIGN.md)
-- Still banned: glassmorphism, gradient text, em-dashes in copy. **No longer banned (Phase 13, available with judgement — see DESIGN.md):** card shadows, mid-tone greys (prefer faded brand colours), decorative card grids, font-weight 500.
+- Still banned: gradient text, em-dashes in copy. **No longer banned (available with judgement — see DESIGN.md):** glassmorphism / backdrop-filter blur (unbanned 2026-06-08), card shadows, mid-tone greys (prefer faded brand colours), decorative card grids, font-weight 500.
 
 ## Context
 
@@ -76,7 +76,7 @@ A warm referral lands, recognises their own problem in Kris's words within 60 se
 - **Performance**: LCP < 2.5s, CLS < 0.1, FID < 100ms, page weight < 500KB excluding images. Images in WebP with srcset; lazy-load below the fold.
 - **Content**: All copy in `CONTENT-DRAFT.md` is directional — Kris refines in her own voice before launch. Several `[DECIDE]` and `[CONFIRM]` markers still open (hero headline, positioning interrupt option, public client names).
 - **Design authority**: root `DESIGN.md` (Phase 13 contract) is the design source of truth; the bans below are revised by it. Read it before design work.
-- **Design bans (revised Phase 13)**: still banned — gradient text, glassmorphism, em-dashes in copy. Available with judgement (DESIGN.md governs) — card shadows, mid-tone greys (prefer faded brand colours), decorative card grids, font-weight 500.
+- **Design bans (revised Phase 13; glassmorphism unbanned 2026-06-08)**: still banned — gradient text, em-dashes in copy. Available with judgement (DESIGN.md governs) — glassmorphism / backdrop-filter blur, card shadows, mid-tone greys (prefer faded brand colours), decorative card grids, font-weight 500.
 - **Gradient discipline (revised Phase 13)**: scarcity rule lifted — gradient is available, including sparingly as a section background, spent deliberately not as default fill. Cool accents (Rich Purple, Cool Indigo) may now drench a section as a gravitas beat.
 
 ## Key Decisions
