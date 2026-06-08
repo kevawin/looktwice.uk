@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1128" height="191" viewBox="0 0 1128 191">
+  <defs>
+    <linearGradient id="grad-amber-v2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#F59300" stop-opacity="0.75"/>
+      <stop offset="18%" stop-color="#F59300" stop-opacity="0.3"/>
+      <stop offset="32%" stop-color="#F59300" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="grad-purple-v2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="60%"  stop-color="#6C2C8C" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#6C2C8C" stop-opacity="0.42"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background (hot-pink) -->
+  <rect id="bg" x="0" y="0" width="1128" height="191" fill="#E0006E"/>
+
+  <!-- Layer 2: Amber gradient overlay (top-left → transparent) -->
+  <rect id="amber-overlay" x="0" y="0" width="1128" height="191" fill="url(#grad-amber-v2)"/>
+
+  <!-- Layer 3: Purple gradient overlay (transparent → bottom-right) -->
+  <rect id="purple-overlay" x="0" y="0" width="1128" height="191" fill="url(#grad-purple-v2)"/>
+
+  <!-- Layer 4: Top bar (under Line 1, extends right into overlap zone) -->
+  <rect id="top-bar" x="260" y="89.5" width="485" height="3" fill="#FFFFFF"/>
+
+  <!-- Layer 5: Bottom bar (over Line 2, extends left into overlap zone) -->
+  <rect id="bottom-bar" x="331.1" y="98.5" width="736.9" height="3" fill="#FFFFFF"/>
+
+  <!-- Layer 6: Line 1 — left-aligned -->
+  <text id="line-1" x="260" y="69.6"
+        font-family="Epilogue, system-ui, sans-serif"
+        font-weight="700"
+        font-size="34"
+        letter-spacing="-0.34"
+        fill="#FFFFFF">Look again at your brand</text>
+
+  <!-- Layer 7: Line 2 — right-aligned, italic tspan for "customer's eyes" -->
+  <text id="line-2" x="1068" y="141.3"
+        font-family="Epilogue, system-ui, sans-serif"
+        font-weight="700"
+        font-size="34"
+        letter-spacing="-0.34"
+        fill="#FFFFFF"
+        text-anchor="end">this time through your <tspan id="italic-word" font-style="italic" fill="#F59300">customer's eyes</tspan></text>
+</svg>
