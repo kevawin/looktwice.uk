@@ -1,9 +1,9 @@
 /* Look Twice — LinkedIn company banner.
    Spec: 1128 × 191 px (LinkedIn company page header).
    Brand: solid hot-pink, Epilogue 700 white, italic word in warm-amber.
-   Brand device: two parallel horizontal white lines, each entering from
-   the opposite side — echoes the LOOK/TWICE divider in the wordmark and
-   the "look twice" / two-perspectives idea.
+   Brand device: two parallel horizontal white lines (=), placed between
+   the two text lines — directly echoes the LOOK = TWICE wordmark
+   arrangement.
 
    LinkedIn profile-pic safe zone: the company logo overlay sits at the
    bottom-left of the banner, ~180 px wide and overlapping the bottom
@@ -80,14 +80,14 @@ body {
   letter-spacing: -0.01em;
 }
 
-.banner__copy {
+.banner__line {
   font-size: 34px;
-  line-height: 1.18;
+  line-height: 1.05;
   font-weight: 700;
   color: var(--white);
 }
 
-.banner__copy em {
+.banner__line em {
   font-style: italic;
   font-weight: 700;
   color: var(--amber);
@@ -111,109 +111,51 @@ body {
 body.show-safe .banner::after { display: block; }
 
 /* ============================================================
-   Brand device — two parallel horizontal lines, each anchored
-   to the opposite side. Two scales: wide (full-banner span)
-   and mark (compact). All variations use the same device.
+   Brand device — the "=" mark between text lines.
+   Two parallel white bars, equal length, vertically stacked.
+   Matches the LOOK/TWICE divider in the wordmark.
    ============================================================ */
-
-/* WIDE — top bar from the left, bottom bar from the right.
-   Sits in the upper band of the banner. */
-.lines--wide {
-  position: absolute;
-  top: 24px;
-  left: 0;
-  right: 0;
-  height: 22px;
-  pointer-events: none;
+.eq {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
 }
-.lines--wide span {
-  position: absolute;
-  height: 6px;
-  background: var(--white);
-}
-.lines--wide span:nth-child(1) { top: 0;  left: 0;  width: 64%; }
-.lines--wide span:nth-child(2) { top: 14px; right: 0;  width: 64%; }
-
-/* MARK — short, offset pair. Used as a small wordmark-style accent. */
-.lines--mark {
+.eq > span {
   display: block;
-  position: relative;
-  width: 110px;
-  height: 18px;
-}
-.lines--mark span {
-  position: absolute;
   height: 5px;
   background: var(--white);
 }
-.lines--mark span:nth-child(1) { top: 0;  left: 0;  width: 78px; }
-.lines--mark span:nth-child(2) { top: 11px; right: 0; width: 78px; }
 
-/* DIVIDER — inline between text lines. Same offset language. */
-.lines--divider {
-  position: relative;
-  width: 100%;
-  height: 14px;
-  margin: 4px 0;
-}
-.lines--divider span {
-  position: absolute;
-  height: 4px;
-  background: var(--white);
-}
-.lines--divider span:nth-child(1) { top: 0; left: 0;  width: 38%; }
-.lines--divider span:nth-child(2) { top: 8px; right: 0; width: 38%; }
+/* Default = width — tuned per variant below. */
+.eq--centred > span { width: 64px; }
+.eq--inline   > span { width: 56px; }
 
 /* ============================================================
-   V1 — Right-anchored copy + WIDE lines across top.
-   Pic zone (bottom-left) stays clear. Lines are the hero device.
+   V1 / V2 — centred stack (LOOK / = / TWICE rhythm).
+   Both text lines centred horizontally; = centred between them.
+   Identical layout, only the italic word differs.
    ============================================================ */
-.banner--v1 {
-  padding: 0;
-}
-.banner--v1 .banner__copy {
-  position: absolute;
-  right: 60px;
-  bottom: 26px;
-  text-align: right;
-  max-width: 920px;
-}
-
-/* ============================================================
-   V2 — Centre-offset, left-aligned copy + lines as divider
-   between the two text lines. Block shifted right to clear pic.
-   ============================================================ */
-.banner--v2 {
-  padding: 28px 60px 28px 220px;
+.banner--centred {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 10px;
+  padding: 22px 60px;
 }
-.banner--v2 .banner__copy {
-  font-size: 32px;
-  line-height: 1.15;
-}
+.banner--centred .banner__line { text-align: center; }
 
 /* ============================================================
-   V3 — Right-anchored copy + small MARK device upper-left of
-   the text block. Minimal, logo-ette feel.
+   V3 — left-aligned alternative, block shifted right past the
+   pic safe zone. Same =-divider device, just anchored left.
    ============================================================ */
-.banner--v3 {
-  padding: 0;
-}
-.banner--v3 .v3-stack {
-  position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: right;
-  max-width: 920px;
+.banner--left {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px 60px 22px 220px;
 }
-.banner--v3 .lines--mark { width: 120px; }
-.banner--v3 .lines--mark span:nth-child(1) { width: 84px; }
-.banner--v3 .lines--mark span:nth-child(2) { width: 84px; }
+.banner--left .banner__line { text-align: left; }

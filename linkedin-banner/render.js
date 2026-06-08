@@ -62,15 +62,16 @@ function startStaticServer() {
     await page.addStyleTag({
       content: `
         body { padding: 0 !important; background: #000 !important; gap: 0 !important; }
+        body > label { display: none !important; }
         body > div { display: none; }
-        body > div:has(.banner--${v}) { display: block; }
+        body > div:has([data-variant="${v}"]) { display: block; }
         body > div .preview-label { display: none; }
       `,
     });
     await page.evaluate(() => document.fonts.ready);
     // Tiny settle to let layout reflow after fonts.
     await page.waitForTimeout(120);
-    const target = await page.locator(`.banner--${v}`);
+    const target = await page.locator(`[data-variant="${v}"]`);
     const box = await target.boundingBox();
     const buffer = await page.screenshot({
       clip: { x: box.x, y: box.y, width: W, height: H },
