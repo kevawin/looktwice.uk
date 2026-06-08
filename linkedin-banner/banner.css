@@ -136,7 +136,7 @@ body.show-safe .banner::after { display: block; }
   display: flex;
   flex-direction: column;
   width: max-content;        /* row sizes to its text width */
-  gap: 3px;                  /* tight text-to-bar gap (reads as an underline) */
+  gap: 12px;                 /* breathing room between text and bars */
   max-width: 100%;
 }
 .banner--split .row--left  { align-self: flex-start; }
