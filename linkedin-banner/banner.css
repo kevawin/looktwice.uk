@@ -113,59 +113,38 @@ body {
 body.show-safe .banner::after { display: block; }
 
 /* ============================================================
-   Brand device — the "=" mark between text lines.
-   Two parallel white bars stretching the FULL WIDTH of the text
-   block, vertically stacked. Matches the LOOK/TWICE divider in
-   the wordmark where the lines span the full word width.
-   ============================================================ */
-.eq {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  width: 100%;          /* span the text block */
-  flex-shrink: 0;
-}
-.eq > span {
-  display: block;
-  height: 5px;
-  background: var(--white);
-  width: 100%;
-}
-
-/* ============================================================
-   V1 — centred. Both text lines centred; = matches the wider
-   line's width via an inner wrapper that sizes to the widest
-   child (display: inline-block on the wrapper).
-   ============================================================ */
-.banner--centred {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 22px 60px;
-}
-.banner--centred .stack {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: stretch;   /* children stretch to wrapper's width */
-  gap: 9px;
-}
-.banner--centred .banner__line { text-align: center; }
-
-/* ============================================================
-   V2 — split. Line 1 left-aligned, line 2 right-aligned, =
-   bridges the full text-block width between them. Text block
-   sits clear of the profile-pic safe zone (left padding 220px).
+   SPLIT LAYOUT — Kris's annotation.
+   Line 1 left-aligned with trailing "...", Line 2 right-aligned
+   with leading "...". Each line carries its OWN white bar
+   matching that line's exact width — top bar tied to Line 1
+   (left), bottom bar tied to Line 2 (right). The bars stack
+   to form an = but each half lives on its own side, mirroring
+   the staggered text.
    ============================================================ */
 .banner--split {
   display: flex;
   align-items: center;
   padding: 22px 60px 22px 220px;
 }
-.banner--split .stack {
+.banner--split .split-stack {
   display: flex;
   flex-direction: column;
-  gap: 9px;
   width: 100%;
+  gap: 6px;                 /* the gap between the two bars (the = gap) */
 }
-.banner--split .banner__line--left  { text-align: left; }
+.banner--split .row {
+  display: flex;
+  flex-direction: column;
+  width: max-content;        /* row sizes to its text width */
+  gap: 3px;                  /* tight text-to-bar gap (reads as an underline) */
+  max-width: 100%;
+}
+.banner--split .row--left  { align-self: flex-start; }
+.banner--split .row--right { align-self: flex-end; }
+.banner--split .bar {
+  height: 5px;
+  background: var(--white);
+  width: 100%;               /* stretches to the row's text width */
+}
+.banner--split .banner__line { white-space: nowrap; }
 .banner--split .banner__line--right { text-align: right; }
