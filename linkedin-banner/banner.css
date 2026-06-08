@@ -1,0 +1,133 @@
+/* Look Twice — LinkedIn company banner.
+   Spec: 1128 × 191 px (LinkedIn company page header).
+   Brand: solid hot-pink, Epilogue 700 white, italic word in warm-amber.
+   Brand device: two short horizontal white bars, stacked. */
+
+@font-face {
+  font-family: 'Epilogue';
+  src: url('../fonts/epilogue-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Epilogue';
+  src: url('../fonts/epilogue-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --pink:   #E0006E;
+  --amber:  #F59300;
+  --white:  #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'Epilogue', system-ui, sans-serif;
+  background: #1a1a1a;
+  color: var(--white);
+}
+
+body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 100vh;
+}
+
+.preview-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.banner {
+  width: 1128px;
+  height: 191px;
+  background: var(--pink);
+  color: var(--white);
+  font-family: 'Epilogue', system-ui, sans-serif;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  /* tighten optical kerning for headline at this size */
+  letter-spacing: -0.01em;
+}
+
+.banner__copy {
+  font-size: 34px;
+  line-height: 1.18;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.banner__copy em {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--amber);
+  /* iOS guard: italic last-glyph clipping */
+  padding-right: 2px;
+}
+
+/* Brand device — two short horizontal white bars stacked.
+   Bar dimensions tuned to read as a mark, not a divider. */
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bars > span {
+  display: block;
+  background: var(--white);
+  height: 5px;
+  border-radius: 0;
+}
+
+/* ============================================================
+   V1 — italic "again" + small mark top-left
+   ============================================================ */
+.banner--v1 {
+  padding: 28px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.banner--v1 .bars > span { width: 56px; }
+.banner--v1 .banner__copy { max-width: 920px; }
+
+/* ============================================================
+   V2 — italic "customer's eyes" + right column accent
+   ============================================================ */
+.banner--v2 {
+  padding: 36px 60px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 48px;
+}
+.banner--v2 .banner__copy { max-width: 880px; }
+.banner--v2 .bars { align-self: center; }
+.banner--v2 .bars > span { width: 72px; }
+
+/* ============================================================
+   V3 — italic "again" + divider between text lines
+   ============================================================ */
+.banner--v3 {
+  padding: 28px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+.banner--v3 .banner__copy { font-size: 32px; }
+.banner--v3 .bars { flex-direction: row; gap: 10px; }
+.banner--v3 .bars > span { width: 40px; height: 4px; }
