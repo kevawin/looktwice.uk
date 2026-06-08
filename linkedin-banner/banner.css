@@ -142,9 +142,25 @@ body.show-safe .banner::after { display: block; }
 .banner--split .row--left  { align-self: flex-start; }
 .banner--split .row--right { align-self: flex-end; }
 .banner--split .bar {
-  height: 5px;
+  height: 3px;               /* thinner — was 5px */
   background: var(--white);
   width: 100%;               /* stretches to the row's text width */
 }
+
+/* Bar extensions — each bar extends 3-4 letters past the text on the
+   side where there's NO opposing-line text above/below.
+   Top bar (under Line 1) extends LEFT only — outer side of the
+   staggered layout, where Line 2 has no text below it.
+   Bottom bar (over Line 2) extends RIGHT only — outer side, where
+   Line 1 has no text above it. */
+.banner--split .row--left  .bar {
+  width: calc(100% + 70px);
+  margin-left: -70px;
+}
+.banner--split .row--right .bar {
+  width: calc(100% + 35px);
+  margin-right: -35px;
+}
+
 .banner--split .banner__line { white-space: nowrap; }
 .banner--split .banner__line--right { text-align: right; }
