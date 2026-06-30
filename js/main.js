@@ -128,7 +128,7 @@
         setStatus("Got it — I'll be in touch within a working day to set up a chat.", 'ok');
         form.reset();
       } catch (err) {
-        setStatus("Something went wrong on my end. Try again, or email hello@looktwice.uk directly.", 'err');
+        setStatus("Something went wrong on my end. Try again, or email " + ['hello','looktwice.uk'].join('@') + " directly.", 'err');
         submit.disabled = false;
         submit.innerHTML = originalLabel;
         return;
@@ -138,9 +138,37 @@
     });
   };
 
+  // ---------- FOOTER ADDRESS (sets aria-label in correct reading order;
+  //            kept out of static HTML to defeat tag-stripping scrapers,
+  //            also marks span children aria-hidden so screen readers
+  //            read the assembled label instead of the shuffled DOM order). ----------
+  const initFooterAddress = () => {
+    const a = document.querySelector('.footer__address');
+    if (!a) return;
+    const parts = Array.from(a.children)
+      .filter((s) => s.dataset && s.dataset.o)
+      .sort((x, y) => Number(x.dataset.o) - Number(y.dataset.o))
+      .map((s) => s.textContent.trim());
+    if (!parts.length) return;
+    a.setAttribute('aria-label', parts.join(' '));
+    Array.from(a.children).forEach((s) => s.setAttribute('aria-hidden', 'true'));
+  };
+
+  // ---------- FOOTER EMAIL LINK (scroll to contact + open message tab) ----------
+  const initFooterEmail = () => {
+    const a = document.querySelector('.footer__email');
+    if (!a) return;
+    a.addEventListener('click', () => {
+      const msgTab = document.querySelector('[data-tab="message"]');
+      if (msgTab) msgTab.click();
+    });
+  };
+
   // ---------- BOOT ----------
   initMobileNav();
   initTabs();
   initContactForm();
+  initFooterAddress();
+  initFooterEmail();
 
 })();
