@@ -289,19 +289,37 @@
   margin: 0 auto;
 }
 
+/* Secondary brands grid — four across so the rest breathe more */
+.logos__grid--brands-other {
+  grid-template-columns: repeat(4, 1fr);
+}
+.logos__grid--brands-other li {
+  height: clamp(48px, 4.5vw, 64px);
+  max-width: 150px;
+  margin: 0 auto;
+}
+
+/* Tighten the gap between the two brand sub-grids so they read as one block */
+.logos__grid--brands + .logos__grid--brands-other {
+  margin-top: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
 /* Per-logo nudges removed — source files are now normalised in
    logos/converted/ (consistent width + visual weight). Re-add if any
    individual logo still reads off. */
 
 @media (max-width: 820px) {
   .logos__grid--brands { grid-template-columns: repeat(4, 1fr); }
+  .logos__grid--brands-other { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 640px) {
   .logos__grid--agencies { grid-template-columns: repeat(2, 1fr); }
-  .logos__grid--brands { grid-template-columns: repeat(3, 1fr); }
+  .logos__grid--brands,
+  .logos__grid--brands-other { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 380px) {
-  .logos__grid--brands { grid-template-columns: repeat(2, 1fr); }
+  .logos__grid--brands,
+  .logos__grid--brands-other { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ============ CONTACT — tabs, form, calendar ============ */
