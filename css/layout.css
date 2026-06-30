@@ -178,15 +178,21 @@
   color: var(--c-black);
   margin-bottom: var(--s-4);
 }
-.hero__cta-wrap .btn,
-.hero__cta-note { display: block; }
-.hero__cta-wrap .btn { width: max-content; max-width: 100%; }
+/* Center only the button + note; keep the prompt left-aligned with body */
+.hero__cta-wrap .btn {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .hero__cta-note {
+  display: block;
   font-size: var(--fs-small);
   color: var(--c-ink-mute);
-  margin-top: var(--s-4);
-  width: 18rem;
+  margin: var(--s-4) auto 0;
   max-width: 100%;
+  text-align: center;
 }
 
 /* SERVICES layout */
@@ -216,7 +222,7 @@
   .logos__intro {
     grid-template-columns: 1fr 1.1fr;
     gap: clamp(2rem, 3vw + 0.5rem, 4rem);
-    align-items: end;
+    align-items: start;
   }
 }
 .logos__intro p { font-size: var(--fs-body); color: var(--c-ink); }
