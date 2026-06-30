@@ -132,6 +132,34 @@
   text-decoration: none;
 }
 .footer__meta a:hover { color: var(--c-cream); }
+
+.footer__legal {
+  color: rgba(249, 246, 241, 0.66);
+  font-size: 0.75rem;
+}
+.footer__sep { opacity: 0.6; }
+
+.footer__address-line {
+  margin: 0;
+  color: rgba(249, 246, 241, 0.66);
+  font-size: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.4em;
+}
+.footer__address-label { font-weight: var(--fw-bold); }
+
+.footer__address {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 0.32em;
+  font-style: normal;
+}
+.footer__address > span[data-o="1"] { order: 1; }
+.footer__address > span[data-o="2"] { order: 2; }
+.footer__address > span[data-o="3"] { order: 3; }
+.footer__address > span[data-o="4"] { order: 4; }
+
 .footer__logo {
   height: 38px;
   width: auto;
