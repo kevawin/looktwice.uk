@@ -222,62 +222,71 @@
   margin: 0;
 }
 
-/* ============ LOGO MARQUEE ============ */
+/* ============ LOGO GRID ============ */
 
-.marquee {
-  position: relative;
-  margin: 0 calc(var(--gutter) * -1);
-}
-.marquee__fade {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: clamp(60px, 6vw, 96px);
-  pointer-events: none;
-  z-index: 2;
-}
-.marquee__fade--left  { left: 0;  background: linear-gradient(to right, var(--c-cream), rgba(249, 246, 241, 0)); }
-.marquee__fade--right { right: 0; background: linear-gradient(to left,  var(--c-cream), rgba(249, 246, 241, 0)); }
+.logos__group + .logos__group { margin-top: clamp(2.5rem, 4vw, 4rem); }
 
-.marquee__scroller {
-  overflow-x: auto;
-  overflow-y: hidden;
-  cursor: grab;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  touch-action: pan-x;
-  -webkit-overflow-scrolling: touch;
+.logos__group-label {
+  font-style: italic;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-ink-mute);
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--c-ink-faint);
 }
-.marquee__scroller::-webkit-scrollbar { display: none; }
-.marquee__scroller.dragging { cursor: grabbing; }
 
-.marquee__track {
-  display: flex;
+.logos__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.25rem, 2vw + 0.5rem, 2.5rem) clamp(1.5rem, 3vw, 3rem);
   align-items: center;
-  width: max-content;
-  gap: clamp(2.5rem, 4vw, 4.5rem);
-  padding: var(--s-4) var(--gutter);
-  will-change: scroll-position;
+  justify-items: center;
 }
-.marquee__cell {
-  flex: 0 0 auto;
-  width: clamp(150px, 22vw, 180px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.marquee__cell img {
-  height: clamp(48px, 7vw, 64px);
+
+.logos__grid img {
   max-width: 100%;
   width: auto;
   object-fit: contain;
   filter: brightness(0) saturate(0);
-  opacity: 0.62;
-  transition: opacity var(--t-mid) var(--ease);
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
+  opacity: 0.72;
+  transition: opacity var(--t-mid) var(--ease), filter var(--t-mid) var(--ease);
 }
-.marquee__cell:hover img { opacity: 1; }
+.logos__grid img:hover { opacity: 1; }
+
+/* Agencies row — four across, taller logos */
+.logos__grid--agencies {
+  grid-template-columns: repeat(4, 1fr);
+}
+.logos__grid--agencies img {
+  height: clamp(48px, 6vw, 80px);
+}
+
+/* Brands grid — denser, six across on desktop, fewer on smaller screens */
+.logos__grid--brands {
+  grid-template-columns: repeat(6, 1fr);
+}
+.logos__grid--brands img {
+  height: clamp(40px, 4vw + 0.5rem, 60px);
+}
+
+@media (max-width: 1100px) {
+  .logos__grid--brands { grid-template-columns: repeat(5, 1fr); }
+}
+@media (max-width: 820px) {
+  .logos__grid--brands { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 640px) {
+  .logos__grid--agencies { grid-template-columns: repeat(2, 1fr); }
+  .logos__grid--brands { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 380px) {
+  .logos__grid--brands { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* ============ CONTACT — tabs, form, calendar ============ */
 
