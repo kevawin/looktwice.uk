@@ -78,6 +78,10 @@
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbdbnrkr';
 
   const isLiveDomain = () => /(^|\.)looktwice\.uk$/i.test(window.location.hostname);
+  // Preview-test escape hatch: append ?send=live to the URL to actually
+  // POST from a preview deployment. Keep this obscure so randoms hitting
+  // the preview URL don't burn the Formspree quota by accident.
+  const isForcedLive = () => new URLSearchParams(window.location.search).get('send') === 'live';
 
   const initContactForm = () => {
     const form = document.getElementById('contact-form');
@@ -111,7 +115,7 @@
       const originalLabel = submit.innerHTML;
       submit.innerHTML = 'Sending…';
 
-      const liveSubmit = isLiveDomain() || window.__LT_FORCE_SUBMIT === true;
+      const liveSubmit = isLiveDomain() || isForcedLive() || window.__LT_FORCE_SUBMIT === true;
 
       try {
         if (liveSubmit) {
