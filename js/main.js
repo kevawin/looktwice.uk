@@ -123,7 +123,7 @@
     });
     window.addEventListener('resize', measure);
 
-    const SPEED = 0.4; // px per ms
+    const SPEED = 0.18; // px per ms (slower than design default)
     let last = performance.now();
     let paused = false;
     let dragging = false;

@@ -66,6 +66,8 @@
 @media (max-width: 720px) {
   .hero__visual .shape--bg-card { border-radius: 32px; }
   .hero__visual .shape--photo { border-radius: 32px; }
+  .hero__visual .shapes { max-width: 320px; }
+  .about__visual .shapes { max-width: 280px; }
 }
 
 /* About shape arrangement */
@@ -149,6 +151,9 @@
 .panel p:last-child { margin-bottom: 0; }
 
 /* ============ FEATURED DIAGNOSTIC ============ */
+/* Temporarily hidden — no offer ready for it yet (Kris, 2026-06-30). */
+/* Markup retained so we can flip display back on without rebuilding it. */
+.diagnostic { display: none !important; }
 
 .diagnostic {
   margin-top: var(--s-12);
@@ -255,13 +260,13 @@
 }
 .marquee__cell {
   flex: 0 0 auto;
-  width: clamp(110px, 12vw, 140px);
+  width: clamp(150px, 22vw, 180px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .marquee__cell img {
-  height: clamp(36px, 3vw + 1rem, 44px);
+  height: clamp(48px, 7vw, 64px);
   max-width: 100%;
   width: auto;
   object-fit: contain;
@@ -313,7 +318,9 @@
 .calendar-frame {
   border: 0;
   width: 100%;
-  height: clamp(560px, 60vh, 720px);
+  /* Tall enough to show the full Google calendar without an inner scroll
+     (Google's embed needs ~900px on desktop, more on narrow mobile). */
+  height: clamp(900px, 100vh, 1180px);
   display: block;
 }
 

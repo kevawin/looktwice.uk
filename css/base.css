@@ -58,6 +58,9 @@ em {
   font-weight: var(--fw-black);
 }
 
+/* Prevent line break inside an inline element */
+.nowrap { white-space: nowrap; }
+
 /* Visually hidden (a11y) */
 .sr-only {
   position: absolute;
