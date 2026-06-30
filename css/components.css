@@ -343,10 +343,14 @@
 .calendar-frame {
   border: 0;
   width: 100%;
-  /* Tall enough to show the full Google calendar without an inner scroll
-     (Google's embed needs ~900px on desktop, more on narrow mobile). */
-  height: clamp(900px, 100vh, 1180px);
+  /* Tuned to match Google's actual content height so there's no dead
+     space before the footer. Slightly taller on narrow viewports where
+     Google's UI stacks. */
+  height: clamp(640px, 70vh, 760px);
   display: block;
+}
+@media (max-width: 540px) {
+  .calendar-frame { height: clamp(720px, 85vh, 880px); }
 }
 
 /* Form */
