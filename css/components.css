@@ -243,7 +243,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: clamp(1.25rem, 2vw + 0.5rem, 2.5rem) clamp(1.5rem, 3vw, 3rem);
+  gap: clamp(2.25rem, 3.5vw + 0.5rem, 4rem) clamp(2.5rem, 4vw + 1rem, 5rem);
 }
 
 /* Every cell becomes the same visual bounding box. Logos fit inside via
@@ -268,29 +268,31 @@
 }
 .logos__grid img:hover { opacity: 1; }
 
-/* Agencies row — four across, larger bounding box */
+/* Agencies row — four across, smaller + uniform bounding box.
+   max-width caps wider marks so they don't dominate the narrower ones. */
 .logos__grid--agencies {
   grid-template-columns: repeat(4, 1fr);
 }
 .logos__grid--agencies li {
-  height: clamp(60px, 7vw, 96px);
+  height: clamp(40px, 4vw, 56px);
+  max-width: 170px;
+  margin: 0 auto;
 }
 
-/* Brands grid — denser, six across on desktop, fewer on smaller screens */
+/* Brands grid — five across on desktop, stepping down on narrower screens */
 .logos__grid--brands {
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 .logos__grid--brands li {
-  height: clamp(56px, 5.5vw, 80px);
+  height: clamp(52px, 5vw, 72px);
+  max-width: 160px;
+  margin: 0 auto;
 }
 
 /* Per-logo nudges removed — source files are now normalised in
    logos/converted/ (consistent width + visual weight). Re-add if any
    individual logo still reads off. */
 
-@media (max-width: 1100px) {
-  .logos__grid--brands { grid-template-columns: repeat(5, 1fr); }
-}
 @media (max-width: 820px) {
   .logos__grid--brands { grid-template-columns: repeat(4, 1fr); }
 }
