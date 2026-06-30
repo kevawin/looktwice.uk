@@ -293,7 +293,7 @@
 .logos__grid img[src*="janssen"]       { transform: scale(1.1); }
 .logos__grid img[src*="russell-hobbs"] { transform: scale(0.95); }
 .logos__grid img[src*="bruntwood"]     { transform: scale(0.95); }
-.logos__grid img[src*="lego"]          { transform: scale(1.1); }
+.logos__grid img[src*="lego"]          { transform: scale(1.1); filter: none; opacity: 1; }
 .logos__grid img[src*="ucb"]           { transform: scale(1.3); }
 .logos__grid img[src*="mbna"]          { transform: scale(1.05); }
 .logos__grid img[src*="brand-vista"]   { transform: scale(1.05); }
