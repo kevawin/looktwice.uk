@@ -296,7 +296,5 @@
 .about__panels { display: flex; flex-direction: column; gap: var(--s-8); }
 
 /* CONTACT layout */
-.contact h2 { margin-bottom: var(--s-5); }
+.contact h2 { margin-bottom: var(--s-10); }
 .contact h2 em { color: var(--c-indigo); }
-.contact__lead { font-size: var(--fs-lead); margin-bottom: var(--s-4); }
-.contact__note { font-size: var(--fs-small); color: var(--c-ink-mute); margin-bottom: var(--s-10); }
