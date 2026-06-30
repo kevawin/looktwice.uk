@@ -244,13 +244,23 @@
   padding: 0;
   display: grid;
   gap: clamp(1.25rem, 2vw + 0.5rem, 2.5rem) clamp(1.5rem, 3vw, 3rem);
+}
+
+/* Every cell becomes the same visual bounding box. Logos fit inside via
+   object-fit:contain, so wide ones hit the width cap and tall ones hit
+   the height cap — they read as the same size to the eye. */
+.logos__grid li {
+  display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .logos__grid img {
+  max-height: 100%;
   max-width: 100%;
   width: auto;
+  height: auto;
   object-fit: contain;
   filter: brightness(0) saturate(0);
   opacity: 0.72;
@@ -258,21 +268,36 @@
 }
 .logos__grid img:hover { opacity: 1; }
 
-/* Agencies row — four across, taller logos */
+/* Agencies row — four across, larger bounding box */
 .logos__grid--agencies {
   grid-template-columns: repeat(4, 1fr);
 }
-.logos__grid--agencies img {
-  height: clamp(48px, 6vw, 80px);
+.logos__grid--agencies li {
+  height: clamp(60px, 7vw, 96px);
 }
 
 /* Brands grid — denser, six across on desktop, fewer on smaller screens */
 .logos__grid--brands {
   grid-template-columns: repeat(6, 1fr);
 }
-.logos__grid--brands img {
-  height: clamp(40px, 4vw + 0.5rem, 60px);
+.logos__grid--brands li {
+  height: clamp(56px, 5.5vw, 80px);
 }
+
+/* Per-logo nudges where visual weight is off (thin or detail-heavy logos
+   scale up; chunky ones stay put). Tune by eye. */
+.logos__grid img[src*="sanofi"]        { transform: scale(0.9); }
+.logos__grid img[src*="wizarding"]     { transform: scale(1.1); }
+.logos__grid img[src*="madame"]        { transform: scale(1.15); }
+.logos__grid img[src*="cosatto"]       { transform: scale(0.9); }
+.logos__grid img[src*="janssen"]       { transform: scale(1.1); }
+.logos__grid img[src*="russell-hobbs"] { transform: scale(0.95); }
+.logos__grid img[src*="bruntwood"]     { transform: scale(0.95); }
+.logos__grid img[src*="lego"]          { transform: scale(1.1); }
+.logos__grid img[src*="ucb"]           { transform: scale(1.3); }
+.logos__grid img[src*="mbna"]          { transform: scale(1.05); }
+.logos__grid img[src*="brand-vista"]   { transform: scale(1.05); }
+.logos__grid img[src*="havas"]         { transform: scale(0.95); }
 
 @media (max-width: 1100px) {
   .logos__grid--brands { grid-template-columns: repeat(5, 1fr); }
