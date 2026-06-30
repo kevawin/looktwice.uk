@@ -41,5 +41,13 @@ Thumbs.db
 skills-lock.json
 
 # Local-only working files (not for the live site)
-images/
 inspo/
+linkedin-banner/
+
+# images/ contains both shipped assets (logos, photos, looktwice-logo.svg)
+# and working inspo subfolders. Ship the assets, ignore the workings.
+images/*
+!images/logos/
+!images/photos/
+!images/looktwice-logo.svg
+!images/favicon.svg

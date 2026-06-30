@@ -1,157 +1,271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Look Twice | Independent brand and customer experience strategy</title>
-  <meta name="description" content="Independent brand and customer experience strategy." />
+  <title>Look Twice — brand and CX strategy for businesses ready to grow on purpose</title>
+  <meta name="description" content="Look Twice is a brand and CX strategy consultancy that closes the gap between what you promise and what customers actually experience. Senior strategic thinking, on your problem." />
+  <meta name="theme-color" content="#F9F6F1" />
+
+  <link rel="icon" href="images/looktwice-logo.svg" type="image/svg+xml" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap" rel="stylesheet" />
 
-    :root {
-      --navy: #e3e3f4;
-      --navy-mid: #e3e3f499;
-      --navy-soft: #e3e3f4cc;
-    }
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
 
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      background: linear-gradient(135deg,
-        #ff9900 0%,
-        #ff4400 25%,
-        #ff1144 45%,
-        #ff0077 65%,
-        #cc00aa 82%,
-        #5500aa 100%
-      );
-      background-attachment: fixed;
-      color: var(--navy);
-      font-family: 'Epilogue', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 4rem 6rem;
-    }
-
-    header {
-      margin-bottom: 4rem;
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-    }
-
-    .wordmark {
-      display: block;
-      width: clamp(8.5rem, 17vw, 10.5rem);
-      height: auto;
-    }
-
-    .tagline {
-      font-family: 'Epilogue', sans-serif;
-      font-weight: 400;
-      font-size: clamp(0.85rem, 1.5vw, 1rem);
-      color: var(--navy-soft);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      line-height: 1.7;
-    }
-
-    main {
-      max-width: 38rem;
-    }
-
-    .headline {
-      font-family: 'Epilogue', sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.35rem, 2.2vw, 1.6rem);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      color: var(--navy);
-    }
-
-    .body-text {
-      font-family: 'Epilogue', sans-serif;
-      font-weight: 500;
-      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
-      line-height: 1.75;
-      color: var(--navy-soft);
-    }
-
-    .body-text p + p {
-      margin-top: 1.1rem;
-    }
-
-    .body-text a {
-      color: var(--navy);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--navy-mid);
-      transition: text-decoration-color 0.2s ease;
-    }
-
-    .body-text a:hover {
-      text-decoration-color: var(--navy);
-    }
-
-    footer {
-      margin-top: 3rem;
-      font-family: 'Epilogue', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--navy-mid);
-    }
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.20);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    header, main, footer {
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 3rem 2rem;
-      }
-    }
-  </style>
+  <meta property="og:title" content="Look Twice — brand and CX strategy" />
+  <meta property="og:description" content="Become the brand your customers want to talk about." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://looktwice.uk/" />
 </head>
 <body>
 
-  <div class="overlay"></div>
+<a class="skip-link" href="#main">Skip to main content</a>
 
-  <header>
-    <img class="wordmark" src="logos/LookTwice_logo.svg" alt="Look Twice" />
-    <div class="tagline">Independent brand &amp;<br />customer experience<br />strategy</div>
+<div class="page">
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <a href="#top" aria-label="Look Twice — home">
+      <img class="nav__logo" src="images/looktwice-logo.svg" alt="Look Twice" width="180" height="56" />
+    </a>
+    <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#logos">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="nav__cta" href="#contact">Book a free 30-min chat</a>
+    </nav>
+    <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <main>
-    <h1 class="headline">Not quite ready for your second look yet.</h1>
+  <main id="main">
 
-    <div class="body-text">
-      <p>Curious? Find me on <a href="https://www.linkedin.com/in/krisevawin/" target="_blank" rel="noopener noreferrer">LinkedIn</a> in the meantime.</p>
-      <p>Or if your brand makes a promise your experience isn&rsquo;t keeping, <span style="white-space: nowrap;">let&rsquo;s talk: <a href="mailto:hello@looktwice.uk">hello@looktwice.uk</a></span></p>
-    </div>
+    <!-- HERO -->
+    <section class="section hero" id="top">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <h1>Become the brand your <em>customers want to talk about</em></h1>
+          <p class="hero__lead">The strongest brands are the ones whose promise matches their experience.</p>
+          <p>Look Twice is a brand and CX strategy consultancy that helps businesses define what they stand for, why customers should care, and how to ensure the experience they create matches what they promise.</p>
+          <p><strong>The result:</strong> better acquisition, reduced costs, loyal customers.</p>
+          <div class="hero__cta-wrap">
+            <p class="hero__cta-prompt">Let me put your brand to the test.</p>
+            <a class="btn btn--primary" href="#contact">Book a free 30-min chat <span aria-hidden="true">→</span></a>
+            <p class="hero__cta-note">No pitch. Just some initial thoughts based on your challenge.</p>
+          </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="shapes">
+            <div class="shape shape--orb-lg"></div>
+            <div class="shape shape--orb-md"></div>
+            <div class="shape shape--orb-sm"></div>
+            <div class="shape shape--pill-tall"></div>
+            <div class="shape shape--blob"></div>
+            <div class="shape shape--bg-card"></div>
+            <img class="shape--photo" src="images/photos/hero.jpg" alt="" loading="eager" />
+            <div class="shape shape--pill-flat"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section services" id="services">
+      <h2>What I can do <em>for you.</em></h2>
+
+      <div class="services__grid">
+        <article class="service" data-accent="pink">
+          <div class="service__eyebrow">01 / Brand strategy</div>
+          <h3 class="service__title">When the business has outgrown the brand.</h3>
+          <p class="service__desc">…or when the brand was never set up to do what it now needs to. Positioning, platforms, propositions, narrative.</p>
+        </article>
+
+        <article class="service" data-accent="orange">
+          <div class="service__eyebrow">02 / Experience strategy</div>
+          <h3 class="service__title">When what you say and what customers get have come apart.</h3>
+          <p class="service__desc">I'll map the journey end to end, find where the gap is, and prioritise what to fix first.</p>
+        </article>
+
+        <article class="service" data-accent="purple">
+          <div class="service__eyebrow">03 / Comms &amp; campaign strategy</div>
+          <h3 class="service__title">When an agency needs senior strategy on a brief.</h3>
+          <p class="service__desc">…or when marketing keeps running but isn't doing the work it should. Insight, brief, plan, creative oversight.</p>
+        </article>
+
+        <article class="service" data-accent="indigo">
+          <div class="service__eyebrow">04 / Workshops &amp; strategic sessions</div>
+          <h3 class="service__title">When teams need to agree on the actual problem.</h3>
+          <p class="service__desc">…or look at the same customer together, or try working with me on something small before committing to something bigger.</p>
+        </article>
+      </div>
+
+      <aside class="diagnostic" aria-label="Featured engagement">
+        <div class="diagnostic__inner">
+          <div>
+            <div class="diagnostic__eyebrow">Featured engagement</div>
+            <h3 class="diagnostic__title">The Look Twice Diagnostic.</h3>
+          </div>
+          <div class="diagnostic__body">
+            <p>When you want to see what I'd see before committing to a bigger piece of work. Half a day on a real business problem. I dig in beforehand, walk you through what I'm seeing, and leave you with a one-page recommendation of what I'd tackle first.</p>
+            <p class="diagnostic__price">Fixed price</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- LOGOS -->
+    <section class="section logos" id="logos">
+      <div class="logos__intro">
+        <h2>I've worked with <em>the best.</em></h2>
+        <p>World-class agencies and clients across a range of sectors — retail, FMCG, healthcare, leisure &amp; entertainment. I've worked with more brands than you can fit into a marketing convention.</p>
+      </div>
+
+      <div class="marquee" aria-label="Clients I've worked with">
+        <div class="marquee__fade marquee__fade--left" aria-hidden="true"></div>
+        <div class="marquee__fade marquee__fade--right" aria-hidden="true"></div>
+        <div class="marquee__scroller" id="marquee-scroller" tabindex="0" role="region" aria-label="Client logos, scrollable">
+          <div class="marquee__track" id="marquee-track">
+            <!-- Populated by JS so the loop can be duplicated cleanly. -->
+          </div>
+        </div>
+      </div>
+
+      <div class="logos__stats">
+        <div>
+          <div class="stat__num">24</div>
+          <div class="stat__label">Brands shipped</div>
+        </div>
+        <div>
+          <div class="stat__num">4</div>
+          <div class="stat__label">Sectors</div>
+        </div>
+        <div>
+          <div class="stat__num">12<sup>+</sup></div>
+          <div class="stat__label">Years</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="about">
+      <h2>A senior strategic brain, <em>on your problem.</em></h2>
+
+      <div class="about__grid">
+        <div class="about__visual" aria-hidden="true">
+          <div class="shapes">
+            <div class="shape shape--pill-flat"></div>
+            <div class="shape shape--orb-md"></div>
+            <div class="shape shape--rect-teal"></div>
+            <div class="shape shape--blob"></div>
+            <div class="shape shape--orb-sm"></div>
+            <div class="shape shape--bg-pill"></div>
+            <img class="shape--photo" src="images/photos/headshot.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="about__panels">
+          <article class="panel" data-accent="pink">
+            <div class="panel__eyebrow">Who I am</div>
+            <p>I'm Kristina 👋.</p>
+            <p>I've spent 12+ years in brand, CX, and communications strategy. I set up Look Twice to allow me to work across all three.</p>
+            <p>The thing I'm most passionate about is solving your problem in the way that's most suitable for it — not limiting my thinking to just brand, just experience or just comms strategy. Because big marketing &amp; growth problems rarely fit just into one domain, so their solutions won't either.</p>
+          </article>
+
+          <article class="panel" data-accent="teal">
+            <div class="panel__eyebrow">How I work</div>
+            <p>I'm curious, direct, and pragmatic.</p>
+            <p>I'll ask you tough questions, not to be a pain in the butt, but because I care. I'm results-driven, both for myself and for my clients. I want to make sure that any work I do for you is actually useful for you and your team.</p>
+            <p>My job is to help you see what's going on, your customers and how they see your business from a new angle. That's where 'Look Twice' comes from — a principle taken from research that people don't always do what they say, and they don't always say what they mean. So if you want to understand what's actually happening, you have to look again — past the surface, past the stated.</p>
+            <p>The name is also a reminder about perspective. I work as an outsider to leadership — close enough to understand the business, far enough to keep seeing it clearly.</p>
+          </article>
+
+          <article class="panel" data-accent="purple">
+            <div class="panel__eyebrow">What it's actually like to work with me</div>
+            <p>I'll spend our first conversation finding the brief-beneath-the-brief. I'll challenge you if I think you're solving the wrong problem. I'll bring all of my experience to your business and give you the shakedown I'm known for.</p>
+            <p>I work best with leaders who want a strategic partner — not just a supplier of decks. Someone who'll work across silos and help you solve your challenges differently.</p>
+          </article>
+
+          <article class="panel" data-accent="orange">
+            <div class="panel__eyebrow">What I'm not</div>
+            <p>If you're after a fresh coat of paint on what's already there — a new logo, a sharper tagline, a quicker fix to your marketing — I'm probably not your strategist.</p>
+            <p>If you want someone who'll dig until they find the real problem, even if it turns out to be a different problem than you thought, let's chat.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <h2>Want a second look at <em>your problem?</em></h2>
+      <p class="contact__lead">Bring your problem. I'll tell you what I'm seeing and what I'd start with. No pitch, no follow-up unless you ask.</p>
+      <p class="contact__note">Book a 30-min call from the slots below. Or use the form to drop me a message and I'll be in touch to arrange a chat.</p>
+
+      <div class="tabs" role="tablist" aria-label="Contact options">
+        <button class="tab" id="tab-book" role="tab" aria-selected="true" aria-controls="panel-book" data-tab="book">Book a slot</button>
+        <button class="tab" id="tab-message" role="tab" aria-selected="false" aria-controls="panel-message" data-tab="message" tabindex="-1">Send a message</button>
+      </div>
+
+      <div class="panel-tab" id="panel-book" role="tabpanel" aria-labelledby="tab-book" data-panel="book">
+        <iframe
+          class="calendar-frame"
+          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ31_GcVR5hkvs5PL6Q93npw3JKpclPDYXr7sCdyyOLv3ckPAcDCU-e-7dFtL_v0jwV6KlalVgby?gv=true"
+          title="Book a free 30-minute chat with Kristina"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="panel-tab panel-tab--form" id="panel-message" role="tabpanel" aria-labelledby="tab-message" data-panel="message" hidden>
+        <form class="form" id="contact-form" novalidate>
+          <div>
+            <label class="form__label" for="cf-name">Your name <span class="form__req" aria-hidden="true">*</span></label>
+            <input class="form__input" id="cf-name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div>
+            <label class="form__label" for="cf-email">Your email <span class="form__req" aria-hidden="true">*</span></label>
+            <input class="form__input" id="cf-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="form__full">
+            <label class="form__label" for="cf-situation">Tell me about your situation <span class="form__req" aria-hidden="true">*</span></label>
+            <p class="form__hint">What the business does, what the problem feels like right now, what you've already tried.</p>
+            <textarea class="form__textarea" id="cf-situation" name="situation" rows="6" required></textarea>
+          </div>
+          <div class="form__full form__row">
+            <button class="btn btn--primary" type="submit" id="cf-submit">Send <span aria-hidden="true">→</span></button>
+            <p class="form__disclaimer">I'll only use this to arrange our free 30-minute chat. I won't add you to a newsletter or sell your email address to the devil.</p>
+          </div>
+          <div class="form__status form__full" id="cf-status" hidden role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
   </main>
 
-  <footer>&copy; 2026 Look Twice Ltd &middot; Company No. 17243993<br />Registered in England &amp; Wales</footer>
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__col">
+      <div class="footer__row">
+        <a class="footer__primary" href="#contact">hello@looktwice.uk</a>
+        <a class="footer__primary" href="https://www.linkedin.com/in/kristinaevawin/" target="_blank" rel="noopener">Find me on LinkedIn</a>
+      </div>
+      <div class="footer__row footer__meta">
+        <span>© 2026 Look Twice Ltd</span>
+        <a href="#contact">Company information</a>
+        <a href="#contact">Privacy policy</a>
+      </div>
+    </div>
+    <img class="footer__logo" src="images/looktwice-logo.svg" alt="Look Twice" width="160" height="38" />
+  </footer>
 
+</div>
+
+<script src="js/main.js" defer></script>
 </body>
 </html>
