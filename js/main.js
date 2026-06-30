@@ -74,117 +74,6 @@
     });
   };
 
-  // ---------- LOGO MARQUEE ----------
-  const LOGOS = [
-    { file: 'lego.svg', name: 'LEGO' },
-    { file: 'asda.svg', name: 'Asda' },
-    { file: 'havas.svg', name: 'Havas' },
-    { file: 'sanofi.svg', name: 'Sanofi' },
-    { file: 'odeon.svg', name: 'Odeon' },
-    { file: 'mediacom.svg', name: 'MediaCom' },
-    { file: 'mbna.svg', name: 'MBNA' },
-    { file: 'lundbeck.svg', name: 'Lundbeck' },
-    { file: 'ucb.svg', name: 'UCB' },
-    { file: 'madame-tussauds.svg', name: 'Madame Tussauds' },
-    { file: 'bruntwood.svg', name: 'Bruntwood' },
-    { file: 'cosatto.svg', name: 'Cosatto' },
-    { file: 'russell-hobbs.svg', name: 'Russell Hobbs' },
-    { file: 'lta.svg', name: 'LTA' },
-  ];
-
-  const initMarquee = () => {
-    const scroller = document.getElementById('marquee-scroller');
-    const track = document.getElementById('marquee-track');
-    if (!scroller || !track) return;
-
-    const makeCell = (logo, labelled) => {
-      const cell = document.createElement('div');
-      cell.className = 'marquee__cell';
-      const img = document.createElement('img');
-      img.src = `images/logos/${logo.file}`;
-      img.alt = labelled ? logo.name : '';
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      cell.appendChild(img);
-      return cell;
-    };
-
-    // First pass labelled (for screen readers), second pass duplicated unlabelled (for visual loop only).
-    LOGOS.forEach((logo) => track.appendChild(makeCell(logo, true)));
-    LOGOS.forEach((logo) => track.appendChild(makeCell(logo, false)));
-
-    if (prefersReducedMotion) return; // static, scrollable manually only
-
-    let halfWidth = 0;
-    const measure = () => { halfWidth = track.scrollWidth / 2; };
-    measure();
-    track.querySelectorAll('img').forEach((img) => {
-      if (!img.complete) img.addEventListener('load', measure, { once: true });
-    });
-    window.addEventListener('resize', measure);
-
-    const SPEED = 0.18; // px per ms (slower than design default)
-    let last = performance.now();
-    let paused = false;
-    let dragging = false;
-    let dragStartX = 0;
-    let dragStartScroll = 0;
-    let lastInteract = 0;
-
-    const normalize = () => {
-      if (halfWidth <= 0) return;
-      if (scroller.scrollLeft >= halfWidth) scroller.scrollLeft -= halfWidth;
-      else if (scroller.scrollLeft < 0) scroller.scrollLeft += halfWidth;
-    };
-
-    const tick = (now) => {
-      const dt = now - last; last = now;
-      if (!paused && !dragging) {
-        scroller.scrollLeft += SPEED * dt;
-        normalize();
-      }
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-
-    scroller.addEventListener('pointerenter', () => { paused = true; });
-    scroller.addEventListener('pointerleave', () => { if (!dragging) paused = false; });
-    scroller.addEventListener('focusin', () => { paused = true; });
-    scroller.addEventListener('focusout', () => { paused = false; });
-
-    scroller.addEventListener('pointerdown', (e) => {
-      dragging = true;
-      dragStartX = e.clientX;
-      dragStartScroll = scroller.scrollLeft;
-      scroller.setPointerCapture(e.pointerId);
-      scroller.classList.add('dragging');
-    });
-    scroller.addEventListener('pointermove', (e) => {
-      if (!dragging) return;
-      scroller.scrollLeft = dragStartScroll - (e.clientX - dragStartX);
-      normalize();
-    });
-    const endDrag = (e) => {
-      if (!dragging) return;
-      dragging = false;
-      scroller.classList.remove('dragging');
-      try { scroller.releasePointerCapture(e.pointerId); } catch (_) {}
-      lastInteract = performance.now();
-      setTimeout(() => {
-        if (performance.now() - lastInteract >= 800) paused = false;
-      }, 900);
-    };
-    scroller.addEventListener('pointerup', endDrag);
-    scroller.addEventListener('pointercancel', endDrag);
-
-    // Keyboard scroll for accessibility
-    scroller.addEventListener('keydown', (e) => {
-      const step = 200;
-      if (e.key === 'ArrowRight') { scroller.scrollLeft += step; normalize(); e.preventDefault(); }
-      else if (e.key === 'ArrowLeft')  { scroller.scrollLeft -= step; normalize(); e.preventDefault(); }
-    });
-  };
-
   // ---------- CONTACT FORM (Formspree) ----------
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbdbnrkr';
 
@@ -252,7 +141,6 @@
   // ---------- BOOT ----------
   initMobileNav();
   initTabs();
-  initMarquee();
   initContactForm();
 
 })();
