@@ -1,0 +1,12 @@
+{
+  "name": "looktwice-uk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Look Twice — brand and CX strategy consultancy. Static site (HTML + CSS + vanilla JS).",
+  "scripts": {
+    "dev": "browser-sync start --config bs-config.js"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.4"
+  }
+}

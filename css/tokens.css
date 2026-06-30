@@ -1,0 +1,89 @@
+/* Look Twice — design tokens (mvp-site) */
+/* Hex now; OKLCH conversion deferred to polish. */
+
+:root {
+  /* Brand colours (from Claude Design canvas) */
+  --c-cream: #F9F6F1;
+  --c-cream-edge: #E8E5DF;
+  --c-ink: #26263E;
+  --c-ink-soft: rgba(38, 38, 62, 0.8);
+  --c-ink-mute: rgba(38, 38, 62, 0.6);
+  --c-ink-faint: rgba(38, 38, 62, 0.135);
+  --c-black: #000;
+
+  --c-pink: #E0006E;
+  --c-indigo: #5556CC;
+  --c-orange: #F59300;
+  --c-orange-deep: #E9631A;
+  --c-teal: #2E7C80;
+  --c-purple: #6C2C8C;
+  --c-navy: #26263E;
+  --c-white: #fff;
+
+  /* Type */
+  --font-sans: 'Epilogue', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Fluid type scale: clamp(min, fluid, max) tuned to Desktop/Tablet/Mobile from design */
+  --fs-h1: clamp(2.25rem, 5.4vw + 0.5rem, 4.25rem);   /* 36 → 68 */
+  --fs-h2: clamp(2rem, 4.4vw + 0.5rem, 4rem);          /* 32 → 64 */
+  --fs-h2-sm: clamp(2rem, 3.4vw + 0.5rem, 3.5rem);     /* 32 → 56 */
+  --fs-h3: clamp(1.75rem, 2.5vw + 0.5rem, 2.5rem);     /* 28 → 40 */
+  --fs-h4: clamp(1.375rem, 1vw + 1rem, 1.5rem);        /* 22 → 24 */
+  --fs-lead: clamp(1.125rem, 0.6vw + 1rem, 1.375rem);  /* 18 → 22 */
+  --fs-body: clamp(0.9375rem, 0.25vw + 0.875rem, 1.0625rem); /* 15 → 17 */
+  --fs-small: clamp(0.8125rem, 0.1vw + 0.8rem, 0.875rem);    /* 13 → 14 */
+  --fs-eyebrow: 0.8125rem;
+  --fs-stat: clamp(1.75rem, 1.4vw + 1.25rem, 2.25rem); /* 28 → 36 */
+
+  --lh-tight: 1.0;
+  --lh-snug: 1.15;
+  --lh-body: 1.55;
+
+  --ls-display: -0.03em;
+  --ls-eyebrow: 0.02em;
+  --ls-cap: 0.06em;
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --fw-heavy: 800;
+  --fw-black: 900;
+
+  /* Spacing scale (8pt base, fluid where it matters) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-20: 5rem;
+
+  /* Section gutters per breakpoint */
+  --gutter: clamp(1.375rem, 3vw + 0.5rem, 4rem);   /* 22 → 64 */
+  --gutter-tight: clamp(1rem, 2vw + 0.4rem, 2.5rem);
+  --section-y: clamp(3rem, 4vw + 1.5rem, 5rem);    /* 48 → 80 */
+
+  --maxw-page: 1440px;
+  --maxw-prose: 540px;
+  --maxw-form: 720px;
+
+  /* Radii */
+  --r-1: 6px;
+  --r-2: 8px;
+  --r-4: 24px;
+  --r-pill: 999px;
+
+  /* Motion */
+  --t-fast: 0.18s;
+  --t-mid: 0.28s;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Focus ring (WCAG) */
+  --focus: 0 0 0 3px rgba(85, 86, 204, 0.45);
+
+  /* Shadows */
+  --sh-card: 0 1px 3px rgba(0,0,0,.08);
+}
