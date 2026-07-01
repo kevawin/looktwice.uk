@@ -22,6 +22,17 @@
   gap: var(--s-6);
   padding: var(--s-5) var(--gutter);
   background: var(--c-cream);
+  /* Sticky floating nav — stays pinned as the page scrolls. */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow var(--t-mid) var(--ease), padding var(--t-mid) var(--ease);
+}
+/* Subtle shadow + slight padding reduction once the user has scrolled past the top. */
+.nav.is-scrolled {
+  box-shadow: 0 4px 20px rgba(30, 30, 30, 0.08);
+  padding-top: var(--s-3);
+  padding-bottom: var(--s-3);
 }
 .nav__logo {
   height: clamp(34px, 1.5vw + 28px, 56px);

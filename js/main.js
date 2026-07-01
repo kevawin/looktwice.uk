@@ -8,6 +8,16 @@
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // ---------- STICKY NAV: toggle shadow class once scrolled ----------
+  const initStickyNav = () => {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const THRESHOLD = 8;
+    const update = () => nav.classList.toggle('is-scrolled', window.scrollY > THRESHOLD);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  };
+
   // ---------- MOBILE NAV TOGGLE ----------
   const initMobileNav = () => {
     const toggle = document.getElementById('nav-toggle');
@@ -169,6 +179,7 @@
   };
 
   // ---------- BOOT ----------
+  initStickyNav();
   initMobileNav();
   initTabs();
   initContactForm();
