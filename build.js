@@ -202,6 +202,7 @@ function copyStatic() {
   const copies = [
     // Root meta/config files
     { src: '_headers',    dest: '_headers' },
+    { src: '_redirects',  dest: '_redirects' },
     { src: 'robots.txt',  dest: 'robots.txt' },
     { src: 'favicon.svg', dest: 'favicon.svg' },
     // Fonts directory (includes OFL.txt + all woff2 files)
