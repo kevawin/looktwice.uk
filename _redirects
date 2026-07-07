@@ -1,0 +1,25 @@
+# Short URL redirects for tracking (UTM-tagged).
+# Format: /from  /to  [status]
+# 302 = temporary redirect. Search engines won't try to canonicalise these as real pages.
+# :splat captures the * wildcard portion for use in the destination.
+# First match wins. Keep specific rules ABOVE wildcards.
+
+# LinkedIn
+/go/linkedin           /?utm_source=linkedin&utm_medium=social&utm_campaign=bio                     302
+/go/linkedin/bio       /?utm_source=linkedin&utm_medium=social&utm_campaign=bio                     302
+/go/linkedin/dm        /?utm_source=linkedin&utm_medium=dm&utm_campaign=outreach                    302
+/go/linkedin/*         /?utm_source=linkedin&utm_medium=social&utm_campaign=post-:splat             302
+
+# Email
+/go/email              /?utm_source=email&utm_medium=signature&utm_campaign=default                 302
+/go/email/bd           /?utm_source=email&utm_medium=outreach&utm_campaign=bd                       302
+/go/email/*            /?utm_source=email&utm_medium=outreach&utm_campaign=:splat                   302
+
+# Strategy Social event announcements
+/go/social/*           /?utm_source=linkedin&utm_medium=social&utm_campaign=strategy-social-:splat  302
+
+# Newsletters / podcast / feature mentions (source name in the URL)
+/go/ref/*              /?utm_source=:splat&utm_medium=referral&utm_campaign=feature                 302
+
+# Catch-all safety net: anything under /go/ that doesn't match above still tracks.
+/go/*                  /?utm_source=go-fallback&utm_medium=short&utm_campaign=:splat                302
