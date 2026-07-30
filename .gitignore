@@ -49,5 +49,6 @@ linkedin-banner/
 images/*
 !images/logos/
 !images/photos/
+!images/email/
 !images/looktwice-logo.svg
 !images/favicon.svg
