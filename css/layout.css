@@ -392,3 +392,18 @@
 .legal ul { padding-left: 1.25rem; margin-bottom: 0.9rem; }
 .legal li { margin-bottom: 0.5rem; }
 .legal a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Website images (hero + about). Each .art box takes in every shape, so
+   nothing overflows or gets clipped. --art-max comes from css/art.css. */
+.hero__visual .art {
+  --art-bleed: calc(clamp(2rem, 3vw + 1rem, 3.75rem) * 0.8);
+  width: min(var(--art-max), calc(100% + var(--art-bleed)));
+  margin-left: calc(var(--art-bleed) * -1);
+}
+@media (max-width: 719px) {
+  .hero__visual .art { width: min(var(--art-max), calc(100% + 40px)); margin-left: -20px; }
+}
+.about__visual .art { width: min(var(--art-max), 100%); margin-inline: auto; }
+@media (max-width: 719px) {
+  .about__visual .art { width: min(300px, 100%); }
+}
