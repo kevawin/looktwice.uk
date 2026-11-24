@@ -16,12 +16,12 @@
 .art--hero .art__9 { left: 37.75%; top: 5.558%; width: 5.63%; aspect-ratio: 1; border-radius: 50% 50% 50% 4%; background: #2E7C80; }
 .art--hero .art__10 { left: 85.82%; top: 66.183%; width: 1.9%; aspect-ratio: 1; border-radius: 50%; background: #5556CC; }
 
-/* about: box spans 116.78 x 148.98 canvas units; at full size 444px wide */
-.art--about { aspect-ratio: 116.780 / 148.980; --art-max: 444px; }
-.art--about .art__1 { left: 62.048%; top: 0%; width: 36.736%; aspect-ratio: 1; border-radius: 50%; background: #F59300; }
-.art--about .art__2 { left: 90.135%; top: 26.621%; width: 5.549%; aspect-ratio: 1; border-radius: 50%; background: #2E7C80; }
-.art--about .art__3 { left: 18.162%; top: 18.016%; width: 69.558%; height: 77.97%; background: #6C2C8C; }
-.art--about .art__4 { left: 8.589%; top: 11.975%; width: 70.123%; height: 77.628%; object-position: 50% 50%; filter: url(#lt-tone-washmid); }
-.art--about .art__5 { left: 63.744%; top: 91.972%; width: 36.256%; height: 8.028%; border-radius: 9999px; background: #E9631A; }
-.art--about .art__6 { left: 0%; top: 67.358%; width: 25.45%; aspect-ratio: 1; border-radius: 50% 50% 50% 4%; background: #DE006D; }
-.art--about .art__7 { left: 1.344%; top: 64.123%; width: 4.127%; aspect-ratio: 1; border-radius: 50%; background: #5556CC; }
+/* about: box spans 120.51 x 148.98 canvas units; at full size 458px wide */
+.art--about { aspect-ratio: 120.510 / 148.980; --art-max: 458px; }
+.art--about .art__1 { left: 61.879%; top: 0%; width: 35.599%; aspect-ratio: 1; border-radius: 50%; background: #F59300; }
+.art--about .art__2 { left: 88.698%; top: 28.125%; width: 11.302%; aspect-ratio: 1; border-radius: 50%; background: #2E7C80; }
+.art--about .art__3 { left: 19.351%; top: 18.016%; width: 67.405%; height: 77.97%; background: #6C2C8C; }
+.art--about .art__4 { left: 10.074%; top: 11.975%; width: 67.953%; height: 77.628%; object-position: 50% 50%; filter: url(#lt-tone-washmid); }
+.art--about .art__5 { left: 63.522%; top: 91.972%; width: 35.134%; height: 8.028%; border-radius: 9999px; background: #E9631A; }
+.art--about .art__6 { left: 1.751%; top: 67.358%; width: 24.662%; aspect-ratio: 1; border-radius: 50% 50% 50% 4%; background: #DE006D; }
+.art--about .art__7 { left: 0%; top: 61.653%; width: 8.298%; aspect-ratio: 1; border-radius: 50%; background: #5556CC; }
